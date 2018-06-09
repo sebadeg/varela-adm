@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  host: ec2-23-23-248-192.compute-1.amazonaws.com
+  username: assxqfbfujuxsf
+  password: 05b9529b100e1c90ce79d772c2693af481f9322775381d9014dd516b43b4c7f2
+  database: dcfv81nh03oqpe
+
+  port: 5432
+  
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
