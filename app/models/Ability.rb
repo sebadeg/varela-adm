@@ -8,12 +8,17 @@ class Ability
     
     if user.soporte
       can :manage, :all
-    elsif user.primaria
-      can :manage, ActiveAdmin::Page, :name => "Primaria" 
-    elsif user.sec_mdeo
-      can :manage, ActiveAdmin::Page, :name => "Pendiente" 
-    elsif user.sec_cc
+    else
+      can :read, AdminUsuario, id: user.id 
+      can :update, AdminUsuario, id: user.id 
       can :manage, ActiveAdmin::Page, :name => "Importar" 
+    end
+      # if user.primaria
+      #   can :manage, ActiveAdmin::Page, :name => "Primaria" 
+      # elsif user.sec_mdeo
+      #   can :manage, ActiveAdmin::Page, :name => "Pendiente" 
+      # elsif user.sec_cc
+      #   can :manage, ActiveAdmin::Page, :name => "Importar" 
 
 #       can :read, ActiveAdmin::Page, :name => "Dashboard"
 
@@ -53,6 +58,6 @@ class Ability
 #       #can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: :admin
 #       #can :read, :all
 #       #can :read, :all
-    end
+#    end
   end
 end

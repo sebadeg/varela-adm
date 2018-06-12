@@ -232,11 +232,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      #menu.add label: "Registro", priority: 1
-      #menu.add label: "Novedades", priority: 2
-      #menu.add label: "Secretaría", priority: 3
-      #menu.add label: "Facturación", priority: 4
-      #menu.add label: "Cobranza", priority: 5
+      menu.add label: "Cobranza", priority: 3
     end
   end
   # == Download Links

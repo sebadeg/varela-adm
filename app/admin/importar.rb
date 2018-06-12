@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Importar" do
 
-  menu priority: 4, label: "Importar"
+  menu parent: "Cobranza", priority: 1, label: "Importar"
 
   content do
     render partial: 'importar'
