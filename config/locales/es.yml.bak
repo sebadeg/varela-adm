@@ -89,7 +89,7 @@ es:
 
     errors:
       models:
-        admin_usuario:
+        usuario:
           attributes:
             email:
               blank: "no puede ser vacío"
