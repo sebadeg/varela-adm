@@ -54,8 +54,23 @@ ActiveAdmin.register Lista do
     f.actions
   end
 
+  # action_item :descargar, only: :show do |f|
+  #   link_to "Descargar", admin_descargar_factura_path(f), method: :post
+  # end
+
+  
+
   controller do
+  #   before_filter only: [:index] do
+  #     params[:q] = { emision_gteq: '2018-01-01', emision_lteq: '2018-12-31' } if params[:commit].blank?
+  #   end
+
+  #   def show
+  #     @lineas = LineaFactura.where(factura_id: 1)
+  #   end
+
     def update
+      p "Puto"
       i = 0
       begin
         if params[:lista][:lista_alumno_attributes][i.to_s] == nil
