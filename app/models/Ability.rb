@@ -8,6 +8,8 @@ class Ability
     
     if user.soporte
       can :manage, :all
+    elsif user.primaria || user.sec_mdeo || user.sec_cc
+      can :manage, Lista
     else
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
