@@ -5,14 +5,27 @@ class Ability
     puts "Usuario " + user.email
 
     can :manage, ActiveAdmin::Page, :name => "Dashboard"
+    can :manage, ActiveAdmin::Comment
     
     if user.soporte
       can :manage, :all
     elsif user.primaria || user.sec_mdeo || user.sec_cc
+      can :read, AdminUsuario, id: user.id 
+      can :update, AdminUsuario, id: user.id 
       can :manage, Lista
+    elsif user.administracion
+      can :read, AdminUsuario, id: user.id 
+      can :update, AdminUsuario, id: user.id 
+
+      can :manage, Especial
+      can :manage, Pago
+      can :manage, ActiveAdmin::Page, :name => "Lote_pago"
+      can :manage, PagoCuenta
+
     else
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
+
       can :manage, ActiveAdmin::Page, :name => "Importar" 
     end
       # if user.primaria

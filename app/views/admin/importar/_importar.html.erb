@@ -1,8 +1,0 @@
-<%= form_tag(admin_importar_importar_path, :method => "post", :multipart => true) do %>
-   <%= file_field_tag "archivos[]", :required => "required", multiple: true %><br><br>
-   <%= submit_tag "Importar" %>
-<% end %>
-
-<!--%= form_tag(admin_importar_exportar_path, :method => "post", :multipart => true) do %>
-   <%= submit_tag "Exportar" %>
-<% end %-->

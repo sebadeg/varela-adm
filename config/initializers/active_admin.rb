@@ -232,7 +232,6 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      menu.add label: "Cobranza", priority: 3
     end
   end
   # == Download Links

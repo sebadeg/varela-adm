@@ -1,0 +1,42 @@
+Red Pagos
+
+- cuando los padres no tienen la factura, cuando no saben el número de cuenta, cuando no van a pagar el monto total o cuando abonan por adelantado.
+
+	O1121217.xls
+
+- codigo de barras
+
+	JP171212.txt
+
+-  cuando los padres van a abonar el total de la facturación del mes sin la factura y saben el número de cuenta.
+
+	CP121217.xls
+
+Sistarbanc
+
+CJPV_20171212.xls
+CJPV_20171211_122244.xls
+
+Abitab
+
+
+
+JPVIngDatos_12122017.csv
+
+
+
+JPV_121217.CSV
+
+- codigo de barras
+
+	JP_121217.CSV
+
+BROU
+
+BROU DE004507.G005.4507.00996878.txt
+
+fecha
+cuenta
+importe
+nombre
+
