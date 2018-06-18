@@ -13,7 +13,7 @@ class Especial < ApplicationRecord
 	  	file = attrs[:nombre]
 	    self.nombre = file.original_filename
 	    self.data = file.read
-	end
+	  end
 
     if !self.save 
       return false

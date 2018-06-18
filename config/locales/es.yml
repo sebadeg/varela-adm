@@ -70,8 +70,8 @@ es:
         nombrearchivo: "Archivo"
         descripcion: "Descripción"
       actividad:
-        fecha: "Fecha límite del debito" 
-        fechainfo: "Fecha límite de la información" 
+        fecha: "Autorización hasta" 
+        fechainfo: "Información hasta" 
 
     models:
       cuenta_usuario:

@@ -2,3 +2,8 @@
    <%= file_field_tag "archivos[]", :required => "required", multiple: true %><br><br>
    <%= submit_tag "Importar" %>
 <% end %>
+
+
+<%= form_tag(admin_lote_pago_extra_path, :method => "post") do %>
+   <%= submit_tag "Extra" %>
+<% end %>
