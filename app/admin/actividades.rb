@@ -12,7 +12,7 @@ ActiveAdmin.register Actividad do
 #   permitted
 # end
 
-  permit_params :nombre, :descripcion, :fecha, :fechainfo, :archivo, :data
+  permit_params :nombre, :descripcion, :fecha, :fechainfo, :archivo, :data, actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy]
 
   menu priority: 5, label: "Actividad"
 
@@ -39,6 +39,14 @@ ActiveAdmin.register Actividad do
       row :fecha, label: "Autorización hasta" 
       row :fechainfo, label: "Información hasta" 
       row :archivo
+
+      row "Listas" do 
+        table_for Lista.where("id in (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{r.id})").order(:nombre) do |t|
+          t.column :id
+          t.column :nombre
+        end
+      end
+
     end
   end
 
@@ -49,6 +57,11 @@ ActiveAdmin.register Actividad do
       f.input :fecha, label: "Autorización hasta", :as => :date_picker, input_html: { style: 'width:40%' }
       f.input :fechainfo, label: "Información hasta", :as => :date_picker, input_html: { style: 'width:40%' } 
       f.input :archivo, as: :file
+    end
+    f.inputs do
+      f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
+        l.input :lista_id, :label => "Nombre", :as => :select, :collection => Lista.all.order(:nombre).map{|u| [u.nombre, u.id]}
+      end
     end
     f.actions
   end
@@ -86,29 +99,26 @@ ActiveAdmin.register Actividad do
       attrs = permitted_params[:actividad]
 
       actividad = Actividad.where(id:params[:id]).first!
-      if actividad.importar(attrs)
-        redirect_to admin_actividad_path(actividad)
-      else
-        render :edit
-      end
-      # i = 0
-      # begin
-      #   if params[:especial][:especial_alumno_attributes][i.to_s] == nil
-      #     i = -1
-      #   else 
-      #     if params[:especial][:especial_alumno_attributes][i.to_s][:id] == nil
-      #       p params[:id].to_i
-      #       p params[:especial][:especial_alumno_attributes][i.to_s][:alumno_id].to_i
-      #       especial_id = params[:id].to_i
-      #       alumno_id = params[:especial][:especial_alumno_attributes][i.to_s][:alumno_id].to_i
-      #       ActiveRecord::Base.connection.execute( "INSERT INTO especial_alumnos (especial_id,alumno_id,created_at,updated_at) VALUES (#{especial_id},#{alumno_id},now(),now())" )
-      #       params[:especial][:especial_alumno_attributes][i.to_s][:id] = EspecialAlumno.where("especial_id=#{especial_id} AND alumno_id=#{alumno_id}").first.id.to_s
-      #       params[:especial][:especial_alumno_attributes][i.to_s][:_destroy] = "0"
-      #     end
-      #     i = i+1
-      #   end
-      # end while i >= 0
-      #update!
+      actividad.importar(attrs)
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_lista_attributes][i.to_s] == nil
+          i = -1
+        else 
+          if params[:actividad][:actividad_lista_attributes][i.to_s][:id] == nil
+            p params[:id].to_i
+            p params[:actividad][:actividad_lista_attributes][i.to_s][:alumno_id].to_i
+            actividad_id = params[:id].to_i
+            lista_id = params[:actividad][:actividad_lista_attributes][i.to_s][:lista_id].to_i
+            ActiveRecord::Base.connection.execute( "INSERT INTO actividad_listas (actividad_id,lista_id,created_at,updated_at) VALUES (#{actividad_id},#{lista_id},now(),now())" )
+            params[:actividad][:actividad_lista_attributes][i.to_s][:id] = ActividadLista.where("actividad_id=#{actividad_id} AND lista_id=#{lista_id}").first.id.to_s
+            params[:actividad][:actividad_lista_attributes][i.to_s][:_destroy] = "0"
+          end
+          i = i+1
+        end
+      end while i >= 0
+      update!
     end
     
   end

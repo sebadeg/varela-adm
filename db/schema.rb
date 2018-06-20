@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180617231036) do
+ActiveRecord::Schema.define(version: 20180619213832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20180617231036) do
     t.integer  "opcion"
     t.index ["actividad_id"], name: "index_actividad_alumnos_on_actividad_id", using: :btree
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id", using: :btree
+  end
+
+  create_table "actividad_listas", force: :cascade do |t|
+    t.integer  "actividad_id"
+    t.integer  "lista_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["actividad_id"], name: "index_actividad_listas_on_actividad_id", using: :btree
+    t.index ["lista_id"], name: "index_actividad_listas_on_lista_id", using: :btree
   end
 
   create_table "actividad_opciones", force: :cascade do |t|
@@ -139,8 +148,9 @@ ActiveRecord::Schema.define(version: 20180617231036) do
     t.integer  "cuenta_id"
     t.date     "fecha"
     t.decimal  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.date     "fecha_vencimiento"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id", using: :btree
   end
 
@@ -282,6 +292,8 @@ ActiveRecord::Schema.define(version: 20180617231036) do
 
   add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
+  add_foreign_key "actividad_listas", "actividades"
+  add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
