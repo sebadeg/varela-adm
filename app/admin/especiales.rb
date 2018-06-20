@@ -23,7 +23,7 @@ ActiveAdmin.register Especial do
     f.inputs do
       f.input :fecha_comienzo, :as => :date_picker, input_html: { style: 'width:40%' }
       f.input :fecha_fin, as: :date_picker, input_html: { style: 'width:40%' }
-      f.input :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
+      f.input :codigo_id, :label => 'Código', :as => :select2, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
       f.input :descripcion
       f.input :importe
       if f.object.new_record?
@@ -34,7 +34,7 @@ ActiveAdmin.register Especial do
     if !f.object.new_record?
       f.inputs do
         f.has_many :especial_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-          l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre, u.id]}
+          l.input :alumno_id, :label => "Nombre", :as => :select2, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre, u.id]}
         end
       end
     end

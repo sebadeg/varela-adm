@@ -59,6 +59,8 @@ gem 'combine_pdf', '~> 0.2.5'
 #gem 'active_admin_flat_skin'
 gem 'active_skin'
 
+gem 'activeadmin_addons'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
