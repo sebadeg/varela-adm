@@ -1,12 +1,17 @@
 ActiveAdmin.register Especial do
 
-  permit_params :fecha_comienzo, :fecha_fin, :descripcion, :importe, :nombre, :data, :md5
+  permit_params :fecha_comienzo, :fecha_fin, :codigo_id, :descripcion, :importe, :nombre, :data, :md5
 
   menu priority: 6, label: "Movimientos especiales"
 
   index do
     column :fecha_comienzo
     column :fecha_fin
+    column "Código" do |c| 
+      if c.codigo != nil
+        c.codigo.nombre 
+      end
+    end
     column :descripcion
     column :importe
     column :nombre
@@ -18,6 +23,7 @@ ActiveAdmin.register Especial do
     f.inputs do
       f.input :fecha_comienzo, :as => :date_picker, input_html: { style: 'width:40%' }
       f.input :fecha_fin, as: :date_picker, input_html: { style: 'width:40%' }
+      f.input :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
       f.input :descripcion
       f.input :importe
       if f.object.new_record?
@@ -39,6 +45,11 @@ ActiveAdmin.register Especial do
     attributes_table do
       row :fecha_comienzo
       row :fecha_fin
+      row "Código" do |c| 
+        if c.codigo != nil
+          c.codigo.nombre 
+        end
+      end
       row :descripcion
       row :importe
       row "Alumnos" do 
@@ -62,7 +73,7 @@ ActiveAdmin.register Especial do
       if especial.importar(attrs)
         redirect_to admin_especial_path(especial)
       else
-        render :new
+        redirect_to new_admin_especial_path
       end
     end
 
@@ -72,28 +83,30 @@ ActiveAdmin.register Especial do
       especial = Especial.where(id:params[:id]).first!
       especial.importar(attrs)
 
-      i = 0
-      begin
-        if params[:especial][:especial_alumno_attributes][i.to_s] == nil
-          i = -1
-        else 
-          if params[:especial][:especial_alumno_attributes][i.to_s][:id] == nil
+      if params[:especial][:especial_alumno_attributes] != nil
+        i = 0
+        begin
+          if params[:especial][:especial_alumno_attributes][i.to_s] == nil
+            i = -1
+          else 
+            if params[:especial][:especial_alumno_attributes][i.to_s][:id] == nil
 
-            p params[:id].to_i
-            p params[:especial][:especial_alumno_attributes][i.to_s][:alumno_id].to_i
-            especial_id = params[:id].to_i
-            alumno_id = params[:especial][:especial_alumno_attributes][i.to_s][:alumno_id].to_i
+              p params[:id].to_i
+              p params[:especial][:especial_alumno_attributes][i.to_s][:alumno_id].to_i
+              especial_id = params[:id].to_i
+              alumno_id = params[:especial][:especial_alumno_attributes][i.to_s][:alumno_id].to_i
 
-            ActiveRecord::Base.connection.execute( "INSERT INTO especial_alumnos (especial_id,alumno_id,created_at,updated_at) VALUES (#{especial_id},#{alumno_id},now(),now())" )
+              ActiveRecord::Base.connection.execute( "INSERT INTO especial_alumnos (especial_id,alumno_id,created_at,updated_at) VALUES (#{especial_id},#{alumno_id},now(),now())" )
 
-            params[:especial][:especial_alumno_attributes][i.to_s][:id] = EspecialAlumno.where("especial_id=#{especial_id} AND alumno_id=#{alumno_id}").first.id.to_s
-            params[:especial][:especial_alumno_attributes][i.to_s][:_destroy] = "0"
+              params[:especial][:especial_alumno_attributes][i.to_s][:id] = EspecialAlumno.where("especial_id=#{especial_id} AND alumno_id=#{alumno_id}").first.id.to_s
+              params[:especial][:especial_alumno_attributes][i.to_s][:_destroy] = "0"
 
-     
+       
+            end
+            i = i+1
           end
-          i = i+1
-        end
-      end while i >= 0
+        end while i >= 0
+      end
       update!
     end 
     #     redirect_to admin_especial_path(especial)

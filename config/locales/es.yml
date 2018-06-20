@@ -95,6 +95,9 @@ es:
       especial_alumno:
         one: "Alumno"
         other: "Alumnos"
+      codigo:
+        one: "Código"
+        other: "Códigos"
 
     errors:
       models:

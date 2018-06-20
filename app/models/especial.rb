@@ -1,4 +1,5 @@
 class Especial < ApplicationRecord
+  belongs_to :codigo
   has_many :especial_alumno, :dependent => :delete_all
   accepts_nested_attributes_for :especial_alumno, allow_destroy: true
 
@@ -6,6 +7,9 @@ class Especial < ApplicationRecord
 
     self.fecha_comienzo = attrs[:fecha_comienzo]
     self.fecha_fin = attrs[:fecha_fin]
+    if ( attrs[:codigo_id] != "")
+      self.codigo_id = attrs[:codigo_id]
+    end
     self.descripcion = attrs[:descripcion]
     self.importe = attrs[:importe]
 
