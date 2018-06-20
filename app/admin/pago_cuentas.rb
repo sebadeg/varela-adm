@@ -21,7 +21,7 @@ ActiveAdmin.register PagoCuenta do
 
   form do |f|
     f.inputs do
-      f.input :cuenta_id, :label => 'Cuenta', :as => :select, :collection => Cuenta.all.order(:id).map{|u| ["#{u.id}",u,id]}
+      f.input :cuenta_id, :label => 'Cuenta', :as => :select, :collection => Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]}
       f.input :fecha, as: :date_picker, input_html: { style: 'width:40%' }
       f.input :descripcion, as: :text
       f.input :importe
