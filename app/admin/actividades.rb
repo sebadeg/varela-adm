@@ -16,6 +16,20 @@ ActiveAdmin.register Actividad do
 
   menu priority: 5, label: "Actividad"
 
+  action_item :asociar, only: :show do
+    link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
+  end
+
+  member_action :asociar, method: :put do
+    id = params[:id]
+    actividad = Actividad.find(id)
+
+    ActiveRecord::Base.connection.execute( "DELETE FROM actividad_alumnos WHERE actividad_id=#{id};" )
+    ActiveRecord::Base.connection.execute( "INSERT INTO actividad_alumnos (actividad_id,alumno_id,created_at,updated_at) (SELECT #{id},id,now(),now() FROM alumnos WHERE id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{id})));" )
+
+    redirect_to admin_actividad_path(actividad)
+  end
+
   index do
     #selectable_column
     column :id
@@ -47,6 +61,12 @@ ActiveAdmin.register Actividad do
         end
       end
 
+      row "Alumnos" do 
+        table_for Alumno.where("id in (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre) do |t|
+          t.column :id
+          t.column :nombre
+        end
+      end
     end
   end
 
@@ -100,6 +120,9 @@ ActiveAdmin.register Actividad do
 
       actividad = Actividad.where(id:params[:id]).first!
       actividad.importar(attrs)
+
+
+      params[:actividad][:archivo] = actividad.archivo
 
       i = 0
       begin

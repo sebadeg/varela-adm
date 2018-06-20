@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620122803) do
+ActiveRecord::Schema.define(version: 20180620183747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,15 @@ ActiveRecord::Schema.define(version: 20180620122803) do
     t.index ["alumno_id"], name: "index_especial_alumnos_on_alumno_id", using: :btree
     t.index ["especial_id", "indice"], name: "index_especial_alumnos_on_especial_id_and_indice", unique: true, using: :btree
     t.index ["especial_id"], name: "index_especial_alumnos_on_especial_id", using: :btree
+  end
+
+  create_table "especial_cuentas", force: :cascade do |t|
+    t.integer  "especial_id"
+    t.integer  "cuenta_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["cuenta_id"], name: "index_especial_cuentas_on_cuenta_id", using: :btree
+    t.index ["especial_id"], name: "index_especial_cuentas_on_especial_id", using: :btree
   end
 
   create_table "especiales", force: :cascade do |t|
@@ -307,6 +316,8 @@ ActiveRecord::Schema.define(version: 20180620122803) do
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"
   add_foreign_key "especial_alumnos", "especiales"
+  add_foreign_key "especial_cuentas", "cuentas"
+  add_foreign_key "especial_cuentas", "especiales"
   add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"

@@ -52,6 +52,11 @@ ActiveAdmin.register Especial do
       end
       row :descripcion
       row :importe
+      row "Cuentas" do 
+        table_for Cuenta.where("id in (SELECT cuenta_id FROM especial_cuentas WHERE especial_id=#{r.id})").order(:id) do |t|
+          t.column :id
+        end
+      end
       row "Alumnos" do 
         table_for Alumno.where("id in (SELECT alumno_id FROM especial_alumnos WHERE especial_id=#{r.id})").order(:nombre) do |t|
           t.column :id
@@ -82,6 +87,8 @@ ActiveAdmin.register Especial do
 
       especial = Especial.where(id:params[:id]).first!
       especial.importar(attrs)
+
+      params[:especial][:nombre] = especial.nombre
 
       if params[:especial][:especial_alumno_attributes] != nil
         i = 0

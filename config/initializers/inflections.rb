@@ -16,6 +16,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'actividad_opcion', 'actividad_opciones'
   inflect.irregular 'lista', 'listas'
   inflect.irregular 'especial', 'especiales'
+  inflect.irregular 'especial_cuenta', 'especial_cuentas'
 end
 # These inflection rules are supported but not enabled by default:
 # ActiveSupport::Inflector.inflections(:en) do |inflect|

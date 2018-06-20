@@ -3,6 +3,9 @@ class Especial < ApplicationRecord
   has_many :especial_alumno, :dependent => :delete_all
   accepts_nested_attributes_for :especial_alumno, allow_destroy: true
 
+  has_many :especial_cuenta, :dependent => :delete_all
+  accepts_nested_attributes_for :especial_cuenta, allow_destroy: true
+
   def importar(attrs)
 
     self.fecha_comienzo = attrs[:fecha_comienzo]
@@ -12,6 +15,7 @@ class Especial < ApplicationRecord
     end
     self.descripcion = attrs[:descripcion]
     self.importe = attrs[:importe]
+    self.nombre = ""
 
   	if attrs[:nombre] != nil
 	  	file = attrs[:nombre]
