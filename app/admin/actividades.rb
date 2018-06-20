@@ -74,8 +74,8 @@ ActiveAdmin.register Actividad do
     f.inputs do
       f.input :nombre
       f.input :descripcion
-      f.input :fecha, label: "Autorización hasta", :as => :date_picker, input_html: { style: 'width:40%' }
-      f.input :fechainfo, label: "Información hasta", :as => :date_picker, input_html: { style: 'width:40%' } 
+      f.input :fecha, label: "Autorización hasta", :as => :date_picker
+      f.input :fechainfo, label: "Información hasta", :as => :date_picker
       f.input :archivo, as: :file
     end
     f.inputs do

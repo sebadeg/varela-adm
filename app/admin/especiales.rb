@@ -21,8 +21,8 @@ ActiveAdmin.register Especial do
 
   form do |f|
     f.inputs do
-      f.input :fecha_comienzo, :as => :date_picker, input_html: { style: 'width:40%' }
-      f.input :fecha_fin, as: :date_picker, input_html: { style: 'width:40%' }
+      f.input :fecha_comienzo, :as => :date_picker
+      f.input :fecha_fin, as: :date_picker
       f.input :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
       f.input :descripcion
       f.input :importe
