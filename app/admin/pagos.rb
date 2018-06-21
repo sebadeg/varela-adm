@@ -10,6 +10,7 @@ ActiveAdmin.register Pago do
 
   index do
     column :nombre
+    column "Total" do |c| PagoCuenta.where( "pago_id=#{c.id}" ).sum(:importe) end
 
     actions
   end
