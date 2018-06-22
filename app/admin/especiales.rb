@@ -16,7 +16,7 @@ ActiveAdmin.register Especial do
     column :importe
     column :nombre
 
-    column "Alumnos" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count end
+    column "Alumnos" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count() end
     column "Total" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).sum(:importe) end
 
     actions
