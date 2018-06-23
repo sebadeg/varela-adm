@@ -15,7 +15,9 @@ class Especial < ApplicationRecord
     end
     self.descripcion = attrs[:descripcion]
     self.importe = attrs[:importe]
-    self.nombre = ""
+    if self.nombre == nil
+      self.nombre = ""
+    end
 
   	if attrs[:nombre] != nil
 	  	file = attrs[:nombre]

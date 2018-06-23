@@ -29,9 +29,7 @@ ActiveAdmin.register Especial do
       f.input :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
       f.input :descripcion
       f.input :importe
-      if f.object.new_record?
-        f.input :nombre, as: :file
-      end
+      f.input :nombre, as: :file, label: "("+r.archivo+")"
     end
 
     if !f.object.new_record?

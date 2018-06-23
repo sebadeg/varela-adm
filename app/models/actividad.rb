@@ -2,6 +2,9 @@ class Actividad < ApplicationRecord
   has_many :actividad_lista, :dependent => :delete_all
   accepts_nested_attributes_for :actividad_lista, allow_destroy: true
 
+  has_many :actividad_opcion, :dependent => :delete_all
+  accepts_nested_attributes_for :actividad_opcion, allow_destroy: true
+
   def importar(attrs)
     p "Seba"
     p attrs
@@ -10,7 +13,9 @@ class Actividad < ApplicationRecord
     self.descripcion = attrs[:descripcion]
     self.fechainfo = attrs[:fechainfo]
     self.fecha = attrs[:fecha]
-    self.archivo = ""
+    if self.archivo == nil
+      self.archivo = ""
+    end
 
     if attrs[:archivo] != nil
       file = attrs[:archivo]
