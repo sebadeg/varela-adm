@@ -132,7 +132,31 @@ ActiveAdmin.register Actividad do
       actividad = Actividad.create()
       actividad.importar(attrs)
 
-      params[:actividad][:archivo] = actividad.archivo
+      if attrs[:archivo] != nil
+        params[:actividad][:archivo] = actividad.archivo
+      end
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_opcion_attributes] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s] == nil
+          i = -1
+        else 
+          if params[:actividad][:actividad_opcion_attributes][i.to_s][:id] == nil
+            actividad_id = params[:id].to_i
+            valor = params[:actividad][:actividad_opcion_attributes][i.to_s][:valor]
+            opcion = params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion]
+            eleccion = params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion]
+
+            ActiveRecord::Base.connection.execute( "INSERT INTO actividad_opciones (actividad_id,valor,opcion,eleccion,created_at,updated_at) VALUES (#{actividad_id},#{valor},'#{opcion}','#{eleccion}',now(),now())" )
+            params[:actividad][:actividad_opcion_attributes][i.to_s][:id] = ActividadOpcion.where("actividad_id=#{actividad_id} AND valor=#{valor}").first.id.to_s
+            params[:actividad][:actividad_opcion_attributes][i.to_s][:valor] = valor
+            params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = opcion
+            params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = eleccion
+            params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] = "0"
+          end
+          i = i+1
+        end
+      end while i >= 0
 
       i = 0
       begin
