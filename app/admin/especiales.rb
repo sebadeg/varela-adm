@@ -37,7 +37,7 @@ ActiveAdmin.register Especial do
     end
 
     f.inputs do
-      f.has_many :especial_alumno, heading: "Cuentas", allow_destroy: true, new_record: true do |l|
+      f.has_many :especial_cuenta, heading: "Cuentas", allow_destroy: true, new_record: true do |l|
         l.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.all.order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
       end
     end
