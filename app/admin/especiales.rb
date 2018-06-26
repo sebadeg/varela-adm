@@ -1,6 +1,7 @@
 ActiveAdmin.register Especial do
 
-  permit_params :fecha_comienzo, :fecha_fin, :codigo_id, :descripcion, :importe, :nombre, :data, :md5
+  permit_params :fecha_comienzo, :fecha_fin, :codigo_id, :descripcion, :importe, :nombre, :data, :md5,
+     especial_alumno_attributes: [:id,:especial_id,:alumno_id,:_destroy,:locale]
 
   menu priority: 6, label: "Movimientos especiales"
 
