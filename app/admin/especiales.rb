@@ -36,13 +36,18 @@ ActiveAdmin.register Especial do
       end
     end
 
-    if !f.object.new_record?
-      f.inputs do
-        f.has_many :especial_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-          l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre, u.id]}
-        end
+    f.inputs do
+      f.has_many :especial_alumno, heading: "Cuentas", allow_destroy: true, new_record: true do |l|
+        l.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.all.order(:nombre).map{|u| [u.id + " - " + u.nombre + " " + u.apellido, u.id]}
       end
     end
+
+    f.inputs do
+      f.has_many :especial_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.id + " - " + u.nombre + " " + u.apellido, u.id]}
+      end
+    end
+
     f.actions
   end
 
@@ -66,6 +71,7 @@ ActiveAdmin.register Especial do
         table_for Alumno.where("id in (SELECT alumno_id FROM especial_alumnos WHERE especial_id=#{r.id})").order(:nombre) do |t|
           t.column :id
           t.column :nombre
+          t.column :apellido
         end
       end
     end
