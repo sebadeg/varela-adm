@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180623022205) do
+ActiveRecord::Schema.define(version: 20180626144336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 20180623022205) do
   create_table "cuentas", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "nombre"
+    t.string   "apellido"
   end
 
   create_table "especial_alumnos", force: :cascade do |t|
@@ -248,13 +250,15 @@ ActiveRecord::Schema.define(version: 20180623022205) do
     t.decimal  "debe"
     t.decimal  "haber"
     t.integer  "tipo"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "pendiente",   default: true
-    t.boolean  "valido",      default: false
-    t.boolean  "duda",        default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "pendiente",      default: true
+    t.boolean  "valido",         default: false
+    t.boolean  "duda",           default: false
+    t.integer  "pago_cuenta_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha", using: :btree
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id", using: :btree
+    t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id", using: :btree
     t.index ["pendiente"], name: "index_movimientos_on_pendiente", using: :btree
   end
 
@@ -288,6 +292,13 @@ ActiveRecord::Schema.define(version: 20180623022205) do
     t.boolean  "procesado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tareas", force: :cascade do |t|
+    t.string   "descripcion"
+    t.boolean  "realizada"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "titular_cuentas", force: :cascade do |t|
@@ -350,6 +361,7 @@ ActiveRecord::Schema.define(version: 20180623022205) do
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "movimientos", "cuentas"
+  add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"

@@ -9,7 +9,7 @@ ActiveAdmin.register Especial do
     column :fecha_fin
     column "Código" do |c| 
       if c.codigo != nil
-        c.codigo.nombre 
+        c.codigo.id.to_s + " - " + c.codigo.nombre 
       end
     end
     column :descripcion
@@ -52,7 +52,7 @@ ActiveAdmin.register Especial do
       row :fecha_fin
       row "Código" do |c| 
         if c.codigo != nil
-          c.codigo.nombre 
+          c.codigo.id.to_s + " - " + c.codigo.nombre 
         end
       end
       row :descripcion
@@ -72,6 +72,7 @@ ActiveAdmin.register Especial do
   end
 
   filter :nombre
+  filter :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.order(:nombre).map{|u| ["#{u.id} - #{u.nombre}", u.id]}
 
   controller do
     before_action { @page_title = "Movimientos especiales" }
