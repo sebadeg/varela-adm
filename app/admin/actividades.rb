@@ -16,7 +16,7 @@ ActiveAdmin.register Actividad do
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
       actividad_opcion_attributes: [:id,:actividad_id,:valor,:opcion,:eleccion,:_destroy]
 
-  menu priority: 5, label: "Actividad"
+  menu priority: 52, label: "Actividad"
 
   action_item :asociar, only: :show do
     link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 

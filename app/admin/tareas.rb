@@ -2,7 +2,7 @@ ActiveAdmin.register Tarea do
 
   permit_params :id, :descripcion, :realizada
 
-  menu priority: 3
+  menu priority: 60
 
   index do
   	#selectable_column

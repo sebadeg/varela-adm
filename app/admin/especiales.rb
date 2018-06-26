@@ -71,7 +71,8 @@ ActiveAdmin.register Especial do
     end
   end
 
-  filter :nombre
+  filter :fecha_comienzo
+  filter :fecha_fin
   filter :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.order(:nombre).map{|u| ["#{u.id} - #{u.nombre}", u.id]}
 
   controller do

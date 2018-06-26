@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Pendiente" do
 
-  menu priority: 3, label: "Pendiente"
+  menu priority: 70, label: "Pendiente"
 
   page_action :validar, method: :post do  	
   	cuenta = eval(params[:cuenta])[:value]
