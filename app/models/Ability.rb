@@ -22,6 +22,7 @@ class Ability
       can :manage, ActiveAdmin::Page, :name => "Lote_pago"
       can :manage, PagoCuenta
       can :manage, Cuenta
+      can :manage, Tarea
 
     else
       can :read, AdminUsuario, id: user.id 
