@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-
 	def aceptar_usuario(usuario)
 		@usuario = usuario
 		#mail(to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso')
@@ -17,5 +16,4 @@ class UserMailer < ApplicationMailer
 
 		mail(to: 'soporte@varela.edu.uy', subject: 'Novedades', delivery_method_options: delivery_options)
 	end
-
 end
