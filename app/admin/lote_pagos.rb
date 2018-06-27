@@ -19,13 +19,9 @@ ActiveAdmin.register_page "Lote_pago" do
 
   page_action :extra, method: :post do
     p "Extra"
-    Actividad.all.each do |a|
-      if a.data == nil && a.archivo != nil
-        file_path = Rails.root.join("data", a.archivo)      
-        a.data = IO.binread(file_path)
-        a.save!
-      end
-    end
+
+    UserMailer.novedades().deliver_now
+
     redirect_to root_path, notice: ""
   end
 
