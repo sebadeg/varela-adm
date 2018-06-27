@@ -37,6 +37,7 @@ ActiveAdmin.register Lista do
       row "Alumnos" do 
         table_for Alumno.where("id in (SELECT alumno_id FROM lista_alumnos WHERE lista_id = #{r.id})") do |t|
           t.column :nombre
+          t.column :apellido
         end
       end
     end
@@ -48,7 +49,7 @@ ActiveAdmin.register Lista do
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
       end
     end
     f.actions
