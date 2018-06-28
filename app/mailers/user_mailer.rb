@@ -10,10 +10,15 @@ class UserMailer < ApplicationMailer
 		delivery_options = {
 			user_name: "novedades@varela.edu.uy",
 			password: "varnov2018",
-            address: "smtp.varela.edu.uy"
+            address: "smtp.varela.edu.uy",
 			port: 587
 		}
 
-		mail(from: 'novedades@varela.edu.uy', to: 'soporte@varela.edu.uy', subject: 'Novedades', delivery_method_options: delivery_options)
+		#attachments.inline['Cabezal.jpg'] = File.read(Rails.root.join("data","Cabezal.jpg"))
+		#attachments['Pie.jpg'] = File.read(Rails.root.join("data","Pie.jpg"))
+
+		mail(from: 'novedades@varela.edu.uy', to: 'soporte@varela.edu.uy', subject: 'Novedades', 
+		
+		 delivery_method_options: delivery_options)
 	end
 end

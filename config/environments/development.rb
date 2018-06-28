@@ -39,6 +39,7 @@ Rails.application.configure do
    :openssl_verify_mode  => 'none'
 }
 
+    config.action_mailer.asset_host = 'http://administracion.varela.edu.uy:80'
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
 
