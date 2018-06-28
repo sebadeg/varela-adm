@@ -39,13 +39,13 @@ Rails.application.configure do
    :openssl_verify_mode  => 'none'
   }
 
-  config.action_mailer.asset_host = 'http://administracion.varela.edu.uy:80'
+  config.action_mailer.asset_host = 'varela-adm.herokuapp.com'
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'http://administracion.varela.edu.uy', port: 80 }
+  config.action_mailer.default_url_options = { host: 'varela-adm.herokuapp.com', port: 80 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
