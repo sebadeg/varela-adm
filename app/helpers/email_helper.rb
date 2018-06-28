@@ -5,6 +5,6 @@ module EmailHelper
                                 :mime_type => "image/jpg",
                                 :encoding => "base64"
                               }
-        image_tag attachments[image].url, id: 'offer_image', **options
+        image_tag attachments[image].url, **options
     end
 end
