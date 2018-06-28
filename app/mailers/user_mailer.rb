@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
 
 		delivery_options = {
             address: "smtp.varela.edu.uy",
-			port: 587
+			port: 587,
 		   domain: "varela.edu.uy", 
 			user_name: "novedades@varela.edu.uy",
 			password: "varnov2018",
