@@ -8,10 +8,14 @@ class UserMailer < ApplicationMailer
 	def novedades()
 
 		delivery_options = {
-			user_name: "novedades@varela.edu.uy",
-			password: "varnov2018",
             address: "smtp.varela.edu.uy",
 			port: 587
+		   domain: "varela.edu.uy", 
+			user_name: "novedades@varela.edu.uy",
+			password: "varnov2018",
+		   authentication: "plain",
+		   enable_starttls_auto: true,
+		   openssl_verify_mode: 'none'
 		}
 
 		#attachments.inline['Cabezal.jpg'] = File.read(Rails.root.join("data","Cabezal.jpg"))
