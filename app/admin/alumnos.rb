@@ -11,7 +11,7 @@ ActiveAdmin.register Alumno do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  menu label: 'Alumnos', priority: 3 
+  menu label: 'Alumnos', priority: 22 
 
   permit_params :id, :nombre, :apellido
 

@@ -2,7 +2,7 @@ ActiveAdmin.register Cuenta do
 
   permit_params :id, :nombre, :apellido
 
-  menu priority: 2
+  menu priority: 21
 
   index do
   	#selectable_column

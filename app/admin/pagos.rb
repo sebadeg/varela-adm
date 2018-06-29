@@ -2,7 +2,7 @@ ActiveAdmin.register Pago do
 
   actions :all, :except => [:new]
   
-  menu priority: 7, label: "Pagos"
+  menu priority: 40, label: "Pagos"
 
   permit_params :nombre, :data, :md5
 
