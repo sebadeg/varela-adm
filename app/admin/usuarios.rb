@@ -1,6 +1,6 @@
 ActiveAdmin.register Usuario do
 
-  menu label: 'Usuarios', priority: 20 
+  menu label: 'Padres', priority: 20 
 
   permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular
 
@@ -14,11 +14,7 @@ ActiveAdmin.register Usuario do
     column :direccion
     column :celular
 
-    actions defaults: false do |u|
-      item "Ver", admin_usuario_path(u), class: "view_link member_link", title: "Ver"
-      #item "Editar", edit_admin_usuario_path(u), class: "edit_link member_link", title: "Editar"
-      #item "Eliminar", admin_usuario_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete
-    end
+    actions
   end
 
   filter :id

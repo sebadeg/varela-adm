@@ -24,6 +24,7 @@ class Ability
       can :manage, Cuenta
       can :manage, Alumno
       can :manage, Tarea
+      can :read, Usuario
 
     else
       can :read, AdminUsuario, id: user.id 
