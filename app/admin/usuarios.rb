@@ -15,9 +15,9 @@ ActiveAdmin.register Usuario do
     column :celular
 
     actions defaults: false do |u|
-      item "Ver", admin_lista_path(u), class: "view_link member_link", title: "Ver"
-      #item "Editar", edit_admin_lista_path(u), class: "edit_link member_link", title: "Editar"
-      #item "Eliminar", admin_lista_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete
+      item "Ver", admin_usuario_path(u), class: "view_link member_link", title: "Ver"
+      #item "Editar", edit_admin_usuario_path(u), class: "edit_link member_link", title: "Editar"
+      #item "Eliminar", admin_usuario_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete
     end
   end
 
