@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180626144336) do
+ActiveRecord::Schema.define(version: 20180725184415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,12 @@ ActiveRecord::Schema.define(version: 20180626144336) do
   end
 
   create_table "codigos", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "conceptos", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -256,6 +262,8 @@ ActiveRecord::Schema.define(version: 20180626144336) do
     t.boolean  "valido",         default: false
     t.boolean  "duda",           default: false
     t.integer  "pago_cuenta_id"
+    t.integer  "concepto_id"
+    t.index ["concepto_id"], name: "index_movimientos_on_concepto_id", using: :btree
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha", using: :btree
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id", using: :btree
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id", using: :btree
@@ -292,6 +300,14 @@ ActiveRecord::Schema.define(version: 20180626144336) do
     t.boolean  "procesado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sinregistro_cuentas", force: :cascade do |t|
+    t.integer  "cuenta_id"
+    t.string   "mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_sinregistro_cuentas_on_cuenta_id", using: :btree
   end
 
   create_table "tareas", force: :cascade do |t|
@@ -360,12 +376,14 @@ ActiveRecord::Schema.define(version: 20180626144336) do
   add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
+  add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
+  add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
 end
