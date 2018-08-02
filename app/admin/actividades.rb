@@ -57,13 +57,11 @@ ActiveAdmin.register Actividad do
     mailsQuery = ActiveRecord::Base.connection.execute(sql)
 
     emails = ""
-    File.open(Rails.root.join("data", 'numeros.txt'),'w') do |file| 
-      mailsQuery.each do |m|
-        emails = emails + m['email'] + ";"
-      end
+    mailsQuery.each do |m|
+      emails = emails + m['email'] + ";"
     end
 
-    UserMailer.novedades( "soporte@varela.edu.uy;sebastian.degrandi@gmail.com;", "Mock de PET, Mock de PET, Mock de PET, Mock de PET").deliver_now
+    UserMailer.novedades( emails, titulo ).deliver_now
 
     redirect_to admin_actividad_path(actividad)
   end
