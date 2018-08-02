@@ -19,6 +19,6 @@ class UserMailer < ApplicationMailer
 		}
 
 		@titulo = titulo
-		mail(from: 'novedades@varela.edu.uy', to: 'novedades@varela.edu.uy',  cc: emails, subject: titulo, delivery_method_options: delivery_options)
+		mail(from: 'novedades@varela.edu.uy', to: 'novedades@varela.edu.uy',  bcc: emails, subject: titulo, delivery_method_options: delivery_options)
 	end
 end
