@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Lote_pago" do
   page_action :extra, method: :post do
     p "Extra"
 
-    UserMailer.novedades().deliver_now
+    #UserMailer.novedades().deliver_now
 
     redirect_to root_path, notice: ""
   end

@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
 		mail(from: 'soporte@varela.edu.uy', to: 'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso')
 	end
 
-	def novedades()
+	def novedades(emails,titulo)
 
 		delivery_options = {
             address: "smtp.varela.edu.uy",
@@ -18,11 +18,7 @@ class UserMailer < ApplicationMailer
 		   openssl_verify_mode: 'none'
 		}
 
-		#attachments.inline['Cabezal.jpg'] = File.read(Rails.root.join("data","Cabezal.jpg"))
-		#attachments['Pie.jpg'] = File.read(Rails.root.join("data","Pie.jpg"))
-
-		mail(from: 'novedades@varela.edu.uy', to: 'soporte@varela.edu.uy', subject: 'Novedades', 
-		
-		 delivery_method_options: delivery_options)
+		@titulo = titulo
+		mail(from: 'novedades@varela.edu.uy', to: 'novedades@varela.edu.uy',  bcc: emails, subject: titulo, delivery_method_options: delivery_options)
 	end
 end

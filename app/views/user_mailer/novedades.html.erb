@@ -1,7 +1,12 @@
-<%= email_image_tag 'Cabezal.jpg' %>
+<table>
+<tr><%= email_image_tag 'Cabezal.jpg' %></tr>
+<tr>
 <br>
-Estimada familia,<br>
+Estimada familia:<br>
 <br>
-Hay novedades en la web.<br>
+<%= "Hay novedades de #{'"'}#{@titulo}#{'"'}' + en la web http://familias.varela.edu.uy" %><br>
 <br>
-<%= email_image_tag 'Pie.jpg' %>
+Saludos cordiales<br>
+<br>
+</tr>
+<tr><%= email_image_tag 'Pie.jpg' %></tr>
