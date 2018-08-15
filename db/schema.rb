@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180801180247) do
+ActiveRecord::Schema.define(version: 20180811225039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,29 @@ ActiveRecord::Schema.define(version: 20180801180247) do
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contrato_cuotas", force: :cascade do |t|
+    t.integer  "contrato_id"
+    t.date     "fecha"
+    t.decimal  "precio"
+    t.decimal  "descuento"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["contrato_id"], name: "index_contrato_cuotas_on_contrato_id", using: :btree
+  end
+
+  create_table "contratos", force: :cascade do |t|
+    t.integer  "cuenta_id"
+    t.integer  "anio"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "validado"
+    t.integer  "concepto_id"
+    t.integer  "alumno_id"
+    t.index ["alumno_id"], name: "index_contratos_on_alumno_id", using: :btree
+    t.index ["concepto_id"], name: "index_contratos_on_concepto_id", using: :btree
+    t.index ["cuenta_id"], name: "index_contratos_on_cuenta_id", using: :btree
   end
 
   create_table "convenios", force: :cascade do |t|
@@ -260,6 +283,9 @@ ActiveRecord::Schema.define(version: 20180801180247) do
     t.decimal  "importe"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "movimiento"
+    t.integer  "tipo"
+    t.boolean  "saldo"
     t.index ["alumno_id"], name: "index_linea_facturas_on_alumno_id", using: :btree
     t.index ["factura_id", "indice"], name: "index_linea_facturas_on_factura_id_and_indice", unique: true, using: :btree
     t.index ["factura_id"], name: "index_linea_facturas_on_factura_id", using: :btree
@@ -296,6 +322,7 @@ ActiveRecord::Schema.define(version: 20180801180247) do
     t.boolean  "duda",           default: false
     t.integer  "pago_cuenta_id"
     t.integer  "concepto_id"
+    t.integer  "factura"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id", using: :btree
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha", using: :btree
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id", using: :btree
@@ -366,6 +393,14 @@ ActiveRecord::Schema.define(version: 20180801180247) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "tipo_cuentas", force: :cascade do |t|
+    t.integer  "cuenta_id"
+    t.integer  "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_tipo_cuentas_on_cuenta_id", using: :btree
+  end
+
   create_table "titular_cuentas", force: :cascade do |t|
     t.integer  "usuario_id"
     t.integer  "cuenta_id"
@@ -411,6 +446,10 @@ ActiveRecord::Schema.define(version: 20180801180247) do
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
+  add_foreign_key "contrato_cuotas", "contratos"
+  add_foreign_key "contratos", "alumnos"
+  add_foreign_key "contratos", "conceptos"
+  add_foreign_key "contratos", "cuentas"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"
@@ -437,6 +476,7 @@ ActiveRecord::Schema.define(version: 20180801180247) do
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
+  add_foreign_key "tipo_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
 end
