@@ -28,12 +28,60 @@ ActiveAdmin.register Contrato do
   member_action :actualizar, method: :put do
     id = params[:id]
 
-    cc = ContratoCuota.where(["contrato_id=? AND fecha='2018-07-01'",id]).first!
+    Contrato.where("id>183").each do |c|
+  
+      c6 = ContratoCuota.where(["contrato_id=? AND fecha='2018-06-01'",c.id]).first rescue nil
+      c7 = ContratoCuota.where(["contrato_id=? AND fecha='2018-07-01'",c.id]).first rescue nil
+      c8 = ContratoCuota.where(["contrato_id=? AND fecha='2018-08-01'",c.id]).first rescue nil
+      c9 = ContratoCuota.where(["contrato_id=? AND fecha='2018-09-01'",c.id]).first rescue nil
+      c10 = ContratoCuota.where(["contrato_id=? AND fecha='2018-10-01'",c.id]).first rescue nil
+      c11 = ContratoCuota.where(["contrato_id=? AND fecha='2018-11-01'",c.id]).first rescue nil
+      c12 = ContratoCuota.where(["contrato_id=? AND fecha='2018-12-01'",c.id]).first rescue nil
 
-    ContratoCuota.where(["contrato_id=? AND fecha>'2018-07-01'",id]).each do |x|
-      x.precio = cc.precio
-      x.descuento = cc.descuento
-      x.save!
+      if c6 != nil && c7 != nil 
+        if c6.precio != c7.precio
+          if c8 != nil && c8.precio == c6.precio && c8.descuento == c6.descuento
+            if c12 != nil 
+              if c8.precio == c12.precio && c8.descuento == c12.descuento
+                c12.precio = c7.precio
+                c12.descuento = c7.descuento
+              else
+                c12.precio = (c7.precio*1.5).round(0)
+                c12.descuento = (c7.descuento*1.5).round(0)
+              end
+              c12.save!
+            end
+
+            c8.precio = c7.precio
+            c8.descuento = c7.descuento
+            c8.save!
+
+            if c9 != nil && c9.precio == c6.precio && c9.descuento == c6.descuento
+              c9.precio = c7.precio
+              c9.descuento = c7.descuento
+              c9.save!
+            end
+            if c10 != nil && c10.precio == c6.precio && c10.descuento == c6.descuento
+              c10.precio = c7.precio
+              c10.descuento = c7.descuento
+              c10.save!
+            end
+            if c11 != nil && c11.precio == c6.precio && c11.descuento == c6.descuento
+              c11.precio = c7.precio
+              c11.descuento = c7.descuento
+              c11.save!
+            end
+          end
+          ContratoCuota.where(["contrato_id=? AND fecha>'2018-12-01'",c.id]).each do |cc|
+            if cc.precio == c6.precio && cc.descuento == c6.descuento
+              cc.precio = c7.precio
+              cc.descuento = c7.descuento
+              cc.save!
+            end
+          end
+
+        end
+      end
     end
 
     contrato = Contrato.find(id.to_i+1)
