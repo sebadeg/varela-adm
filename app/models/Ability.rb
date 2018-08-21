@@ -27,6 +27,7 @@ class Ability
       can :read, Usuario
 
       can :manage, Contrato
+      can :manage, InscripcionAlumno
     else
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
