@@ -47,7 +47,7 @@ gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views', '~> 0.0.11'
 
 gem 'activeadmin'
-#gem 'responsive_active_admin', '0.0.5'
+gem 'responsive_active_admin'
 #gem 'active_admin_flat_skin'
 gem 'active_skin', '0.0.12'
 gem 'activeadmin_addons', '1.5'
