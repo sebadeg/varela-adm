@@ -26,10 +26,26 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+   :address              => "smtp.varela.edu.uy",
+   :port                 => 587,
+   :domain               => "varela.edu.uy", 
+   :user_name            => "soporte@varela.edu.uy",
+   :password             => "Ene_2018",
+   :authentication       => "plain",
+   :enable_starttls_auto => true,
+   :openssl_verify_mode  => 'none'
+  }
+
+  config.action_mailer.asset_host = 'http://varela-adm.herokuapp.com:80'
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: 'http://varela-adm.herokuapp.com', port: 80 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -40,6 +56,7 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
+  
   config.assets.debug = true
 
   # Suppress logger output for asset requests.
