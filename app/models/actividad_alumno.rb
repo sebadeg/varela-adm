@@ -1,2 +1,0 @@
-class ActividadAlumno < ApplicationRecord
-end
