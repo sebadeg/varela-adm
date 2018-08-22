@@ -11,7 +11,7 @@ ActiveAdmin.register InscripcionAlumno do
     id = params[:id]
     inscripcion_alumno = InscripcionAlumno.find(id)
 
-    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumno SET registrado=false WHERE id=#{id};" )
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET registrado=false WHERE id=#{id};" )
 
     redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
   end
