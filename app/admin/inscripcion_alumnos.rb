@@ -3,6 +3,18 @@ ActiveAdmin.register InscripcionAlumno do
 
   permit_params :cedula
 
+  action_item :resetear, only: :show do
+    link_to "Resetear", resetear_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+  end
+
+  member_action :resetear, method: :put do
+    id = params[:id]
+    inscripcion_alumno = InscripcionAlumno.find(id)
+
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumno SET registrado=false WHERE id=#{id};" )
+
+    redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
+  end
 
   index do
   	#selectable_column
