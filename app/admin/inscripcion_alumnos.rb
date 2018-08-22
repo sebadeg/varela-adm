@@ -48,11 +48,11 @@ ActiveAdmin.register InscripcionAlumno do
       row :alumno_id
       row "Nombre" do |r| "#{r.alumno.nombre} #{r.alumno.apellido}" end
       row :cedula
-      row "Convenio" do |r| (r.convenio != nil ? "#{r.convenio.nombre} - #{r.convenio.valor} %" : "") end
       row "Grado" do |r| ( (g = ProximoGrado.find(r.grado)) != nil ? "#{g.nombre} - $U #{g.precio}" : "") end
+      row "Convenio" do |r| (r.convenio != nil ? "#{r.convenio.nombre} - #{r.convenio.valor} %" : "") end
+      row :matricula
       row :hermanos
       row :cuotas
-      row :mes
       row :nombre1
       row :documento1
       row :domicilio1

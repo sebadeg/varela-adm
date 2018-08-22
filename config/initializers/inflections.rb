@@ -18,6 +18,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'especial', 'especiales'
   inflect.irregular 'especial_cuenta', 'especial_cuentas'
   inflect.irregular 'contrato_cuota', 'contrato_cuotas'
+  inflect.irregular 'inscripcion', 'inscripciones'
 end
 # These inflection rules are supported but not enabled by default:
 # ActiveSupport::Inflector.inflections(:en) do |inflect|

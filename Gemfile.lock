@@ -280,9 +280,9 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  active_skin (= 0.0.12)
-  activeadmin
-  activeadmin_addons (= 1.5)
+  active_skin
+  activeadmin (= 1.3)
+  activeadmin_addons
   bootstrap-sass
   byebug
   cancancan (~> 2.0)
