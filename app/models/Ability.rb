@@ -29,10 +29,10 @@ class Ability
       can :manage, Contrato
       can :read, InscripcionAlumno
 
-      can :manage Inscripciones
+      can :manage, Inscripcion
 
     elsif user.inscripciones
-      can :manage Inscripciones
+      can :manage, Inscripcion
     else
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
