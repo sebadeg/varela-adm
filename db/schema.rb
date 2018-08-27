@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822230606) do
+ActiveRecord::Schema.define(version: 20180826210100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,8 +301,41 @@ ActiveRecord::Schema.define(version: 20180822230606) do
     t.string   "domicilio2"
     t.string   "email2"
     t.string   "celular2"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "lugar_nacimiento"
+    t.date     "fecha_nacimiento"
+    t.string   "domicilio"
+    t.string   "celular"
+    t.string   "mutualista"
+    t.string   "emergencia"
+    t.string   "procede"
+    t.string   "nombre_padre"
+    t.string   "apellido_padre"
+    t.string   "lugar_nacimiento_padre"
+    t.date     "fecha_nacimiento_padre"
+    t.string   "email_padre"
+    t.string   "domicilio_padre"
+    t.string   "celular_padre"
+    t.string   "profesion_padre"
+    t.string   "trabajo_padre"
+    t.string   "telefono_trabajo_padre"
+    t.boolean  "titular_padre"
+    t.string   "nombre_madre"
+    t.string   "apellido_madre"
+    t.string   "lugar_nacimiento_madre"
+    t.date     "fecha_nacimiento_madre"
+    t.string   "email_madre"
+    t.string   "domicilio_madre"
+    t.string   "celular_madre"
+    t.string   "profesion_madre"
+    t.string   "trabajo_madre"
+    t.string   "telefono_trabajo_madre"
+    t.boolean  "titular_madre"
+    t.date     "fecha"
+    t.string   "recibida"
+    t.integer  "cedula_padre"
+    t.integer  "cedula_madre"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id", using: :btree
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id", using: :btree
   end
