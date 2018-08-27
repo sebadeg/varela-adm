@@ -323,6 +323,7 @@ class Inscripcion < ApplicationRecord
       "Documento de identidad: #{cedula_tos(inscripcion.cedula_padre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
+      "Mail: #{inscripcion.email_padre}<br>" + 
       "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
       "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
       "Profesión: #{inscripcion.profesion_padre}<br>" + 
@@ -336,6 +337,7 @@ class Inscripcion < ApplicationRecord
       "Documento de identidad: #{cedula_tos(inscripcion.cedula_madre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
+      "Mail: #{inscripcion.email_madre}<br>" + 
       "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
       "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
       "Profesión: #{inscripcion.profesion_madre}<br>" + 
