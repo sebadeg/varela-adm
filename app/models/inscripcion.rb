@@ -227,6 +227,13 @@ class Inscripcion < ApplicationRecord
     return (cedula/10).to_s + "-" + (cedula%10).to_s
   end
 
+  def fecha_tos(fecha)
+    if ( fecha == nil )
+      return ""
+    end
+    return I18n.l(fecha, format: '%-d de %B de %Y')
+  end
+
   def formulario(file_path)
 
     inscripcion = Inscripcion.find(id)
@@ -286,7 +293,7 @@ class Inscripcion < ApplicationRecord
     texto_inscripcion =
       "<b>INSCRIPCION</b><br>"+      
       "<br>"+
-      "Fecha: #{I18n.l(inscripcion.created_at, format: '%-d de %B de %Y')}<br>" +
+      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
       "Recibida por: #{inscripcion.recibida}<br>" +
       "<br>" +
       "<b>NIVEL</b><br>" +
@@ -302,7 +309,7 @@ class Inscripcion < ApplicationRecord
       "Nombre: #{inscripcion.nombre}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
-      "Fecha de nacimiento: #{I18n.l(inscripcion.fecha_nacimiento, format: '%-d de %B de %Y')}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
       "Domicilio: #{inscripcion.domicilio}<br>" + 
       "Teléfono/Celular: #{inscripcion.celular}<br>" + 
       "Mutualista: #{inscripcion.mutualista}<br>" + 
@@ -315,7 +322,7 @@ class Inscripcion < ApplicationRecord
       "Nombre: #{inscripcion.nombre_padre}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula_padre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
-      "Fecha de nacimiento: #{I18n.l(inscripcion.fecha_nacimiento_padre, format: '%-d de %B de %Y')}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
       "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
       "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
       "Profesión: #{inscripcion.profesion_padre}<br>" + 
@@ -328,7 +335,7 @@ class Inscripcion < ApplicationRecord
       "Nombre: #{inscripcion.nombre_madre}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula_madre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
-      "Fecha de nacimiento: #{I18n.l(inscripcion.fecha_nacimiento_madre, format: '%-d de %B de %Y')}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
       "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
       "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
       "Profesión: #{inscripcion.profesion_madre}<br>" + 
