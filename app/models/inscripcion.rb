@@ -434,11 +434,11 @@ class Inscripcion < ApplicationRecord
         text texto_inscripcion, align: :left, inline_format: true
       end
 
-      bounding_box([20, 270], :width => 250, :height => 150) do
+      bounding_box([20, 280], :width => 250, :height => 150) do
         text texto_padre, align: :left, inline_format: true
       end
 
-      bounding_box([270, 270], :width => 250, :height => 150) do
+      bounding_box([270, 280], :width => 250, :height => 150) do
         text texto_madre, align: :left, inline_format: true
       end
 
