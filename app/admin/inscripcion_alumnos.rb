@@ -77,6 +77,7 @@ ActiveAdmin.register InscripcionAlumno do
   filter :alumno_id
   filter :cedula
   filter :registrado
+  filter :inscripto
 
   show do
     attributes_table do
