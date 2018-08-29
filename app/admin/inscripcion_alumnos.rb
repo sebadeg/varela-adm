@@ -30,12 +30,47 @@ ActiveAdmin.register InscripcionAlumno do
     redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
   end
 
+
+
+
+
+  action_item :inscribir, only: :show do
+    link_to "Inscribir", inscribir_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+  end
+
+  member_action :inscribir, method: :put do
+    id = params[:id]
+    inscripcion_alumno = InscripcionAlumno.find(id)
+
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET inscripto=true WHERE id=#{id};" )
+
+    redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
+  end
+
+
+  action_item :deshacer_inscripcion, only: :show do
+    link_to "Deshacer inscripción", deshacer_inscripcion_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+  end
+
+  member_action :deshacer_inscripcion, method: :put do
+    id = params[:id]
+    inscripcion_alumno = InscripcionAlumno.find(id)
+
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET inscripto=false WHERE id=#{id};" )
+
+    redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
+  end
+
+
+
+
   index do
   	#selectable_column
     column :alumno_id
     column "Nombre" do |r| "#{r.alumno.nombre} #{r.alumno.apellido}" end
     column :cedula
     column :registrado
+    column :inscripto
     actions
   end
 
@@ -64,6 +99,7 @@ ActiveAdmin.register InscripcionAlumno do
       row :email2
       row :celular2
       row :registrado
+      row :inscripto
     end
   end
 

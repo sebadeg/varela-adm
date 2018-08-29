@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826210100) do
+ActiveRecord::Schema.define(version: 20180829122759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,8 +150,9 @@ ActiveRecord::Schema.define(version: 20180826210100) do
   create_table "convenios", force: :cascade do |t|
     t.string   "nombre"
     t.decimal  "valor"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.boolean  "ocultar_porcentaje"
   end
 
   create_table "cuenta_alumnos", force: :cascade do |t|
@@ -269,13 +270,14 @@ ActiveRecord::Schema.define(version: 20180826210100) do
     t.string   "email2"
     t.string   "celular2"
     t.boolean  "registrado"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "grado"
     t.integer  "matricula"
     t.boolean  "visa"
     t.integer  "cedula"
     t.boolean  "inhabilitado"
+    t.boolean  "inscripto",    default: false
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id", using: :btree
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id", using: :btree
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id", using: :btree
@@ -442,6 +444,7 @@ ActiveRecord::Schema.define(version: 20180826210100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "grado"
+    t.decimal  "descuento"
   end
 
   create_table "sinregistro_cuentas", force: :cascade do |t|
