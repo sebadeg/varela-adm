@@ -359,7 +359,12 @@ class Inscripcion < ApplicationRecord
       importe_total = importe_total * 0.95
     elsif  (inscripcion.hermanos == 2 )
       importe_total = importe_total * 0.9
-    end    
+    end
+    if inscripcion.afinidad
+      importe_total = importe_total * 0.95
+    end
+    importe_total = importe_total * (100-inscripcion.formulario/100.0)
+
     importe_total = (importe_total + 0.5).to_i
 
     cuotas = inscripcion.cuotas
