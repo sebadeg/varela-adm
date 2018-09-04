@@ -242,6 +242,14 @@ class Inscripcion < ApplicationRecord
     proximo_grado = ProximoGrado.find(inscripcion.proximo_grado_id) rescue nil
 
     convenio_nombre = (convenio != nil ? "#{convenio.nombre} - #{convenio.valor} %" : "")
+
+    if convenio.afinidad
+      convenio_nombre = convenio_nombre + " + Afinidad"
+    end
+    if convenio.formulario>0
+      convenio_nombre = convenio_nombre + " + Formulario #{convenio.formulario} %"
+    end
+
     proximo_grado_nombre = (proximo_grado != nil ? "#{proximo_grado.nombre} - $U #{proximo_grado.precio}" : "")
     matriculaS = find([["Contado",5],["Exhonerada",6]],inscripcion.matricula)
     hermanosS = find([["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]],inscripcion.hermanos)
@@ -363,7 +371,7 @@ class Inscripcion < ApplicationRecord
     if inscripcion.afinidad
       importe_total = importe_total * 0.95
     end
-    importe_total = importe_total * (100-inscripcion.formulario/100.0)
+    importe_total = importe_total * (100-inscripcion.formulario)/100
 
     importe_total = (importe_total + 0.5).to_i
 
