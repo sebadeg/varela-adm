@@ -234,7 +234,7 @@ class Inscripcion < ApplicationRecord
     return I18n.l(fecha, format: '%-d de %B de %Y')
   end
 
-  def formulario(file_path)
+  def imprimir_formulario(file_path)
 
     inscripcion = Inscripcion.find(id)
 

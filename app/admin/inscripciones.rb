@@ -19,7 +19,7 @@ ActiveAdmin.register Inscripcion do
   
     file_name = "Inscripcion #{inscripcion.nombre}.pdf"
     file = Tempfile.new(file_name)
-    inscripcion.formulario(file.path)
+    inscripcion.imprimir_formulario(file.path)
 
     send_file(
         file.path,
