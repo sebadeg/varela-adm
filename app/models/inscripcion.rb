@@ -387,6 +387,8 @@ class Inscripcion < ApplicationRecord
       mes = 2
     elsif cuotas==10
       mes = 3
+    else 
+      mes = 1
     end
 
     desde = DateTime.new(2019,mes,10)
