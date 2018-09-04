@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180904012700) do
+ActiveRecord::Schema.define(version: 20180904012900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -348,7 +348,7 @@ ActiveRecord::Schema.define(version: 20180904012700) do
     t.integer  "cedula_padre"
     t.integer  "cedula_madre"
     t.boolean  "afinidad"
-    t.decimal  "formulario"
+    t.integer  "formulario"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id", using: :btree
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id", using: :btree
   end
