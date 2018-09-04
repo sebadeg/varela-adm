@@ -32,6 +32,9 @@ class Ability
       can :manage, Inscripcion
 
     elsif user.inscripciones
+      can :read, AdminUsuario, id: user.id 
+      can :update, AdminUsuario, id: user.id 
+
       can :manage, Inscripcion
     else
       can :read, AdminUsuario, id: user.id 
