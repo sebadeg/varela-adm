@@ -243,11 +243,11 @@ class Inscripcion < ApplicationRecord
 
     convenio_nombre = (convenio != nil ? "#{convenio.nombre} - #{convenio.valor} %" : "")
 
-    if convenio.afinidad
+    if inscripcion.afinidad
       convenio_nombre = convenio_nombre + " + Afinidad"
     end
-    if convenio.formulario>0
-      convenio_nombre = convenio_nombre + " + Formulario #{convenio.formulario} %"
+    if inscripcion.formulario>0
+      convenio_nombre = convenio_nombre + " + Formulario #{inscripcion.formulario} %"
     end
 
     proximo_grado_nombre = (proximo_grado != nil ? "#{proximo_grado.nombre} - $U #{proximo_grado.precio}" : "")
@@ -307,7 +307,7 @@ class Inscripcion < ApplicationRecord
       "<b>NIVEL</b><br>" +
       "<br>" +
       "Grado: #{proximo_grado_nombre}<br>" +
-      "Convenio: #{convenio_nombre}<br>" +
+      "Descuento: #{convenio_nombre}<br>" +
       "Matrícula: #{matriculaS}<br>" +
       "Hermanos: #{hermanosS}<br>" +
       "Cuotas: #{inscripcion.cuotas}<br>" + 
