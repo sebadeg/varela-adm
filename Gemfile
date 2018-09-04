@@ -42,7 +42,7 @@ gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
 
 
-gem 'devise'
+gem 'devise', '4.4.3'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views', '~> 0.0.11'
 
