@@ -3,7 +3,7 @@ ActiveAdmin.register Inscripcion do
 
   permit_params :fecha, :recibida,
     :nombre,:cedula,:lugar_nacimiento,:fecha_nacimiento,:domicilio,:celular,:mutualista,:emergencia,:procede,
-    :proximo_grado_id,:convenio_id,:matricula,:hermanos,:cuotas,
+    :proximo_grado_id,:convenio_id,:afinidad,:formulario,:matricula,:hermanos,:cuotas,
     :nombre_padre,:cedula_padre,:lugar_nacimiento_padre,:fecha_nacimiento_padre,:email_padre,:domicilio_padre,:celular_padre,:profesion_padre,:trabajo_padre,:telefono_trabajo_padre,:titular_padre,
     :nombre_madre,:cedula_madre,:lugar_nacimiento_madre,:fecha_nacimiento_madre,:email_madre,:domicilio_madre,:celular_madre,:profesion_madre,:trabajo_madre,:telefono_trabajo_madre,:titular_madre,
     :nombre1,:documento1,:domicilio1,:email1,:celular1,
