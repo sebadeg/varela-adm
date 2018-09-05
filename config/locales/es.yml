@@ -115,6 +115,8 @@ es:
               blank: "no puede ser vacío"
             convenio_id:
               blank: "no puede ser vacío"
+            formulario:
+              blank: "no puede ser vacío"
             matricula:
               blank: "no puede ser vacía"
             hermanos:
