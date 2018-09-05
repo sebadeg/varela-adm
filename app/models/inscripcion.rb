@@ -15,6 +15,7 @@ class Inscripcion < ApplicationRecord
 
   validates :proximo_grado_id, presence: true
   validates :convenio_id, presence: true
+  validates :formulario, presence: true
   validates :matricula, presence: true
   validates :hermanos, presence: true
   validates :cuotas, presence: true
