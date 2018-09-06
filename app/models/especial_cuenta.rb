@@ -1,2 +1,0 @@
-class EspecialCuenta < ApplicationRecord
-end

@@ -5,19 +5,13 @@ git_source(:github) do |repo_name|
   "http://github.com/#{repo_name}.git"
 end
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-# Use postgres as the database for Active Record
 gem 'pg', '~> 0.18'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '5.2'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-#gem 'actionpack', '5.2'
-#gem 'railties', '5.2'
-#gem 'sass-rails', '5.0.7'
-#gem 'activesupport', '5.2'
-gem 'rails', '5.2'
-gem 'rubyzip', '1.2.1'
-
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -44,29 +38,6 @@ gem 'font-awesome-rails'
 gem 'bootstrap-sass'
 gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
-
-
-gem 'devise', '4.4.3'
-gem 'twitter-bootstrap-rails'
-gem 'devise-bootstrap-views', '~> 0.0.11'
-
-gem 'inherited_resources', '1.8'
-
-gem 'activeadmin', '1.3'
-gem 'responsive_active_admin'
-#gem 'active_admin_flat_skin'
-gem 'active_skin'
-gem 'activeadmin_addons'
-
-gem 'dbf', '~> 3.1', '>= 3.1.1'
-gem 'roo', '~> 2.7', '>= 2.7.1'
-gem 'roo-xls', '~> 1.2'
-gem 'pdf-reader', '~> 2.0'
-gem 'prawn', '~> 2.2', '>= 2.2.2'
-gem 'pdf-toolkit', '~> 1.1'
-gem 'cancancan', '~> 2.0'
-gem 'combine_pdf', '~> 0.2.5'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
