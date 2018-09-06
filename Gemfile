@@ -11,11 +11,11 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-gem 'actionpack', '5.2'
-gem 'railties', '5.2'
-gem 'sass-rails', '5.0.7'
-gem 'activesupport', '5.2'
-gem 'rails', '5.2'
+#gem 'actionpack', '5.2'
+#gem 'railties', '5.2'
+#gem 'sass-rails', '5.0.7'
+#gem 'activesupport', '5.2'
+gem 'rails', '5.1.6'
 gem 'rubyzip', '1.2.1'
 
 # Use Uglifier as compressor for JavaScript assets
