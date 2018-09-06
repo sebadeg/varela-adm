@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "http://github.com/#{repo_name}.git"
 end
 
-ruby '2.3'
-
 gem 'pg', '~> 0.18'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2'
@@ -41,7 +39,7 @@ gem 'bootstrap-sass'
 gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
 
-gem 'inherited_resources', '1.9'
+gem 'inherited_resources', '1.8'
 
 gem 'devise', '4.4.3'
 gem 'activeadmin', '1.3'
