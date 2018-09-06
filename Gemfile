@@ -48,7 +48,7 @@ gem 'devise-bootstrap-views', '~> 0.0.11'
 
 gem 'inherited_resources', '1.8'
 
-gem 'activeadmin', '1.3'
+gem 'activeadmin', '1.2.1'
 gem 'responsive_active_admin'
 #gem 'active_admin_flat_skin'
 gem 'active_skin'
