@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  #before_action :authenticate_admin_usuario!
+  before_action :authenticate_admin_usuario!
 
-  before_filter :set_locale
+  #before_filter :set_locale
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
