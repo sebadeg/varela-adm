@@ -101,6 +101,46 @@ es:
 
     errors:
       models:
+        inscripcion:
+          attributes:
+            nombre:
+              blank: "no puede ser vacío"
+            cedula:
+              blank: "no puede ser vacía"
+              greater_than: "inválida"
+              less_than: "inválida"
+              not_a_number: "inválida"
+              not_an_integer: "inválida"
+            proximo_grado_id:
+              blank: "no puede ser vacío"
+            convenio_id:
+              blank: "no puede ser vacío"
+            formulario:
+              blank: "no puede ser vacío"
+            matricula:
+              blank: "no puede ser vacía"
+            hermanos:
+              blank: "no puede ser vacío"
+            cuotas:
+              blank: "no puede ser vacía"
+              not_a_number: "debe ser un número"
+              less_than_or_equal_to: "menor o igual a 12"
+              greater_than_or_equal_to: "mayor o igual a 1"
+            nombre1:
+              blank: "no puede ser vacío"
+            documento1:
+              blank: "no puede ser vacía"
+              greater_than: "inválida"
+              less_than: "inválida"
+              not_a_number: "inválida"
+              not_an_integer: "inválida"
+            email1:
+              blank: "no puede ser vacío"
+            domicilio1:
+              blank: "no puede ser vacío"
+            celular1:
+              blank: "no puede ser vacío"
+
         admin_usuario:
           attributes:
             email:

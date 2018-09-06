@@ -38,28 +38,31 @@ gem 'jbuilder', '~> 2.5'
 gem 'coffee-script-source', '1.8.0'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
-gem 'sprockets'
+gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
 
-gem 'devise'
+
+gem 'devise', '4.4.3'
 gem 'twitter-bootstrap-rails'
-gem 'devise-bootstrap-views'
+gem 'devise-bootstrap-views', '~> 0.0.11'
 
-gem 'activeadmin'
+gem 'inherited_resources', '1.8'
+
+gem 'activeadmin', '1.3'
 gem 'responsive_active_admin'
-gem 'dbf', '~> 3.1', '>= 3.1.1'
-gem 'roo' #, '~> 2.7', '>= 2.7.1'
-gem 'roo-xls'
+#gem 'active_admin_flat_skin'
+gem 'active_skin'
+gem 'activeadmin_addons'
 
+gem 'dbf', '~> 3.1', '>= 3.1.1'
+gem 'roo', '~> 2.7', '>= 2.7.1'
+gem 'roo-xls', '~> 1.2'
 gem 'pdf-reader', '~> 2.0'
 gem 'prawn', '~> 2.2', '>= 2.2.2'
 gem 'pdf-toolkit', '~> 1.1'
 gem 'cancancan', '~> 2.0'
 gem 'combine_pdf', '~> 0.2.5'
-#gem 'active_admin_flat_skin'
-gem 'active_skin'
 
-gem 'activeadmin_addons'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
