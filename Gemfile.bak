@@ -39,6 +39,8 @@ gem 'bootstrap-sass'
 gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
 
+gem 'inherited_resources', '1.9'
+
 gem 'devise', '4.4.3'
 gem 'activeadmin', '1.3'
 gem 'responsive_active_admin', '0.0.5'
