@@ -11,10 +11,11 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-gem 'actionpack', '5.0.3'
-gem 'railties', '5.0.3'
-gem 'sass-rails', '5.0.3'
-gem 'rails', '5.0.3'
+gem 'actionpack', '5.0.7'
+gem 'railties', '5.0.7'
+gem 'sass-rails', '5.0.7'
+gem 'rails', '5.0.7'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -49,7 +50,7 @@ gem 'devise-bootstrap-views', '~> 0.0.11'
 
 gem 'inherited_resources', '1.8'
 
-gem 'activeadmin', '1.2.1'
+gem 'activeadmin', '1.3'
 gem 'responsive_active_admin'
 #gem 'active_admin_flat_skin'
 gem 'active_skin'
