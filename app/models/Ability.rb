@@ -27,15 +27,6 @@ class Ability
       can :read, Usuario
 
       can :manage, Contrato
-      can :read, InscripcionAlumno
-
-      can :manage, Inscripcion
-
-    elsif user.inscripciones
-      can :read, AdminUsuario, id: user.id 
-      can :update, AdminUsuario, id: user.id 
-
-      can :manage, Inscripcion
     else
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 

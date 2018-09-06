@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  #before_action :authenticate_admin_usuario!
+  before_action :authenticate_admin_usuario!
 
   before_filter :set_locale
 
