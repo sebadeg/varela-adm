@@ -14,6 +14,7 @@ gem 'puma', '~> 3.0'
 gem 'actionpack', '5.2'
 gem 'railties', '5.2'
 gem 'sass-rails', '5.0.7'
+gem 'activesupport', '5.2'
 gem 'rails', '5.2'
 gem 'rubyzip', '1.2.1'
 
