@@ -242,13 +242,14 @@ class Inscripcion < ApplicationRecord
     convenio = Convenio.find(inscripcion.convenio_id) rescue nil
     proximo_grado = ProximoGrado.find(inscripcion.proximo_grado_id) rescue nil
 
-    convenio_nombre = (convenio != nil ? "#{convenio.nombre} - #{convenio.valor} %" : "")
+    convenio_nombre = (convenio != nil ? "#{convenio.nombre} - #{convenio.valor}%" : "")
 
     if inscripcion.afinidad
       convenio_nombre = convenio_nombre + " + Afinidad"
     end
-    if inscripcion.formulario>0
-      convenio_nombre = convenio_nombre + " + Formulario #{inscripcion.formulario} %"
+    convenio_formulario = Convenio.find(inscripcion.formulario)
+    if convenio_formulario != nil
+      convenio_nombre = convenio_nombre + " + Formulario #{convenio_formulario.valor}%"
     end
 
     proximo_grado_nombre = (proximo_grado != nil ? "#{proximo_grado.nombre} - $U #{proximo_grado.precio}" : "")
@@ -372,7 +373,10 @@ class Inscripcion < ApplicationRecord
     if inscripcion.afinidad
       importe_total = importe_total * 0.95
     end
-    importe_total = importe_total * (100-inscripcion.formulario)/100
+
+    if formulario_convenio != nil
+      importe_total = importe_total * (100-formulario_convenio.valor)/100
+    end
 
     importe_total = (importe_total + 0.5).to_i
 
