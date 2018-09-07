@@ -249,7 +249,7 @@ class Inscripcion < ApplicationRecord
     end
     convenio_formulario = Convenio.find(inscripcion.formulario)
     if convenio_formulario != nil
-      convenio_nombre = convenio_nombre + " + Formulario #{convenio_formulario.valor}%"
+      convenio_nombre = convenio_nombre + " + #{convenio_formulario.nombre} - #{convenio_formulario.valor}%"
     end
 
     proximo_grado_nombre = (proximo_grado != nil ? "#{proximo_grado.nombre} - $U #{proximo_grado.precio}" : "")
@@ -374,8 +374,8 @@ class Inscripcion < ApplicationRecord
       importe_total = importe_total * 0.95
     end
 
-    if formulario_convenio != nil
-      importe_total = importe_total * (100-formulario_convenio.valor)/100
+    if convenio_formulario != nil
+      importe_total = importe_total * (100-convenio_formulario.valor)/100
     end
 
     importe_total = (importe_total + 0.5).to_i
