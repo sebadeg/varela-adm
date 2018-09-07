@@ -302,12 +302,10 @@ class Inscripcion < ApplicationRecord
 
     texto_inscripcion =
       "<b>INSCRIPCION</b><br>"+      
-      "<br>"+
       "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
       "Recibida por: #{inscripcion.recibida}<br>" +
       "<br>" +
       "<b>NIVEL</b><br>" +
-      "<br>" +
       "Grado: #{proximo_grado_nombre}<br>" +
       "Descuento: #{convenio_nombre}<br>" +
       "Matrícula: #{matriculaS}<br>" +
@@ -315,7 +313,6 @@ class Inscripcion < ApplicationRecord
       "Cuotas: #{inscripcion.cuotas}<br>" + 
       "<br>"+
       "<b>ALUMNO</b><br>" +
-      "<br>"+
       "Nombre: #{inscripcion.nombre}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
@@ -328,7 +325,6 @@ class Inscripcion < ApplicationRecord
 
       texto_padre =
       "<b>PADRE</b><br>" +
-      "<br>" +
       "Nombre: #{inscripcion.nombre_padre}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula_padre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
@@ -342,7 +338,6 @@ class Inscripcion < ApplicationRecord
 
       texto_madre =
       "<b>MADRE</b><br>" +
-      "<br>" +
       "Nombre: #{inscripcion.nombre_madre}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula_madre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
