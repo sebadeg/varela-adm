@@ -393,6 +393,13 @@ class Inscripcion < ApplicationRecord
       mes = 3
     end
 
+    if ( mes == nil )
+      mes = 1;
+    if ( dia == nil )
+      mes = 10;
+    if ( anio == nil )
+      mes = 2019;
+
     desde = DateTime.new(anio,mes,dia)
 
     mesS = I18n.l(desde, format: '%B')
