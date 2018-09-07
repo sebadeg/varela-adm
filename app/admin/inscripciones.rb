@@ -73,7 +73,7 @@ ActiveAdmin.register Inscripcion do
       row "Convenio" do |r| (r.convenio != nil ? "#{r.convenio.nombre} - #{r.convenio.valor}%" : "") end
       row "Formulario" do |r| ( (formulario = Convenio.find(r.formulario)) != nil ? "#{formulario.nombre} - #{formulario.valor}%" : "") end
       row :afinidad
-      row "Matrícula" do |r| find([["Contado",5],["Exhonerada",6]],r.matricula) end
+      row "Matrícula" do |r| find([["Contado",5],["Exonerada",6]],r.matricula) end
       row "Hermanos" do |r| find([["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]],r.hermanos) end
       row :cuotas
     end
@@ -146,7 +146,7 @@ ActiveAdmin.register Inscripcion do
       f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => Convenio.all.order(:nombre).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]}
       f.input :formulario, :label => 'Formulario', :as => :select, :collection => Convenio.where("formulario").order(:valor).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]}
       f.input :afinidad
-      f.input :matricula, :label => 'Matrícula', :as => :select, :collection => [["Contado",5],["Exhonerada",6]]
+      f.input :matricula, :label => 'Matrícula', :as => :select, :collection => [["Contado",5],["Exonerada",6]]
       f.input :hermanos, :label => 'Hermanos', :as => :select, :collection => [["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]] 
       f.input :cuotas
     end

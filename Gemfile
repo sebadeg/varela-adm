@@ -40,6 +40,7 @@ gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
 
 gem 'inherited_resources', '1.8'
+gem 'rubyzip', '~> 1.2', '>= 1.2.2'
 
 gem 'devise', '4.4.3'
 gem 'activeadmin', '1.3'
