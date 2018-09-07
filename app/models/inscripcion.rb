@@ -394,11 +394,14 @@ class Inscripcion < ApplicationRecord
     end
 
     if ( mes == nil )
-      mes = 1;
+      mes = 1
+    end
     if ( dia == nil )
-      mes = 10;
+      mes = 10
+    end
     if ( anio == nil )
-      mes = 2019;
+      mes = 2019
+    end
 
     desde = DateTime.new(anio,mes,dia)
 
