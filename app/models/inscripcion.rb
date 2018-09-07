@@ -253,7 +253,7 @@ class Inscripcion < ApplicationRecord
     end
 
     proximo_grado_nombre = (proximo_grado != nil ? "#{proximo_grado.nombre} - $U #{proximo_grado.precio}" : "")
-    matriculaS = find([["Contado",5],["Exhonerada",6]],inscripcion.matricula)
+    matriculaS = find([["Contado",5],["Exonerada",6]],inscripcion.matricula)
     hermanosS = find([["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]],inscripcion.hermanos)
 
     idx=0

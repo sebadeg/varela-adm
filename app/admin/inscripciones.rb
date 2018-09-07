@@ -126,7 +126,9 @@ ActiveAdmin.register Inscripcion do
   form do |f|    
     if f.object.new_record?
       f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
+      f.input :dia, input_html: { value: 10 }, as: :hidden
       f.input :mes, input_html: { value: 1 }, as: :hidden
+      f.input :anio, input_html: { value: 2019 }, as: :hidden
     end
 
     f.inputs "Alumno" do
