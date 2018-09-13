@@ -4,11 +4,10 @@ ActiveAdmin.register_page "Informe" do
 
   content do
     form decorate: true do |f|
-      table_for ActiveRecord::Base.connection.execute("SELECT *,proximo_grados.id as grado1 FROM inscripcion_alumnos INNER JOIN proximo_grados ON inscripcion_alumnos.grado=proximo_grados.id WHERE registrado ORDER BY proximo_grados.nombre"), sortable: true, class: 'index_table' do
+      table_for ActiveRecord::Base.connection.execute("SELECT *,proximo_grados.id as gradoID FROM inscripcion_alumnos INNER JOIN proximo_grados ON inscripcion_alumnos.grado=proximo_grados.id WHERE registrado ORDER BY proximo_grados.nombre"), sortable: true, class: 'index_table' do
         column "Alumno" do |x| x["alumno_id"] end
-        #column "Nombre" do |x| (alumno = Alumno.find(x["alumno_id"])) != nil ? "#{alumno.nombre} #{alumno.apellido}" : "" end
-        column "Grado1" do |x| x["grado1"] end
-        column "Grado" do |x| ProximoGrado.find(x["grado1"]).nombre end
+        column "Nombre" do |x| (alumno = Alumno.find(x["alumno_id"])) != nil ? "#{alumno.nombre} #{alumno.apellido}" : "" end
+        column "Grado" do |x| ProximoGrado.find(x["gradoID"]).nombre end
         column "Inscripto" do |x| x["inscripto"] end
       end
     end
