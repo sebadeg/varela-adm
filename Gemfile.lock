@@ -316,6 +316,7 @@ DEPENDENCIES
   responsive_active_admin (= 0.0.5)
   roo (~> 2.7, >= 2.7.1)
   roo-xls (~> 1.2)
+  rubyzip (~> 1.2, >= 1.2.2)
   sass-rails (~> 5.0)
   sprockets (~> 3.5, >= 3.5.2)
   turbolinks (~> 5)
