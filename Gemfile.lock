@@ -107,6 +107,7 @@ GEM
     formtastic_i18n (0.6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
@@ -303,6 +304,7 @@ DEPENDENCIES
   devise (= 4.4.3)
   devise-bootstrap-views (= 0.0.11)
   font-awesome-rails
+  gmaps4rails
   inherited_resources (= 1.8)
   jbuilder (~> 2.5)
   jquery-rails
