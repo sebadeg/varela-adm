@@ -15,7 +15,9 @@ class Ability
       can :manage, Lista
 
       can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"       
+      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
     elsif user.administracion
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
@@ -35,7 +37,9 @@ class Ability
       can :manage, Inscripcion
 
       can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria" 
+      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
 
     elsif user.inscripciones
       can :read, AdminUsuario, id: user.id 
@@ -44,13 +48,17 @@ class Ability
       can :manage, Inscripcion
 
       can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria" 
+      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
     else
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
 
       can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria" 
+      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
+      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
     end
       # if user.primaria
       #   can :manage, ActiveAdmin::Page, :name => "Primaria" 
