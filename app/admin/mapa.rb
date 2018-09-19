@@ -3,7 +3,15 @@ ActiveAdmin.register_page "Mapa" do
   menu priority: 50, label: "Mapa"
 
   content do
-    render partial: 'mapa'
+   
+    @markers = ""
+  	i = 0
+    Direccion.all.each do |x|
+      @markers = @markers + "var marker#{i} = new google.maps.Marker({position: {lat: #{x.latitude}, lng: #{x.longitude}}, map: map});"
+      i = i+1
+    end
+
+    render partial: 'mapa', locals: { markers: @markers }
   end
 
 end
