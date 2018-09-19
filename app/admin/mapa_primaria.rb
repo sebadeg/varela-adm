@@ -1,4 +1,4 @@
-    ActiveAdmin.register_page "Mapa_primaria" do
+ActiveAdmin.register_page "Mapa_primaria" do
 
   menu priority: 50, label: "Primaria", parent: "Mapa"
 
