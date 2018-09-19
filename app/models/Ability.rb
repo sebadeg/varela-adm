@@ -40,7 +40,7 @@ class Ability
       can :read, AdminUsuario, id: user.id 
       can :update, AdminUsuario, id: user.id 
 
-      can :manage, ActiveAdmin::Page, :name => "Importar" 
+      can :manage, ActiveAdmin::Page, :name => "Mapa" 
     end
       # if user.primaria
       #   can :manage, ActiveAdmin::Page, :name => "Primaria" 
