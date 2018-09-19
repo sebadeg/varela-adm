@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_000000) do
+ActiveRecord::Schema.define(version: 2018_09_20_000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,17 @@ ActiveRecord::Schema.define(version: 2018_09_06_000000) do
     t.string "apellido"
   end
 
+  create_table "direcciones", force: :cascade do |t|
+    t.bigint "usuario_id"
+    t.string "direccion"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "resultado"
+    t.index ["usuario_id"], name: "index_direcciones_on_usuario_id"
+  end
+
   create_table "especial_alumnos", id: :serial, force: :cascade do |t|
     t.integer "especial_id"
     t.integer "alumno_id"
@@ -350,6 +361,8 @@ ActiveRecord::Schema.define(version: 2018_09_06_000000) do
     t.integer "cedula_madre"
     t.boolean "afinidad"
     t.integer "formulario"
+    t.integer "dia", default: 10
+    t.integer "anio", default: 2019
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
@@ -535,6 +548,7 @@ ActiveRecord::Schema.define(version: 2018_09_06_000000) do
   add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
+  add_foreign_key "direcciones", "usuarios"
   add_foreign_key "especial_alumnos", "alumnos"
   add_foreign_key "especial_alumnos", "especiales"
   add_foreign_key "especial_cuentas", "cuentas"

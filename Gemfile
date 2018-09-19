@@ -59,8 +59,7 @@ gem 'pdf-toolkit', '~> 1.1'
 gem 'cancancan', '~> 2.0'
 gem 'combine_pdf', '~> 0.2.5'
 
-
-gem 'gmaps4rails'
+gem 'geocoder', '~> 1.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
