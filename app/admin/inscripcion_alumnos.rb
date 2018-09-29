@@ -3,65 +3,52 @@ ActiveAdmin.register InscripcionAlumno do
 
   permit_params :cedula
 
+  action_item :habilitar, only: :show do
+    if inscripcion_alumno.inhabilitado
+      link_to "Habilitar", habilitar_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+    else
+      link_to "Inhabilitar", habilitar_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put   
+    end
+  end
+
   action_item :registrar, only: :show do
-    link_to "Registrar", registrar_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+    if inscripcion_alumno.registrado
+      link_to "Desregistrar", registrar_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put   
+    else
+      link_to "Registrar", registrar_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+    end
+  end
+
+  action_item :inscribir, only: :show do
+    if inscripcion_alumno.inscripto
+      link_to "Desinscribir", inscribir_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+    else
+      link_to "Inscribir", inscribir_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
+    end
+  end
+
+  member_action :habilitar, method: :put do
+    id = params[:id]
+    inscripcion_alumno = InscripcionAlumno.find(id)
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET inhabilitado=#{!inscripcion_alumno.inhabilitado} WHERE id=#{id};" )
+    redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
   end
 
   member_action :registrar, method: :put do
     id = params[:id]
     inscripcion_alumno = InscripcionAlumno.find(id)
-
-    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET registrado=true WHERE id=#{id};" )
-
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET registrado=#{!inscripcion_alumno.registrado} WHERE id=#{id};" )
     redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
-  end
-
-
-  action_item :deshacer_registro, only: :show do
-    link_to "Deshacer registro", deshacer_registro_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
-  end
-
-  member_action :deshacer_registro, method: :put do
-    id = params[:id]
-    inscripcion_alumno = InscripcionAlumno.find(id)
-
-    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET registrado=false WHERE id=#{id};" )
-
-    redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
-  end
-
-
-
-
-
-  action_item :inscribir, only: :show do
-    link_to "Inscribir", inscribir_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
   end
 
   member_action :inscribir, method: :put do
     id = params[:id]
     inscripcion_alumno = InscripcionAlumno.find(id)
 
-    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET inscripto=true WHERE id=#{id};" )
+    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET inscripto=#{!inscripcion_alumno.inscripto} WHERE id=#{id};" )
 
     redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
   end
-
-
-  action_item :deshacer_inscripcion, only: :show do
-    link_to "Deshacer inscripción", deshacer_inscripcion_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
-  end
-
-  member_action :deshacer_inscripcion, method: :put do
-    id = params[:id]
-    inscripcion_alumno = InscripcionAlumno.find(id)
-
-    ActiveRecord::Base.connection.execute( "UPDATE inscripcion_alumnos SET inscripto=false WHERE id=#{id};" )
-
-    redirect_to admin_inscripcion_alumno_path(inscripcion_alumno)
-  end
-
-
 
 
   index do
@@ -69,6 +56,7 @@ ActiveAdmin.register InscripcionAlumno do
     column :alumno_id
     column "Nombre" do |r| "#{r.alumno.nombre} #{r.alumno.apellido}" end
     column :cedula
+    column :inhabilitado
     column :registrado
     column :inscripto
     actions
@@ -78,13 +66,15 @@ ActiveAdmin.register InscripcionAlumno do
   filter :cedula
   filter :registrado
   filter :inscripto
+  filter :inhabilitado
+
 
   show do
     attributes_table do
       row :alumno_id
       row "Nombre" do |r| "#{r.alumno.nombre} #{r.alumno.apellido}" end
       row :cedula
-      row "Grado" do |r| ( (g = ProximoGrado.find(r.grado)) != nil ? "#{g.nombre} - $U #{g.precio}" : "") end
+      row "Grado" do |r| ( (g = ProximoGrado.find(r.grado) rescue nil) != nil ? "#{g.nombre} - $U #{g.precio}" : "") end
       row "Convenio" do |r| (r.convenio != nil ? "#{r.convenio.nombre} - #{r.convenio.valor} %" : "") end
       row :matricula
       row :hermanos
@@ -99,6 +89,7 @@ ActiveAdmin.register InscripcionAlumno do
       row :domicilio2
       row :email2
       row :celular2
+      row :inhabilitado
       row :registrado
       row :inscripto
     end

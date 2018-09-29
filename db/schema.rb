@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_000000) do
+ActiveRecord::Schema.define(version: 2018_09_29_144906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,9 @@ ActiveRecord::Schema.define(version: 2018_09_20_000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "resultado"
+    t.boolean "primaria", default: false
+    t.boolean "secundaria", default: false
+    t.boolean "costa", default: false
     t.index ["usuario_id"], name: "index_direcciones_on_usuario_id"
   end
 
@@ -297,8 +300,9 @@ ActiveRecord::Schema.define(version: 2018_09_20_000000) do
     t.integer "matricula"
     t.boolean "visa"
     t.integer "cedula"
-    t.boolean "inhabilitado"
     t.boolean "inscripto", default: false
+    t.date "facturado"
+    t.boolean "inhabilitado"
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
@@ -470,6 +474,7 @@ ActiveRecord::Schema.define(version: 2018_09_20_000000) do
     t.datetime "updated_at", null: false
     t.integer "grado"
     t.decimal "descuento"
+    t.decimal "matricula"
   end
 
   create_table "sinregistro_cuentas", id: :serial, force: :cascade do |t|
