@@ -366,6 +366,9 @@ class Inscripcion < ApplicationRecord
       importe_total = importe_total * 0.9
     end
     if inscripcion.afinidad
+      importe_total = importe_total * 0.9
+    end
+    if inscripcion.cuotas == 1
       importe_total = importe_total * 0.95
     end
 
