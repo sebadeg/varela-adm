@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_144906) do
+ActiveRecord::Schema.define(version: 2018_11_02_165028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,6 +274,12 @@ ActiveRecord::Schema.define(version: 2018_09_29_144906) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "anio"
+    t.integer "codigo"
+    t.boolean "pri_mdeo", default: false
+    t.boolean "sec_mdeo", default: false
+    t.boolean "sec_cc", default: false
+    t.integer "proximo_grado"
   end
 
   create_table "inscripcion_alumnos", id: :serial, force: :cascade do |t|
@@ -367,6 +373,7 @@ ActiveRecord::Schema.define(version: 2018_09_29_144906) do
     t.integer "formulario"
     t.integer "dia", default: 10
     t.integer "anio", default: 2019
+    t.string "especial"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
@@ -399,6 +406,14 @@ ActiveRecord::Schema.define(version: 2018_09_29_144906) do
 
   create_table "listas", id: :serial, force: :cascade do |t|
     t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matriculas", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "codigo"
+    t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -475,6 +490,7 @@ ActiveRecord::Schema.define(version: 2018_09_29_144906) do
     t.integer "grado"
     t.decimal "descuento"
     t.decimal "matricula"
+    t.string "codigo"
   end
 
   create_table "sinregistro_cuentas", id: :serial, force: :cascade do |t|
@@ -483,6 +499,33 @@ ActiveRecord::Schema.define(version: 2018_09_29_144906) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cuenta_id"], name: "index_sinregistro_cuentas_on_cuenta_id"
+  end
+
+  create_table "spams", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subgrado_alumnos", force: :cascade do |t|
+    t.bigint "subgrado_id"
+    t.bigint "alumno_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "inscripto", default: false
+    t.index ["alumno_id"], name: "index_subgrado_alumnos_on_alumno_id"
+    t.index ["subgrado_id"], name: "index_subgrado_alumnos_on_subgrado_id"
+  end
+
+  create_table "subgrados", force: :cascade do |t|
+    t.bigint "grado_id"
+    t.string "nombre"
+    t.decimal "precio"
+    t.decimal "descuento"
+    t.decimal "matricula"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grado_id"], name: "index_subgrados_on_grado_id"
   end
 
   create_table "tareas", id: :serial, force: :cascade do |t|
@@ -580,6 +623,9 @@ ActiveRecord::Schema.define(version: 2018_09_29_144906) do
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
+  add_foreign_key "subgrado_alumnos", "alumnos"
+  add_foreign_key "subgrado_alumnos", "subgrados"
+  add_foreign_key "subgrados", "grados"
   add_foreign_key "tipo_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"

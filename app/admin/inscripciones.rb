@@ -76,6 +76,7 @@ ActiveAdmin.register Inscripcion do
       row "Matrícula" do |r| find([["Contado",5],["Exonerada",6]],r.matricula) end
       row "Hermanos" do |r| find([["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]],r.hermanos) end
       row :cuotas
+      row :especial
     end
 
     attributes_table title:"Padre" do
@@ -151,6 +152,7 @@ ActiveAdmin.register Inscripcion do
       f.input :matricula, :label => 'Matrícula', :as => :select, :collection => [["Contado",5],["Exonerada",6]]
       f.input :hermanos, :label => 'Hermanos', :as => :select, :collection => [["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]] 
       f.input :cuotas
+      f.input :especial
     end
     
     f.inputs "Padre" do
