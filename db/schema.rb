@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_165028) do
+ActiveRecord::Schema.define(version: 2018_11_03_175712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,23 @@ ActiveRecord::Schema.define(version: 2018_11_02_165028) do
     t.string "trabajo"
     t.string "ultimo_trabajo"
     t.string "comentarios"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "exalumnos", force: :cascade do |t|
+    t.string "nombre"
+    t.string "celular"
+    t.string "mail"
+    t.string "padre"
+    t.string "celular_padre"
+    t.string "mail_padre"
+    t.string "madre"
+    t.string "celular_madre"
+    t.string "mail_madre"
+    t.string "pase"
+    t.string "clase"
+    t.string "anio_egreso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -493,6 +510,19 @@ ActiveRecord::Schema.define(version: 2018_11_02_165028) do
     t.string "codigo"
   end
 
+  create_table "seguimientos", force: :cascade do |t|
+    t.bigint "alumno_id"
+    t.string "celular"
+    t.boolean "no_atiende"
+    t.boolean "no_inscribe"
+    t.boolean "inscribe"
+    t.boolean "duda"
+    t.text "comentario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_seguimientos_on_alumno_id"
+  end
+
   create_table "sinregistro_cuentas", id: :serial, force: :cascade do |t|
     t.integer "cuenta_id"
     t.string "mail"
@@ -622,6 +652,7 @@ ActiveRecord::Schema.define(version: 2018_11_02_165028) do
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "seguimientos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "subgrado_alumnos", "alumnos"
   add_foreign_key "subgrado_alumnos", "subgrados"
