@@ -45,11 +45,11 @@ gem 'devise'
 gem 'activeadmin'
 gem 'cancancan'
 
-gem 'responsive_active_admin'
-gem 'active_skin'
-gem 'activeadmin_addons'
-gem 'twitter-bootstrap-rails'
-gem 'devise-bootstrap-views'
+#gem 'responsive_active_admin'
+#gem 'active_skin'
+#gem 'activeadmin_addons'
+#gem 'twitter-bootstrap-rails'
+#gem 'devise-bootstrap-views'
 
 
 gem 'dbf'
