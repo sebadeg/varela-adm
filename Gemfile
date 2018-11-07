@@ -35,31 +35,8 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'coffee-script-source'
-gem 'font-awesome-rails'
-gem 'bootstrap-sass'
-#gem 'sprockets'
-gem 'jquery-turbolinks'
-
 gem 'devise'
 gem 'activeadmin'
-gem 'cancancan'
-
-#gem 'responsive_active_admin'
-#gem 'active_skin'
-#gem 'activeadmin_addons'
-#gem 'twitter-bootstrap-rails'
-#gem 'devise-bootstrap-views'
-
-
-gem 'dbf'
-gem 'roo'
-gem 'roo-xls'
-gem 'pdf-reader'
-gem 'prawn'
-gem 'pdf-toolkit'
-gem 'combine_pdf'
-gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

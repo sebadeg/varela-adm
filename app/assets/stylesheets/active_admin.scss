@@ -1,4 +1,3 @@
-//= require activeadmin_addons/all
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -8,25 +7,11 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
-$primary-color: #16367c;
-$current-menu-item-background: #BA361B; //lighten($primary-color, 12%) !default;
-$hover-menu-item-background: #BA361B; //lighten($primary-color, 12%) !default;
-
-//$secondary-color: #844c62;
-//$background: #000000;
-
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
-@import "responsive_active_admin";
-//@import "active_skin";
-
-//$skinLogo: url("varela.png") no-repeat 0 0;
-
-//@import "active_admin_flat_skin";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
-//.status_tag { background: #6090DB; }
-
+//   .status_tag { background: #6090DB; }

@@ -1,2 +1,0 @@
-class Seguimiento < ApplicationRecord
-end
