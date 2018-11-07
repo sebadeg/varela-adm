@@ -38,7 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-script-source'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
-gem 'sprockets'
+#gem 'sprockets'
 gem 'jquery-turbolinks'
 
 gem 'devise'
