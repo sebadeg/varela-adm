@@ -20,6 +20,7 @@ $hover-menu-item-background: #BA361B; //lighten($primary-color, 12%) !default;
 @import "active_admin/base";
 @import "responsive_active_admin";
 //@import "active_skin";
+@import "gmaps4rails";
 
 //$skinLogo: url("varela.png") no-repeat 0 0;
 
