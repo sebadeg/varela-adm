@@ -33,11 +33,24 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-#gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.1.0', require: false
+
+gem 'coffee-script-source'
+gem 'font-awesome-rails'
+gem 'bootstrap-sass'
+gem 'sprockets',
+gem 'jquery-turbolinks'
 
 gem 'devise'
 gem 'activeadmin'
 gem 'cancancan'
+
+gem 'responsive_active_admin'
+gem 'active_skin'
+gem 'activeadmin_addons'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
+
 
 gem 'dbf'
 gem 'roo'
