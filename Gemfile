@@ -37,6 +37,16 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
 gem 'activeadmin'
+gem 'cancancan'
+
+gem 'dbf'
+gem 'roo'
+gem 'roo-xls'
+gem 'pdf-reader'
+gem 'prawn'
+gem 'pdf-toolkit'
+gem 'combine_pdf'
+gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
