@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-#gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'coffee-script-source', '1.8.0'
 gem 'font-awesome-rails'
@@ -43,7 +43,6 @@ gem 'jquery-turbolinks'
 
 gem 'devise', '4.4.3'
 gem 'activeadmin', '1.3'
-
 gem 'responsive_active_admin', '0.0.5'
 gem 'active_skin', '0.0.12'
 gem 'activeadmin_addons', '1.6'
