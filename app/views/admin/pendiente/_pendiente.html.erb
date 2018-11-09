@@ -1,0 +1,18 @@
+Cuentas pendientes de usuarios<br>
+
+<% usuarios.each do |u| %>
+	<%= p u.cuenta %><br>
+<% end %>
+<br>
+<br>
+
+Cuentas pendientes<br>
+
+<table border=1px width="40%">
+	<% cuentas.each do |c| %>
+		<%= form_tag(admin_pendiente_validar_path, :method => "post") do %>
+		   <tr><td><%= hidden_field_tag :cuenta, value: c.id %><%= c.id %></td>
+		   <td><%= submit_tag "Validar" %></td></tr>
+		<% end %>
+	<% end %>
+</table>
