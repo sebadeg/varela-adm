@@ -63,7 +63,24 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "varela-adm_#{Rails.env}"
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+   :address              => "smtp.varela.edu.uy",
+   :port                 => 587,
+   :domain               => "varela.edu.uy", 
+   :user_name            => "soporte@varela.edu.uy",
+   :password             => "Ene_2018",
+   :authentication       => "plain",
+   :enable_starttls_auto => true,
+   :openssl_verify_mode  => 'none'
+  }
+  config.action_mailer.asset_host = 'http://varela-adm.herokuapp.com:80'
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'http://varela-adm.herokuapp.com', port: 80 }
+
+
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
