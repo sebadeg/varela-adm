@@ -1,0 +1,4 @@
+
+Agregar los alumnos registrados
+
+INSERT INTO subgrado_alumnos (subgrado_id,alumno_id,inscripto,created_at,updated_at) (SELECT grado,alumno_id,inscripto,now(),now() FROM inscripcion_alumnos WHERE registrado AND NOT (alumno_id IN (SELECT alumno_id FROM subgrado_alumnos WHERE subgrado_id<72)))

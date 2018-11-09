@@ -1,7 +1,7 @@
 ActiveAdmin.register Subgrado do
 
   menu label: 'Grados'
-  menu parent: 'Secretaría'
+  menu parent: 'Inscripciones'
 
   permit_params :id, :nombre, :apellido
 
@@ -16,23 +16,18 @@ ActiveAdmin.register Subgrado do
   	#selectable_column
     column :id
     column :nombre
-
-    column "Año" do |subgrado|
-      subgrado.grado.anio
-    end
+    column "Grado" do |r| (r.grado != nil ? "#{r.grado.nombre} (#{r.grado.anio})" : "") end
 
     actions
   end
 
   filter :nombre
-  filter :grado_anio, as: :numeric, :label => 'Año'
 
   show do
     attributes_table do
       row :id
       row :nombre
-
-      row "Año" do |subgrado| subgrado.grado.anio end
+      row "Grado" do |r| (r.grado != nil ? "#{r.grado.nombre} (#{r.grado.anio})" : "") end
     end
   end
 
@@ -40,6 +35,7 @@ ActiveAdmin.register Subgrado do
     f.inputs do
       f.input :id
       f.input :nombre
+      f.input :grado_id, :label => 'Grado', :as => :select, :collection => Grado.all.order(:anio,:nombre).map{|u| ["#{u.nombre (u.anio)}",u.id]}
     end
     f.actions
   end
