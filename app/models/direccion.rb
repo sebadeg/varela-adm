@@ -1,2 +1,0 @@
-class Direccion < ApplicationRecord
-end
