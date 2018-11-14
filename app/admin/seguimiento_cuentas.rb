@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
 
 
               column "Seguimiento" do |x|
-                link_to 'Seguimiento', admin_alumno_path(x), method: :get
+                link_to 'Ver', admin_alumno_path(x), class: "view_link member_link", method: :get
               end
             end
           end
