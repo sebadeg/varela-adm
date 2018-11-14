@@ -1,7 +1,7 @@
 ActiveAdmin.register Subgrado do
 
   menu label: 'Grados'
-  menu parent: 'Inscripciones'
+  menu parent: 'Seguimiento'
 
   permit_params :id, :nombre, :apellido
 
