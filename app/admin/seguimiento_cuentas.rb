@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
       column do
         panel "Cuentas" do
           table_for Cuenta.all.each do |c|
-            column:  :id
+            column :id
             column "Seguimiento" do
               link_to('Seguimiento',admin_cuenta_path(u))
             end
