@@ -34,9 +34,14 @@ ActiveAdmin.register Subgrado do
           t.column :id
           t.column :nombre
           t.column :apellido
+
+          t.column "Registrado" do |x| (InscripcionAlumno.where( "alumno_id=#{r.id}" ).registrado) end
+          t.column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{r.id}" ).inscripto) end
+
         end
       end
-    end
+
+     end
   end
 
   form do |f|
