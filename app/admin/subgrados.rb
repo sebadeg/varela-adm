@@ -35,14 +35,8 @@ ActiveAdmin.register Subgrado do
           t.column :nombre
           t.column :apellido
 
-          t.column "Registrado" do |x| 
-            insc = InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil
-            if insc != nil insc.registrado end
-          end
-          t.column "Inscripto" do |x|
-            insc = InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil
-            if insc != nil insc.inscripto end
-          end
+          t.column "Registrado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.registrado : "" end
+          t.column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inscripto : "" end
 
         end
       end
