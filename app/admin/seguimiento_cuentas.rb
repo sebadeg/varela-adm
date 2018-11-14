@@ -1,4 +1,4 @@
-ActiveAdmin.register_page SeguimientoCuenta do
+ActiveAdmin.register_page "Seguimiento Cuenta" do
 
   menu label: 'Seguimiento Cuenta'
   menu parent: 'Seguimiento'
