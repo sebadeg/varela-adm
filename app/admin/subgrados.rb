@@ -35,8 +35,8 @@ ActiveAdmin.register Subgrado do
           t.column :nombre
           t.column :apellido
 
-          t.column "Registrado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).registrado) end
-          t.column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).inscripto) end
+          t.column "Registrado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.registrado) end
+          t.column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inscripto) end
 
         end
       end
