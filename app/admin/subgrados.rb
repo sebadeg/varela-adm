@@ -37,11 +37,11 @@ ActiveAdmin.register Subgrado do
 
           t.column "Registrado" do |x| 
             insc = InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil
-            if insc != nil insc.registrado 
+            if insc != nil insc.registrado end
           end
           t.column "Inscripto" do |x|
             insc = InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil
-            if insc != nil insc.inscripto 
+            if insc != nil insc.inscripto end
           end
 
         end
