@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
         panel "Cuentas" do
           ul do
             Cuenta.all.each do |c|
-              li link_to "Seguimiento", admin_cuenta_path(c), method: :get 
+              li link_to('Seguimiento',admin_cuenta_path(u))
             end
           end
         end
@@ -18,9 +18,9 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
       column do
         panel "Cuentas" do
           table_for Cuenta.all.each do |c|
-            :id
-            actions defaults: false do |u|
-              item "Seguimiento", admin_cuenta_path(u), title: "Seguimiento"
+            column:  :id
+            column "Seguimiento" do
+              link_to('Seguimiento',admin_cuenta_path(u))
             end
           end
         end
