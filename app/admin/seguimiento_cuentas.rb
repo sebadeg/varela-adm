@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
         panel "Cuentas" do
           ul do
             Cuenta.all do |c|
-              li link_to(c.id.to_s, admin_cuenta_path(c))
+              li link_to "Habilitar", admin_cuenta_path(c), method: :get 
             end
           end
         end
