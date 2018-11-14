@@ -29,7 +29,7 @@ ActiveAdmin.register Subgrado do
       row :nombre
       row "Grado" do |r| (r.grado != nil ? "#{r.grado.nombre} (#{r.grado.anio})" : "") end
  
-      row "Alumnos" do 
+      row "Alumnos" do |r|
         table_for Alumno.where("id in (SELECT alumno_id FROM subgrado_alumnos WHERE subgrado_id=#{r.id})").order(:nombre, :apellido) do |t|
           t.column :id
           t.column :nombre
