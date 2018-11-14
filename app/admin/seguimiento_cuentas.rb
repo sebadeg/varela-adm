@@ -11,6 +11,13 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
             column :id
             column :nombre
             column :apellido
+
+            column "Habilitado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? !InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inhabilitado : "" end
+
+            column "Registrado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.registrado : "" end
+            column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inscripto : "" end
+
+
             column "Seguimiento" do |x|
               link_to 'Seguimiento', admin_alumno_path(x), method: :get
             end
