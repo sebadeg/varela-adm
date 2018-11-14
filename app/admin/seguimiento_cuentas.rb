@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Seguimiento Cuenta" do
     columns do
       column do
         panel "Cuentas" do
-          table_for Cuenta.where('id=#{params[:cuenta]}').each do |c|
+          table_for Cuenta.where("id=#{params[:cuenta]}").each do |c|
             column :id
             column "Seguimiento" do |x|
               link_to 'Seguimiento', admin_cuenta_path(x), method: :get
