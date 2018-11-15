@@ -50,12 +50,12 @@ ActiveAdmin.register Seguimiento do
       @alumno_id = params["q"]["alumno_id_equals"]
       $alumno_id = params["q"]["alumno_id_equals"]
       super
-    end
+    end 
 
-    def new
-      alumno = Alumno.find($alumno_id)
-      @page_title = "Añadir seguimiento a #{alumno.nombre} #{alumno.apellido}"
-    end
+    #def new
+    #  alumno = Alumno.find($alumno_id)
+    #  @page_title = "Añadir seguimiento a #{alumno.nombre} #{alumno.apellido}"
+    #end
 
   end
 
