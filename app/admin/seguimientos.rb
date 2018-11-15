@@ -46,7 +46,7 @@ ActiveAdmin.register Seguimiento do
 
     def build_new_resource
       r = super
-      r.assign_attributes(alumno_id: 121211) # @alumno_id)
+      r.assign_attributes(alumno_id: @alumno_id)
       r
     end
 
