@@ -28,11 +28,13 @@ ActiveAdmin.register Seguimiento do
   form do |f|
 
     s = ""
-    Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id IN (SELECT cuenta_id FROM cuenta_alumnos WHERE alumno_id=#{$alumno_id}))").each do |u|
-      if s != ""
-        s = s + " - "
+    if $alumno_id != nil
+      Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id IN (SELECT cuenta_id FROM cuenta_alumnos WHERE alumno_id=#{$alumno_id}))").each do |u|
+        if s != ""
+          s = s + " - "
+        end
+        s = s + "#{u.nombre} #{u.apellido} (#{u.celular})"
       end
-      s = s + "#{u.nombre} #{u.apellido} (#{u.celular})"
     end
 
     f.inputs do
@@ -58,7 +60,10 @@ ActiveAdmin.register Seguimiento do
     end
 
     def index
-      $alumno_id = params["q"]["alumno_id_equals"]
+      $alumno_id = nil
+      if params["q"] != nil
+        $alumno_id = params["q"]["alumno_id_equals"]
+      end
       super
     end 
 
