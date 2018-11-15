@@ -5,7 +5,7 @@ ActiveAdmin.register Seguimiento do
 
   permit_params :id, :alumno_id, :celular, :no_atiende, :no_inscribe, :inscribe, :duda, :comentario, :created_at, :updated_at
 
-  action_item :localizar, only: :index do
+  action_item :add, only: :index do
     link_to 'Añadir seguimiento', new_admin_seguimiento_path(:alumno_id => @alumno_id)
   end
 
@@ -44,9 +44,9 @@ ActiveAdmin.register Seguimiento do
 
   controller do
 
-    def action_methods
-      super - ['new']
-    end
+    #def action_methods
+    #  super - ['new']
+    #end
 
     def build_new_resource
 
