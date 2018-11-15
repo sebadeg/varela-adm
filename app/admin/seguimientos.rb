@@ -22,8 +22,6 @@ ActiveAdmin.register Seguimiento do
       row :inscribe
       row :duda
       row :comentario
-      row :created_at
-      row :updated_at
     end
   end
 
@@ -36,8 +34,6 @@ ActiveAdmin.register Seguimiento do
       f.input :inscribe
       f.input :duda
       f.input :comentario
-      f.input :created_at
-      f.input :updated_at
     end
     f.actions
   end
