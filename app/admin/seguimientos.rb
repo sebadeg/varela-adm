@@ -27,7 +27,7 @@ ActiveAdmin.register Seguimiento do
 
   form do |f|
     f.inputs do
-      f.input :alumno_id, input_html: { value: params["q"]["alumno_id_equals"] }
+      f.input :alumno_id, input_html: { value: @alumno_id }
       f.input :celular
       f.input :no_atiende
       f.input :no_inscribe
@@ -36,6 +36,13 @@ ActiveAdmin.register Seguimiento do
       f.input :comentario
     end
     f.actions
+  end
+
+  controller do
+
+    def index
+      @alumno_id = params["q"]["alumno_id_equals"]
+    end  
   end
 
 end
