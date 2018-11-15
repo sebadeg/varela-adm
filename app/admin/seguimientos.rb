@@ -6,7 +6,7 @@ ActiveAdmin.register Seguimiento do
   permit_params :id, :alumno_id, :celular, :no_atiende, :no_inscribe, :inscribe, :duda, :comentario, :created_at, :updated_at
 
   action_item :localizar, only: :index do
-    link_to 'Agregar', new_admin_seguimiento(:alumno_id => @alumno_id)
+    link_to 'Agregar', new_admin_seguimiento_path(:alumno_id => @alumno_id)
   end
 
   index do
