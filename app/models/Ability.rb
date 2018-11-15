@@ -47,6 +47,8 @@ class Ability
 
       can :manage, Inscripcion
       can :manage, Seguimiento
+      can :manage, SeguimientoCuenta
+      can :manage, Subgrado
 
       can :manage, ActiveAdmin::Page, :name => "Mapa" 
       can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
