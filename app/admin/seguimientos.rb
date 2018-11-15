@@ -27,7 +27,7 @@ ActiveAdmin.register Seguimiento do
 
   form do |f|
     f.inputs do
-      f.input :alumno_id
+      f.input :alumno_id, input_html: { value: params["alumno_id_equals"] }
       f.input :celular
       f.input :no_atiende
       f.input :no_inscribe
