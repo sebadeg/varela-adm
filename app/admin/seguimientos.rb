@@ -54,6 +54,7 @@ ActiveAdmin.register Seguimiento do
 
     def new
       #alumno = Alumno.find($alumno_id)
+      super
       @page_title = "Añadir seguimiento a ..."
     end
 
