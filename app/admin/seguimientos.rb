@@ -42,6 +42,7 @@ ActiveAdmin.register Seguimiento do
 
     def index
       @alumno_id = params["q"]["alumno_id_equals"]
+      super
     end  
   end
 
