@@ -44,9 +44,9 @@ ActiveAdmin.register Seguimiento do
 
   controller do
 
-    def action_methods
-      super - ['new']
-    end
+    #def action_methods
+    #  super - ['new']
+    #end
 
     def index
       @alumno_id = params["q"]["alumno_id_equals"]
