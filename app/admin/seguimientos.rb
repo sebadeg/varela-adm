@@ -9,6 +9,8 @@ ActiveAdmin.register Seguimiento do
   	#selectable_column
     column :alumno_id
     column :created_at
+
+    actions
   end
 
   filter :alumno_id
