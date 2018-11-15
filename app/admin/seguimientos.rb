@@ -47,14 +47,15 @@ ActiveAdmin.register Seguimiento do
     end
 
     def index
-      @alumno_id = params["q"]["alumno_id_equals"]
       $alumno_id = params["q"]["alumno_id_equals"]
       super
     end 
 
     def new
-      alumno = Alumno.find($alumno_id)
-      @page_title = "Añadir seguimiento a #{alumno.nombre} #{alumno.apellido}"
+      if $alumno_id != nil
+        alumno = Alumno.find($alumno_id)
+        @page_title = "Añadir seguimiento a #{alumno.nombre} #{alumno.apellido}"
+      end
       new!
     end
 
