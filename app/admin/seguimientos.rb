@@ -52,10 +52,11 @@ ActiveAdmin.register Seguimiento do
       super
     end 
 
-    #def new
-    #  alumno = Alumno.find($alumno_id)
-    #  @page_title = "Añadir seguimiento a #{alumno.nombre} #{alumno.apellido}"
-    #end
+    def new
+      super
+      alumno = Alumno.find($alumno_id)
+      @page_title = "Añadir seguimiento a #{alumno.nombre} #{alumno.apellido}"
+    end
 
   end
 
