@@ -46,8 +46,9 @@ class Ability
       can :update, AdminUsuario, id: user.id 
 
       can :manage, Inscripcion
+
       can :manage, Seguimiento
-      can :manage, SeguimientoCuenta
+      can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
       can :manage, Subgrado
 
       can :manage, ActiveAdmin::Page, :name => "Mapa" 
