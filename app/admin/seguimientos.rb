@@ -29,11 +29,14 @@ ActiveAdmin.register Seguimiento do
 
     s = ""
     Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id IN (SELECT cuenta_id FROM cuenta_alumnos WHERE alumno_id=#{$alumno_id}))").each do |u|
-      s = s + "#{u.nombre} #{u.apellido} (#{u.celular}),"
+      if s != ""
+        s = s + " - "
+      end
+      s = s + "#{u.nombre} #{u.apellido} (#{u.celular})"
     end
 
     f.inputs do
-      f.li s
+      f.li s, label: "Registrado"
       f.input :alumno_id
 
       f.input :celular
