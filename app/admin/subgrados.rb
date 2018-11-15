@@ -40,7 +40,7 @@ ActiveAdmin.register Subgrado do
           t.column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inscripto : "" end
 
           t.column "Seguimiento" do |x|
-            link_to 'Ver', :controller => "seguimiento_cuentas", :action => "index", 'alumno' => "#{x.id}".html_safe
+            link_to 'Ver', :controller => "seguimiento_cuenta", :action => "index", 'alumno' => "#{x.id}".html_safe
           end            
 
         end
