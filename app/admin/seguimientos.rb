@@ -31,10 +31,9 @@ ActiveAdmin.register Seguimiento do
     Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id IN (SELECT cuenta_id FROM cuenta_alumnos WHERE alumno_id=#{$alumno_id}))").each do |u|
       s = s + "<p>#{u.nombre} #{u.apellido} #{u.celular}</p><br>"
     end
-    f.form_buffers.last << s.html_safe
-
 
     f.inputs do
+      f.li s
       f.input :alumno_id
 
       f.input :celular
