@@ -5,10 +5,6 @@ ActiveAdmin.register Seguimiento do
 
   permit_params :id, :alumno_id, :celular, :no_atiende, :no_inscribe, :inscribe, :duda, :comentario, :created_at, :updated_at
 
-  action_item :add, only: :index do
-    link_to 'Añadir seguimiento', new_admin_seguimiento_path(:alumno_id => @alumno_id)
-  end
-
   index do
   	#selectable_column
     column :alumno_id
@@ -44,15 +40,7 @@ ActiveAdmin.register Seguimiento do
 
   controller do
 
-    #def action_methods
-    #  super - ['new']
-    #end
-
     def build_new_resource
-
-      p "BUILD ALUMNO #{@alumno_id}"
-      p "BUILD ALUMNO #{$alumno_id}"
-
       r = super
       r.assign_attributes(alumno_id: $alumno_id)
       r
@@ -61,8 +49,6 @@ ActiveAdmin.register Seguimiento do
     def index
       @alumno_id = params["q"]["alumno_id_equals"]
       $alumno_id = params["q"]["alumno_id_equals"]
-      p "INDEX ALUMNO #{@alumno_id}"
-      p "INDEX ALUMNO #{$alumno_id}"
       super
     end  
   end
