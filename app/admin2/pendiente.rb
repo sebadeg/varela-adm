@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "sistarbanc.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
+       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
        (1..10).each do |x|
         cuenta = 12121
         nombre = "CECILIA"
@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Pendiente" do
         mes = 1
         anio = 2019
 
-        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
+        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
 	end
 
