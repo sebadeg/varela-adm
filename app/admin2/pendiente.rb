@@ -8,22 +8,20 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "sistarbanc.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-     	f.write("test")
-     	
- #      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
- #      (1..10).each do |x|
- #        cuenta = 12121
- #        nombre = "CECILIA"
- #        apellido = "SAETTONE"
- #        importe = 34000
- #        vencimiento = "10/01/2019"
- #        inicio = "01/01/2019"
- #        dia = 10
- #        mes = 1
- #        anio = 2019
+       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
+       (1..10).each do |x|
+        cuenta = 12121
+        nombre = "CECILIA"
+        apellido = "SAETTONE"
+        importe = 34000
+        vencimiento = "10/01/2019"
+        inicio = "01/01/2019"
+        dia = 10
+        mes = 1
+        anio = 2019
 
- #        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
- #      end
+        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
+      end
 	end
 
     send_file(
