@@ -5,9 +5,11 @@ ActiveAdmin.register_page "Pendiente" do
   page_action :sistarbanc, method: :post do   
     #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
 
- #    file_name = "sistarbanc.txt"
- #    file = Tempfile.new(file_name)    
- #    File.open(file, "w+") do |f|
+     file_name = "sistarbanc.txt"
+     file = Tempfile.new(file_name)    
+     File.open(file, "w+") do |f|
+     	f.write("test")
+     	
  #      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
  #      (1..10).each do |x|
  #        cuenta = 12121
@@ -22,14 +24,13 @@ ActiveAdmin.register_page "Pendiente" do
 
  #        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
  #      end
-	# end
+	end
 
- #    send_file(
- #        file.path,
- #        filename: file_name,
- #        type: "application/txt"
- #      )
-  redirect_to admin_pendiente_path, notice: "Hecho"
+    send_file(
+        file.path,
+        filename: file_name,
+        type: "application/txt"
+      )
   end
 
  #  page_action :redpagos, method: :post do   
