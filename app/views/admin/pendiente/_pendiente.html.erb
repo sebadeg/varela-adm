@@ -1,18 +1,16 @@
-Cuentas pendientes de usuarios<br>
-
-<% usuarios.each do |u| %>
-	<%= p u.cuenta %><br>
+<%= form_tag(admin_pendiente_sistarbanc_path, :method => "post") do %>
+   <%= submit_tag "Sistar Banc" %>
 <% end %>
-<br>
-<br>
+<br><br>
+<%= form_tag(admin_pendiente_redpagos_path, :method => "post") do %>
+   <%= submit_tag "Red Pagos" %>
+<% end %>
+<br><br>
+<%= form_tag(admin_pendiente_abitab_path, :method => "post") do %>
+   <%= submit_tag "Abitab" %>
+<% end %>
+<br><br>
+<%= form_tag(admin_pendiente_brou_path, :method => "post") do %>
+   <%= submit_tag "BROU" %>
+<% end %>
 
-Cuentas pendientes<br>
-
-<table border=1px width="40%">
-	<% cuentas.each do |c| %>
-		<%= form_tag(admin_pendiente_validar_path, :method => "post") do %>
-		   <tr><td><%= hidden_field_tag :cuenta, value: c.id %><%= c.id %></td>
-		   <td><%= submit_tag "Validar" %></td></tr>
-		<% end %>
-	<% end %>
-</table>
