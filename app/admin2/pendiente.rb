@@ -19,7 +19,7 @@ ActiveAdmin.register_page "Pendiente" do
         cuenta = 12121
         nombre = "CECILIA"
         apellido = "SAETTONE"
-        importe = 34000
+        importe = 3400
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -48,7 +48,7 @@ ActiveAdmin.register_page "Pendiente" do
         cuenta = 12121
         nombre = "CECILIA"
         apellido = "SAETTONE"
-        importe = 34000
+        importe = 3400
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -79,7 +79,7 @@ ActiveAdmin.register_page "Pendiente" do
          cuenta = 12121
          nombre = "CECILIA"
          apellido = "SAETTONE"
-         importe = 34000
+         importe = 3400
          
          cantidad = cantidad + 1
          suma = suma + importe
@@ -113,9 +113,9 @@ ActiveAdmin.register_page "Pendiente" do
          cuenta = 12121
          nombre = "CECILIA"
          apellido = "SAETTONE"
-         importe = 34000
+         importe = 3400
          factura = 450798
-         str = ("#{apellido}, #{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,47]
+         str = ("#{apellido}, #{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
          suma = suma + importe 
          f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000#{factura}A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\r\n" )
        end
