@@ -5,125 +5,126 @@ ActiveAdmin.register_page "Pendiente" do
   page_action :sistarbanc, method: :post do   
     #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
 
-    file_name = "sistarbanc.txt"
-    file = Tempfile.new(file_name)    
-    File.open(file, "w+") do |f|
-      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
-      (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 34000
-        vencimiento = "10/01/2019"
-        inicio = "01/01/2019"
-        dia = 10
-        mes = 1
-        anio = 2019
+ #    file_name = "sistarbanc.txt"
+ #    file = Tempfile.new(file_name)    
+ #    File.open(file, "w+") do |f|
+ #      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
+ #      (1..10).each do |x|
+ #        cuenta = 12121
+ #        nombre = "CECILIA"
+ #        apellido = "SAETTONE"
+ #        importe = 34000
+ #        vencimiento = "10/01/2019"
+ #        inicio = "01/01/2019"
+ #        dia = 10
+ #        mes = 1
+ #        anio = 2019
 
-        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
-      end
-	end
+ #        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
+ #      end
+	# end
 
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/txt"
-      )
+ #    send_file(
+ #        file.path,
+ #        filename: file_name,
+ #        type: "application/txt"
+ #      )
+  redirect_to admin_pendiente_path, notice: "Hecho"
   end
 
-  page_action :redpagos, method: :post do   
-    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
+ #  page_action :redpagos, method: :post do   
+ #    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
     
-    file_name = "redpagos.txt"
-    file = Tempfile.new(file_name)    
-    File.open(file, "w+") do |f|
+ #    file_name = "redpagos.txt"
+ #    file = Tempfile.new(file_name)    
+ #    File.open(file, "w+") do |f|
 
-      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
-      (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 34000
-        vencimiento = "10/01/2019"
-        inicio = "01/01/2019"
-        dia = 10
-        mes = 1
-        anio = 2019
+ #      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\n")
+ #      (1..10).each do |x|
+ #        cuenta = 12121
+ #        nombre = "CECILIA"
+ #        apellido = "SAETTONE"
+ #        importe = 34000
+ #        vencimiento = "10/01/2019"
+ #        inicio = "01/01/2019"
+ #        dia = 10
+ #        mes = 1
+ #        anio = 2019
 
-        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
-      end
-	end
+ #        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\n")
+ #      end
+	# end
 
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/txt"
-      )
-  end
+ #    send_file(
+ #        file.path,
+ #        filename: file_name,
+ #        type: "application/txt"
+ #      )
+ #  end
 
-  page_action :abitab, method: :post do   
-    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
+ #  page_action :abitab, method: :post do   
+ #    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
     
-    file_name = "abitab.txt"
-    file = Tempfile.new(file_name)    
-    File.open(file, "w+") do |f|
-      f.write("13|16|1\n")
+ #    file_name = "abitab.txt"
+ #    file = Tempfile.new(file_name)    
+ #    File.open(file, "w+") do |f|
+ #      f.write("13|16|1\n")
       
-      (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 34000
-        vencimiento = "10/01/2019"
-        inicio = "01/01/2019"
-        titulo = "FACTURACION ENE/2019"
-        f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1")
-      end
+ #      (1..10).each do |x|
+ #        cuenta = 12121
+ #        nombre = "CECILIA"
+ #        apellido = "SAETTONE"
+ #        importe = 34000
+ #        vencimiento = "10/01/2019"
+ #        inicio = "01/01/2019"
+ #        titulo = "FACTURACION ENE/2019"
+ #        f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1")
+ #      end
 
-      f.write("#|1|406|925667116\n")
-	end
+ #      f.write("#|1|406|925667116\n")
+	# end
 
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/txt"
-      )
-  end
+ #    send_file(
+ #        file.path,
+ #        filename: file_name,
+ #        type: "application/txt"
+ #      )
+ #  end
 
-  page_action :brou, method: :post do   
-    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
+ #  page_action :brou, method: :post do   
+ #    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
     
-    file_name = "brou.txt"
-    file = Tempfile.new(file_name)    
-    File.open(file, "w+") do |f|
-      suma = 0
-      (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 34000
-        vencimiento = "10/01/2019"
-        inicio = "01/01/2019"        
-        titulo = "FACTURACION ENE/2019"
-        dia = 10
-        mes = 1
-        anio = 2019
-        factura = 450798
-        str = ("#{apellido}, #{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,47]
-		suma = suma + importe 
+ #    file_name = "brou.txt"
+ #    file = Tempfile.new(file_name)    
+ #    File.open(file, "w+") do |f|
+ #      suma = 0
+ #      (1..10).each do |x|
+ #        cuenta = 12121
+ #        nombre = "CECILIA"
+ #        apellido = "SAETTONE"
+ #        importe = 34000
+ #        vencimiento = "10/01/2019"
+ #        inicio = "01/01/2019"        
+ #        titulo = "FACTURACION ENE/2019"
+ #        dia = 10
+ #        mes = 1
+ #        anio = 2019
+ #        factura = 450798
+ #        str = ("#{apellido}, #{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,47]
+	# 	suma = suma + importe 
 
-        f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000#{factura}A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\n" )
+ #        f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000#{factura}A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\n" )
 
-      end
-      f.write("2 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}00001000000000#{(importe*100).round(0).to_s.rjust(10, "0")}00000000000000000000000000000000000000000000000000000000000000000000000000000000111111111110000000000000000000000000000000000000000000000000000000000"
-	end
+ #      end
+ #      f.write("2 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}00001000000000#{(importe*100).round(0).to_s.rjust(10, "0")}00000000000000000000000000000000000000000000000000000000000000000000000000000000111111111110000000000000000000000000000000000000000000000000000000000"
+	# end
 
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/txt"
-      )
-  end
+ #    send_file(
+ #        file.path,
+ #        filename: file_name,
+ #        type: "application/txt"
+ #      )
+ #  end
 
 
 #  page_action :validar, method: :post do  	
