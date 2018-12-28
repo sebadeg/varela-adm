@@ -74,7 +74,7 @@ ActiveAdmin.register_page "Pendiente" do
          vencimiento = "10/01/2019"
          inicio = "01/01/2019"
          titulo = "FACTURACION ENE/2019"
-#         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
+         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
        end
 
        f.write("#|1|406|925667116\r\n")
