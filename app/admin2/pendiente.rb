@@ -8,17 +8,18 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "sistarbanc.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
+       vencimiento = "10/01/2019"
+       inicio = "01/01/2019"
+       dia = 10
+       mes = 1
+       anio = 2019
+
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
        (1..10).each do |x|
         cuenta = 12121
         nombre = "CECILIA"
         apellido = "SAETTONE"
         importe = 34000
-        vencimiento = "10/01/2019"
-        inicio = "01/01/2019"
-        dia = 10
-        mes = 1
-        anio = 2019
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -36,17 +37,18 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "redpagos.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
+       vencimiento = "10/01/2019"
+       inicio = "01/01/2019"
+       dia = 10
+       mes = 1
+       anio = 2019
+
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
        (1..10).each do |x|
         cuenta = 12121
         nombre = "CECILIA"
         apellido = "SAETTONE"
         importe = 34000
-        vencimiento = "10/01/2019"
-        inicio = "01/01/2019"
-        dia = 10
-        mes = 1
-        anio = 2019
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -64,23 +66,27 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "abitab.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       f.write("13|16|1\r\n")
+
+       vencimiento = "10/01/2019"
+       inicio = "01/01/2019"
+       titulo = "FACTURACION ENE/2019"      
+
        cantidad = 0
        suma = 0
+
+       f.write("13|16|1\r\n")
        (1..10).each do |x|
          cuenta = 12121
          nombre = "CECILIA"
          apellido = "SAETTONE"
          importe = 34000
-         vencimiento = "10/01/2019"
-         inicio = "01/01/2019"
-         titulo = "FACTURACION ENE/2019"
+         
          cantidad = cantidad + 1
          suma = suma + importe
-         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{	importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
+         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
        end
 
-       f.write("#|1|#{cantidad}|#{suma}\r\n")
+       f.write("#|1|#{cantidad}|#{suma*100}\r\n")
  	end
 
     send_file(
@@ -95,18 +101,19 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "brou.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
+       vencimiento = "10/01/2019"
+       inicio = "01/01/2019"        
+       titulo = "FACTURACION ENE/2019"
+       dia = 10
+       mes = 1
+       anio = 2019
+
        suma = 0
        (1..10).each do |x|
          cuenta = 12121
          nombre = "CECILIA"
          apellido = "SAETTONE"
          importe = 34000
-         vencimiento = "10/01/2019"
-         inicio = "01/01/2019"        
-         titulo = "FACTURACION ENE/2019"
-         dia = 10
-         mes = 1
-         anio = 2019
          factura = 450798
          str = ("#{apellido}, #{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,47]
          suma = suma + importe 
