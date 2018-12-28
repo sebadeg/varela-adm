@@ -127,6 +127,12 @@ ActiveAdmin.register_page "Pendiente" do
  #  end
 
 
+  content do
+    render partial: 'pendiente'
+  end
+
+
+
 #  page_action :validar, method: :post do  	
 #  	cuenta = eval(params[:cuenta])[:value]
 #	ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
