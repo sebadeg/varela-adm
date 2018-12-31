@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_175712) do
+ActiveRecord::Schema.define(version: 2018_12_30_232100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -391,6 +391,8 @@ ActiveRecord::Schema.define(version: 2018_11_03_175712) do
     t.integer "dia", default: 10
     t.integer "anio", default: 2019
     t.string "especial"
+    t.integer "cuenta_id"
+    t.integer "alumno_id"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
@@ -508,6 +510,7 @@ ActiveRecord::Schema.define(version: 2018_11_03_175712) do
     t.decimal "descuento"
     t.decimal "matricula"
     t.string "codigo"
+    t.integer "grado_id"
   end
 
   create_table "seguimientos", force: :cascade do |t|

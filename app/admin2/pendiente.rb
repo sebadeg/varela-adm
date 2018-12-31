@@ -3,26 +3,51 @@ ActiveAdmin.register_page "Pendiente" do
   menu priority: 70, label: "Pendiente"
 
   page_action :sistarbanc, method: :post do   
-    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
 
-     file_name = "sistarbanc.txt"
-     file = Tempfile.new(file_name)    
-     File.open(file, "w+") do |f|
-       vencimiento = "10/01/2019"
-       inicio = "01/01/2019"
-       dia = 10
-       mes = 1
-       anio = 2019
+    mes = 1
+    cuotas = 12
+    cuenta = 12121
+    alumno = 121211
+    valor = 18202
 
-       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-       (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 3400
+    (1..12).each do |x|
+      ActiveRecord::Base.connection.execute( 
+        "INSERT INTO movimientos (alumno,cuenta_id,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES " +
+        "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
+    end
+    
 
-        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
-      end
+    mes = 1
+    cuotas = 12
+    cuenta = 12121
+    alumno = 121211
+    valor = 16473
+
+    (1..12).each do |x|
+      ActiveRecord::Base.connection.execute( 
+        "INSERT INTO movimientos (alumno,cuenta_id,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES " +
+        "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
+    end
+
+
+     # file_name = "sistarbanc.txt"
+     # file = Tempfile.new(file_name)    
+     # File.open(file, "w+") do |f|
+     #   vencimiento = "10/01/2019"
+     #   inicio = "01/01/2019"
+     #   dia = 10
+     #   mes = 1
+     #   anio = 2019
+
+     #   f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
+     #   (1..10).each do |x|
+     #    cuenta = 12121
+     #    nombre = "CECILIA"
+     #    apellido = "SAETTONE"
+     #    importe = 3400
+
+     #    f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
+     #  end
 	end
 
     send_file(
