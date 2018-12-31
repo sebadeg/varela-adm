@@ -5,30 +5,49 @@ ActiveAdmin.register_page "Pendiente" do
 
   page_action :mail, method: :post do   
 
-    mes = 1
-    cuotas = 12
-    cuenta = 12121
-    alumno = 121211
-    valor = 18202
+    # mes = 1
+    # cuotas = 12
+    # cuenta = 12121
+    # alumno = 121211
+    # valor = 18202
 
-    (1..12).each do |x|
-      ActiveRecord::Base.connection.execute( 
-        "INSERT INTO movimientos (alumno,cuenta_id,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES " +
-        "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
-    end
+    # (1..12).each do |x|
+    #   ActiveRecord::Base.connection.execute( 
+    #     "INSERT INTO movimientos (alumno,cuenta_id,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES " +
+    #     "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
+    # end
     
 
-    mes = 1
-    cuotas = 12
-    cuenta = 12121
-    alumno = 121211
-    valor = 16473
+    # mes = 1
+    # cuotas = 12
+    # cuenta = 12121
+    # alumno = 121211
+    # valor = 16473
 
-    (1..12).each do |x|
-      ActiveRecord::Base.connection.execute( 
-        "INSERT INTO movimientos (alumno,cuenta_id,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES " +
-        "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
+    # (1..12).each do |x|
+    #   ActiveRecord::Base.connection.execute( 
+    #     "INSERT INTO movimientos (alumno,cuenta_id,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES " +
+    #     "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
+    # end
+
+
+    cuenta_id = 12121
+
+    factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
+    if factura != nil
+
+      file = Tempfile.new("factura#{cuenta_id}.pdf")
+      factura.imprimir(file.path,cuenta_id,factura)
+      send_file(
+        file.path,
+        filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+        type: "application/pdf"
+      )
+
+    else
+      redirect_to admin_pendiente_path
     end
+  end
 
   end
 
