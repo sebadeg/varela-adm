@@ -52,7 +52,7 @@ class Factura < ApplicationRecord
         
         text_box "Titular", :at => [190, 710]
         text_box "Cuenta", :at => [190, 710-renglon]
-        text_box "Comprobante", :at => [190, 710-2*renglon]
+        text_box "Factura", :at => [190, 710-2*renglon]
         text_box "Vencimiento", :at => [190, 710-3*renglon]
 
         bounding_box([280, 710], :width => 240, :height => renglon) do
@@ -102,7 +102,7 @@ class Factura < ApplicationRecord
         text_box "Vencimiento", :at => [20+delta, 41], size:8
         text_box "Documento", :at => [20+2*delta, 41], size:8
         text_box "Cuenta", :at => [20+3*delta, 41], size:8
-        text_box "Comprobante", :at => [20+4*delta, 41], size:8
+        text_box "Factura", :at => [20+4*delta, 41], size:8
         text_box "Moneda", :at => [20+5*delta, 41], size:8
         text_box "Importe", :at => [20+6*delta, 41], size:8
 

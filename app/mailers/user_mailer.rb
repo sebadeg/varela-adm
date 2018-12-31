@@ -41,6 +41,6 @@ class UserMailer < ApplicationMailer
 		@cuenta = cuenta
 
         attachments[filename] = File.read(file.path)
-        mail(from: 'novedades@varela.edu.uy', to: usuario.email, bcc: 'novedades@varela.edu.uy', subject: "Envío de copia de comprobante correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
+        mail(from: 'novedades@varela.edu.uy', to: usuario.email, bcc: 'novedades@varela.edu.uy', subject: "Envío de copia de factura correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
 	end
 end
