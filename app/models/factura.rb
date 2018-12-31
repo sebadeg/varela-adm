@@ -55,7 +55,7 @@ class Factura < ApplicationRecord
         text_box "Comprobante", :at => [190, 710-2*renglon]
         text_box "Vencimiento", :at => [190, 710-3*renglon]
 
-        bounding_box([280, 710], :width => 240, :height => renglon)
+        bounding_box([280, 710], :width => 240, :height => renglon) do
           text_box cuenta.nombre, align: :left
           transparent(0) { stroke_bounds }
         end
