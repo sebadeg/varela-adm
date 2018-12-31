@@ -44,13 +44,10 @@ ActiveAdmin.register_page "Pendiente" do
       #   type: "application/pdf"
       # )
 
-      p "PRUEBA"
       Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
-        p usuario.nombre + ";"
-        p usuario.apellido + ";"
-        p usuario.email + ";"
+        p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
 
-        #UserMailer.facturacion( usuario, "Enero 2019", "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+        UserMailer.facturacion( usuario, "Enero 2019", "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
       end
     end
 
