@@ -29,7 +29,7 @@ class Factura < ApplicationRecord
 
       usuario = Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").first!
       lineas = LineaFactura.where( "factura_id=#{factura.id}" ).order(:indice)
-
+      cuenta = Cuenta.find(cuenta_id)
 
       text_file = Tempfile.new("text.pdf")
       text_file_path = text_file.path
@@ -55,7 +55,7 @@ class Factura < ApplicationRecord
         text_box "Comprobante", :at => [190, 710-2*renglon]
         text_box "Vencimiento", :at => [190, 710-3*renglon]
 
-        text_box usuario.nombre + ' ' + usuario.apellido, :at => [280, 710]
+        text_box cuenta.nombre, :at => [280, 710]
         text_box cuenta_id.to_s, :at => [280, 710-renglon]
         text_box factura.id.to_s, :at => [280, 710-2*renglon]
         text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
