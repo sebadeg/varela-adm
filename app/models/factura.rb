@@ -49,13 +49,16 @@ class Factura < ApplicationRecord
       end
 
       Prawn::Document.generate(text_file_path) do
-
+        
         text_box "Titular", :at => [190, 710]
         text_box "Cuenta", :at => [190, 710-renglon]
         text_box "Comprobante", :at => [190, 710-2*renglon]
         text_box "Vencimiento", :at => [190, 710-3*renglon]
 
-        text_box cuenta.nombre, :at => [280, 710]
+        bounding_box([280, 710], :width => 240, :height => renglon)
+          text_box cuenta.nombre, align: :left
+          transparent(0) { stroke_bounds }
+        end
         text_box cuenta_id.to_s, :at => [280, 710-renglon]
         text_box factura.id.to_s, :at => [280, 710-2*renglon]
         text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
