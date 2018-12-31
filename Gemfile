@@ -60,13 +60,11 @@ gem 'prawn', '~> 2.2', '>= 2.2.2'
 gem 'pdf-toolkit', '~> 1.1'
 gem 'cancancan', '~> 2.0'
 gem 'combine_pdf', '~> 0.2.5'
+gem 'chunky_png', '~> 1.3', '>= 1.3.10'
+gem 'barby', '~> 0.6.5'
 
 gem 'geocoder', '~> 1.5'
 
-gem 'prawn', '~> 2.2', '>= 2.2.2'
-gem 'combine_pdf', '~> 0.2.5'
-gem 'chunky_png', '~> 1.3', '>= 1.3.10'
-gem 'barby', '~> 0.6.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

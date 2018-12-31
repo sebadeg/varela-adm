@@ -46,9 +46,6 @@ ActiveAdmin.register_page "Pendiente" do
     end
   end
 
-  end
-
-
   page_action :sistarbanc, method: :post do   
 
     file_name = "sistarbanc.txt"
