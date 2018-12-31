@@ -2,7 +2,8 @@ ActiveAdmin.register_page "Pendiente" do
 
   menu priority: 70, label: "Pendiente"
 
-  page_action :sistarbanc, method: :post do   
+
+  page_action :mail, method: :post do   
 
     mes = 1
     cuotas = 12
@@ -29,32 +30,34 @@ ActiveAdmin.register_page "Pendiente" do
         "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
     end
 
+  end
 
-     # file_name = "sistarbanc.txt"
-     # file = Tempfile.new(file_name)    
-     # File.open(file, "w+") do |f|
-     #   vencimiento = "10/01/2019"
-     #   inicio = "01/01/2019"
-     #   dia = 10
-     #   mes = 1
-     #   anio = 2019
 
-     #   f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-     #   (1..10).each do |x|
-     #    cuenta = 12121
-     #    nombre = "CECILIA"
-     #    apellido = "SAETTONE"
-     #    importe = 3400
+  page_action :sistarbanc, method: :post do   
 
-     #    f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
-     #  end
-	end
+    file_name = "sistarbanc.txt"
+    file = Tempfile.new(file_name)    
+    File.open(file, "w+") do |f|
+      vencimiento = "10/01/2019"
+      inicio = "01/01/2019"
+      dia = 10
+      mes = 1
+      anio = 2019
+      f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
+      (1..10).each do |x|
+        cuenta = 12121
+        nombre = "CECILIA"
+        apellido = "SAETTONE"
+        importe = 3400
 
+        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
+      end
+    end
     send_file(
-        file.path,
-        filename: file_name,
-        type: "application/txt"
-      )
+      file.path,
+      filename: file_name,
+      type: "application/txt"
+    )
   end
 
   page_action :redpagos, method: :post do   
