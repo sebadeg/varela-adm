@@ -45,7 +45,7 @@ ActiveAdmin.register_page "Pendiente" do
       # )
 
       p "PRUEBA"
-      Usuario.where( "id IN (SELECT usuario_id WHERE cuenta_id=#{cuenta_id})").each do |usuario|
+      Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
         p usuario.nombre + ";"
         p usuario.apellido + ";"
         p usuario.mail + ";"
