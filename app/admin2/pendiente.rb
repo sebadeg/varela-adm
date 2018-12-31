@@ -38,12 +38,23 @@ ActiveAdmin.register_page "Pendiente" do
 
       file = Tempfile.new("factura#{cuenta_id}.pdf")
       factura.imprimir(file.path,cuenta_id,factura)
-      send_file(
-        file.path,
-        filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
-        type: "application/pdf"
-      )
+      # send_file(
+      #   file.path,
+      #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+      #   type: "application/pdf"
+      # )
+
+      p "PRUEBA"
+      Usuario.where( "id IN (SELECT usuario_id WHERE cuenta_id=#{cuenta_id})").each do |usuario|
+        p usuario.nombre + ";"
+        p usuario.apellido + ";"
+        p usuario.mail + ";"
+
+        #UserMailer.novedades( usuario, "Enero 2019", "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+      end
     end
+
+
   end
 
   page_action :sistarbanc, method: :post do   

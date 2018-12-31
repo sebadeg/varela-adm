@@ -21,4 +21,25 @@ class UserMailer < ApplicationMailer
 		@titulo = titulo
 		mail(from: 'novedades@varela.edu.uy', to: 'novedades@varela.edu.uy',  bcc: emails, subject: titulo, delivery_method_options: delivery_options)
 	end
+
+
+	def facturacion(usuario,mes,filename,file)
+
+		delivery_options = {
+            address: "smtp.varela.edu.uy",
+			port: 587,
+		   domain: "varela.edu.uy", 
+			user_name: "novedades@varela.edu.uy",
+			password: "varnov2018",
+		   authentication: "plain",
+		   enable_starttls_auto: true,
+		   openssl_verify_mode: 'none'
+		}
+
+		@usuario = usuario
+		@mes = mes
+
+        attachments[filename] = File.read(file.path)
+        mail(from: 'novedades@varela.edu.uy', to: usuario.email, bcc: 'novedades@varela.edu.uy', subject: "Envío de copia de comprobante correspondiente a #{mes}", delivery_method_options: delivery_options)
+	end
 end
