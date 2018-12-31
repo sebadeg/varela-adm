@@ -43,9 +43,6 @@ ActiveAdmin.register_page "Pendiente" do
         filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
         type: "application/pdf"
       )
-
-    else
-      redirect_to admin_pendiente_path
     end
   end
 
