@@ -3,6 +3,7 @@ class Inscripcion < ApplicationRecord
   belongs_to :proximo_grado
 
   validates :nombre, presence: true
+  validates :apellido, presence: true
   validates :cedula, presence: true
   validates :cedula, numericality: { only_integer: true, greater_than:0, less_than: 100000000 }
   validates :lugar_nacimiento, presence: true
@@ -313,7 +314,7 @@ class Inscripcion < ApplicationRecord
       "Cuotas: #{inscripcion.cuotas}<br>" + 
       "<br>"+
       "<b>ALUMNO</b><br>" +
-      "Nombre: #{inscripcion.nombre}<br>" +
+      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
       "Documento de identidad: #{cedula_tos(inscripcion.cedula)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
@@ -413,7 +414,7 @@ class Inscripcion < ApplicationRecord
     hoy = DateTime.now
     hoyS = "#{hoy.day} de #{hoy.month} de #{hoy.year}"
 
-    nombre = inscripcion.nombre
+    nombre = inscripcion.nombre + " " + inscripcion.apellido
     cedula = cedula_tos(inscripcion.cedula)
     
     cabezal = 

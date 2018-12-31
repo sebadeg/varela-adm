@@ -2,7 +2,7 @@ ActiveAdmin.register Inscripcion do
   menu label: 'Inscripción', priority: 90 
 
   permit_params :fecha, :recibida,
-    :nombre,:cedula,:lugar_nacimiento,:fecha_nacimiento,:domicilio,:celular,:mutualista,:emergencia,:procede,
+    :nombre,:apellido,:cedula,:lugar_nacimiento,:fecha_nacimiento,:domicilio,:celular,:mutualista,:emergencia,:procede,
     :proximo_grado_id,:convenio_id,:afinidad,:formulario,:matricula,:hermanos,:cuotas,
     :nombre_padre,:cedula_padre,:lugar_nacimiento_padre,:fecha_nacimiento_padre,:email_padre,:domicilio_padre,:celular_padre,:profesion_padre,:trabajo_padre,:telefono_trabajo_padre,:titular_padre,
     :nombre_madre,:cedula_madre,:lugar_nacimiento_madre,:fecha_nacimiento_madre,:email_madre,:domicilio_madre,:celular_madre,:profesion_madre,:trabajo_madre,:telefono_trabajo_madre,:titular_madre,
@@ -17,7 +17,7 @@ ActiveAdmin.register Inscripcion do
     id = params[:id]
     inscripcion = Inscripcion.find(id)
   
-    file_name = "Inscripcion #{inscripcion.nombre}.pdf"
+    file_name = "Inscripcion #{inscripcion.nombre} #{inscripcion.apellido}.pdf"
     file = Tempfile.new(file_name)
     inscripcion.imprimir_formulario(file.path)
 
@@ -32,11 +32,13 @@ ActiveAdmin.register Inscripcion do
   index do
   	#selectable_column
     column :nombre
+    column :apellido
     column :cedula
     actions
   end
 
   filter :nombre
+  filter :apellido
   filter :cedula
 
 
@@ -58,6 +60,7 @@ ActiveAdmin.register Inscripcion do
 
     attributes_table title:"Alumno" do
       row :nombre
+      row :apellido
       row 'Cédula' do |r| r.cedula end
       row 'Lugar de nacimiento' do |r| r.lugar_nacimiento end
       row 'Fecha de nacimiento' do |r| r.fecha_nacimiento end
@@ -134,6 +137,7 @@ ActiveAdmin.register Inscripcion do
 
     f.inputs "Alumno" do
       f.input :nombre, label: "Nombre"
+      f.input :apellido, label: "Apellido"
       f.input :cedula, label: "Cédula"
       f.input :lugar_nacimiento, label: 'Lugar de nacimiento'
       f.input :fecha_nacimiento, label: 'Fecha de nacimiento'
