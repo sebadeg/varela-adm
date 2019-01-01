@@ -31,26 +31,35 @@ ActiveAdmin.register_page "Pendiente" do
     # end
 
 
-    cuenta_id = 12121
+    # cuenta_id = 12121
 
-    factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
-    if factura != nil
+    # factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
+    # if factura != nil
 
-      file = Tempfile.new("factura#{cuenta_id}.pdf")
-      factura.imprimir(file.path,cuenta_id,factura)
-      # send_file(
-      #   file.path,
-      #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
-      #   type: "application/pdf"
-      # )
+    #   file = Tempfile.new("factura#{cuenta_id}.pdf")
+    #   factura.imprimir(file.path,cuenta_id,factura)
+    #   # send_file(
+    #   #   file.path,
+    #   #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+    #   #   type: "application/pdf"
+    #   # )
 
-      Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
-        p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
+    #   Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
+    #     p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
 
-        UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
-      end
+    #     UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+    #   end
+    # end
+
+    movimiento = Movimiento.where( "NOT factura IS NULL" ).first rescue nil
+
+    (2..movimiento.factura).each do |mes|
+      fecha = movimiento.fecha >> (mes-1)
+      ActiveRecord::Base.connection.execute(
+        "INSERT INTO movimientos (cuenta_id,alumno,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES" +
+        "(#{movimiento.cuenta_id},#{movimiento.alumno},'#{fecha.year}-#{fecha.month}-#{fecha.day}','CUOTA 2019 #{mes}/#{movimiento.factura}',#{movimiento.debe},0,'',2,now(),now());"
+      )
     end
-
 
   end
 
