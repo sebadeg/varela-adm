@@ -61,6 +61,10 @@ ActiveAdmin.register_page "Pendiente" do
       )
     end
 
+      ActiveRecord::Base.connection.execute(
+        "UPDATE movimientos SET factura=NULL WHERE id=#{movimiento.id};"
+      )
+
   end
 
   page_action :sistarbanc, method: :post do   
