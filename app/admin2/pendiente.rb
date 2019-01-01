@@ -51,20 +51,19 @@ ActiveAdmin.register_page "Pendiente" do
     #   end
     # end
 
-    movimiento = Movimiento.where( "NOT factura IS NULL" ).first rescue nil
+    Movimiento.where( "NOT factura IS NULL" ).each do |movimiento|
+      (2..movimiento.factura).each do |mes|
+        fecha = movimiento.fecha >> (mes-1)
+        ActiveRecord::Base.connection.execute(
+          "INSERT INTO movimientos (cuenta_id,alumno,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES" +
+          "(#{movimiento.cuenta_id},#{movimiento.alumno},'#{fecha.year}-#{fecha.month}-#{fecha.day}','CUOTA 2019 #{mes}/#{movimiento.factura}',#{movimiento.debe},0,'',2,now(),now());"
+        )
+      end
 
-    (2..movimiento.factura).each do |mes|
-      fecha = movimiento.fecha >> (mes-1)
-      ActiveRecord::Base.connection.execute(
-        "INSERT INTO movimientos (cuenta_id,alumno,fecha,descripcion,debe,haber,extra,tipo,created_at,updated_at) VALUES" +
-        "(#{movimiento.cuenta_id},#{movimiento.alumno},'#{fecha.year}-#{fecha.month}-#{fecha.day}','CUOTA 2019 #{mes}/#{movimiento.factura}',#{movimiento.debe},0,'',2,now(),now());"
-      )
+        ActiveRecord::Base.connection.execute(
+          "UPDATE movimientos SET factura=NULL WHERE id=#{movimiento.id};"
+        )
     end
-
-      ActiveRecord::Base.connection.execute(
-        "UPDATE movimientos SET factura=NULL WHERE id=#{movimiento.id};"
-      )
-
   end
 
   page_action :sistarbanc, method: :post do   
