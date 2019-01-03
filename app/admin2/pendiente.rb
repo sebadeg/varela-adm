@@ -90,13 +90,12 @@ ActiveAdmin.register_page "Pendiente" do
       mes = 1
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 3400
+      Facturas.each do |f|
+        cuenta = f.cuenta_id
+        nombre = Cuenta.where("id=#{f.cuenta_id}").first
+        importe = f.importe
 
-        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
+        f.write("#{anio};#{mes};0;#{cuenta};#{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
     end
     send_file(
@@ -118,11 +117,10 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-       (1..10).each do |x|
-        cuenta = 12121
-        nombre = "CECILIA"
-        apellido = "SAETTONE"
-        importe = 3400
+      Facturas.each do |f|
+        cuenta = f.cuenta_id
+        nombre = Cuenta.where("id=#{f.cuenta_id}").first
+        importe = f.importe
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -149,15 +147,14 @@ ActiveAdmin.register_page "Pendiente" do
        suma = 0
 
        f.write("13|16|1\r\n")
-       (1..10).each do |x|
-         cuenta = 12121
-         nombre = "CECILIA"
-         apellido = "SAETTONE"
-         importe = 3400
+      Facturas.each do |f|
+        cuenta = f.cuenta_id
+        nombre = Cuenta.where("id=#{f.cuenta_id}").first
+        importe = f.importe
          
          cantidad = cantidad + 1
          suma = suma + importe
-         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}|#{apellido}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
+         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}| | |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
        end
 
        f.write("#|1|#{cantidad}|#{suma*100}\r\n")
@@ -183,13 +180,13 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        suma = 0
-       (1..10).each do |x|
-         cuenta = 12121
-         nombre = "CECILIA"
-         apellido = "SAETTONE"
-         importe = 3400
-         factura = 450798
-         str = ("#{apellido}, #{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
+      Facturas.each do |f|
+        cuenta = f.cuenta_id
+        nombre = Cuenta.where("id=#{f.cuenta_id}").first
+        importe = f.importe
+         factura = f.id
+
+         str = ("#{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
          suma = suma + importe 
          f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000#{factura}A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\r\n" )
        end
