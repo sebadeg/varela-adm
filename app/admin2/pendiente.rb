@@ -58,7 +58,7 @@ ActiveAdmin.register_page "Pendiente" do
 
           ActiveRecord::Base.connection.execute(
             "INSERT INTO linea_facturas (factura_id,alumno_id,importe,indice,descripcion,created_at,updated_at) VALUES " +
-            "(#{f.id},#{m.debe},#{i},#{m.descripcion},now(),now());"
+            "(#{f.id},#{m.alumno},#{m.debe},#{i},#{m.descripcion},now(),now());"
             )
           i=i+1
         end
