@@ -90,7 +90,7 @@ ActiveAdmin.register_page "Pendiente" do
       mes = 1
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.each do |f|
+      Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
         importe = f.importe
@@ -117,7 +117,7 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.each do |f|
+      Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
         importe = f.importe
@@ -147,7 +147,7 @@ ActiveAdmin.register_page "Pendiente" do
        suma = 0
 
        f.write("13|16|1\r\n")
-      Factura.each do |f|
+      Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
         importe = f.importe
@@ -180,7 +180,7 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        suma = 0
-      Factura.each do |f|
+      Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
         importe = f.importe
