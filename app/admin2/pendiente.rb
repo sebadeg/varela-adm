@@ -180,10 +180,10 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        suma = 0
-      Factura.all.each do |x|
-        cuenta = x.cuenta_id
-        nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
-        importe = x.total
+       Factura.where("cuenta_id IN (11601,11624,11795,11983,12037,12775,12776,13769,13857)").each do |x|
+         cuenta = x.cuenta_id
+         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
+         importe = x.total
          factura = x.id
 
          str = ("#{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
