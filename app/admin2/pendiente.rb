@@ -93,7 +93,7 @@ ActiveAdmin.register_page "Pendiente" do
       Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.importe
+        importe = f.total
 
         f.write("#{anio};#{mes};0;#{cuenta};#{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -120,7 +120,7 @@ ActiveAdmin.register_page "Pendiente" do
       Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.importe
+        importe = f.total
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -150,7 +150,7 @@ ActiveAdmin.register_page "Pendiente" do
       Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.importe
+        importe = f.total
          
          cantidad = cantidad + 1
          suma = suma + importe
@@ -183,7 +183,7 @@ ActiveAdmin.register_page "Pendiente" do
       Factura.all.each do |f|
         cuenta = f.cuenta_id
         nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.importe
+        importe = f.total
          factura = f.id
 
          str = ("#{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
