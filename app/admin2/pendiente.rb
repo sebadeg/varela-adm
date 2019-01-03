@@ -90,10 +90,10 @@ ActiveAdmin.register_page "Pendiente" do
       mes = 1
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.all.each do |f|
-        cuenta = f.cuenta_id
-        nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.total
+      Factura.all.each do |x|
+        cuenta = x.cuenta_id
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        importe = x.total
 
         f.write("#{anio};#{mes};0;#{cuenta};#{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -117,10 +117,10 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.all.each do |f|
-        cuenta = f.cuenta_id
-        nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.total
+      Factura.all.each do |x|
+        cuenta = x.cuenta_id
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        importe = x.total
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
@@ -147,10 +147,10 @@ ActiveAdmin.register_page "Pendiente" do
        suma = 0
 
        f.write("13|16|1\r\n")
-      Factura.all.each do |f|
-        cuenta = f.cuenta_id
-        nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.total
+      Factura.all.each do |x|
+        cuenta = x.cuenta_id
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        importe = x.total
          
          cantidad = cantidad + 1
          suma = suma + importe
@@ -180,11 +180,11 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
 
        suma = 0
-      Factura.all.each do |f|
-        cuenta = f.cuenta_id
-        nombre = Cuenta.where("id=#{f.cuenta_id}").first
-        importe = f.total
-         factura = f.id
+      Factura.all.each do |x|
+        cuenta = x.cuenta_id
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        importe = x.total
+         factura = x.id
 
          str = ("#{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
          suma = suma + importe 
