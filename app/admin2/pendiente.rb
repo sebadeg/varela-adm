@@ -92,7 +92,7 @@ ActiveAdmin.register_page "Pendiente" do
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
       Factura.all.each do |x|
         cuenta = x.cuenta_id
-        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
 
         f.write("#{anio};#{mes};0;#{cuenta};#{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
@@ -119,7 +119,7 @@ ActiveAdmin.register_page "Pendiente" do
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
       Factura.all.each do |x|
         cuenta = x.cuenta_id
-        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
 
         f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
@@ -149,7 +149,7 @@ ActiveAdmin.register_page "Pendiente" do
        f.write("13|16|1\r\n")
       Factura.all.each do |x|
         cuenta = x.cuenta_id
-        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
          
          cantidad = cantidad + 1
@@ -182,7 +182,7 @@ ActiveAdmin.register_page "Pendiente" do
        suma = 0
       Factura.all.each do |x|
         cuenta = x.cuenta_id
-        nombre = Cuenta.where("id=#{x.cuenta_id}").first
+        nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
          factura = x.id
 
