@@ -122,7 +122,7 @@ ActiveAdmin.register_page "Pendiente" do
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
 
-        f.write("#{anio};#{mes};0;#{cuenta};#{apellido}, #{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
+        f.write("#{anio};#{mes};0;#{cuenta};#{nombre};0;#{importe};#{vencimiento};#{inicio};\r\n")
       end
 	end
 
