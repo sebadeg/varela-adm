@@ -59,6 +59,6 @@ class UserMailer < ApplicationMailer
 		}
 
 		@usuario = usuario
-		mail(to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Bienvenido al Colegio Nacional José Pedro Varela', delivery_method_options: delivery_options)
+		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Bienvenido al Colegio Nacional José Pedro Varela', delivery_method_options: delivery_options)
 	end
 end
