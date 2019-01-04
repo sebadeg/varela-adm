@@ -1,0 +1,22 @@
+<table width=538 style="width:538px">
+<tr><td><%= email_image_tag 'Cabezal.jpg' %></td></tr>
+<tr><td>
+<br>
+Estimado/a <%= p @usuario.nombre + " " + @usuario.apellido %>:<br>
+<br>
+Queremos darle la bienvenida al Colegio Nacional José Pedro Varela. En nuestra Institución la forma de informar, inscribir y autorizar el débito de las diferentes actividades enviadas por las secciones correspondientes, así como el acceso a la cuenta corriente del alumno y las facturas que se generen mensualmente es a través de la web http://familias.varela.edu.uy
+<br>
+<%= email_image_tag 'pantallafamilias_color' %>
+<br>
+Para acceder debe ingresar la siguiente información:
+<br>
+Cédula de Identidad: <%= p @usuario.cedula %><br>
+Contraseña: <%= p @usuario.passwd %><br>
+<br>
+Por motivos de seguridad recomendamos cambiar la contraseña una vez que haya efectuado el primer ingreso.<br>
+<br>
+Por consultas o sugerencias dirigirse a soporte@varela.edu.uy
+<br>
+Saludos cordiales<br>
+</td></tr>
+<tr><td><%= email_image_tag 'Pie.jpg' %></td></tr>

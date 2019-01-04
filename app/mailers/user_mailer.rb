@@ -43,4 +43,10 @@ class UserMailer < ApplicationMailer
         attachments[filename] = File.read(file.path)
         mail(from: 'facturacion@varela.edu.uy', to: usuario.email, bcc: 'facturacion@varela.edu.uy', subject: "Envío de copia de factura correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
 	end
+
+
+	def inscribir_usuario(usuario)
+		@usuario = usuario
+		mail(to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Bienvenido al Colegio Nacional José Pedro Varela')
+	end
 end
