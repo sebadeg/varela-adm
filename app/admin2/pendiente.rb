@@ -42,14 +42,17 @@ ActiveAdmin.register_page "Pendiente" do
         #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
         #   type: "application/pdf"
         # )
+      
+        usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
 
-        Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
-          p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
+        if ( usuarios != nil )
+          usuarios.each do |usuario|
+            p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
 
-          UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+            UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
 
-          ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
-
+            ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
+          end
         end
       end
     end
