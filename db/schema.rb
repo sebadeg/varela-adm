@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_014845) do
+ActiveRecord::Schema.define(version: 2019_01_04_030902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_014845) do
     t.date "fecha_vencimiento"
     t.boolean "mail", default: false
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
+    t.index ["mail"], name: "index_facturas_on_mail"
   end
 
   create_table "grado_alumnos", id: :serial, force: :cascade do |t|
