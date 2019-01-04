@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
 			port: 587,
 		   domain: "varela.edu.uy", 
 			user_name: "facturacion@varela.edu.uy",
-			password: "F4c7V@r3",
+			password: "F4c7V@r3Pr0",
 		   authentication: "plain",
 		   enable_starttls_auto: true,
 		   openssl_verify_mode: 'none'
