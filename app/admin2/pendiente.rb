@@ -30,7 +30,7 @@ ActiveAdmin.register_page "Pendiente" do
     #     "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
     # end
 
-    Factura.where("NOT mail").order(:id).limit(100).each do |factura|
+    Factura.where("NOT mail").order(:id).limit(50).each do |factura|
       if factura != nil
    
         cuenta_id = factura.cuenta_id
@@ -55,6 +55,7 @@ ActiveAdmin.register_page "Pendiente" do
           end
         end
       end
+      redirect_to admin_pendiente_path, notice: "Hecho"
     end
 
     # Factura.each do |f|
