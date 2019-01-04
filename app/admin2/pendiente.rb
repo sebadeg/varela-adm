@@ -50,6 +50,7 @@ ActiveAdmin.register_page "Pendiente" do
         UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
       end
     end
+    
 
     # Factura.each do |f|
 
