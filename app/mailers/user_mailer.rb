@@ -46,6 +46,18 @@ class UserMailer < ApplicationMailer
 
 
 	def inscribir_usuario(usuario)
+
+		delivery_options = {
+            address: "smtp.varela.edu.uy",
+			port: 587,
+		   domain: "varela.edu.uy", 
+			user_name: "soporte@varela.edu.uy",
+			password: "Ago_2018",
+		   authentication: "plain",
+		   enable_starttls_auto: true,
+		   openssl_verify_mode: 'none'
+		}
+
 		@usuario = usuario
 		mail(to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Bienvenido al Colegio Nacional José Pedro Varela')
 	end
