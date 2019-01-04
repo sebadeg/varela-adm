@@ -29,8 +29,8 @@ class UserMailer < ApplicationMailer
             address: "smtp.varela.edu.uy",
 			port: 587,
 		   domain: "varela.edu.uy", 
-			user_name: "novedades@varela.edu.uy",
-			password: "varnov2018",
+			user_name: "facturacion@varela.edu.uy",
+			password: "F4c7V@r3",
 		   authentication: "plain",
 		   enable_starttls_auto: true,
 		   openssl_verify_mode: 'none'
@@ -41,6 +41,6 @@ class UserMailer < ApplicationMailer
 		@cuenta = cuenta
 
         attachments[filename] = File.read(file.path)
-        mail(from: 'novedades@varela.edu.uy', to: usuario.email, bcc: 'novedades@varela.edu.uy', subject: "Envío de copia de factura correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
+        mail(from: 'facturacion@varela.edu.uy', to: usuario.email, bcc: 'facturacion@varela.edu.uy', subject: "Envío de copia de factura correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
 	end
 end

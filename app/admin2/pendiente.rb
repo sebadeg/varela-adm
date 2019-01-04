@@ -31,38 +31,38 @@ ActiveAdmin.register_page "Pendiente" do
     # end
 
 
-    # cuenta_id = 12121
+    cuenta_id = 12121
 
-    # factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
-    # if factura != nil
+    factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
+    if factura != nil
 
-    #   file = Tempfile.new("factura#{cuenta_id}.pdf")
-    #   factura.imprimir(file.path,cuenta_id,factura)
-    #   # send_file(
-    #   #   file.path,
-    #   #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
-    #   #   type: "application/pdf"
-    #   # )
+      file = Tempfile.new("factura#{cuenta_id}.pdf")
+      factura.imprimir(file.path,cuenta_id,factura)
+      # send_file(
+      #   file.path,
+      #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+      #   type: "application/pdf"
+      # )
 
-    #   Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
-    #     p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
+      Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
+        p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
 
-    #     UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
-    #   end
-    # end
+        UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+      end
+    end
 
-    Factura.each do |f|
+    # Factura.each do |f|
 
-        i = 1
-        Movimiento.where( "cuenta_id=#{f.cuenta_id} AND fecha='2019-01-01'" ).order(:tipo) do |movimiento|
+    #     i = 1
+    #     Movimiento.where( "cuenta_id=#{f.cuenta_id} AND fecha='2019-01-01'" ).order(:tipo) do |movimiento|
 
-          ActiveRecord::Base.connection.execute(
-            "INSERT INTO linea_facturas (factura_id,alumno_id,importe,indice,descripcion,created_at,updated_at) VALUES " +
-            "(#{f.id},#{m.alumno},#{m.debe},#{i},#{m.descripcion},now(),now());"
-            )
-          i=i+1
-        end
-    end  
+    #       ActiveRecord::Base.connection.execute(
+    #         "INSERT INTO linea_facturas (factura_id,alumno_id,importe,indice,descripcion,created_at,updated_at) VALUES " +
+    #         "(#{f.id},#{m.alumno},#{m.debe},#{i},#{m.descripcion},now(),now());"
+    #         )
+    #       i=i+1
+    #     end
+    # end  
 
     # Movimiento.where( "NOT factura IS NULL" ).each do |movimiento|
     #   (2..movimiento.factura).each do |mes|
