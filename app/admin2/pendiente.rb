@@ -30,10 +30,6 @@ ActiveAdmin.register_page "Pendiente" do
     #     "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
     # end
 
-
-    factura_id = 585400
-    factura_id_max = factura_id+10
-
     Factura.where("NOT mail").limit(2).each do |factura|
       if factura != nil
    
