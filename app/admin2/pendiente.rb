@@ -31,7 +31,7 @@ ActiveAdmin.register_page "Pendiente" do
     # end
 
 
-    cuenta_id = 12121
+    cuenta_id = 13398
 
     factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
     if factura != nil
@@ -50,7 +50,7 @@ ActiveAdmin.register_page "Pendiente" do
         UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
       end
     end
-    
+
 
     # Factura.each do |f|
 
