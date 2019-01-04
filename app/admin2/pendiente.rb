@@ -31,26 +31,29 @@ ActiveAdmin.register_page "Pendiente" do
     # end
 
 
-    cuenta_id = 13398
+    factura_id = 585400
+    factura_id_max = factura_id+10
 
-    factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
-    if factura != nil
+    Factura.where("id>=#{factura_id} AND id<#{factura_id_max} ").order(:id).each do |factura|
+      if factura != nil
+   
+        cuenta_id = factura.cuenta_id
 
-      file = Tempfile.new("factura#{cuenta_id}.pdf")
-      factura.imprimir(file.path,cuenta_id,factura)
-      # send_file(
-      #   file.path,
-      #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
-      #   type: "application/pdf"
-      # )
+        file = Tempfile.new("factura#{cuenta_id}.pdf")
+        factura.imprimir(file.path,cuenta_id,factura)
+        # send_file(
+        #   file.path,
+        #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+        #   type: "application/pdf"
+        # )
 
-      Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
-        p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
+        Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").each do |usuario|
+          p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
 
-        UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+          UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+        end
       end
     end
-
 
     # Factura.each do |f|
 
