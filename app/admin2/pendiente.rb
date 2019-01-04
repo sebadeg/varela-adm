@@ -8,24 +8,27 @@ ActiveAdmin.register_page "Pendiente" do
     usuarios = Usuario.where( "mail IS NULL OR mail=false") rescue nil
     if ( usuarios != nil )
       usuarios.each do |usuario|
-        usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
-      end
-    end
-
-
-    cuenta_id = 12121
-    usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
-
-
-    if ( usuarios != nil )
-      usuarios.each do |usuario|
-        p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
-
+        #usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
         UserMailer.inscribir_usuario( usuario ).deliver_now
-        
         ActiveRecord::Base.connection.execute( "UPDATE usuarios SET mail=true WHERE id=#{usuario.id};" )
+
       end
     end
+
+
+    # cuenta_id = 12121
+    # usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
+
+
+    # if ( usuarios != nil )
+    #   usuarios.each do |usuario|
+    #     p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
+
+    #     UserMailer.inscribir_usuario( usuario ).deliver_now
+        
+    #     ActiveRecord::Base.connection.execute( "UPDATE usuarios SET mail=true WHERE id=#{usuario.id};" )
+    #   end
+    # end
 
 
     # mes = 1
