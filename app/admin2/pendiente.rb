@@ -5,6 +5,15 @@ ActiveAdmin.register_page "Pendiente" do
 
   page_action :mail, method: :post do   
 
+    usuarios = Usuario.where( "mail IS NULL OR mail=false") rescue nil
+    if ( usuarios != nil )
+      usuario = usuarios.first
+#      usuarios.each do |usuario|
+        usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
+#      end
+    end
+
+
     cuenta_id = 12121
     usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
 
