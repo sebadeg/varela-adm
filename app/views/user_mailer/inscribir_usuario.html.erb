@@ -4,11 +4,13 @@
 <br>
 Estimado/a <%= p @usuario.nombre + " " + @usuario.apellido %>:<br>
 <br>
-Queremos darle la bienvenida al Colegio Nacional José Pedro Varela. En nuestra Institución la forma de informar, inscribir y autorizar el débito de las diferentes actividades enviadas por las secciones correspondientes, así como el acceso a la cuenta corriente del alumno y las facturas que se generen mensualmente es a través de la web http://familias.varela.edu.uy
+Queremos darle la bienvenida al Colegio Nacional José Pedro Varela. En nuestra Institución la forma de informar, inscribir y autorizar el débito de las diferentes actividades enviadas por las secciones correspondientes, así como el acceso a la cuenta corriente del alumno y las facturas que se generen mensualmente es a través de la web http://familias.varela.edu.uy<br>
 <br>
-<%= email_image_tag 'pantallafamilias_color.jpg' %>
 <br>
-Para acceder debe ingresar la siguiente información:
+<%= email_image_tag 'pantallafamilias_color.jpg' %><br>
+<br>
+<br>
+Para acceder debe ingresar la siguiente información:<br>
 <br>
 Cédula de Identidad: <%= p @usuario.cedula %><br>
 Contraseña: <%= p @usuario.passwd %><br>
