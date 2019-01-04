@@ -34,7 +34,7 @@ ActiveAdmin.register_page "Pendiente" do
     factura_id = 585400
     factura_id_max = factura_id+10
 
-    Factura.where("id>=#{factura_id} AND id<#{factura_id_max} ").order(:id).each do |factura|
+    Factura.where("NOT mail").limit(2).each do |factura|
       if factura != nil
    
         cuenta_id = factura.cuenta_id
@@ -51,6 +51,9 @@ ActiveAdmin.register_page "Pendiente" do
           p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
 
           UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+
+          ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
+
         end
       end
     end
