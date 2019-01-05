@@ -1,5 +1,9 @@
-<%= form_tag(admin_pendiente_mail_path, :method => "post") do %>
-   <%= submit_tag "Mail" %>
+<%= form_tag(admin_pendiente_inscribirusuario_path, :method => "post") do %>
+   <%= submit_tag "Inscribir usuario" %>
+<% end %>
+<br><br>
+<%= form_tag(admin_pendiente_enviarfactura_path, :method => "post") do %>
+   <%= submit_tag "Enviar factura" %>
 <% end %>
 <br><br>
 <%= form_tag(admin_pendiente_sistarbanc_path, :method => "post") do %>

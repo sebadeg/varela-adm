@@ -3,10 +3,9 @@ ActiveAdmin.register_page "Pendiente" do
   menu priority: 70, label: "Pendiente"
 
 
-  page_action :mail, method: :post do   
+  page_action :inscribirusuario, method: :post do
 
-    #usuarios = Usuario.where( "mail IS NULL OR mail=false").limit(1) rescue nil
-    usuarios = Usuario.where( "id=2").limit(1) rescue nil
+    usuarios = Usuario.where( "mail IS NULL OR mail=false").limit(1) rescue nil    
     if ( usuarios != nil )
       usuarios.each do |usuario|
         #usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
@@ -14,9 +13,11 @@ ActiveAdmin.register_page "Pendiente" do
         ActiveRecord::Base.connection.execute( "UPDATE usuarios SET mail=true WHERE id=#{usuario.id};" )
       end
     end
+  end
 
-    #facturas = Factura.where("NOT mail").order(:id).limit(1) rescue nil
-    facturas = Factura.where("cuenta_id=12121").order(:id).limit(1) rescue nil
+  page_action :enviarfactura, method: :post do
+
+    facturas = Factura.where("NOT mail").order(:id).limit(1) rescue nil    
     if facturas != nil
       facturas.each do |factura|
         cuenta_id = factura.cuenta_id
