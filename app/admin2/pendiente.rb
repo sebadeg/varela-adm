@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Pendiente" do
     usuarios = Usuario.where( "mail IS NULL OR mail=false").limit(1) rescue nil    
     if ( usuarios != nil )
       usuarios.each do |usuario|
-        #usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
+        usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
         UserMailer.inscribir_usuario( usuario ).deliver_now
         ActiveRecord::Base.connection.execute( "UPDATE usuarios SET mail=true WHERE id=#{usuario.id};" )
       end
