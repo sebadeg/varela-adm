@@ -5,16 +5,39 @@ ActiveAdmin.register_page "Pendiente" do
 
   page_action :mail, method: :post do   
 
-    usuarios = Usuario.where( "mail IS NULL OR mail=false") rescue nil
+    usuarios = Usuario.where( "mail IS NULL OR mail=false").limit(1) rescue nil
     if ( usuarios != nil )
-      usuario = usuarios.first
-      #usuarios.each do |usuario|
+      usuarios.each do |usuario|
         #usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
         UserMailer.inscribir_usuario( usuario ).deliver_now
         ActiveRecord::Base.connection.execute( "UPDATE usuarios SET mail=true WHERE id=#{usuario.id};" )
-
-      #end
+      end
     end
+
+    facturas = Factura.where("NOT mail").order(:id).limit(1) rescue nil
+    if facturas != nil
+      facturas.each do |factura|
+        cuenta_id = factura.cuenta_id
+
+        file = Tempfile.new("factura#{cuenta_id}.pdf")
+        factura.imprimir(file.path,cuenta_id,factura)
+        # send_file(
+        #   file.path,
+        #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+        #   type: "application/pdf"
+        # )
+      
+        usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
+        if ( usuarios != nil )
+          usuarios.each do |usuario|
+            p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
+            UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
+            ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
+          end
+        end
+      end
+    end
+
     redirect_to admin_pendiente_path, notice: "Hecho"
 
 
@@ -58,33 +81,7 @@ ActiveAdmin.register_page "Pendiente" do
     #     "(#{alumno},#{cuenta},'2019-#{mes+x-1}-01','CUOTA 2019 #{x}/#{cuotas}',#{valor},0,'',2,now(),now());" )  
     # end
 
-    # Factura.where("NOT mail").order(:id).limit(10).each do |factura|
-    #   if factura != nil
-   
-    #     cuenta_id = factura.cuenta_id
-
-    #     file = Tempfile.new("factura#{cuenta_id}.pdf")
-    #     factura.imprimir(file.path,cuenta_id,factura)
-    #     # send_file(
-    #     #   file.path,
-    #     #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
-    #     #   type: "application/pdf"
-    #     # )
-      
-    #     usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
-
-    #     if ( usuarios != nil )
-    #       usuarios.each do |usuario|
-    #         p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
-
-    #         UserMailer.facturacion( usuario, "Enero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file ).deliver_now
-
-    #         ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
-    #       end
-    #     end
-    #   end
-    #   redirect_to admin_pendiente_path, notice: "Hecho"
-    # end
+    
 
     # Factura.each do |f|
 
