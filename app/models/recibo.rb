@@ -8,9 +8,9 @@ class Recibo < ApplicationRecord
       Prawn::Document.generate(text_file_path) do
       	font "Helvetica", :size => 10
       	
-      	horizontal_line 0, 540, :at => 240
-      	horizontal_line 0, 540, :at => 480
-
+        dash(0.25, :space => 0.25, :phase => 0)
+        stroke_horizontal_line 0, 540, :at => 240
+        stroke_horizontal_line 0, 540, :at => 480
       
     #   stroke_color "0000FF"
     #   stroke_rectangle [0, 720], 540, 720   
