@@ -5,7 +5,7 @@ class Recibo < ApplicationRecord
       text_file = Tempfile.new("text.pdf")
       text_file_path = text_file.path
 
-      Prawn::Document.generate(file_path) do
+      Prawn::Document.generate(text_file_path) do
       	font "Helvetica", :size => 10
       	
       	horizontal_line 0, 540, :at => 240
