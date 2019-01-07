@@ -36,7 +36,7 @@ class Recibo < ApplicationRecord
         font "Helvetica", :size => 10
 
         bounding_box([460, 10], :width => 80, :height => 10) do
-          text "N° " + recibo.hoja_nro, align: :center, inline_format: true
+          text "N° " + recibo.hoja_nro.to_s, align: :center, inline_format: true
         end
 
 
