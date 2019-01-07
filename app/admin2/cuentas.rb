@@ -11,6 +11,7 @@ ActiveAdmin.register Cuenta do
     end
     column :nombre
     column :apellido
+    column :comentario
     actions
   end
 
@@ -23,6 +24,7 @@ ActiveAdmin.register Cuenta do
       row :id
       row :nombre 
       row :apellido
+      row :comentario
     end
   end
 
@@ -31,6 +33,7 @@ ActiveAdmin.register Cuenta do
       f.input :id
       f.input :nombre
       f.input :apellido
+      f.input :comentario
     end
     f.actions
   end
