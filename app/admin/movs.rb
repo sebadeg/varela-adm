@@ -7,7 +7,7 @@ ActiveAdmin.register Mov do
   	#selectable_column
 
     column "Fecha", :movfec
-    column "Cuenta" do |r| (r.placta != nil ? "#{r.placta.plagru}-#{r.placta.placap}-#{r.placta.plarub}-#{r.placta.plasub}" : "")
+    column "Cuenta" do |r| (r.placta != nil ? "#{r.placta.plagru}-#{r.placta.placap}-#{r.placta.plarub}-#{r.placta.plasub}" : "") end
     column "Subcuenta", :movcta
     column "Descripción", :movdes
     column "Com", :movcom
