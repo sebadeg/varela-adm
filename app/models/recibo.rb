@@ -7,6 +7,14 @@ class Recibo < ApplicationRecord
       return I18n.l(fecha, format: '%-d de %B de %Y')
     end
 
+    def fechavto_tos(fecha)
+      if ( fecha == nil )
+        return ""
+      end
+      return I18n.l(fecha, format: '%d/%m/%Y')
+    end
+
+
     def imprimir(file_path)
 
       recibo = Recibo.find(id)
@@ -15,7 +23,8 @@ class Recibo < ApplicationRecord
       text_file_path = text_file.path
 
 
-      f_vto = fecha_tos(recibo.fecha_vto)
+      fec = fecha_tos(recibo.fecha)
+      fec_vto = fechavto_tos(recibo.fecha_vto)
 
       Prawn::Document.generate(text_file_path) do
       	
@@ -43,26 +52,60 @@ class Recibo < ApplicationRecord
 
           font "Helvetica", :size => 8
 
+          bounding_box([210, x+151], :width => 120, :height => 10) do
+            text "<b>RECIBO</b>", align: :center, inline_format: true
+          end
+
+          bounding_box([405, x+151], :width => 135, :height => 10) do
+            text "<b>DUPLICADO</b>", align: :right, inline_format: true
+          end
+
+
+          bounding_box([0, x+137], :width => 270, :height => 10) do
+            text "<b>Comprobante Nro.:</b> #{recibo.id}", align: :right, inline_format: true
+          end
+
+          bounding_box([0, x+123], :width => 270, :height => 10) do
+            text "<b>Cuenta:</b> #{recibo.cuenta_id}", align: :left, inline_format: true
+          end
+
+          bounding_box([270, x+123], :width => 270, :height => 10) do
+            text "Montevideo, #{fec}", align: :right, inline_format: true
+          end
+
+          bounding_box([0, x+109], :width => 540, :height => 10) do
+            text "<b>Recibimos de:</b> #{recibo.nombre}", align: :left, inline_format: true
+          end
+
+          bounding_box([0, x+95], :width => 540, :height => 10) do
+            text "<b>La suma de:</b> #{recibo.suma}", align: :left, inline_format: true
+          end
+
+          bounding_box([0, x+81], :width => 540, :height => 10) do
+            text "<b>Por concepto de:</b> #{recibo.concepto}", align: :left, inline_format: true
+          end
+
+
           bounding_box([0, x+67], :width => 135, :height => 10) do
-            text "Cheque Nro. #{recibo.cheque}", align: :left, inline_format: true
+            text "<b>Cheque Nro.:</b> #{recibo.cheque}", align: :left, inline_format: true
           end
 
           bounding_box([135, x+67], :width => 135, :height => 10) do
-            text "Banco #{recibo.banco}", align: :left, inline_format: true
+            text "<b>Banco:</b> #{recibo.banco}", align: :left, inline_format: true
           end
 
           bounding_box([270, x+67], :width => 135, :height => 10) do
-            text "Vto. #{f_vto}", align: :left, inline_format: true
+            text "<b>Vto.:</b> #{fec_vto}", align: :left, inline_format: true
           end
 
           bounding_box([405, x+67], :width => 135, :height => 10) do
-            text "$ #{recibo.importe}", align: :left, inline_format: true
+            text "<b>$</b> #{recibo.importe}", align: :left, inline_format: true
           end
 
           font "Helvetica", :size => 10
 
           bounding_box([460, x+10], :width => 80, :height => 10) do
-            text "N° #{recibo.hoja_nro}" , align: :right, inline_format: true
+            text "<b>N°</b> #{recibo.hoja_nro}" , align: :right, inline_format: true
           end
         end
 
