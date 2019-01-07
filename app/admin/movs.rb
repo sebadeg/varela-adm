@@ -16,7 +16,7 @@ ActiveAdmin.register Mov do
     column "Haber", :movhab
   end
 
-  filter :fecha
+  filter :movfec
   filter :movcta
 
 end
