@@ -10,8 +10,7 @@ ActiveAdmin.register Cuenta do
       link_to cuenta.id, admin_cuenta_path(cuenta.id)
     end
     column :nombre
-    column :apellido
-    column :comentario
+    column :apellido    
     actions
   end
 
