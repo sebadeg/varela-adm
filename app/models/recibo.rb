@@ -14,6 +14,9 @@ class Recibo < ApplicationRecord
       text_file = Tempfile.new("text.pdf")
       text_file_path = text_file.path
 
+
+      f_vto = fecha_tos(recibo.fecha_vto)
+
       Prawn::Document.generate(text_file_path) do
       	
         # stroke_color "000000"
@@ -49,7 +52,7 @@ class Recibo < ApplicationRecord
           end
 
           bounding_box([270, x+67], :width => 135, :height => 10) do
-            text "Vto. #{fecha_tos(recibo.fecha_vto)}", align: :left, inline_format: true
+            text "Vto. #{f_vto}", align: :left, inline_format: true
           end
 
           bounding_box([405, x+67], :width => 135, :height => 10) do
