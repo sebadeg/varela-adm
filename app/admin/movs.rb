@@ -16,7 +16,7 @@ ActiveAdmin.register Mov do
     column "Haber", :movhab
   end
 
-  filter :movfec
-  filter :movcta
+  filter "Fecha", :movfec
+  filter "Subcuenta", :movcta
 
 end
