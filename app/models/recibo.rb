@@ -16,7 +16,7 @@ class Recibo < ApplicationRecord
         stroke_horizontal_line 0, 540, :at => 492
         stroke_horizontal_line 0, 540, :at => 227
       
-        font "Book Antiqua", :size => 5
+        font "Helvetica", :size => 5
 
         image Rails.root.join("data", "logo.png"), at: [44,190], scale: 0.066
 
