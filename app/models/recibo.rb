@@ -6,7 +6,6 @@ class Recibo < ApplicationRecord
       text_file_path = text_file.path
 
       Prawn::Document.generate(text_file_path) do
-      	font "Helvetica", :size => 10
       	
         stroke_color "000000"
         stroke_rectangle [0, 720], 540, 190
@@ -17,6 +16,18 @@ class Recibo < ApplicationRecord
         stroke_horizontal_line 0, 540, :at => 492
         stroke_horizontal_line 0, 540, :at => 227
       
+        font "Book Antiqua", :size => 5
+
+        image Rails.root.join("data", "logo.png"), at: [44,190], scale: 0.066
+
+        bounding_box([0, 156], :width => 105, :height => 5) do
+          text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
+        end
+        bounding_box([0, 151], :width => 105, :height => 5) do
+          text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
+        end
+
+
     #   stroke_color "FF0000"
     #   stroke_rectangle [2, 718], 536, 716
 
