@@ -10,6 +10,7 @@ class Recibo < ApplicationRecord
       	
         stroke_color "000000"
         stroke_rectangle [0, 720], 540, 720
+        stroke_rectangle [0, 720], 540, 700
 
         dash(0.25, :space => 0.25, :phase => 0)
         stroke_horizontal_line 0, 540, :at => 240
