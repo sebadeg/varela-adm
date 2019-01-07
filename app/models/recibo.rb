@@ -1,5 +1,12 @@
 class Recibo < ApplicationRecord
 
+    def fecha_tos(fecha)
+      if ( fecha == nil )
+        return ""
+      end
+      return I18n.l(fecha, format: '%-d de %B de %Y')
+    end
+
     def imprimir(file_path)
 
       recibo = Recibo.find(id)
@@ -29,14 +36,28 @@ class Recibo < ApplicationRecord
           text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
         end
 
+        font "Helvetica", :size => 8
 
+        bounding_box([0, 67], :width => 135, :height => 10) do
+          text "Cheque Nro. #{recibo.cheque}", align: :left, inline_format: true
+        end
 
+        bounding_box([135, 67], :width => 135, :height => 10) do
+          text "Banco #{recibo.banco}", align: :left, inline_format: true
+        end
 
+        bounding_box([270, 67], :width => 135, :height => 10) do
+          text "Vto. #{fecha_tos(recibo.fecha_vto)}", align: :left, inline_format: true
+        end
+
+        bounding_box([405, 67], :width => 135, :height => 10) do
+          text "$ #{recibo.importe}", align: :left, inline_format: true
+        end
 
         font "Helvetica", :size => 10
 
         bounding_box([460, 10], :width => 80, :height => 10) do
-          text "N° " + recibo.hoja_nro.to_s, align: :center, inline_format: true
+          text "N° #{recibo.hoja_nro}" + , align: :right, inline_format: true
         end
 
 
