@@ -16,50 +16,52 @@ class Recibo < ApplicationRecord
 
       Prawn::Document.generate(text_file_path) do
       	
-        stroke_color "000000"
-        stroke_rectangle [0, 720], 540, 190
-        stroke_rectangle [0, 455], 540, 190
-        stroke_rectangle [0, 190], 540, 190
+        # stroke_color "000000"
+        # stroke_rectangle [0, 720], 540, 190
+        # stroke_rectangle [0, 455], 540, 190
+        # stroke_rectangle [0, 190], 540, 190
 
         dash(0.25, :space => 0.25, :phase => 0)
         stroke_horizontal_line 0, 540, :at => 492
         stroke_horizontal_line 0, 540, :at => 227
+
+        [0,265,530].each do |x|
       
-        font "Helvetica", :size => 5
+          font "Helvetica", :size => 5
 
-        image Rails.root.join("data", "logo.png"), at: [44,190], scale: 0.066
+          image Rails.root.join("data", "logo.png"), at: [44,x+190], scale: 0.066
 
-        bounding_box([0, 170], :width => 105, :height => 5) do
-          text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
+          bounding_box([0, x+170], :width => 105, :height => 5) do
+            text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
+          end
+          bounding_box([0, x+162], :width => 105, :height => 5) do
+            text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
+          end
+
+          font "Helvetica", :size => 8
+
+          bounding_box([0, x+67], :width => 135, :height => 10) do
+            text "Cheque Nro. #{recibo.cheque}", align: :left, inline_format: true
+          end
+
+          bounding_box([135, x+67], :width => 135, :height => 10) do
+            text "Banco #{recibo.banco}", align: :left, inline_format: true
+          end
+
+          bounding_box([270, x+67], :width => 135, :height => 10) do
+            text "Vto. #{fecha_tos(recibo.fecha_vto)}", align: :left, inline_format: true
+          end
+
+          bounding_box([405, x+67], :width => 135, :height => 10) do
+            text "$ #{recibo.importe}", align: :left, inline_format: true
+          end
+
+          font "Helvetica", :size => 10
+
+          bounding_box([460, x+10], :width => 80, :height => 10) do
+            text "N° #{recibo.hoja_nro}" , align: :right, inline_format: true
+          end
         end
-        bounding_box([0, 162], :width => 105, :height => 5) do
-          text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
-        end
-
-        font "Helvetica", :size => 8
-
-        bounding_box([0, 67], :width => 135, :height => 10) do
-          text "Cheque Nro. #{recibo.cheque}", align: :left, inline_format: true
-        end
-
-        bounding_box([135, 67], :width => 135, :height => 10) do
-          text "Banco #{recibo.banco}", align: :left, inline_format: true
-        end
-
-        bounding_box([270, 67], :width => 135, :height => 10) do
-          text "Vto. #{fecha_tos(recibo.fecha_vto)}", align: :left, inline_format: true
-        end
-
-        bounding_box([405, 67], :width => 135, :height => 10) do
-          text "$ #{recibo.importe}", align: :left, inline_format: true
-        end
-
-        font "Helvetica", :size => 10
-
-        bounding_box([460, 10], :width => 80, :height => 10) do
-          text "N° #{recibo.hoja_nro}" + , align: :right, inline_format: true
-        end
-
 
     #   stroke_color "FF0000"
     #   stroke_rectangle [2, 718], 536, 716
