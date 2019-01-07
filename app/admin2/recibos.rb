@@ -5,7 +5,7 @@ ActiveAdmin.register Recibo do
   permit_params :id,:cuenta_id,:nombre,:fecha,:importe,:suma,:concepto,:cheque,:banco,:fecha_vto,:hoja_nro
 
   action_item :imprimir, only: :show do
-    link_to "Imprimir", imprimir_admin_recibo_path(inscripcion), method: :put 
+    link_to "Imprimir", imprimir_admin_recibo_path(recibo), method: :put 
   end
 
   member_action :imprimir, method: :put do
