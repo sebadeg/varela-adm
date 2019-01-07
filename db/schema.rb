@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_171245) do
+ActiveRecord::Schema.define(version: 2019_01_07_204824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -561,6 +561,22 @@ ActiveRecord::Schema.define(version: 2019_01_07_171245) do
     t.integer "grado_id"
   end
 
+  create_table "recibos", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.string "nombre"
+    t.date "fecha"
+    t.string "suma"
+    t.string "concepto"
+    t.string "cheque"
+    t.string "banco"
+    t.date "fecha_vto"
+    t.decimal "importe"
+    t.integer "hoja_nro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_recibos_on_cuenta_id"
+  end
+
   create_table "seguimientos", force: :cascade do |t|
     t.bigint "alumno_id"
     t.string "celular"
@@ -704,6 +720,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_171245) do
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "recibos", "cuentas"
   add_foreign_key "seguimientos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "subgrado_alumnos", "alumnos"
