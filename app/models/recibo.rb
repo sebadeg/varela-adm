@@ -28,6 +28,16 @@ class Recibo < ApplicationRecord
         end
 
 
+
+
+
+        font "Helvetica", :size => 10
+
+        bounding_box([460, 10], :width => 80, :height => 10) do
+          text "N° " + recibo.hoja_nro, align: :center, inline_format: true
+        end
+
+
     #   stroke_color "FF0000"
     #   stroke_rectangle [2, 718], 536, 716
 
