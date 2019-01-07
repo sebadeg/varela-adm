@@ -2,6 +2,8 @@ class Recibo < ApplicationRecord
 
     def imprimir(file_path)
 
+      recibo = Recibo.find(id)
+
       text_file = Tempfile.new("text.pdf")
       text_file_path = text_file.path
 
