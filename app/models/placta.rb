@@ -1,0 +1,2 @@
+class Placta < ApplicationRecord
+end

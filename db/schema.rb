@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_030902) do
+ActiveRecord::Schema.define(version: 2019_01_06_203641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -463,6 +463,39 @@ ActiveRecord::Schema.define(version: 2019_01_04_030902) do
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
   end
 
+  create_table "movs", force: :cascade do |t|
+    t.bigint "placta_id"
+    t.integer "movgru"
+    t.integer "movcap"
+    t.integer "movrub"
+    t.integer "movsub"
+    t.bigint "movcta"
+    t.date "movfec"
+    t.integer "movord"
+    t.datetime "movnow"
+    t.integer "movcgr"
+    t.string "movcajpen"
+    t.integer "movcmx"
+    t.bigint "movasi"
+    t.integer "movcom"
+    t.string "movdes"
+    t.date "movvto"
+    t.integer "movcod"
+    t.decimal "movdeb"
+    t.decimal "movhab"
+    t.decimal "movmed"
+    t.decimal "movmeh"
+    t.bigint "movcta1"
+    t.string "movnom"
+    t.string "movnompla"
+    t.bigint "movcta2"
+    t.string "movmov"
+    t.bigint "movint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["placta_id"], name: "index_movs_on_placta_id"
+  end
+
   create_table "padre_alumnos", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "alumno_id"
@@ -491,6 +524,18 @@ ActiveRecord::Schema.define(version: 2019_01_04_030902) do
     t.binary "data"
     t.string "md5"
     t.boolean "procesado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plactas", force: :cascade do |t|
+    t.integer "plagru"
+    t.integer "placap"
+    t.integer "plarub"
+    t.integer "plasub"
+    t.bigint "placta"
+    t.integer "moncod"
+    t.string "planom"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -652,6 +697,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_030902) do
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
+  add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
