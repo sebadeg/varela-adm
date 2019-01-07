@@ -20,10 +20,10 @@ class Recibo < ApplicationRecord
 
         image Rails.root.join("data", "logo.png"), at: [44,190], scale: 0.066
 
-        bounding_box([0, 156], :width => 105, :height => 5) do
+        bounding_box([0, 170], :width => 105, :height => 5) do
           text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
         end
-        bounding_box([0, 151], :width => 105, :height => 5) do
+        bounding_box([0, 162], :width => 105, :height => 5) do
           text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
         end
 
