@@ -61,7 +61,7 @@ class Recibo < ApplicationRecord
           end
 
 
-          bounding_box([0, x+137], :width => 270, :height => 10) do
+          bounding_box([0, x+137], :width => 540, :height => 10) do
             text "<b>Comprobante Nro.:</b> #{recibo.id}", align: :right, inline_format: true
           end
 
@@ -100,6 +100,11 @@ class Recibo < ApplicationRecord
 
           bounding_box([405, x+67], :width => 135, :height => 10) do
             text "<b>$</b> #{recibo.importe}", align: :left, inline_format: true
+          end
+
+
+          bounding_box([0, x+30], :width => 540, :height => 10) do
+            text "<b>Son: $</b> #{recibo.importe}", align: :center, inline_format: true
           end
 
           font "Helvetica", :size => 10
