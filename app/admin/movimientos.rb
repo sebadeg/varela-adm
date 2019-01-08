@@ -6,7 +6,7 @@ ActiveAdmin.register Movimiento do
   index do
   	#selectable_column
 
-    column "Fecha", :movfec
+    column "Fecha", :fecha
     column "Cuenta", :cuenta_id
     column "Alumno", :alumno
     column "Descripción", :descripcion
