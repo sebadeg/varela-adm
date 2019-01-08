@@ -41,12 +41,12 @@ class Recibo < ApplicationRecord
       
           font "Helvetica", :size => 5
 
-          image Rails.root.join("data", "logo.png"), at: [44,x+190], scale: 0.066
+          image Rails.root.join("data", "logo.png"), at: [44,x+190], scale: 0.1
 
-          bounding_box([0, x+170], :width => 105, :height => 5) do
+          bounding_box([0, x+150], :width => 105, :height => 5) do
             text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
           end
-          bounding_box([0, x+162], :width => 105, :height => 5) do
+          bounding_box([0, x+142], :width => 105, :height => 5) do
             text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
           end
 
