@@ -12,9 +12,16 @@ ActiveAdmin.register Usuario do
 
   member_action :contrasena, method: :put do
     id = params[:id]
+    
+    passwd = Digest::MD5.hexdigest(usuario.cedula.to_s + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
+
     usuario = Usuario.find(id)
-    usuario.passwd = Digest::MD5.hexdigest(usuario.cedula.to_s + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
+    usuario.passwd = passwd
     usuario.save!
+    usuario.update( password: passwd, password_confirmation: passwd );
+    
+    UserMailer.aceptar_usuario(usuario).deliver_now
+
     redirect_to admin_usuario_path(usuario)
   end
 
@@ -44,6 +51,7 @@ ActiveAdmin.register Usuario do
       row :email
       row :direccion
       row :celular
+      row :passwd
     end
   end
 
