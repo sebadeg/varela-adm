@@ -13,7 +13,7 @@ ActiveAdmin.register Usuario do
   member_action :contrasena, method: :put do
     id = params[:id]
     usuario = Usuario.find(id)
-    usuario.passwd = Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7])
+    usuario.passwd = Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
     usuario.save!
     redirect_to admin_usuario_path(usuario)
   end
