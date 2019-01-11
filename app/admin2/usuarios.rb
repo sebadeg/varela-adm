@@ -5,11 +5,11 @@ ActiveAdmin.register Usuario do
   permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular
 
   action_item :contrasena, only: :show do
-    link_to "Resetear Contraseña", constrasena_admin_usuario_path(usuario), method: :put 
+    link_to "Resetear Contraseña", contrasena_admin_usuario_path(usuario), method: :put 
   end
 
   require 'digest/md5'
-  
+
   member_action :contrasena, method: :put do
     id = params[:id]
     usuario = Usuario.find(id)
