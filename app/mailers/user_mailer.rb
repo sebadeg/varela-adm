@@ -12,8 +12,8 @@ class UserMailer < ApplicationMailer
 		}
 
 		@usuario = usuario
-		#mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
-		mail(from: 'soporte@varela.edu.uy', to: 'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
+		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
+	
 	end
 
 	def novedades(emails,titulo)
