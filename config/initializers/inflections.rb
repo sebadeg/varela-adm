@@ -20,6 +20,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'especial_cuenta', 'especial_cuentas'
   inflect.irregular 'contrato_cuota', 'contrato_cuotas'
   inflect.irregular 'inscripcion', 'inscripciones'
+  inflect.irregular 'sector', 'sectores'
   inflect.irregular 'direccion', 'direcciones'
   inflect.irregular 'placta', 'plactas'
 end

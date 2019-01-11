@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_204824) do
+ActiveRecord::Schema.define(version: 2019_01_10_151638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -559,6 +559,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_204824) do
     t.decimal "matricula"
     t.string "codigo"
     t.integer "grado_id"
+    t.bigint "sector_id"
+    t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
   create_table "recibos", force: :cascade do |t|
@@ -575,6 +577,22 @@ ActiveRecord::Schema.define(version: 2019_01_07_204824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cuenta_id"], name: "index_recibos_on_cuenta_id"
+  end
+
+  create_table "sector_alumnos", force: :cascade do |t|
+    t.bigint "alumno_id"
+    t.bigint "sector_id"
+    t.integer "anio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_sector_alumnos_on_alumno_id"
+    t.index ["sector_id"], name: "index_sector_alumnos_on_sector_id"
+  end
+
+  create_table "sectores", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "seguimientos", force: :cascade do |t|
@@ -720,7 +738,10 @@ ActiveRecord::Schema.define(version: 2019_01_07_204824) do
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recibos", "cuentas"
+  add_foreign_key "sector_alumnos", "alumnos"
+  add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "subgrado_alumnos", "alumnos"

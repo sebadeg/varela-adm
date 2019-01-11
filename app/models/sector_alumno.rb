@@ -1,0 +1,2 @@
+class SectorAlumno < ApplicationRecord
+end
