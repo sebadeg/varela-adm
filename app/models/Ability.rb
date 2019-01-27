@@ -26,6 +26,8 @@ class Ability
       can :manage, Placta
       can :manage, Movimiento
 
+      can :manage, Recibo
+
 
       can :manage, Especial
       can :manage, Pago
@@ -38,13 +40,7 @@ class Ability
 
       can :manage, Contrato
       can :read, InscripcionAlumno
-
       can :manage, Inscripcion
-
-      can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
 
     elsif user.inscripciones
       can :read, AdminUsuario, id: user.id 

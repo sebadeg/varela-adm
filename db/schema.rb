@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_151638) do
+ActiveRecord::Schema.define(version: 2019_01_26_204032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -430,6 +430,9 @@ ActiveRecord::Schema.define(version: 2019_01_10_151638) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "anio"
+    t.bigint "sector_id"
+    t.index ["sector_id"], name: "index_listas_on_sector_id"
   end
 
   create_table "matriculas", force: :cascade do |t|
@@ -729,6 +732,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_151638) do
   add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
+  add_foreign_key "listas", "sectores"
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
