@@ -8,22 +8,29 @@ class Ability
     can :manage, ActiveAdmin::Comment
     
 
-    if user.primaria
-      can :manage, Lista, Lista.where("sector_id=1 AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
-        true
-      end
-    end
-    if user.sec_mdeo
-      can :manage, Lista, Lista.where("sector_id=2 AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
-        true
-      end
-    end
-    if user.sec_cc
-      can :manage, Lista, Lista.where("sector_id=3 AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
-        true
-      end      
-    end
+    if user.primaria || user.sec_mdeo || user.sec_cc
 
+      s = ""
+      if user.primaria
+        s = "1"
+      end
+      if user.sec_mdeo
+        if s != ""
+          s = s + ","
+        end
+        s = s + "2"
+      end
+      if user.sec_cc
+        if s != ""
+          s = s + ","
+        end
+        s = s + "3"
+      end
+
+      can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
+        true
+      end
+    end
 
     if user.soporte
       can :manage, :all
