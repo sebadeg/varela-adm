@@ -41,7 +41,7 @@ class Recibo < ApplicationRecord
       
           font "Helvetica", :size => 5
 
-          if x != 0 
+          if x != 530 
             image Rails.root.join("data", "logo.png"), at: [38,x+190], scale: 0.1
           end
 
@@ -58,7 +58,7 @@ class Recibo < ApplicationRecord
             text "<b>RECIBO</b>", align: :center, inline_format: true
           end
 
-          if x == 0
+          if x == 530
             bounding_box([405, x+151], :width => 135, :height => 10) do
               text "<b>ORIGINAL</b>", align: :right, inline_format: true
             end
