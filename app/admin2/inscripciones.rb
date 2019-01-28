@@ -1,5 +1,5 @@
 ActiveAdmin.register Inscripcion do
-  menu label: 'Inscripción', priority: 90 
+  menu label: 'Inscripción', priority: 1001 
 
   permit_params :fecha, :recibida,
     :nombre,:apellido,:cedula,:lugar_nacimiento,:fecha_nacimiento,:domicilio,:celular,:mutualista,:emergencia,:procede,
