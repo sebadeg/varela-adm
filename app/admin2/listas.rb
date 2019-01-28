@@ -44,12 +44,33 @@ ActiveAdmin.register Lista do
   end
 
   form do |f|
+    def sectores
+      s = ""
+      if current_user.primaria
+        s = "1"
+      end
+      if current_user.sec_mdeo
+        if s != ""
+          s = s + ","
+        end
+        s = "2"
+      end
+      if current_user.sec_cc
+        if s != ""
+          s = s + ","
+        end
+        s = "3"
+      end
+      return s
+    end
+
+
     f.inputs do
       f.input :nombre
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + sectores() + ") AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
       end
     end
     f.actions
