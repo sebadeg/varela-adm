@@ -1,7 +1,7 @@
 ActiveAdmin.register Seguimiento do
 
   menu priority: 1022, label: 'Seguimiento'
-  menu priority: 1020, parent: 'Seguimiento'
+  menu parent: 'Seguimiento'
 
   permit_params :id, :alumno_id, :celular, :no_atiende, :no_inscribe, :inscribe, :duda, :comentario, :created_at, :updated_at
 
