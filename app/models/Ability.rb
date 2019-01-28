@@ -7,28 +7,32 @@ class Ability
     can :manage, ActiveAdmin::Page, :name => "Dashboard"
     can :manage, ActiveAdmin::Comment
     
+
+    if user.primaria
+      can :manage, Lista, sector: 1
+    end
+    if user.sec_mdeo
+      can :manage, Lista, sector: 2
+    end
+    if user.sec_cc
+      can :manage, Lista, sector: 3
+    end
+
+
     if user.soporte
       can :manage, :all
-    elsif user.primaria || user.sec_mdeo || user.sec_cc
+    else
       can :read, AdminUsuario, id: user.id 
-      can :update, AdminUsuario, id: user.id 
-      can :manage, Lista
+      can :update, AdminUsuario, id: user.id      
+    end
 
-      can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
-    elsif user.administracion
-      can :read, AdminUsuario, id: user.id 
-      can :update, AdminUsuario, id: user.id 
-
+    if user.administracion
       can :manage, Mov
       can :manage, Placta
       can :manage, Movimiento
 
       can :manage, Recibo
-
-
+      
       can :manage, Especial
       can :manage, Pago
       can :manage, ActiveAdmin::Page, :name => "Lote_pago"
@@ -43,27 +47,11 @@ class Ability
       can :manage, Inscripcion
 
     elsif user.inscripciones
-      can :read, AdminUsuario, id: user.id 
-      can :update, AdminUsuario, id: user.id 
-
       can :manage, Inscripcion
 
       can :manage, Seguimiento
       can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
       can :manage, Subgrado
-
-      can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
-    else
-      can :read, AdminUsuario, id: user.id 
-      can :update, AdminUsuario, id: user.id 
-
-      can :manage, ActiveAdmin::Page, :name => "Mapa" 
-      can :manage, ActiveAdmin::Page, :name => "Mapa_primaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_secundaria"
-      can :manage, ActiveAdmin::Page, :name => "Mapa_costa"
     end
       # if user.primaria
       #   can :manage, ActiveAdmin::Page, :name => "Primaria" 
