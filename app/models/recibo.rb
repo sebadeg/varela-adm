@@ -33,9 +33,9 @@ class Recibo < ApplicationRecord
         # stroke_rectangle [0, 455], 540, 190
         # stroke_rectangle [0, 190], 540, 190
 
-        dash(0.25, :space => 0.25, :phase => 0)
-        stroke_horizontal_line 0, 540, :at => 492
-        stroke_horizontal_line 0, 540, :at => 227
+        #dash(0.25, :space => 0.25, :phase => 0)
+        #stroke_horizontal_line 0, 540, :at => 492
+        #stroke_horizontal_line 0, 540, :at => 227
 
         [0,265,530].each do |x|
       
