@@ -35,7 +35,7 @@ ActiveAdmin.register Lista do
     attributes_table do
       row :nombre
       row "Alumnos" do 
-        table_for Alumno.where("id in (SELECT alumno_id FROM lista_alumnos WHERE lista_id = #{r.id})") do |t|
+        table_for Alumno.where("id in (SELECT alumno_id FROM lista_alumnos WHERE lista_id = #{r.id})").order(:nombre,:apellido) do |t|
           t.column :nombre
           t.column :apellido
         end
