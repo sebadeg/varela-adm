@@ -46,16 +46,16 @@ ActiveAdmin.register Lista do
   form do |f|
     def sectores
       s = ""
-      if current_user.primaria
+      if current_admin_usuario.primaria
         s = "1"
       end
-      if current_user.sec_mdeo
+      if current_admin_usuario.sec_mdeo
         if s != ""
           s = s + ","
         end
         s = "2"
       end
-      if current_user.sec_cc
+      if current_admin_usuario.sec_cc
         if s != ""
           s = s + ","
         end
