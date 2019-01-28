@@ -1,7 +1,7 @@
 ActiveAdmin.register_page "Seguimiento Cuenta" do
 
   menu priority: 1021, label: 'Seguimiento Cuenta'
-  menu parent: 'Seguimiento'
+  menu parent: 'Seguimiento', priority: 1020
 
   content do
     columns do

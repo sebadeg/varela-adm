@@ -1,7 +1,7 @@
 ActiveAdmin.register Subgrado do
 
   menu priority: 1023, label: 'Grados'
-  menu parent: 'Seguimiento'
+  menu parent: 'Seguimiento', priority: 1020
 
   permit_params :id, :nombre, :apellido
 
