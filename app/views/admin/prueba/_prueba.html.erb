@@ -8,9 +8,25 @@
         <div class="col-xs-12 col-sm-8 col-md-6">
     		<form>
                 <table class="index_table index">
+                <tbody>
+                    <% i = 0 %>
                     <% Lista.where("anio=2019").each do |x| %>
-                        <tr><td><%= x.nombre %></td><td><%= link_to 'Ver', '#' %> <%= link_to 'Editar', '#' %> <%= link_to 'Eliminar', '#' %></td></tr>
+                        <% if i % 2 == 0 %>
+                            <tr class="odd">
+                        <% else %>
+                            <tr class="even">
+                        <% end %>
+                        <% i = i+1 %>
+
+                        <td><%= x.nombre %></td><td><%= link_to 'Ver', '#' %> <%= link_to 'Editar', '#' %> <%= link_to 'Eliminar', '#' %></td></tr>
                     <% end %>
+                    <% if i % 2 == 0 %>
+                        <tr class="odd">
+                    <% else %>
+                        <tr class="even">
+                    <% end %>
+                    <td><input type="text" name="nombre" id="nombre"></td><td><%= link_to 'Añadir', '#' %></td></tr>
+                </tbody>
                 </table>
 
     		    <div class="row">
