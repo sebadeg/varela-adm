@@ -9,13 +9,13 @@ class Ability
     
 
     if user.primaria
-      can :manage, Lista, sector: 1
+      can :manage, Lista, sector_id: 1
     end
     if user.sec_mdeo
-      can :manage, Lista, sector: 2
+      can :manage, Lista, sector_id: 2
     end
     if user.sec_cc
-      can :manage, Lista, sector: 3
+      can :manage, Lista, sector_id: 3
     end
 
 
@@ -32,7 +32,7 @@ class Ability
       can :manage, Movimiento
 
       can :manage, Recibo
-      
+
       can :manage, Especial
       can :manage, Pago
       can :manage, ActiveAdmin::Page, :name => "Lote_pago"
