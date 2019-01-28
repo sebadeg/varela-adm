@@ -9,7 +9,7 @@
     		<form>
                 <table>
                     <% Lista.where("anio=2019").each do |x| %>
-                        <tr><%= x.nombre %></tr>
+                        <tr><td><%= x.nombre %></td><td><%= link_to 'Ver', '#' %><%= link_to 'Editar', '#' %><%= link_to 'Eliminar', '#' %></td></tr>
                     <% end %>
                 </table>
 
