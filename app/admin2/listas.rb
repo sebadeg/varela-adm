@@ -53,13 +53,13 @@ ActiveAdmin.register Lista do
         if s != ""
           s = s + ","
         end
-        s = "2"
+        s = s + "2"
       end
       if current_admin_usuario.sec_cc
         if s != ""
           s = s + ","
         end
-        s = "3"
+        s = s + "3"
       end
       return s
     end
