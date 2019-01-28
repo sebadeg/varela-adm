@@ -41,7 +41,9 @@ class Recibo < ApplicationRecord
       
           font "Helvetica", :size => 5
 
-          image Rails.root.join("data", "logo.png"), at: [38,x+190], scale: 0.1
+          if x != 0 
+            image Rails.root.join("data", "logo.png"), at: [38,x+190], scale: 0.1
+          end
 
           bounding_box([0, x+160], :width => 105, :height => 5) do
             text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
@@ -56,10 +58,15 @@ class Recibo < ApplicationRecord
             text "<b>RECIBO</b>", align: :center, inline_format: true
           end
 
-          bounding_box([405, x+151], :width => 135, :height => 10) do
-            text "<b>DUPLICADO</b>", align: :right, inline_format: true
+          if x == 0
+            bounding_box([405, x+151], :width => 135, :height => 10) do
+              text "<b>ORIGINAL</b>", align: :right, inline_format: true
+            end
+          else
+            bounding_box([405, x+151], :width => 135, :height => 10) do
+              text "<b>DUPLICADO</b>", align: :right, inline_format: true
+            end
           end
-
 
           bounding_box([0, x+137], :width => 540, :height => 10) do
             text "<b>Comprobante Nro.:</b> #{recibo.id}", align: :right, inline_format: true
@@ -109,9 +116,9 @@ class Recibo < ApplicationRecord
 
           font "Helvetica", :size => 10
 
-          bounding_box([460, x+10], :width => 80, :height => 10) do
-            text "<b>N°</b> #{recibo.hoja_nro}" , align: :right, inline_format: true
-          end
+          #bounding_box([460, x+10], :width => 80, :height => 10) do
+          #  text "<b>N°</b> #{recibo.hoja_nro}" , align: :right, inline_format: true
+          #end
         end
 
     #   stroke_color "FF0000"
