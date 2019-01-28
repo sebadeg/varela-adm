@@ -43,13 +43,14 @@ class Recibo < ApplicationRecord
 
           if x != 530 
             image Rails.root.join("data", "logo.png"), at: [38,x+190], scale: 0.1
-          end
 
-          bounding_box([0, x+160], :width => 105, :height => 5) do
-            text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
-          end
-          bounding_box([0, x+152], :width => 105, :height => 5) do
-            text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
+
+            bounding_box([0, x+160], :width => 105, :height => 5) do
+              text "Sociedad Uruguaya de Enseñanza", align: :center, inline_format: true
+            end
+            bounding_box([0, x+152], :width => 105, :height => 5) do
+              text "COLEGIO NACIONAL JOSÉ PEDRO VARELA", align: :center, inline_format: true
+            end
           end
 
           font "Helvetica", :size => 8
