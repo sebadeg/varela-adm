@@ -1,6 +1,6 @@
 ActiveAdmin.register Cuenta do
 
-  permit_params :id, :nombre, :apellido, :comentario
+  permit_params :id, :nombre, :apellido
 
   menu priority: 21
 
