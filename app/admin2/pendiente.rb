@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Pendiente" do
       facturas.each do |factura|
         cuenta_id = factura.cuenta_id
 
-        file = Tempfile.new("factura#{cuenta_id}.pdf")
+        file = File.new("factura_#{cuenta_id}_#{factura.id}.pdf")
         factura.imprimir(file.path,cuenta_id,factura)
         # send_file(
         #   file.path,
