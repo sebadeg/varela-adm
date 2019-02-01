@@ -34,7 +34,7 @@ class UserMailer < ApplicationMailer
 	end
 
 
-	def facturacion(usuario,mes,cuenta,filename,file)
+	def facturacion(usuario,mes,cuenta,filename,file_path)
 
 		delivery_options = {
             address: "smtp.varela.edu.uy",
@@ -51,7 +51,7 @@ class UserMailer < ApplicationMailer
 		@mes = mes
 		@cuenta = cuenta
 
-        attachments[filename] = File.read(file.path)
+        attachments[filename] = File.read(file_path)
         mail(from: 'facturacion@varela.edu.uy', to: usuario.email, bcc: 'facturacion@varela.edu.uy', subject: "Envío de copia de factura correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
 	end
 
