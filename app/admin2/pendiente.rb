@@ -187,7 +187,11 @@ ActiveAdmin.register_page "Pendiente" do
          
          cantidad = cantidad + 1
          suma = suma + importe
-         f.write("C|JPV|2124|1|1|#{cuenta}|#{nombre}| | |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
+
+         str = ("#{nombre}" + ' ' * 30)[0,30]
+
+
+         f.write("C|JPV|2124|1|1|#{cuenta}|#{str}|#{str}| |1|#{vencimiento}| |#{inicio}|#{importe*100}|000|000|1| | | | | | | | | | | |#{titulo}| | | | | |1\r\n")
        end
 
        f.write("#|1|#{cantidad}|#{suma*100}\r\n")
