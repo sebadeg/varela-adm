@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Pendiente" do
       facturas.each do |factura|
         cuenta_id = factura.cuenta_id
 
-        file_path = Rails.root.join("tmp", "factura_#{cuenta_id}_#{factura.id}.pdf")
+        file_path = Rails.root.join("temp", "factura_#{cuenta_id}_#{factura.id}.pdf")
         factura.imprimir(file_path,cuenta_id,factura)
         # send_file(
         #   file.path,
