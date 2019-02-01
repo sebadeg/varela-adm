@@ -119,10 +119,9 @@ ActiveAdmin.register_page "Pendiente" do
     file_name = "sistarbanc.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
-      vencimiento = "10/01/2019"
-      inicio = "01/01/2019"
-      dia = 10
-      mes = 1
+      vencimiento = "10/02/2019"
+      inicio = "01/02/2019"
+      mes = 2
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
       Factura.all.each do |x|
@@ -145,10 +144,9 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "redpagos.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "10/01/2019"
-       inicio = "01/01/2019"
-       dia = 10
-       mes = 1
+       vencimiento = "28/02/2019"
+       inicio = "01/02/2019"
+       mes = 2
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
@@ -174,9 +172,9 @@ ActiveAdmin.register_page "Pendiente" do
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
 
-       vencimiento = "10/01/2019"
-       inicio = "01/01/2019"
-       titulo = "FACTURACION ENE/2019"      
+       vencimiento = "28/02/2019"
+       inicio = "01/02/2019"
+       titulo = "FACTURACION FEB/2019"      
 
        cantidad = 0
        suma = 0
@@ -207,15 +205,15 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "brou.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "10/01/2019"
-       inicio = "01/01/2019"        
-       titulo = "FACTURACION ENE/2019"
+       vencimiento = "10/02/2019"
+       inicio = "01/02/2019"        
+       titulo = "FACTURACION FEB/2019"
        dia = 10
-       mes = 1
+       mes = 2
        anio = 2019
-
+       cantidad = 0
        suma = 0
-       Factura.where("cuenta_id IN (11601,11624,11795,11983,12037,12775,12776,13769,13857)").each do |x|
+       Factura.where("cuenta_id IN (11601,11624,11795,11983,12037,12776,13857)").each do |x|
          cuenta = x.cuenta_id
          nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
          importe = x.total
@@ -223,9 +221,10 @@ ActiveAdmin.register_page "Pendiente" do
 
          str = ("#{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
          suma = suma + importe 
+         cantidad = cantidad+1
          f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000#{factura}A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\r\n" )
        end
-       f.write("2 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}00001000000000#{(suma*100).round(0).to_s.rjust(10, "0")}00000000000000000000000000000000000000000000000000000000000000000000000000000000111111111110000000000000000000000000000000000000000000000000000000000\r\n")
+       f.write("2 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}0000#{cantidad.to_s.rjust(2, "0")}00000000#{(suma*100).round(0).to_s.rjust(10, "0")}00000000000000000000000000000000000000000000000000000000000000000000000000000000111111111110000000000000000000000000000000000000000000000000000000000\r\n")
 	end
 
     send_file(
