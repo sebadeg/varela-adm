@@ -34,9 +34,9 @@ ActiveAdmin.register_page "Pendiente" do
         if ( usuarios != nil )
           usuarios.each do |usuario|
             p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
-            UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_later
-            UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_later
-            UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_later
+            UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_now
+            UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_now
+            UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_now
             ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
           end
         end
