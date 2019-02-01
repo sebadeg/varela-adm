@@ -29,7 +29,7 @@ ActiveAdmin.register_page "Pendiente" do
         #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
         #   type: "application/pdf"
         # )
-        file = File.new(file,"r")
+        file = File.new(file_path,"r")
 
         usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
         if ( usuarios != nil )
