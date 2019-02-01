@@ -22,14 +22,15 @@ ActiveAdmin.register_page "Pendiente" do
       facturas.each do |factura|
         cuenta_id = factura.cuenta_id
 
-        file = File.new("factura_#{cuenta_id}_#{factura.id}.pdf")
-        factura.imprimir(file.path,cuenta_id,factura)
+        file_path = Rails.root.join("tmp", "factura_#{cuenta_id}_#{factura.id}.pdf")
+        factura.imprimir(file_path,cuenta_id,factura)
         # send_file(
         #   file.path,
         #   filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
         #   type: "application/pdf"
         # )
-      
+        file = File.new(file,"r")
+
         usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
         if ( usuarios != nil )
           usuarios.each do |usuario|
