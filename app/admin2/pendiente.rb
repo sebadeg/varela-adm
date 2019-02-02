@@ -17,7 +17,7 @@ ActiveAdmin.register_page "Pendiente" do
 
   page_action :enviarfactura, method: :post do
 
-    facturas = Factura.where("fecha='2019-02-01' AND NOT mail").order(:id).limit(2) rescue nil    
+    facturas = Factura.where("fecha='2019-02-01' AND NOT mail").order(:id).limit(5) rescue nil    
     if facturas != nil
       facturas.each do |factura|
         cuenta_id = factura.cuenta_id
