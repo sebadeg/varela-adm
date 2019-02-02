@@ -17,7 +17,7 @@ ActiveAdmin.register_page "Pendiente" do
 
   page_action :enviarfactura, method: :post do
 
-    facturas = Factura.where("fecha='2019-02-01' AND NOT mail").order(:id).limit(10) rescue nil    
+    facturas = Factura.where("fecha='2019-02-01' AND NOT mail").order(:id).limit(5) rescue nil    
     if facturas != nil
       facturas.each do |factura|
         cuenta_id = factura.cuenta_id
@@ -35,7 +35,6 @@ ActiveAdmin.register_page "Pendiente" do
           usuarios.each do |usuario|
             p usuario.nombre + " " + usuario.apellido + " - " + usuario.email
             UserMailer.facturacion( usuario, "Febrero 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_now
-            sleep 10
           end
           ActiveRecord::Base.connection.execute( "UPDATE facturas SET mail=true WHERE id=#{factura.id};" )
         end
