@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Pendiente" do
     usuarios = Usuario.where( "mail IS NULL OR mail=false").limit(1) rescue nil    
     if ( usuarios != nil )
       usuarios.each do |usuario|
-        passwd =  Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
+        passwd =  Digest::MD5.hexdigest(usuario.cedula + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
         ActiveRecord::Base.connection.execute( "UPDATE usuarios SET passwd='#{passwd}' WHERE id=#{usuario.id};" )
 
         usuario1 = Usuario.find(usuario.id)
