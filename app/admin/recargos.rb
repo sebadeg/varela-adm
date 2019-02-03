@@ -15,6 +15,7 @@ ActiveAdmin.register Recargo do
     end
     column "Comienzo", :fecha_comienzo
     column "Fin", :fecha_fin
+    actions
   end
 
   filter :cuenta_id
