@@ -7,10 +7,10 @@ ActiveAdmin.register Recargo do
 
   index do
   	#selectable_column
-
-    column "Cuenta" do |c| 
+    column :cuenta_id
+    column "Nombre" do |c| 
       if c.cuenta != nil
-        c.cuenta.id.to_s + " - " + c.cuenta.nombre 
+        c.cuenta.nombre 
       end
     end
     column "Comienzo", :fecha_comienzo
