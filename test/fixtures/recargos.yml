@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cuenta: 1
+  recargo: false
+  comentario: MyText
+
+two:
+  cuenta: 1
+  recargo: false
+  comentario: MyText

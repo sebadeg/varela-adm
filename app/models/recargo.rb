@@ -1,0 +1,2 @@
+class Recargo < ApplicationRecord
+end

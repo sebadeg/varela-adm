@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_035642) do
+ActiveRecord::Schema.define(version: 2019_02_02_221545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -574,6 +574,15 @@ ActiveRecord::Schema.define(version: 2019_01_28_035642) do
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
+  create_table "recargos", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.boolean "recargo"
+    t.text "comentario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_recargos_on_cuenta_id"
+  end
+
   create_table "recibos", force: :cascade do |t|
     t.bigint "cuenta_id"
     t.string "nombre"
@@ -751,6 +760,7 @@ ActiveRecord::Schema.define(version: 2019_01_28_035642) do
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grados", "sectores"
+  add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "cuentas"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
