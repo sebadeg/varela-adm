@@ -1,7 +1,12 @@
 class Ability   
   include CanCan::Ability
 
+
+
   def initialize(user)
+    
+    @user = user
+
     puts "Usuario " + user.email
 
     can :manage, ActiveAdmin::Page, name: "Dashboard"

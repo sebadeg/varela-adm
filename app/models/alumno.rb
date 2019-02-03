@@ -6,16 +6,16 @@ class Alumno < ApplicationRecord
   def self.consulta()
 
     s = ""
-    if current_admin_usuario.primaria
+    if Ability.user.primaria
       s = "1"
     end
-    if current_admin_usuario.sec_mdeo
+    if Ability.user.sec_mdeo
       if s != ""
         s = s + ","
       end
       s = s + "2"
     end
-    if current_admin_usuario.sec_cc
+    if Ability.user.sec_cc
       if s != ""
         s = s + ","
       end
