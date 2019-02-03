@@ -14,15 +14,22 @@ ActiveAdmin.register_page "Lote_pago" do
         b = pago.importar(file)
       end
     end
-    redirect_to admin_pagos_path, notice: ""
+    redirect_to admin_pagos_path, notice: "HECHO"
   end
 
-  page_action :extra, method: :post do
-    p "Extra"
+  page_action :acreditar, method: :post do
 
-    #UserMailer.novedades().deliver_now
+    #ActiveRecord::Base.connection.execute( 
+    #  "INSERT INTO movimientos (pago_cuenta_id,cuenta_id,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
+    #  (SELECT id,cuenta_id,fecha,'PAGO','',0,importe,1005,false,now(),now() FROM pago_cuentas WHERE id>=3106 AND NOT id IN (SELECT pago_cuenta_id FROM movimientos WHERE NOT pago_cuenta_id IS NULL));" )
 
-    redirect_to root_path, notice: ""
+    p "*********"
+    p "*********"
+    p "Acreditar"
+    p "*********"
+    p "*********"
+
+    redirect_to admin_pagos_path, notice: "HECHO"
   end
 
 end
