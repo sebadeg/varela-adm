@@ -16,11 +16,11 @@ es:
   formtastic:
     :yes: "Sí"
     :no: "No"
-    :create: "Guardar %{model}"
-    :update: "Guardar %{model}"
+    :create: "Guardar"
+    :update: "Guardar"
     :submit: "Aceptar"
     :cancel: "Cancelar"
-    :reset: "Restablecer %{model}"
+    :reset: "Restablecer"
     :required: "requerido"
 
   active_admin:
