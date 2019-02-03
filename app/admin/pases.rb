@@ -44,11 +44,11 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
     def index
       @page_title = "Pases"
-      model = "Pases"
+      model = "Pase"
     end
 
     def show
-      model = "Pases"
+      model = "Pase"
       @page_title = "Pases"
       if resource != nil
         @page_title = "Pase de : #{resource.alumno_id}"
@@ -60,7 +60,7 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
     end
 
     def edit
-      model = "Pases"
+      model = "Pase"
       @page_title = "Pases"
       if resource != nil
         @page_title = "Pase de : #{resource.alumno_id}"
