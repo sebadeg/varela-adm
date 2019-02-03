@@ -3,19 +3,19 @@ class Alumno < ApplicationRecord
   accepts_nested_attributes_for :lista_alumno, allow_destroy: true
 
 
-  def self.consulta()
+  def self.consulta(user)
 
     s = ""
-    if Ability.user.primaria
+    if user.primaria
       s = "1"
     end
-    if Ability.user.sec_mdeo
+    if user.sec_mdeo
       if s != ""
         s = s + ","
       end
       s = s + "2"
     end
-    if Ability.user.sec_cc
+    if user.sec_cc
       if s != ""
         s = s + ","
       end

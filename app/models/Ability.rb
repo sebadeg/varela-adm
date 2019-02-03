@@ -4,8 +4,6 @@ class Ability
 
 
   def initialize(user)
-    
-    @user = user
 
     puts "Usuario " + user.email
 
