@@ -22,7 +22,7 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
     actions
   end
 
-  filter :alumno_id, :label => 'Alumno', :as => :select, :collection => Alumno.de_sector().order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
+  filter :alumno_id, :label => 'Alumno', :as => :select, :collection => Alumno.where(Alumno.consulta()).order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
 
   show do
     attributes_table do

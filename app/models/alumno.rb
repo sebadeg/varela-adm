@@ -3,7 +3,7 @@ class Alumno < ApplicationRecord
   accepts_nested_attributes_for :lista_alumno, allow_destroy: true
 
 
-  def de_sector()
+  def consulta()
 
     s = ""
     if current_admin_usuario.primaria
@@ -21,6 +21,6 @@ class Alumno < ApplicationRecord
       end
       s = s + "3"
     end
-    return where("IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)))")
+    return "IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)))"
   end
 end
