@@ -27,24 +27,37 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
   show do
     attributes_table do
-      row "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.id} - #{r.alumno.nombre} #{r.alumno.apellido}" : "") end
       row :fecha_pase
       row :destino
     end
   end
 
   form do |f|
-    a = Alumno.find(f.object.alumno_id) rescue nil
-    if a != nil 
-      li "#{a.id} - #{a.nombre} #{a.apellido}"
-    else
-      li ""
-    end
     f.inputs do      
       f.input :fecha_pase
       f.input :destino
     end
     f.actions
   end
+
+  controller do
+
+    if resource != nil
+      a = Alumno.find(resource.alumno_id) rescue nil
+    end
+
+    def index
+      @page_title = "Pases"
+    end
+
+    def show
+      @page_title = "Pase de : #{a.id} - #{a.nombre} #{a.apellido}"
+    end
+
+    def edit
+      @page_title = "Pase de : #{a.id} - #{a.nombre} #{a.apellido}"
+    end
+
+  end  
 
 end
