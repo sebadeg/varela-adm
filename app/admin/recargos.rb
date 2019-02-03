@@ -1,4 +1,4 @@
-ActiveAdmin.register Movimiento do
+ActiveAdmin.register Recargo do
 
   permit_params :cuenta_id, :fecha_comienzo, :fecha_fin, :comentario
 
