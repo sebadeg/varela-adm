@@ -13,15 +13,14 @@ es:
   current_sign_in_at: "Conectado desde"
   password_confirmation: "Confirmación de contraseña"
 
-
   formtastic:
     :yes: "Sí"
     :no: "No"
-    :create: "Guardar"
-    :update: "Guardar"
+    :create: "Guardar %{model}"
+    :update: "Guardar %{model}"
     :submit: "Aceptar"
     :cancel: "Cancelar"
-    :reset: "Restablecer"
+    :reset: "Restablecer %{model}"
     :required: "requerido"
 
   active_admin:
