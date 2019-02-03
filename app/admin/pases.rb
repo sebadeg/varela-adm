@@ -4,7 +4,6 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
   permit_params :fecha_pase, :destino
 
-
   index do
   	#selectable_column
     column :alumno_id
@@ -23,7 +22,7 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
     actions
   end
 
-  filter :alumno_id, :label => 'Alumno', :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
+  filter :alumno_id, :label => 'Alumno', :as => :select, :collection => Alumno.where("IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + sector() + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)))").order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
 
   show do
     attributes_table do
@@ -41,6 +40,26 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
   end
 
   controller do
+
+    def sector
+      s = ""
+      if current_admin_usuario.primaria
+        s = "1"
+      end
+      if current_admin_usuario.sec_mdeo
+        if s != ""
+          s = s + ","
+        end
+        s = s + "2"
+      end
+      if current_admin_usuario.sec_cc
+        if s != ""
+          s = s + ","
+        end
+        s = s + "3"
+      end
+      return s
+    end
 
     def show
       @page_title = "Pases"

@@ -10,7 +10,6 @@ class Ability
 
     if user.primaria || user.sec_mdeo || user.sec_cc
 
-      can :manage, InscripcionAlumno #ACtiveAdmin::Register, name: 'Pase'
 
       s = ""
       if user.primaria
@@ -27,6 +26,12 @@ class Ability
           s = s + ","
         end
         s = s + "3"
+      end
+
+      can :manage, InscripcionAlumno, InscripcionAlumno.where(
+        "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)))"
+        ) do |x|
+        true
       end
 
       can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
