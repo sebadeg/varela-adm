@@ -1,4 +1,4 @@
 class Cuenta < ApplicationRecord
   has_many :pago_cuenta
-  belongs_to :recargo
+  has_many :recargo
 end

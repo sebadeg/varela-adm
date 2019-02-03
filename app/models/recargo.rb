@@ -1,3 +1,3 @@
 class Recargo < ApplicationRecord
-  has_many :cuenta
+  belongs :cuenta
 end
