@@ -3,7 +3,7 @@ class Alumno < ApplicationRecord
   accepts_nested_attributes_for :lista_alumno, allow_destroy: true
 
 
-  def de_sector
+  def de_sector()
 
     s = ""
     if current_admin_usuario.primaria
