@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_162210) do
+ActiveRecord::Schema.define(version: 2019_02_03_190545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -468,11 +468,13 @@ ActiveRecord::Schema.define(version: 2019_02_03_162210) do
     t.integer "pago_cuenta_id"
     t.integer "concepto_id"
     t.integer "factura"
+    t.bigint "recibo_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
+    t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
   end
 
   create_table "movs", force: :cascade do |t|
@@ -755,6 +757,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_162210) do
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
+  add_foreign_key "movimientos", "recibos"
   add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
