@@ -8,6 +8,23 @@ ActiveAdmin.register Pago do
 
   config.filters = false
 
+  action_item :acreditar, only: :index do
+    link_to "Acreditar", habilitar_admin_acreditar_pago_path(pago), method: :put 
+  end
+
+  member_action :acreditar, method: :put do
+    #ActiveRecord::Base.connection.execute( 
+    #  "INSERT INTO movimientos (pago_cuenta_id,cuenta_id,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
+    #  (SELECT id,cuenta_id,fecha,'PAGO','',0,importe,1005,false,now(),now() FROM pago_cuentas WHERE id>=3106 AND NOT id IN (SELECT pago_cuenta_id FROM movimientos WHERE NOT pago_cuenta_id IS NULL));" )
+    p "*********"
+    p "*********"
+    p "Acreditar"
+    p "*********"
+    p "*********"
+    redirect_to admin_pagos_path
+  end
+
+
   index do
     column :nombre
     column "Total" do |c| PagoCuenta.where( "pago_id=#{c.id}" ).sum(:importe) end
