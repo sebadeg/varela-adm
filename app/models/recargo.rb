@@ -1,3 +1,3 @@
 class Recargo < ApplicationRecord
-  belongs :cuenta
+	belongs_to :cuenta
 end
