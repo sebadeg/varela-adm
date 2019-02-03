@@ -42,19 +42,21 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
   controller do
 
-    if resource != nil
-      a = Alumno.find(resource.alumno_id) rescue nil
-    end
-
     def index
       @page_title = "Pases"
     end
 
     def show
+      if resource != nil
+        a = Alumno.find(resource.alumno_id) rescue nil
+      end
       @page_title = "Pase de : #{a.id} - #{a.nombre} #{a.apellido}"
     end
 
     def edit
+      if resource != nil
+        a = Alumno.find(resource.alumno_id) rescue nil
+      end
       @page_title = "Pase de : #{a.id} - #{a.nombre} #{a.apellido}"
     end
 
