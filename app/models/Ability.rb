@@ -10,6 +10,8 @@ class Ability
 
     if user.primaria || user.sec_mdeo || user.sec_cc
 
+      can :manage, 'Pase'
+
       s = ""
       if user.primaria
         s = "1"
