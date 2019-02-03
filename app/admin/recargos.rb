@@ -13,6 +13,7 @@ ActiveAdmin.register Recargo do
         c.cuenta.nombre 
       end
     end
+    column :comentario
     column "Comienzo", :fecha_comienzo
     column "Fin", :fecha_fin
     actions
