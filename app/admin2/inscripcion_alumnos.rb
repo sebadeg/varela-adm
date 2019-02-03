@@ -62,7 +62,7 @@ ActiveAdmin.register InscripcionAlumno do
     actions
   end
 
-  filter :alumno_id
+  filter :alumno_id, :label => 'Alumno', :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
   filter :cedula
   filter :registrado
   filter :inscripto
