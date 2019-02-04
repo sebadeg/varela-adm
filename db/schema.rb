@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_201854) do
+ActiveRecord::Schema.define(version: 2019_02_04_005245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -544,6 +544,15 @@ ActiveRecord::Schema.define(version: 2019_02_03_201854) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pases", force: :cascade do |t|
+    t.bigint "alumno_id"
+    t.date "fecha_pase"
+    t.text "destino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_pases_on_alumno_id"
+  end
+
   create_table "plactas", force: :cascade do |t|
     t.integer "plagru"
     t.integer "placap"
@@ -765,6 +774,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_201854) do
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
+  add_foreign_key "pases", "alumnos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"

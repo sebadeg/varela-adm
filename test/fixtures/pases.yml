@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  alumno: 1
+  fecha_pase: 2019-02-03
+  destino: MyText
+
+two:
+  alumno: 1
+  fecha_pase: 2019-02-03
+  destino: MyText

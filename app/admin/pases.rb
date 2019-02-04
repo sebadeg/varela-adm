@@ -1,8 +1,8 @@
-ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
+ActiveAdmin.register Pase do
 
   menu label: 'Pases'
 
-  permit_params :id, :alumno_id, :fecha_pase, :destino
+  permit_params :fecha_pase, :destino
 
   index do
   	#selectable_column
@@ -33,50 +33,35 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
   form do |f|
     f.inputs do      
-      f.input :id, as: :hidden
-      f.input :alumno_id, as: :hidden
       f.input :fecha_pase
       f.input :destino
     end
     f.actions
   end
 
-  # controller do    
+  controller do    
 
-  #   def show
-  #     @page_title = "Pases"
-  #     if resource != nil
-  #       @page_title = "Pase de : #{resource.alumno_id}"
-  #       a = Alumno.find(resource.alumno_id) rescue nil
-  #       if a != nil
-  #         @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
-  #       end
-  #     end
-  #   end
+    def show
+      @page_title = "Pases"
+      if resource != nil
+        @page_title = "Pase de : #{resource.alumno_id}"
+        a = Alumno.find(resource.alumno_id) rescue nil
+        if a != nil
+          @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
+        end
+      end
+    end
 
-  #   def edit
-  #     @page_title = "Pases"
-  #     if resource != nil
-  #       @page_title = "Pase de : #{resource.alumno_id}"
-  #       a = Alumno.find(resource.alumno_id) rescue nil
-  #       if a != nil
-  #         @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
-  #       end
-  #     end
-  #   end
-
-  #   def update
-  #     update! do |format|
-  #       format.html { redirect_to collection_path } if resource.valid?
-  #     end
-  #   end
-
-  #   def create
-  #     create! do |format|
-  #       format.html { redirect_to collection_path } if resource.valid?
-  #     end
-  #   end
-
-  # end  
+    def edit
+      @page_title = "Pases"
+      if resource != nil
+        @page_title = "Pase de : #{resource.alumno_id}"
+        a = Alumno.find(resource.alumno_id) rescue nil
+        if a != nil
+          @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
+        end
+      end
+    end
+  end  
 
 end
