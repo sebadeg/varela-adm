@@ -33,6 +33,8 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
   form do |f|
     f.inputs do      
+      f.input :id, as: :hidden
+      f.input :alumno_id, as: :hidden
       f.input :fecha_pase
       f.input :destino
     end
