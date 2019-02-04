@@ -13,16 +13,6 @@ es:
   current_sign_in_at: "Conectado desde"
   password_confirmation: "Confirmación de contraseña"
 
-  formtastic:
-    :yes: "Sí"
-    :no: "No"
-    :create: "Guardar"
-    :update: "Guardar"
-    :submit: "Aceptar"
-    :cancel: "Cancelar"
-    :reset: "Restablecer"
-    :required: "requerido"
-
   active_admin:
     devise:
       cedula:
