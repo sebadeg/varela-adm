@@ -52,9 +52,12 @@ class Ability
         can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
           true
         end
+        can :manage, Inscripcion
+        can :manage, Seguimiento
+        can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
+        can :manage, Subgrado
       elsif user.inscripciones
         can :manage, Inscripcion
-
         can :manage, Seguimiento
         can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
         can :manage, Subgrado
@@ -77,6 +80,7 @@ class Ability
         can :manage, Contrato
         can :read, InscripcionAlumno
         can :manage, Inscripcion
+        can :manage, Pase
       end
     end
   end
