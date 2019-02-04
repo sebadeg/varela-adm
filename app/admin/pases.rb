@@ -63,6 +63,18 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
       end
     end
 
+    def update
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
+    def create
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
   end  
 
 end
