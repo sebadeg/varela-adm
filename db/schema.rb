@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_005245) do
+ActiveRecord::Schema.define(version: 2019_02_04_010744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -337,8 +337,6 @@ ActiveRecord::Schema.define(version: 2019_02_04_005245) do
     t.boolean "inhabilitado"
     t.boolean "no_inscribe"
     t.boolean "pase"
-    t.date "fecha_pase"
-    t.string "destino"
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
@@ -546,7 +544,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_005245) do
 
   create_table "pases", force: :cascade do |t|
     t.bigint "alumno_id"
-    t.date "fecha_pase"
+    t.date "fecha"
     t.text "destino"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

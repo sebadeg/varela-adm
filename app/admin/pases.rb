@@ -2,7 +2,7 @@ ActiveAdmin.register Pase do
 
   menu label: 'Pases'
 
-  permit_params :fecha_pase, :destino
+  permit_params :fecha, :destino
 
   index do
   	#selectable_column
@@ -17,7 +17,7 @@ ActiveAdmin.register Pase do
         c.alumno.apellido
       end
     end
-    column :fecha_pase
+    column :fecha
     column :destino
     actions
   end
@@ -26,14 +26,14 @@ ActiveAdmin.register Pase do
 
   show do
     attributes_table do
-      row :fecha_pase
+      row :fecha
       row :destino
     end
   end
 
   form do |f|
     f.inputs do      
-      f.input :fecha_pase
+      f.input :fecha
       f.input :destino
     end
     f.actions
