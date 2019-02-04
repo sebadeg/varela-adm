@@ -81,6 +81,7 @@ class Ability
         can :read, InscripcionAlumno
         can :manage, Inscripcion
         can :manage, Pase
+        can :manage, Recargo
       end
     end
   end
