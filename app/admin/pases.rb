@@ -41,42 +41,42 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
     f.actions
   end
 
-  controller do    
+  # controller do    
 
-    def show
-      @page_title = "Pases"
-      if resource != nil
-        @page_title = "Pase de : #{resource.alumno_id}"
-        a = Alumno.find(resource.alumno_id) rescue nil
-        if a != nil
-          @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
-        end
-      end
-    end
+  #   def show
+  #     @page_title = "Pases"
+  #     if resource != nil
+  #       @page_title = "Pase de : #{resource.alumno_id}"
+  #       a = Alumno.find(resource.alumno_id) rescue nil
+  #       if a != nil
+  #         @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
+  #       end
+  #     end
+  #   end
 
-    def edit
-      @page_title = "Pases"
-      if resource != nil
-        @page_title = "Pase de : #{resource.alumno_id}"
-        a = Alumno.find(resource.alumno_id) rescue nil
-        if a != nil
-          @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
-        end
-      end
-    end
+  #   def edit
+  #     @page_title = "Pases"
+  #     if resource != nil
+  #       @page_title = "Pase de : #{resource.alumno_id}"
+  #       a = Alumno.find(resource.alumno_id) rescue nil
+  #       if a != nil
+  #         @page_title = @page_title + " - #{a.nombre} #{a.apellido}"
+  #       end
+  #     end
+  #   end
 
-    def update
-      update! do |format|
-        format.html { redirect_to collection_path } if resource.valid?
-      end
-    end
+  #   def update
+  #     update! do |format|
+  #       format.html { redirect_to collection_path } if resource.valid?
+  #     end
+  #   end
 
-    def create
-      create! do |format|
-        format.html { redirect_to collection_path } if resource.valid?
-      end
-    end
+  #   def create
+  #     create! do |format|
+  #       format.html { redirect_to collection_path } if resource.valid?
+  #     end
+  #   end
 
-  end  
+  # end  
 
 end
