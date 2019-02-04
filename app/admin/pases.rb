@@ -2,7 +2,7 @@ ActiveAdmin.register InscripcionAlumno, as: 'Pase' do
 
   menu label: 'Pases'
 
-  permit_params :fecha_pase, :destino
+  permit_params :id, :alumno_id, :fecha_pase, :destino
 
   index do
   	#selectable_column
