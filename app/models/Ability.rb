@@ -35,9 +35,11 @@ class Ability
           s = s + "3"
         end
 
-        can :manage, Pase, Pase.where(
-          "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))"
-          ) do |x|
+        pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))")
+        can :read, Pase, pases do |x|
+          true
+        end
+        can :update, Pase, pases do |x|
           true
         end
 
