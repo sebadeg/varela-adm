@@ -4,6 +4,9 @@ ActiveAdmin.register Pase do
 
   permit_params :fecha, :destino
 
+  scope :todos 
+  scope :pases
+
   index do
   	#selectable_column
     column :alumno_id
