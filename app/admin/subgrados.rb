@@ -38,7 +38,7 @@ ActiveAdmin.register Subgrado do
           t.column "Habilitado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? !InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inhabilitado : "" end
           t.column "Registrado" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.registrado : "" end
           t.column "Inscripto" do |x| (InscripcionAlumno.where( "alumno_id=#{x.id}" ).first rescue nil) != nil ? InscripcionAlumno.where( "alumno_id=#{x.id}" ).first.inscripto : "" end
-          t.column "Pase" do |x| (Pase.where( "NOT fecha_pase IS NULL" ).first rescue nil) != nil ? Pase.where( "alumno_id=#{x.id}" ).first.fecha_pase != nil : "" end
+          t.column "Pase" do |x| (Pase.where( "NOT fecha_pase IS NULL" ).first rescue nil) != nil ? Pase.where( "alumno_id=#{x.id}" ).first.fecha != nil : "" end
 
           t.column "Seguimiento" do |x|
             link_to 'Ver', :controller => "seguimiento_cuenta", :action => "index", 'alumno' => "#{x.id}".html_safe
