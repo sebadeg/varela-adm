@@ -27,7 +27,7 @@ class Alumno < ApplicationRecord
 
   def self.grado(id)
     if id!=nil
-      grado = Grado.where("id IN (SELECT grado_id FROM grado_alumnos WHERE alumno_id=#{id} AND NOT grado_id IS NULL)").rescue nil
+      grado = Grado.where("id IN (SELECT grado_id FROM grado_alumnos WHERE alumno_id=#{id} AND NOT grado_id IS NULL)").first rescue nil
       if grado != nil
         return grado.nombre
       end
