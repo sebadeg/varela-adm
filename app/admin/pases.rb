@@ -20,6 +20,9 @@ ActiveAdmin.register Pase do
         c.alumno.apellido
       end
     end
+    column "Grado" do |r| Alumno.grado(r.alumno_id) end
+
+
     column :fecha
     column :destino
     actions
