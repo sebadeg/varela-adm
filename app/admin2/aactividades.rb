@@ -28,7 +28,6 @@ ActiveAdmin.register Aactividad do
       row "Archivos" do 
         table_for AactividadArchivo.where("aactividad_id=#{r.id}").order(:id) do |t|
           t.column :nombre
-          t.column :data
         end
       end
 
@@ -59,7 +58,7 @@ ActiveAdmin.register Aactividad do
 
     f.inputs do
       f.has_many :aactividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
-        l.input :nombre
+        l.input :nombre, as :hidden
         l.input :data, as: :file
       end
     end
