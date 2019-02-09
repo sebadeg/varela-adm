@@ -59,6 +59,7 @@ ActiveAdmin.register Aactividad do
 
     f.inputs do
       f.has_many :aactividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
+        l.input :nombre
         l.input :data, as: :file
       end
     end
@@ -82,7 +83,7 @@ ActiveAdmin.register Aactividad do
 
   end
 
-  # controller do
+  controller do
 
   #   def create
   #     attrs = permitted_params[:aactividad]
@@ -100,22 +101,36 @@ ActiveAdmin.register Aactividad do
   #     create!
   #   end
 
-  #   def update
-  #     attrs = permitted_params[:aactividad]
+    def update
+      attrs = permitted_params[:aactividad]
 
-  #     i = 0
-  #     begin
-  #       if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
-  #         i = -1
-  #       else 
-          
-  #         i = i+1
-  #       end
-  #     end while i >= 0
+      i = 0
+      begin
+        if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
+            p "----------"
+            p "----------"
+            p "----------"
+            p "----------"
+            p "----------"
+            file = params[:aactividad][:aactividad_archivo_attributes][:data]
+            params[:aactividad][:aactividad_archivo_attributes][:nombre] = file.original_filename
+            params[:aactividad][:aactividad_archivo_attributes][:data] = file.file.read
+            p "----------"
+            p "----------"
+            p "----------"
+            p "----------"
+            p "----------"
+          end
+          i = i+1
+        end
+      end while i >= 0
 
-  #     update!
-  #   end
+      update!
+    end
     
-  # end
+  end
 
 end
