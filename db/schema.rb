@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_012459) do
+ActiveRecord::Schema.define(version: 2019_02_09_130746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 2019_02_04_012459) do
     t.integer "opcion"
     t.index ["actividad_id"], name: "index_actividad_alumnos_on_actividad_id"
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id"
+  end
+
+  create_table "actividad_archivos", force: :cascade do |t|
+    t.bigint "actividad_id"
+    t.string "nombre"
+    t.binary "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actividad_id"], name: "index_actividad_archivos_on_actividad_id"
   end
 
   create_table "actividad_listas", id: :serial, force: :cascade do |t|
@@ -282,6 +291,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_012459) do
     t.datetime "updated_at", null: false
     t.date "fecha_vencimiento"
     t.boolean "mail", default: false
+    t.decimal "dolar"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
     t.index ["mail"], name: "index_facturas_on_mail"
   end
@@ -734,6 +744,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_012459) do
 
   add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
+  add_foreign_key "actividad_archivos", "actividades"
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
