@@ -1,7 +1,7 @@
 ActiveAdmin.register Aactividad do
 
   permit_params :nombre, :fecha, :fechainfo,
-      aactividad_opcion_attributes: [:id,:actividad_id,:valor,:opcion,:eleccion,:fecha,:_destroy]
+      aactividad_opcion_attributes: [:id,:aactividad_id,:valor,:opcion,:eleccion,:fecha,:_destroy]
 
   menu label: "Actividad 2019"
 
