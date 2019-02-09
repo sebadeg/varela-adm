@@ -115,9 +115,9 @@ ActiveAdmin.register Aactividad do
             p "----------"
             p "----------"
             p "----------"
-            file = params[:aactividad][:aactividad_archivo_attributes][:data]
-            params[:aactividad][:aactividad_archivo_attributes][:nombre] = file.original_filename
-            params[:aactividad][:aactividad_archivo_attributes][:data] = file.file.read
+            file = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data]
+            params[:aactividad][:aactividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+            params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data] = file.file.read
             p "----------"
             p "----------"
             p "----------"
