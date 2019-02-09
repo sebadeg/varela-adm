@@ -26,7 +26,7 @@ ActiveAdmin.register Aactividad do
       row :fechainfo, label: "Información hasta" 
 
       row "Opciones" do 
-        table_for AactividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
+        table_for AactividadOpcion.where("aactividad_id=#{r.id}").order(:valor) do |t|
           t.column :valor
           t.column :opcion
           t.column :eleccion
