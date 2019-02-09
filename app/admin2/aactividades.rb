@@ -1,13 +1,13 @@
 ActiveAdmin.register Aactividad do
 
   permit_params :nombre, :fecha, :fechainfo,
-      aactividad_opcion_attributes: [:id,:aactividad_id,:valor,:opcion,:eleccion,:fecha,:_destroy]
+      aactividad_opcion_attributes: [:id,:aactividad_id,:valor,:opcion,:eleccion,:fecha,:_destroy],
+      aactividad_lista_attributes: [:id,:aactividad_id,:lista_id,:_destroy]
 
   menu label: "Actividad 2019"
 
   index do
     #selectable_column
-    column :id
     column :nombre
     column :fecha, label: "Autorización hasta" 
     column :fechainfo, label: "Información hasta" 
@@ -20,7 +20,6 @@ ActiveAdmin.register Aactividad do
 
   show do |r|
     attributes_table do
-      row :id
       row :nombre
       row :fecha, label: "Autorización hasta" 
       row :fechainfo, label: "Información hasta" 
