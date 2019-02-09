@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_205642) do
+ActiveRecord::Schema.define(version: 2019_02_09_230856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aactividad_alumnos", force: :cascade do |t|
+    t.bigint "aactividad_id"
+    t.bigint "alumno_id"
+    t.integer "opcion"
+    t.date "fecha"
+    t.boolean "secretaria"
+    t.boolean "mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aactividad_id"], name: "index_aactividad_alumnos_on_aactividad_id"
+    t.index ["alumno_id"], name: "index_aactividad_alumnos_on_alumno_id"
+  end
 
   create_table "aactividad_archivos", force: :cascade do |t|
     t.bigint "aactividad_id"
@@ -781,6 +794,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_205642) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "aactividad_alumnos", "aactividades"
+  add_foreign_key "aactividad_alumnos", "alumnos"
   add_foreign_key "aactividad_archivos", "aactividades"
   add_foreign_key "aactividad_listas", "aactividades"
   add_foreign_key "aactividad_listas", "listas"
