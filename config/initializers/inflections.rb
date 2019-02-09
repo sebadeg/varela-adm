@@ -23,6 +23,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'sector', 'sectores'
   inflect.irregular 'direccion', 'direcciones'
   inflect.irregular 'placta', 'plactas'
+  inflect.irregular 'aactividad', 'aactividades'
+  inflect.irregular 'aactividad_opcion', 'aactividad_opciones'
+
 end
 
 # These inflection rules are supported but not enabled by default:
