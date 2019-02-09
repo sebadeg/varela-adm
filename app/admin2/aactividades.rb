@@ -116,8 +116,10 @@ ActiveAdmin.register Aactividad do
             p "----------"
             p "----------"
             file = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data]
-            params[:aactividad][:aactividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
-            params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data] = file.file.read
+            if file.instance_of? ActionDispatch::Http::UploadedFile
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data] = file.read
+            end
             p "----------"
             p "----------"
             p "----------"
