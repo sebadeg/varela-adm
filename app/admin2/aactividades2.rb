@@ -3,7 +3,7 @@ ActiveAdmin.register Aactividad, :as => 'Autorizaciones' do
   permit_params :nombre, :fecha, :fechainfo,
       aactividad_alumno_attributes: [:id,:aactividad_id,:lista_id,:_destroy]
 
-  menu label: "Actividad 2019"
+  menu label: "Autorizaciones"
 
   index do
     #selectable_column

@@ -7,6 +7,21 @@ ActiveAdmin.register Aactividad do
 
   menu label: "Actividad 2019"
 
+  action_item :asociar, only: :show do
+    link_to "Asociar", asociar_admin_aactividad_path(aactividad), method: :put 
+  end
+
+  member_action :asociar, method: :put do
+    id = params[:id]
+    aactividad = Aactividad.find(id)
+
+    ActiveRecord::Base.connection.execute( "DELETE FROM aactividad_alumnos WHERE aactividad_id=#{id};" )
+    ActiveRecord::Base.connection.execute( "INSERT INTO aactividad_alumnos (aactividad_id,alumno_id,created_at,updated_at) (SELECT #{id},id,now(),now() FROM alumnos WHERE id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT lista_id FROM aactividad_listas WHERE aactividad_id=#{id})));" )
+
+    redirect_to admin_aactividad_path(aactividad)
+  end
+
+
   index do
     #selectable_column
     column :nombre
