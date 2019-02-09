@@ -33,6 +33,13 @@ ActiveAdmin.register Aactividad do
           t.column :fecha
         end
       end
+
+      row "Listas" do 
+        table_for AactividadLista.where("aactividad_id=#{r.id}").order(:nombre) do |t|
+          t.column :nombre
+        end
+      end
+
     end
   end
 
@@ -51,7 +58,15 @@ ActiveAdmin.register Aactividad do
         l.input :fecha
       end
     end
+
+    f.inputs do
+      f.has_many :aactividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
+        l.input :lista_id, :label => 'Lista', :as => :select, :collection => Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]}
+      end
+    end
+
     f.actions
+
   end
 
 end

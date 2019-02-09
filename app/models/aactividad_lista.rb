@@ -1,0 +1,2 @@
+class AactividadLista < ApplicationRecord
+end

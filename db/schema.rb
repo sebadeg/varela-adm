@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_192215) do
+ActiveRecord::Schema.define(version: 2019_02_09_203740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aactividad_listas", force: :cascade do |t|
+    t.bigint "aactividad_id"
+    t.bigint "lista_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aactividad_id"], name: "index_aactividad_listas_on_aactividad_id"
+    t.index ["lista_id"], name: "index_aactividad_listas_on_lista_id"
+  end
 
   create_table "aactividad_opciones", force: :cascade do |t|
     t.bigint "aactividad_id"
@@ -763,6 +772,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_192215) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "aactividad_listas", "aactividades"
+  add_foreign_key "aactividad_listas", "listas"
   add_foreign_key "aactividad_opciones", "aactividades"
   add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
@@ -770,3 +781,55 @@ ActiveRecord::Schema.define(version: 2019_02_09_192215) do
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
+  add_foreign_key "contrato_cuotas", "contratos"
+  add_foreign_key "contratos", "alumnos"
+  add_foreign_key "contratos", "conceptos"
+  add_foreign_key "contratos", "cuentas"
+  add_foreign_key "convenio_alumnos", "alumnos"
+  add_foreign_key "convenio_alumnos", "convenios"
+  add_foreign_key "cuenta_alumnos", "alumnos"
+  add_foreign_key "cuenta_alumnos", "cuentas"
+  add_foreign_key "direcciones", "usuarios"
+  add_foreign_key "especial_alumnos", "alumnos"
+  add_foreign_key "especial_alumnos", "especiales"
+  add_foreign_key "especial_cuentas", "cuentas"
+  add_foreign_key "especial_cuentas", "especiales"
+  add_foreign_key "especiales", "codigos"
+  add_foreign_key "facturas", "cuentas"
+  add_foreign_key "grado_alumnos", "alumnos"
+  add_foreign_key "grado_alumnos", "grados"
+  add_foreign_key "inscripcion_alumnos", "alumnos"
+  add_foreign_key "inscripcion_alumnos", "convenios"
+  add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripciones", "convenios"
+  add_foreign_key "inscripciones", "proximo_grados"
+  add_foreign_key "linea_facturas", "alumnos"
+  add_foreign_key "linea_facturas", "facturas"
+  add_foreign_key "lista_alumnos", "alumnos"
+  add_foreign_key "lista_alumnos", "listas"
+  add_foreign_key "listas", "sectores"
+  add_foreign_key "movimientos", "conceptos"
+  add_foreign_key "movimientos", "cuentas"
+  add_foreign_key "movimientos", "pago_cuentas"
+  add_foreign_key "movimientos", "recibos"
+  add_foreign_key "movs", "plactas"
+  add_foreign_key "padre_alumnos", "alumnos"
+  add_foreign_key "padre_alumnos", "usuarios"
+  add_foreign_key "pago_cuentas", "cuentas"
+  add_foreign_key "pago_cuentas", "pagos"
+  add_foreign_key "pases", "alumnos"
+  add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "proximo_grados", "sectores"
+  add_foreign_key "recargos", "cuentas"
+  add_foreign_key "recibos", "cuentas"
+  add_foreign_key "sector_alumnos", "alumnos"
+  add_foreign_key "sector_alumnos", "sectores"
+  add_foreign_key "seguimientos", "alumnos"
+  add_foreign_key "sinregistro_cuentas", "cuentas"
+  add_foreign_key "subgrado_alumnos", "alumnos"
+  add_foreign_key "subgrado_alumnos", "subgrados"
+  add_foreign_key "subgrados", "grados"
+  add_foreign_key "tipo_cuentas", "cuentas"
+  add_foreign_key "titular_cuentas", "cuentas"
+  add_foreign_key "titular_cuentas", "usuarios"
+end
