@@ -58,12 +58,12 @@ ActiveAdmin.register Aactividad do
 
     f.inputs do
       f.has_many :aactividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
-        if f.object.new_record?
+        if l.object.new_record?
           l.input :nombre, :input_html => { :value => "" }, as: :hidden
           l.input :data, as: :file, label: "Archivo"
         else
-          l.input :nombre, :input_html => { :value => f.object.nombre }, as: :hidden
-          l.input :data, as: :file, label: "Archivo ("+ f.object.nombre + ")"
+          l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
+          l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
         end
       end
     end
