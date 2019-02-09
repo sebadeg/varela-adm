@@ -34,7 +34,7 @@ ActiveAdmin.register Aactividad do
       end
 
       row "Listas" do 
-        table_for AactividadLista.where("aactividad_id=#{r.id}").order(:nombre) do |t|
+        table_for Lista.where("id IN (SELECT lista_id FROM aactividad_listas WHERE aactividad_id=#{r.id})").order(:nombre) do |t|
           t.column :nombre
         end
       end
