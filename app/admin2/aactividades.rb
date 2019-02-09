@@ -1,6 +1,7 @@
 ActiveAdmin.register Aactividad do
 
   permit_params :nombre, :fecha, :fechainfo,
+      aactividad_archivo_attributes: [:id,:aactividad_id,:nombre,:data,:_destroy],
       aactividad_opcion_attributes: [:id,:aactividad_id,:valor,:opcion,:eleccion,:fecha,:_destroy],
       aactividad_lista_attributes: [:id,:aactividad_id,:lista_id,:_destroy]
 
@@ -23,6 +24,13 @@ ActiveAdmin.register Aactividad do
       row :nombre
       row :fecha, label: "Autorización hasta" 
       row :fechainfo, label: "Información hasta" 
+
+      row "Archivos" do 
+        table_for AactividadArchivo.where("aactividad_id=#{r.id}").order(:id) do |t|
+          t.column :nombre
+          t.column :data
+        end
+      end
 
       row "Opciones" do 
         table_for AactividadOpcion.where("aactividad_id=#{r.id}").order(:valor) do |t|
@@ -50,6 +58,12 @@ ActiveAdmin.register Aactividad do
     end
 
     f.inputs do
+      f.has_many :aactividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
+        l.input :data, as: :file
+      end
+    end
+
+    f.inputs do
       f.has_many :aactividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
         l.input :valor
         l.input :opcion
@@ -67,5 +81,41 @@ ActiveAdmin.register Aactividad do
     f.actions
 
   end
+
+  # controller do
+
+  #   def create
+  #     attrs = permitted_params[:aactividad]
+
+  #     i = 0
+  #     begin
+  #       if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
+  #         i = -1
+  #       else 
+          
+  #         i = i+1
+  #       end
+  #     end while i >= 0
+
+  #     create!
+  #   end
+
+  #   def update
+  #     attrs = permitted_params[:aactividad]
+
+  #     i = 0
+  #     begin
+  #       if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
+  #         i = -1
+  #       else 
+          
+  #         i = i+1
+  #       end
+  #     end while i >= 0
+
+  #     update!
+  #   end
+    
+  # end
 
 end

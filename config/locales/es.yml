@@ -84,6 +84,9 @@ es:
         fechainfo: "Información hasta" 
 
     models:
+      aactividad:
+        one: "Actividad"
+        other: "Actividades"
       cuenta_usuario:
         one: "Usuario de cuenta"
         other: "Usuarios de cuentas"
