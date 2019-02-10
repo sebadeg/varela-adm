@@ -26,8 +26,9 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "//////////"
       p "Ver"
       p "//////////"
+      p params
 
-      redirect_to admin_ver_aactividad_path, alumno_id: params[:alumno_id]
+      redirect_to controller: 'index', action: 'get', id: params[:alumno_id]
     end
 
   end
