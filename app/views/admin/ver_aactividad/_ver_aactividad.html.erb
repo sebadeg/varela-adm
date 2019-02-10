@@ -1,5 +1,5 @@
 <%= form_tag(admin_ver_aactividad_ver_path, :method => "post") do %>
-	<%= select_tag :alumno_id, options_for_select( Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + Alumno.consulta(AdminUsuario.find(usuario_id)) + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL) AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]},alumno_id) %>
+	<%= select_tag :alumno_id, options_for_select( Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + Alumno.sector(AdminUsuario.find(usuario_id)) + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL) AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]},alumno_id) %>
     <%= submit_tag "Ver" %>
 <% end %>
 <br><br>
