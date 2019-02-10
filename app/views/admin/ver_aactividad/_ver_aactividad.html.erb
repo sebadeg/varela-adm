@@ -5,7 +5,7 @@
 <br><br>
 
 <% t = alumno_id %>
-<% @act = AactividadAlumno.where(['alumno_id = ?',t.id]).order("aactividad_id") %>
+<% @act = AactividadAlumno.where(['alumno_id = ?',t]).order("aactividad_id") %>
 <% if (@act != nil) %>
 	<% @act.each do |a| %>
 		<% @actividad = Aactividad.find(a.aactividad_id) rescue nil %>
