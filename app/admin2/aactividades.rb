@@ -104,21 +104,36 @@ ActiveAdmin.register Aactividad do
 
   controller do
 
-  #   def create
-  #     attrs = permitted_params[:aactividad]
+    def create
+      attrs = permitted_params[:aactividad]
 
-  #     i = 0
-  #     begin
-  #       if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
-  #         i = -1
-  #       else 
-          
-  #         i = i+1
-  #       end
-  #     end while i >= 0
+      i = 0
+      begin
+        if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
+            p "----------"
+            p "CREATE"
+            p "----------"
+            file = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data]
+            if file.instance_of? ActionDispatch::Http::UploadedFile
+              p "----------"
+              p "ARCHIVO"
+              p "----------"
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data] = file.read
+            end
+            p "----------"
+            p "----------"
+            p "----------"
+          end
+          i = i+1
+        end
+      end while i >= 0
 
-  #     create!
-  #   end
+      create!
+    end
 
     def update
       attrs = permitted_params[:aactividad]
@@ -130,17 +145,16 @@ ActiveAdmin.register Aactividad do
         else
           if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
             p "----------"
-            p "----------"
-            p "----------"
-            p "----------"
+            p "UPDATE"
             p "----------"
             file = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data]
             if file.instance_of? ActionDispatch::Http::UploadedFile
+              p "----------"
+              p "ARCHIVO"
+              p "----------"
               params[:aactividad][:aactividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
               params[:aactividad][:aactividad_archivo_attributes][i.to_s][:data] = file.read
             end
-            p "----------"
-            p "----------"
             p "----------"
             p "----------"
             p "----------"
