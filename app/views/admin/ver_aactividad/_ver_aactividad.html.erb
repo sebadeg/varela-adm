@@ -4,6 +4,7 @@
 <% end %>
 <br><br>
 
+<div>
 <% x = Aactividad.new %>
 <% y = AactividadAlumno.new %>
 <% t = alumno_id %>
@@ -32,7 +33,7 @@
 					    <% if arreglo[:elecciones][a.opcion] != nil %>
 					    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
 					    <% else %>
-					    	<b><%= p "" %><b>
+					    	<b><%= p "" %></b>
 					    <% end %><br><br>
 
 			            <%= f.hidden_field :alumno_id, value: t %>
@@ -49,3 +50,4 @@
 		<% end %>
 	<% end %>
 <% end %>
+</div>
