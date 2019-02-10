@@ -16,6 +16,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "//////////"
       
       @some_var = 121212
+      
       #@some_var = @alumno_id
     end
 
