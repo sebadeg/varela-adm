@@ -120,18 +120,18 @@ ActiveAdmin.register Aactividad do
             cuotas = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:cuotas]
             importe = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:importe]
             concepto = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:concepto]
-            if cuotas == 0
+            if cuotas == nil || cuotas == 0
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
-            elsif importe == 0
+            elsif importe == nil || importe == 0
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo #{concepto}" 
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado #{concepto}"
             elsif cuotas == 1
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} contado de $U #{importe}" 
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} contado de $U #{importe}"
             else
-              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} en #{cuotas} de $U #{importe}" 
-              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} en #{cuotas} de $U #{importe}"
+              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} en #{cuotas} cuotas de $U #{importe}" 
+              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} en #{cuotas} cuotas de $U #{importe}"
             end
           end
           i = i+1
@@ -178,18 +178,18 @@ ActiveAdmin.register Aactividad do
             cuotas = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:cuotas]
             importe = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:importe]
             concepto = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:concepto]
-            if cuotas == 0
+            if cuotas == nil || cuotas == 0
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
-            elsif importe == 0
+            elsif importe == nil || importe == 0
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo #{concepto}" 
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado #{concepto}"
             elsif cuotas == 1
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} contado de $U #{importe}" 
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} contado de $U #{importe}"
             else
-              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} en #{cuotas} de $U #{importe}" 
-              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} en #{cuotas} de $U #{importe}"
+              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} en #{cuotas} cuotas de $U #{importe}" 
+              params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} en #{cuotas} cuotas de $U #{importe}"
             end
           end
           i = i+1
