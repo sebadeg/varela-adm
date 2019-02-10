@@ -26,22 +26,15 @@ class Alumno < ApplicationRecord
   end
 
   def self.sector(user)
-
-    s = ""
+    s = "0"
     if user.primaria
-      s = "1"
+      s = s + ",1"
     end
     if user.sec_mdeo
-      if s != ""
-        s = s + ","
-      end
-      s = s + "2"
+      s = s + ",2"
     end
     if user.sec_cc
-      if s != ""
-        s = s + ","
-      end
-      s = s + "3"
+      s = s + ",3"
     end
     return s
   end
