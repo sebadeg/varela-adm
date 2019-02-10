@@ -14,9 +14,10 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "//////////"
       p "Index"
       p "//////////"
-      
-      params[:alumno_id] = 121212
-      p params[:alumno_id]
+      p params
+
+//      params[:alumno_id] = 121212
+//      p params[:alumno2_id]
 
     end
 
@@ -25,11 +26,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "//////////"
       p "Ver"
       p "//////////"
-      @alumno_id = params[:alumno_id]
-      p @alumno_id
 
-      @some_var = 121212
-      redirect_to admin_ver_aactividad_path, notice: "HECHO"
+      redirect_to admin_ver_aactividad_path, alumno_id: params[:alumno_id]
     end
 
   end
