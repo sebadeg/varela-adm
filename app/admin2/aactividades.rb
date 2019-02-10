@@ -112,7 +112,7 @@ ActiveAdmin.register Aactividad do
         if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
           i = -1
         else
-          if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
+          if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
             p "----------"
             p "CREATE"
             p "----------"
@@ -143,7 +143,7 @@ ActiveAdmin.register Aactividad do
         if params[:aactividad][:aactividad_archivo_attributes] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s] == nil
           i = -1
         else
-          if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
+          if params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == nil || params[:aactividad][:aactividad_archivo_attributes][i.to_s][:_destroy] == "0"
             p "----------"
             p "UPDATE"
             p "----------"
