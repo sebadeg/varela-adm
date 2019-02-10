@@ -8,30 +8,27 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p "//////////"
     p params
 
-    #redirect_to admin_ver_aactividad_path, alumno_id: 121212
+    Temp.create(usuario_id: current_admin_usuario.id, temp_id: params[:alumno_id] )
+
+    redirect_to admin_ver_aactividad_path
     
     
   end
 
   controller do
-    def ver
-      p "\\\\\\\\\\"
-      p "Ver 2"
-      p "\\\\\\\\\\"
-      p params
-      @options = { alumno_id: 121212 }
-      redirect_to admin_ver_aactividad_path   
-    end
-   end
 
   content do
+    a_id = Temp.where("usuario_id = current_admin_usuario.id").order(id: :desc).limit(1).first rescue nil
+
     p "++++++++++"
     p "++++++++++"
-    p params[:alumno_id]
-    p options
+    p a_id
     p "++++++++++"
     p "++++++++++"
-    render partial: 'ver_aactividad', locals: { alumno_id: params[:alumno_id] }
+
+
+
+    render partial: 'ver_aactividad', locals: { alumno_id: a_id }
   end
 
 end
