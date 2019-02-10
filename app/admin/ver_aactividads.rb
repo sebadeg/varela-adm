@@ -6,7 +6,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p "//////////"
     p "Ver 2"
     p "//////////"
-    redirect_to admin_ver_aactividad_path, alumno_id: 121212 
+    #redirect_to admin_ver_aactividad_path, alumno_id: 121212
+    redirect_to controller: 'ver_aactividad', action: 'get', alumno_id: 121212
   end
 
   content do
