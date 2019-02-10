@@ -28,7 +28,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     if temp == nil 
       render partial: 'ver_aactividad'
     else
-      render partial: 'ver_aactividad', locals: { alumno_id: temp.temp_id }
+      render partial: 'ver_aactividad', locals: { alumno_id: temp.temp_id, usuario_id: temp.usuario_id }
     end
   end
 
