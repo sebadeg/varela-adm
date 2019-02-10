@@ -49,8 +49,9 @@ ActiveAdmin.register Aactividad do
       row "Opciones" do 
         table_for AactividadOpcion.where("aactividad_id=#{r.id}").order(:valor) do |t|
           t.column :valor
-          t.column :opcion
-          t.column :eleccion
+          t.column :concepto
+          t.column :cuotas
+          t.column :importe
           t.column :fecha
         end
       end
@@ -86,8 +87,11 @@ ActiveAdmin.register Aactividad do
     f.inputs do
       f.has_many :aactividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
         l.input :valor
-        l.input :opcion
-        l.input :eleccion
+        l.input :concepto
+        l.input :opcion, :input_html => { :value => "" }, as: :hidden
+        l.input :eleccion, :input_html => { :value => "" }, as: :hidden
+        l.input :cuotas
+        l.input :importe
         l.input :fecha
       end
     end
@@ -106,6 +110,33 @@ ActiveAdmin.register Aactividad do
 
     def create
       attrs = permitted_params[:aactividad]
+
+      i = 0
+      begin
+        if params[:aactividad][:aactividad_opcion_attributes] == nil || params[:aactividad][:aactividad_opcion_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:aactividad][:aactividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:aactividad][:aactividad_opcion_attributes][i.to_s][:_destroy] == "0"
+            cuotas = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:cuotas]
+            importe = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:importe]
+            concepto = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:concepto]
+            if cuotas == 0
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "No autorizo"
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "No está autorizado"
+            elsif importe == 0
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "Autorizo #{concepto}" 
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "Está autorizado #{concepto}"
+            elsif cuotas == 1
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} contado de $U #{importe}" 
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} contado de $U #{importe}"
+            else
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} en #{cuotas} de $U #{importe}" 
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} en #{cuotas} de $U #{importe}"
+            end
+          end
+          i = i+1
+        end
+      end while i >= 0
 
       i = 0
       begin
@@ -137,6 +168,33 @@ ActiveAdmin.register Aactividad do
 
     def update
       attrs = permitted_params[:aactividad]
+
+      i = 0
+      begin
+        if params[:aactividad][:aactividad_opcion_attributes] == nil || params[:aactividad][:aactividad_opcion_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:aactividad][:aactividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:aactividad][:aactividad_opcion_attributes][i.to_s][:_destroy] == "0"
+            cuotas = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:cuotas]
+            importe = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:importe]
+            concepto = params[:aactividad][:aactividad_archivo_attributes][i.to_s][:concepto]
+            if cuotas == 0
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "No autorizo"
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "No está autorizado"
+            elsif importe == 0
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "Autorizo #{concepto}" 
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "Está autorizado #{concepto}"
+            elsif cuotas == 1
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} contado de $U #{importe}" 
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} contado de $U #{importe}"
+            else
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:opcion] = "Autorizo a debitar #{concepto} en #{cuotas} de $U #{importe}" 
+              params[:aactividad][:aactividad_archivo_attributes][i.to_s][:eleccion] = "Está autorizado el débito #{concepto} en #{cuotas} de $U #{importe}"
+            end
+          end
+          i = i+1
+        end
+      end while i >= 0
 
       i = 0
       begin
