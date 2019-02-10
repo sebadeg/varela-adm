@@ -39,8 +39,8 @@
 					    	<b><%= p "" %><b>
 					    <% end %><br><br>
 
-			            <%= f.hidden_field :alumno_id, value: t.id %>
-			            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
+			            <%= f.hidden_field :alumno_id, value: t %>
+			            <%= f.hidden_field :aactividad_id, value: a.aactividad_id %>
 
 						
 						<%= f.select :opcion, options_for_select(arreglo[:opciones], a.opcion)  %><br><br>
