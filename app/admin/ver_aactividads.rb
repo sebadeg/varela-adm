@@ -7,7 +7,14 @@ ActiveAdmin.register_page "Ver_Aactividad" do
   page_action :ver, method: :post do
     @alumno_id = params[:alumno_id]
     p @alumno_id
-    redirect_to admin_ver_aactividad_path, id: params[:alumno_id], notice: "HECHO"
+    redirect_to admin_ver_aactividad_path, notice: "HECHO"
+  end
+
+  controller do
+    def index
+      @alumno_id = 121212
+      @some_var = @alumno_id
+    end
   end
 
   content do
@@ -16,7 +23,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p params
     p "++++++++++"
     p "++++++++++"
-    render partial: 'ver_aactividad', locals: { alumno_id: params[:id] }
+    render partial: 'ver_aactividad', locals: { alumno_id: params[:some_var] }
   end
 
 end
