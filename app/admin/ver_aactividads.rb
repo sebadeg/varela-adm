@@ -4,7 +4,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
 
   page_action :ver, method: :post do
     @alumno_id = params[:alumno_id]
-    render partial: 'ver_aactividad', locals: { alumno_id: @alumno_id }
+    render partial: 'ver_aactividad', locals: { alumno_id: @alumno_id }, :layout => 'active_admin'
   end
 
   content do
