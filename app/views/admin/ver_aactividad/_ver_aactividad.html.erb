@@ -1,4 +1,4 @@
-<%= form_tag(admin_ver_aactividad_ver_path, :method => "post") do %>
+<%= form_tag(admin_ver_aactividad_path, :method => "post") do %>
 	<%= select_tag :alumno_id, options_for_select(Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id] }) %>
     <%= submit_tag "Ver" %>
 <% end %>
