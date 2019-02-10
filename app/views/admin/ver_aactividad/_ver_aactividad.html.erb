@@ -2,3 +2,6 @@
 	<%= select_tag :alumno, options_for_select(Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id] }) %>
     <%= submit_tag "Ver" %>
 <% end %>
+<br><br>
+
+<%= p alumno %>
