@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
 
     p "++++++++++"
     p "++++++++++"
-    p a_id
+    p temp.temp_id
     p "++++++++++"
     p "++++++++++"
 
