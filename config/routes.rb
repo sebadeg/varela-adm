@@ -6,6 +6,4 @@ Rails.application.routes.draw do
 
   get 'principal/index'
   #root 'principal#index'
-
-  post '/admin/ver_aactividad' => 'admin/ver_aactividad#ver'
 end
