@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
 
   controller do
     def ver
-      @alumno_id = params[:alumno_id])      
+      @alumno_id = params[:alumno_id]      
     end
   end
 
