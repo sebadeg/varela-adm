@@ -6,8 +6,23 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p "//////////"
     p "Ver 2"
     p "//////////"
+    p params
     #redirect_to admin_ver_aactividad_path, alumno_id: 121212
-    redirect_to admin_ver_aactividad_path, action: 'get', options: {alumno_id: 121212} 
+    redirect_to admin_ver_aactividad_path 
+  end
+
+  controller
+    def ver
+      p "\\\\\\\\\\"
+      p "Ver 2"
+      p "\\\\\\\\\\"
+      p params
+    end
+
+    def default_url_options(options={})
+      { alumno_id: 121212 }
+    end
+
   end
 
   content do
