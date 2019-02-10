@@ -7,14 +7,14 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p "----------"
     p params
    	@alumno_id = params[:alumno_id]
-    p alumno_id
+    p @alumno_id
     p "----------"
     p "----------"
     redirect_to admin_ver_aactividad_path, notice: "HECHO"
   end
 
   content do
-    render partial: 'ver_aactividad'
+    render partial: 'ver_aactividad', locals: { alumno_id: @alumno_id }
   end
 
 end
