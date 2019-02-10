@@ -3,6 +3,9 @@ ActiveAdmin.register_page "Ver_Aactividad" do
   menu priority: 10000, label: "Ver actividad", parent: "Actividad 2019"
 
   page_action :ver, method: :post do
+      p "//////////"
+      p "Ver 2"
+      p "//////////"
     #redirect_to admin_ver_aactividad_path, notice: "HECHO"
   end
 
@@ -12,7 +15,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "Index"
       p "//////////"
       
-      @some_var = @alumno_id
+      @some_var = 121212
+      #@some_var = @alumno_id
     end
 
       
@@ -22,7 +26,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "//////////"
       @alumno_id = params[:alumno_id]
       p @alumno_id
-      @some_var = @alumno_id
+
+      @some_var = 121212
       redirect_to admin_ver_aactividad_path, notice: "HECHO"
     end
 
