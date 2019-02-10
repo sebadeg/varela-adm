@@ -4,6 +4,8 @@
 <% end %>
 <br><br>
 
+<% x = Aactividad.new %>
+<% y = AactividadAlumno.new %>
 <% t = alumno_id %>
 <% @act = AactividadAlumno.where(['alumno_id = ?',t]).order("aactividad_id") %>
 <% if (@act != nil) %>
@@ -12,7 +14,7 @@
 		<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
 		    <br>
 			
-			<%= form_for(@x, as: :aactividad, url: '#', :html => {:id=>'form_download_' + a.aactividad_id.to_s}) do |f| %>
+			<%= form_for(x, as: :aactividad, url: '#', :html => {:id=>'form_download_' + a.aactividad_id.to_s}) do |f| %>
 	           <%= f.hidden_field :id, value: @actividad.id %>
 			    <div id="textoRegistrarse">
 
@@ -27,7 +29,7 @@
 
 				<% if arreglo[:opciones].count > 0 %>
 
-					<%= form_for(@y, as: :actividad_alumno, url: '#') do |f| %>
+					<%= form_for(y, as: :actividad_alumno, url: '#') do |f| %>
 
 
 						<div id="textoRegistrarse">							
