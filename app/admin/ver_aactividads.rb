@@ -15,8 +15,6 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     
   end
 
-  controller do
-
   content do
     a_id = Temp.where("usuario_id = current_admin_usuario.id").order(id: :desc).limit(1).first rescue nil
 
