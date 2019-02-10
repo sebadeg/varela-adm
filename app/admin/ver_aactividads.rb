@@ -15,9 +15,9 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "Index"
       p "//////////"
       
-      @some_var = 121212
-      p @some_var
-      #@some_var = @alumno_id
+      params[:alumno_id] = 121212
+      p params[:alumno_id]
+
     end
 
       
@@ -37,11 +37,10 @@ ActiveAdmin.register_page "Ver_Aactividad" do
   content do
     p "++++++++++"
     p "++++++++++"
-    p params
-      p @some_var
+    p params[:alumno_id]
     p "++++++++++"
     p "++++++++++"
-    render partial: 'ver_aactividad', locals: { alumno_id: 121212, alumno2_id: @some_var }
+    render partial: 'ver_aactividad', locals: { alumno_id: 121212, alumno2_id: params[:alumno_id] }
   end
 
 end
