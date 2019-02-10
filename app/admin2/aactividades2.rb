@@ -36,10 +36,10 @@ ActiveAdmin.register Aactividad, :as => 'Autorizaciones' do
         table_for Alumno.where("id IN (SELECT alumno_id FROM aactividad_alumnos WHERE aactividad_id=#{r.id})").order(:nombre,:apellido) do |t|
           t.column :nombre
           t.column :apellido
-          t.column "Opcion" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: t.id).opcion end
-          t.column "Fecha" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: t.id).fecha end
-          t.column "Secretaría" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: t.id).secretaria end
-          t.column "Mail" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: t.id).mail end
+          t.column "Opcion" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: x.id).opcion end
+          t.column "Fecha" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: x.id).fecha end
+          t.column "Secretaría" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: x.id).secretaria end
+          t.column "Mail" do |x| AactividadAlumno.find_by(aactividad_id: r.id, alumno_id: x.id).mail end
         end
       end
     end
