@@ -14,7 +14,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p params
     p "++++++++++"
     p "++++++++++"
-    render partial: 'ver_aactividad', locals: { alumno_id: @alumno_id }
+    render partial: 'ver_aactividad', locals: { alumno_id: current_admin_usuario.email }
   end
 
 end
