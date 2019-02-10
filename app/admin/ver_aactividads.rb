@@ -4,7 +4,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
 
   page_action :ver, method: :post do  
     p params
-   	@alumno_id = eval(params[:alumno])
+   	@alumno_id = eval(params[:alumno_id])
     redirect_to admin_ver_aactividad_path, notice: "HECHO"
   end
 
