@@ -23,6 +23,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       @alumno_id = params[:alumno_id]
       p @alumno_id
       @some_var = @alumno_id
+      redirect_to admin_ver_aactividad_path, notice: "HECHO"
     end
 
   end
