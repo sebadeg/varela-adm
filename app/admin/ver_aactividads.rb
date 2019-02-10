@@ -16,8 +16,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "//////////"
       p params
 
-//      params[:alumno_id] = 121212
-//      p params[:alumno2_id]
+      #params[:alumno_id] = 121212
+      #p params[:alumno2_id]
 
     end
 
