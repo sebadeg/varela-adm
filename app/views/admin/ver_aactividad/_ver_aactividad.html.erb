@@ -4,16 +4,6 @@
 <% end %>
 <br><br>
 
-
-
-
-<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-	<div class="panel-group sub-grupo">
-		<div class="panel panel-default">
-			<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-
-
-
 <% x = Aactividad.new %>
 <% y = AactividadAlumno.new %>
 <% t = alumno_id %>
@@ -26,10 +16,7 @@
 			
 			<%= form_for(x, as: :aactividad, url: '#', :html => {:id=>'form_download_' + a.aactividad_id.to_s}) do |f| %>
 	           <%= f.hidden_field :id, value: @actividad.id %>
-			    <div id="textoRegistrarse">
-
 					<b><%= link_to "Descargar información: " + @actividad.nombre, "", :onclick => "$('#form_download_" + a.aactividad_id.to_s + "').submit()" %></b>
-			    </div>
 			<% end %>
 
 		    <% if @actividad.fecha == nil || @actividad.fecha >= DateTime.now %>
@@ -42,7 +29,6 @@
 					<%= form_for(y, as: :actividad_alumno, url: '#') do |f| %>
 
 
-						<div id="textoRegistrarse">							
 					    <% if arreglo[:elecciones][a.opcion] != nil %>
 					    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
 					    <% else %>
@@ -55,7 +41,6 @@
 						
 						<%= f.select :opcion, options_for_select(arreglo[:opciones], a.opcion)  %><br><br>
 			            <%= f.submit "Confirmar"  %>
-						</div>
 
 					<% end %>												
 				<% end %>	
@@ -64,8 +49,3 @@
 		<% end %>
 	<% end %>
 <% end %>
-
-			</div>
-		</div>
-	</div>
-</div>
