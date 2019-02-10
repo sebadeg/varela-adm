@@ -1,6 +1,6 @@
-ActiveAdmin.register_page "Aactividad" do
+ActiveAdmin.register_page "Ver_Aactividad" do
 
-  menu priority: 10000, label: "Vista previa", parent: "Actividad 2019"
+  menu priority: 10000, label: "Ver actividad", parent: "Actividad 2019"
 
   page_action :ver, method: :post do  	
    	#@alumno_id = eval(params[:alumno])
