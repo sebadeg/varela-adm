@@ -10,7 +10,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
 
   controller do
     def index
-      @alumno_id = 121212
+      
       @some_var = @alumno_id
     end
   end
