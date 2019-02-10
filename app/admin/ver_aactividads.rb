@@ -9,8 +9,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p params
 
     #redirect_to admin_ver_aactividad_path, alumno_id: 121212
-    @options = { alumno_id: 121212 }
-    redirect_to admin_ver_aactividad_path 
+    
+    
   end
 
   controller do
@@ -19,6 +19,8 @@ ActiveAdmin.register_page "Ver_Aactividad" do
       p "Ver 2"
       p "\\\\\\\\\\"
       p params
+      @options = { alumno_id: 121212 }
+      redirect_to admin_ver_aactividad_path   
     end
    end
 
