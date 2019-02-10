@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
   end
 
   content do
-    render partial: 'ver_aactividad'
+    render partial: 'ver_aactividad', locals: { alumno_id: "" }
   end
 
 end
