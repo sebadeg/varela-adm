@@ -120,10 +120,10 @@ ActiveAdmin.register Aactividad do
             cuotas = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:cuotas]
             importe = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:importe]
             concepto = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:concepto]
-            if cuotas == nil || cuotas == 0
+            if cuotas == nil || cuotas == 0 || cuotas == ""
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
-            elsif importe == nil || importe == 0
+            elsif importe == nil || importe == 0 || importe == ""
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo #{concepto}" 
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado #{concepto}"
             elsif cuotas == 1
@@ -178,10 +178,10 @@ ActiveAdmin.register Aactividad do
             cuotas = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:cuotas]
             importe = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:importe]
             concepto = params[:aactividad][:aactividad_opcion_attributes][i.to_s][:concepto]
-            if cuotas == nil || cuotas == 0
+            if cuotas == nil || cuotas == 0 || cuotas == ""
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
-            elsif importe == nil || importe == 0
+            elsif importe == nil || importe == 0 || importe == ""
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:opcion] = "Autorizo #{concepto}" 
               params[:aactividad][:aactividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado #{concepto}"
             elsif cuotas == 1
