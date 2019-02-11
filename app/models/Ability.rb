@@ -59,17 +59,16 @@ class Ability
         can :manage, AactividadLista
         can :manage, AactividadArchivo
         can :manage, ActiveAdmin::Page, :name => "Ver_Aactividad"
+      end
 
+      if user.inscripciones
         can :manage, Inscripcion
         can :manage, Seguimiento
         can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
         can :manage, Subgrado
-      elsif user.inscripciones
-        can :manage, Inscripcion
-        can :manage, Seguimiento
-        can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
-        can :manage, Subgrado
-      elsif user.administracion
+      end
+      
+      if user.administracion
         can :manage, Mov
         can :manage, Placta
         can :manage, Movimiento
@@ -87,9 +86,15 @@ class Ability
 
         can :manage, Contrato
         can :read, InscripcionAlumno
-        can :manage, Inscripcion
         can :manage, Pase
         can :manage, Recargo
+
+        can :manage, Inscripcion
+
+        can :manage, Seguimiento
+        can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
+        can :manage, Subgrado
+
       end
     end
   end
