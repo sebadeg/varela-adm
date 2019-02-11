@@ -8,22 +8,33 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p params
     p "//////////"
 
-    # p params[:actividad][:id]
+    # p params[:id]
 
-    # actividad = Actividad.find(params[:actividad][:id])    
-    # if ( actividad != nil )
-    #   file = Tempfile.new("actividad.pdf")
-    #   IO.binwrite(file.path, actividad.data)
+    actividad = Aactividad.find(params[:id])
+    if ( actividad != nil )
+      file_name = "#{actividad.nombre}.pdf"
+      file = Tempfile.new(file_name)
+      
 
-    #   send_file(
-    #     file.path,
-    #     filename: actividad.archivo,
-    #     type: "application/pdf"
-    #   )
+      pdf = CombinePDF.new
+      AactividadArchivo.where("aactividad_id=#{params[:id]}").order(:id).each do |arch|
+        
+        file2_name = "#{arch.nombre}"
+        file2 = Tempfile.new(file2_name)
+        IO.binwrite(file2.path, arch.actividad.data)
+        pdf << CombinePDF.load(file2.path)
 
-    # else
+      end
+      pdf.save file.path
+
+      send_file(
+        file.path,
+        filename: file_name,
+        type: "application/pdf"
+      )
+    else
       redirect_to admin_ver_aactividad_path
-    #end
+    end
   end
 
   page_action :confirmar, method: :post do
