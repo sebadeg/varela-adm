@@ -22,10 +22,7 @@
 		<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
 		    <br>
 			
-			<%= form_tag(admin_ver_aactividad_descargar_path, :method => "post") do %>
-				<%= hidden_field_tag :id, value: @actividad.id %>
-				<%= submit_tag "Descargar información: #{@actividad.nombre}" %>
-			<% end %>
+			<%= link_to "Descargar información: #{@actividad.nombre}", url: admin_ver_aactividad_descargar_path(@actividad.id) %><br>
 
 		    <% if @actividad.fecha == nil || @actividad.fecha >= DateTime.now %>
 
@@ -41,7 +38,7 @@
 					    <% else %>
 					    	<b><%= p "" %></b>
 					    <% end %>
-						<%= select_tag :opcion, options_for_select(arreglo[:opciones], a.opcion) %>
+						<%= select_tag :opcion, options_for_select(arreglo[:opciones], a.opcion) %><br>
 			            <%= submit_tag "Confirmar"  %>
 					<% end %>												
 				<% end %>	
