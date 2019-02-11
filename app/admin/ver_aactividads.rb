@@ -26,7 +26,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
   content do
     temp = Temp.where("usuario_id = #{current_admin_usuario.id}").order(id: :desc).limit(1).first rescue nil
     if temp == nil 
-      render partial: 'ver_aactividad'
+      render partial: 'ver_aactividad', locals: { alumno_id: nil, usuario_id: nil }
     else
       render partial: 'ver_aactividad', locals: { alumno_id: temp.temp_id, usuario_id: temp.usuario_id }
     end
