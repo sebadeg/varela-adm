@@ -7,95 +7,105 @@ class Ability
 
     puts "Usuario " + user.email
 
-    can :manage, ActiveAdmin::Page, name: "Dashboard"
-    can :manage, ActiveAdmin::Comment
-    
     if user.soporte
       can :manage, :all
-    else
-      can :read, AdminUsuario, id: user.id 
-      can :update, AdminUsuario, id: user.id      
+      return
+    end
+
+    can :manage, ActiveAdmin::Page, name: "Dashboard"
+    can :manage, ActiveAdmin::Comment
+    can :read, AdminUsuario, id: user.id 
+    can :update, AdminUsuario, id: user.id      
 
 
-      if user.primaria || user.sec_mdeo || user.sec_cc
-        s = ""
-        if user.primaria
-          s = "1"
-        end
-        if user.sec_mdeo
-          if s != ""
-            s = s + ","
-          end
-          s = s + "2"
-        end
-        if user.sec_cc
-          if s != ""
-            s = s + ","
-          end
-          s = s + "3"
-        end
+    if user.administracion
+      can :manage, Mov
+      can :manage, Placta
+      can :manage, Movimiento
 
-        pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))")
-        can :read, Pase, pases do |x|
-          true
-        end
-        can :update, Pase, pases do |x|
-          true
-        end
+      can :manage, Recibo
 
-        can :manage, InscripcionAlumno, InscripcionAlumno.where(
-          "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))"
-          ) do |x|
-          true
-        end
+      can :manage, Especial
+      can :manage, Pago
+      can :manage, ActiveAdmin::Page, :name => "Lote_pago"
+      can :manage, PagoCuenta
+      can :manage, Cuenta
+      can :manage, Alumno
+      can :manage, Tarea
+      can :read, Usuario
 
-        can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
-          true
-        end
-        
-        can :manage, Aactividad
-        can :manage, AactividadAlumno
-        can :manage, AactividadOpcion
-        can :manage, AactividadLista
-        can :manage, AactividadArchivo
-        can :manage, ActiveAdmin::Page, :name => "Ver_Aactividad"
+      can :manage, Contrato
+      can :read, InscripcionAlumno
+      can :manage, Pase
+      can :manage, Recargo
+
+      can :manage, Inscripcion
+
+      can :manage, Seguimiento
+      can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
+      can :manage, Subgrado
+
+
+      return
+    end
+
+
+
+
+
+
+    s = "0"
+    if user.primaria || user.sec_mdeo || user.sec_cc
+      if user.primaria
+        s = s + ",1"
+      end
+      if user.sec_mdeo
+        s = s + ",2"
+      end
+      if user.sec_cc
+        s = s + ",3"
+      end
+    elsif user.inscripciones
+      s = "0,1,2,3"
+    end
+
+
+    if user.primaria || user.sec_mdeo || user.sec_cc || user.inscripciones
+      pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))")
+      can :read, Pase, pases do |x|
+        true
+      end
+      can :update, Pase, pases do |x|
+        true
       end
 
-      if user.inscripciones
-        can :manage, Inscripcion
-        can :manage, Seguimiento
-        can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
-        can :manage, Subgrado
+      can :manage, InscripcionAlumno, InscripcionAlumno.where(
+        "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))"
+        ) do |x|
+        true
+      end
+
+      can :manage, Seguimiento
+      can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
+      can :manage, Subgrado
+    end
+
+    if user.primaria || user.sec_mdeo || user.sec_cc
+      can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
+        true
       end
       
-      if user.administracion
-        can :manage, Mov
-        can :manage, Placta
-        can :manage, Movimiento
-
-        can :manage, Recibo
-
-        can :manage, Especial
-        can :manage, Pago
-        can :manage, ActiveAdmin::Page, :name => "Lote_pago"
-        can :manage, PagoCuenta
-        can :manage, Cuenta
-        can :manage, Alumno
-        can :manage, Tarea
-        can :read, Usuario
-
-        can :manage, Contrato
-        can :read, InscripcionAlumno
-        can :manage, Pase
-        can :manage, Recargo
-
-        can :manage, Inscripcion
-
-        can :manage, Seguimiento
-        can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
-        can :manage, Subgrado
-
-      end
+      can :manage, Aactividad
+      can :manage, AactividadAlumno
+      can :manage, AactividadOpcion
+      can :manage, AactividadLista
+      can :manage, AactividadArchivo
+      can :manage, ActiveAdmin::Page, :name => "Ver_Aactividad"
     end
+
+    if user.inscripciones
+      can :manage, Inscripcion
+    end
+      
   end
 end
