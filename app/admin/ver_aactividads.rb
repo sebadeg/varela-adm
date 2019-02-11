@@ -23,7 +23,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     redirect_to admin_ver_aactividad_path
   end
 
-  content do
+  content title: "Vista previa" do
     temp = Temp.where("usuario_id = #{current_admin_usuario.id}").order(id: :desc).limit(1).first rescue nil
     if temp == nil 
       render partial: 'ver_aactividad', locals: { alumno_id: nil, usuario_id: nil }
