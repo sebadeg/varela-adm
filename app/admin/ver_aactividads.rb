@@ -21,7 +21,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
         
         file2_name = "#{arch.nombre}"
         file2 = Tempfile.new(file2_name)
-        IO.binwrite(file2.path, arch.actividad.data)
+        IO.binwrite(file2.path, arch.data)
         pdf << CombinePDF.load(file2.path)
 
       end
