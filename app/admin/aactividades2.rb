@@ -3,8 +3,7 @@ ActiveAdmin.register Aactividad, :as => 'Autorizaciones' do
   permit_params :nombre, :fecha, :fechainfo,
       aactividad_alumno_attributes: [:id,:aactividad_id,:lista_id,:_destroy]
 
-  menu priority: 3003, label: "Autorizaciones"
-  menu parent: "Actividad 2019", priority: 3000
+  menu priority: 3003, label: "Autorizaciones", parent: "Actividad 2019"
 
   index do
     #selectable_column
