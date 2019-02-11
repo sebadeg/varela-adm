@@ -10,6 +10,14 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     redirect_to admin_ver_aactividad_path
   end
 
+  page_action :confirmar, method: :post do
+    p "//////////"
+    p "Confirmar"
+    p params
+    p "//////////"
+    redirect_to admin_ver_aactividad_path
+  end
+
   page_action :ver, method: :post do
     Temp.create(usuario_id: current_admin_usuario.id, temp_id: params[:alumno_id] )
     redirect_to admin_ver_aactividad_path

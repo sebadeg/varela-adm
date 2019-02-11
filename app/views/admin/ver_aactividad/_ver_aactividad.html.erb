@@ -14,8 +14,6 @@
 
 
 
-<% x = Aactividad.new %>
-<% y = AactividadAlumno.new %>
 <% t = alumno_id %>
 <% @act = AactividadAlumno.where(['alumno_id = ?',t]).order("aactividad_id") %>
 <% if (@act != nil) %>
@@ -24,9 +22,9 @@
 		<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
 		    <br>
 			
-			<%= form_for(x, as: :aactividad, url: admin_ver_aactividad_descargar_path, :html => {:id=>'form_download_' + a.aactividad_id.to_s}) do |f| %>
-	           <%= f.hidden_field :id, value: @actividad.id %>
-					<b><%= link_to "Descargar información: " + @actividad.nombre, "", :onclick => "$('#form_download_" + a.aactividad_id.to_s + "').submit()" %></b>
+			<%= form_tag(admin_ver_aactividad_descargar_path, :method => "post") do %>
+				<%= hidden_field_tag :id, value: @actividad.id %>
+				<%= submit_tag "Descargar información: #{@actividad.nombre}" %>
 			<% end %>
 
 		    <% if @actividad.fecha == nil || @actividad.fecha >= DateTime.now %>
@@ -36,22 +34,15 @@
 
 				<% if arreglo[:opciones].count > 0 %>
 
-					<%= form_for(y, as: :actividad_alumno, url: '#') do |f| %>
-
+					<%= form_tag(admin_ver_aactividad_confirmar_path, :method => "post") do %>
 
 					    <% if arreglo[:elecciones][a.opcion] != nil %>
 					    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
 					    <% else %>
 					    	<b><%= p "" %></b>
-					    <% end %><br><br>
-
-			            <%= f.hidden_field :alumno_id, value: t %>
-			            <%= f.hidden_field :aactividad_id, value: a.aactividad_id %>
-
-						
-						<%= f.select :opcion, options_for_select(arreglo[:opciones], a.opcion)  %><br><br>
-			            <%= f.button "Confirmar"  %>
-
+					    <% end %>
+						<%= select_tag :opcion, options_for_select(arreglo[:opciones], a.opcion) %>
+			            <%= submit_tag "Confirmar"  %>
 					<% end %>												
 				<% end %>	
 				<br>
