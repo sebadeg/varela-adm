@@ -48,7 +48,6 @@ ActiveAdmin.register Aactividad do
 
       row "Opciones" do 
         table_for AactividadOpcion.where("aactividad_id=#{r.id}").order(:valor) do |t|
-          t.column :valor
           t.column :concepto
           t.column :cuotas
           t.column :importe
@@ -86,7 +85,6 @@ ActiveAdmin.register Aactividad do
 
     f.inputs do
       f.has_many :aactividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
-        l.input :valor
         l.input :concepto
         l.input :opcion, :input_html => { :value => "" }, as: :hidden
         l.input :eleccion, :input_html => { :value => "" }, as: :hidden
