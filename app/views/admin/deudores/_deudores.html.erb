@@ -1,0 +1,8 @@
+<table class="index_table index">
+<thead>
+<tr><th>Cuenta</th><th>Ultimo</th></tr>
+</thead>
+<tbody>
+<% @saldo.keys.each do |cta| %>
+<tr><td><%= @saldo[cta] %></td><td><%= @ultimo[cta] %></td></tr>
+</tbody>
