@@ -14,7 +14,7 @@ ActiveAdmin.register Lista do
 
   permit_params :nombre, :locale, lista_alumno_attributes: [:id,:lista_id,:alumno_id,:_destroy,:locale]
 
-  menu priority: 1001, label: "Lista de distribución"
+  menu priority: 2001, label: "Lista de distribución"
 
   index do
     #selectable_column
