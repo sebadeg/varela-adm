@@ -5,7 +5,7 @@ ActiveAdmin.register Aactividad do
       aactividad_opcion_attributes: [:id,:aactividad_id,:valor,:concepto,:cuotas,:importe,:opcion,:eleccion,:fecha,:_destroy],
       aactividad_lista_attributes: [:id,:aactividad_id,:lista_id,:_destroy]
 
-  menu label: "Actividad 2019"
+  menu label: "Modificar", parent: "Actividad 2019"
 
   action_item :asociar, only: :show do
     link_to "Asociar", asociar_admin_aactividad_path(aactividad), method: :put 

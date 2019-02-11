@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Ver_Aactividad" do
 
-  menu priority: 10000, label: "Ver actividad", parent: "Actividad 2019"
+  menu label: "Vista previa", parent: "Actividad 2019"
 
   page_action :descargar, method: :post do
     p "//////////"
