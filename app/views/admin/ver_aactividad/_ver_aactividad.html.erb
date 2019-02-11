@@ -22,7 +22,7 @@
 		<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
 		    <br>
 			
-			<%= link_to "Descargar información: #{@actividad.nombre}", url: admin_ver_aactividad_descargar_path, , method: :post, id: @actividad.id %><br><br>
+			<%= link_to "Descargar información: #{@actividad.nombre}", url: admin_ver_aactividad_descargar_path, method: :post, id: @actividad.id %><br><br>
 
 		    <% if @actividad.fecha == nil || @actividad.fecha >= DateTime.now %>
 
