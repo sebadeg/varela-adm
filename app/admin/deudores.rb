@@ -10,7 +10,7 @@ ActiveAdmin.register_page "Deudores" do
   	def index
       @saldo = Hash.new
       @ultimo = Hash.new
-      Movs.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10").order(:movcta,:movfec).each do |m|
+      Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10").order(:movcta,:movfec).each do |m|
         if ( !saldo.has_key(m.movcta) )
           @saldo[m.movcta] = 0
           @saldo[m.movcta] = Date.new(2013,12,31)
