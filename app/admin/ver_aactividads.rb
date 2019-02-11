@@ -7,7 +7,23 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p "Descargar"
     p params
     p "//////////"
-    redirect_to admin_ver_aactividad_path
+
+    # p params[:actividad][:id]
+
+    # actividad = Actividad.find(params[:actividad][:id])    
+    # if ( actividad != nil )
+    #   file = Tempfile.new("actividad.pdf")
+    #   IO.binwrite(file.path, actividad.data)
+
+    #   send_file(
+    #     file.path,
+    #     filename: actividad.archivo,
+    #     type: "application/pdf"
+    #   )
+
+    # else
+      redirect_to admin_ver_aactividad_path
+    #end
   end
 
   page_action :confirmar, method: :post do
