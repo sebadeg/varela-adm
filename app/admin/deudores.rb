@@ -51,7 +51,7 @@ ActiveAdmin.register_page "Deudores" do
       	fecha_hasta = fecha_hasta + 30.days
       end
 
-      Movimientos.where("id>=1300 AND fecha<='#{DateTime.now.strftime('%Y-%m-%d')}'").order(:fecha).each do |m|
+      Movimientos.where("id>=1300 AND fecha<='#{DateTime.now.strftime('%Y-%m-%d')}' AND (fecha>='2019-01-01' OR tipo=1005) ").order(:fecha).each do |m|
         if ( !@saldo.has_key?(m.cuenta_id) )
           @saldo[m.cuenta_id] = 0
           deuda[m.cuenta_id] = Array.new
