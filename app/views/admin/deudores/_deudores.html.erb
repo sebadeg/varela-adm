@@ -1,11 +1,11 @@
 <table class="index_table index">
 <thead>
-<tr><th>Cuenta</th><th>Saldo</th><th>Ultimo</th></tr>
+<tr><th>Cuenta</th><th>Saldo</th><th>Deuda</th><th>Fecha</th></tr>
 </thead>
 <tbody>
 <% @saldo.keys.each do |cta| %>
 	<% if @saldo[cta]>0 %>
-		<tr><td><%= cta %></td><td><%= @saldo[cta] %></td><td><%= @ultimo[cta] %></td></tr>
+		<tr><td><%= cta %></td><td><%= @saldo[cta] %></td><td><%= @deuda[cta] %></td><td><%= @fecha[cta] %></td></tr>
 	<% end %>
 <% end %>
 </tbody>
