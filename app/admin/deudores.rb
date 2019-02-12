@@ -51,6 +51,18 @@ ActiveAdmin.register_page "Deudores" do
       	fecha_hasta = fecha_hasta + 30.days
       end
 
+      @saldo.keys.each do |k|
+        @fecha[k] = DateTime.now.to_date
+        @deuda[k] = 0
+        if deuda[k].count > 0
+          @fecha[k] = fecha[k][0]
+          deuda[k].each do |d|
+            @deuda[k] = @deuda[k] + d
+          end
+        end
+      end
+
+
       @saldo2 = Hash.new
       @deuda2 = Hash.new
       @fecha2 = Hash.new
