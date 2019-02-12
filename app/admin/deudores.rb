@@ -14,8 +14,8 @@ ActiveAdmin.register_page "Deudores" do
       deuda = Hash.new
       fecha = Hash.new
 
-      fecha_desde = Date.new(2000,12,31)
-      fecha_hasta = Date.new(2014,1,1)
+      fecha_desde = Date.new(2017,12,31)
+      fecha_hasta = Date.new(2018,1,1)
       ultima_fecha = Date.new(2019,1,1)
 
       while fecha_desde < ultima_fecha do
