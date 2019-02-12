@@ -57,7 +57,8 @@ ActiveAdmin.register_page "Deudores" do
         if deuda[k].count > 0
           @fecha[k] = fecha[0]
           deuda[k].each do |d|
-          @deuda[k] = @deuda[k] + d
+            @deuda[k] = @deuda[k] + d
+          end
         end
       end
 
