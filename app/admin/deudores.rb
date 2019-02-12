@@ -36,12 +36,12 @@ ActiveAdmin.register_page "Deudores" do
 		  end
 
 		  while @saldo[m.movcta] > 0 && deuda[m.movcta].count > 0 do
-		  	if deuda[m.movcta] <= @saldo[m.movcta]
-              @saldo[m.movcta] = @saldo[m.movcta] - deuda[m.movcta]
+		  	if deuda[m.movcta][0] <= @saldo[m.movcta]
+              @saldo[m.movcta] = @saldo[m.movcta] - deuda[m.movcta][0]
               deuda.delete_at(0)
               fecha.delete_at(0)
             else
-              deuda[m.movcta] = deuda[m.movcta] - @saldo[m.movcta]
+              deuda[m.movcta][0] = deuda[m.movcta][0] - @saldo[m.movcta]
               @saldo[m.movcta] = 0
 		  	end		  	
 		  end
