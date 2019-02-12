@@ -70,7 +70,7 @@ ActiveAdmin.register_page "Deudores" do
 
 		while @saldo[m.cuenta_id] > 0 && deuda[m.cuenta_id].count > 0 do
 		  if deuda[m.cuenta_id][0] <= @saldo[m.cuenta_id]
-            @saldo[m.cuenta_id] = @saldo[m.cuenta_id] - deuda[m.v][0]
+            @saldo[m.cuenta_id] = @saldo[m.cuenta_id] - deuda[m.cuenta_id][0]
             deuda[m.cuenta_id].delete_at(0)
             fecha[m.cuenta_id].delete_at(0)
           else
