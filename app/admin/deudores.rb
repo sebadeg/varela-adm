@@ -52,7 +52,7 @@ ActiveAdmin.register_page "Deudores" do
       end
 
       @saldo.keys.each do |k|
-        @fecha[k] = Date.now
+        @fecha[k] = DateTime.now.to_date
         @deuda[k] = 0
         if deuda[k].count > 0
           @fecha[k] = fecha[0]
