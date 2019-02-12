@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_234402) do
+ActiveRecord::Schema.define(version: 2019_02_12_111330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,15 @@ ActiveRecord::Schema.define(version: 2019_02_11_234402) do
     t.string "nombre"
     t.string "apellido"
     t.text "comentario"
+  end
+
+  create_table "deudas", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_deudas_on_cuenta_id"
   end
 
   create_table "direcciones", force: :cascade do |t|
@@ -824,6 +833,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_234402) do
   add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
+  add_foreign_key "deudas", "cuentas"
   add_foreign_key "direcciones", "usuarios"
   add_foreign_key "especial_alumnos", "alumnos"
   add_foreign_key "especial_alumnos", "especiales"
