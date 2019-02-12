@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Deudores" do
       @saldo = Hash.new
       @ultimo = Hash.new
       Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec<='2014-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key(m.movcta) )
+        if ( !@saldo.has_key?(m.movcta) )
           @saldo[m.movcta] = 0
           @saldo[m.movcta] = Date.new(2013,12,31)
         end
@@ -19,7 +19,7 @@ ActiveAdmin.register_page "Deudores" do
         @ultimo[m.movcta] = m.movfec
       end
       Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2015-01-01' AND movfec<='2015-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key(m.movcta) )
+        if ( !@saldo.has_key?(m.movcta) )
           @saldo[m.movcta] = 0
           @saldo[m.movcta] = Date.new(2013,12,31)
         end
@@ -27,7 +27,7 @@ ActiveAdmin.register_page "Deudores" do
         @ultimo[m.movcta] = m.movfec
       end
       Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2016-01-01' AND movfec<='2016-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key(m.movcta) )
+        if ( !@saldo.has_key?(m.movcta) )
           @saldo[m.movcta] = 0
           @saldo[m.movcta] = Date.new(2013,12,31)
         end
@@ -35,7 +35,7 @@ ActiveAdmin.register_page "Deudores" do
         @ultimo[m.movcta] = m.movfec
       end
       Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2017-01-01' AND movfec<='2017-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key(m.movcta) )
+        if ( !@saldo.has_key?(m.movcta) )
           @saldo[m.movcta] = 0
           @saldo[m.movcta] = Date.new(2013,12,31)
         end
@@ -43,7 +43,7 @@ ActiveAdmin.register_page "Deudores" do
         @ultimo[m.movcta] = m.movfec
       end
       Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2018-01-01'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key(m.movcta) )
+        if ( !@saldo.has_key?(m.movcta) )
           @saldo[m.movcta] = 0
           @saldo[m.movcta] = Date.new(2013,12,31)
         end
