@@ -9,6 +9,10 @@ ActiveAdmin.register_page "Deudores" do
   controller do
   	def index
       @saldo = Hash.new
+      @deuda = Hash.new
+      @fecha = Hash.new
+      deuda = Hash.new
+      fecha = Hash.new
 
       fecha_desde = Date.new(2000,12,31)
       fecha_hasta = Date.new(2014,1,1)
