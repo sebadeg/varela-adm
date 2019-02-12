@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_10_220207) do
+ActiveRecord::Schema.define(version: 2019_02_11_234402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -570,6 +570,8 @@ ActiveRecord::Schema.define(version: 2019_02_10_220207) do
     t.bigint "movint"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["movcta", "movfec"], name: "index_movs_fec"
+    t.index ["movgru", "movcap", "movrub", "movsub"], name: "index_movs_cta"
     t.index ["placta_id"], name: "index_movs_on_placta_id"
   end
 
