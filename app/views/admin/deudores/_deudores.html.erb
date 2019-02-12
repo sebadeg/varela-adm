@@ -59,9 +59,9 @@
 <tr><th>Cuenta</th><th>Saldo</th><th>Deuda</th><th>Fecha mayor de 30 días</th></tr>
 </thead>
 <tbody>
-<% @saldo.keys.each do |cta| %>
-	<% if @deuda[cta]>0 && (DateTime.now-@fecha[cta]).to_i < 60 && (DateTime.now-@fecha[cta]).to_i >= 30 %>
-		<tr><td><%= cta %></td><td><%= @saldo[cta] %></td><td><%= @deuda[cta] %></td><td><%= @fecha[cta] %></td></tr>
+<% @saldo2.keys.each do |cta| %>
+	<% if @deuda2[cta]>0 && (DateTime.now-@fecha2[cta]).to_i < 60 && (DateTime.now-@fecha2[cta]).to_i >= 30 %>
+		<tr><td><%= cta %></td><td><%= @saldo2[cta] %></td><td><%= @deuda2[cta] %></td><td><%= @fecha2[cta] %></td></tr>
 	<% end %>
 <% end %>
 </tbody>
@@ -73,9 +73,9 @@
 <tr><th>Cuenta</th><th>Saldo</th><th>Deuda</th><th>Fecha menor de 30 días</th></tr>
 </thead>
 <tbody>
-<% @saldo.keys.each do |cta| %>
-	<% if @deuda[cta]>0 && (DateTime.now-@fecha[cta]).to_i < 30 %>
-		<tr><td><%= cta %></td><td><%= @saldo[cta] %></td><td><%= @deuda[cta] %></td><td><%= @fecha[cta] %></td></tr>
+<% @saldo2.keys.each do |cta| %>
+	<% if @deuda2[cta]>0 && (DateTime.now-@fecha2[cta]).to_i < 30 %>
+		<tr><td><%= cta %></td><td><%= @saldo2[cta] %></td><td><%= @deuda2[cta] %></td><td><%= @fecha2[cta] %></td></tr>
 	<% end %>
 <% end %>
 </tbody>

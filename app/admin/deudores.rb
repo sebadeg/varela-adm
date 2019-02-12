@@ -51,41 +51,48 @@ ActiveAdmin.register_page "Deudores" do
       	fecha_hasta = fecha_hasta + 30.days
       end
 
-      Movimiento.where("id>=1300 AND fecha<='#{DateTime.now.strftime('%Y-%m-%d')}' AND (fecha>='2019-01-01' OR tipo=1005) ").order(:fecha).each do |m|
-        if ( !@saldo.has_key?(m.cuenta_id.to_i) )
-          @saldo[m.cuenta_id.to_i] = 0
+      @saldo2 = Hash.new
+      @deuda2 = Hash.new
+      @fecha2 = Hash.new
+      deuda = Hash.new
+      fecha = Hash.new
+
+      #Movimiento.where("id>=1300 AND fecha<='#{DateTime.now.strftime('%Y-%m-%d')}' AND (fecha>='2019-01-01' OR tipo=1005) ").order(:fecha).each do |m|
+      Movimiento.where("fecha<='#{DateTime.now.strftime('%Y-%m-%d')}'").order(:fecha).each do |m|
+        if ( !@saldo2.has_key?(m.cuenta_id.to_i) )
+          @saldo2[m.cuenta_id.to_i] = 0
           deuda[m.cuenta_id.to_i] = Array.new
           fecha[m.cuenta_id.to_i] = Array.new
         end
         
         d = m.debe - m.haber
         if d <= 0
-          @saldo[m.cuenta_id.to_i] = @saldo[m.cuenta_id.to_i] - d
+          @saldo2[m.cuenta_id.to_i] = @saldo2[m.cuenta_id.to_i] - d
         else
 		  deuda[m.cuenta_id.to_i].push(d)
 		  fecha[m.cuenta_id.to_i].push(m.fecha)
 		end
 
-		while @saldo[m.cuenta_id.to_i] > 0 && deuda[m.cuenta_id.to_i].count > 0 do
-		  if deuda[m.cuenta_id.to_i][0] <= @saldo[m.cuenta_id.to_i]
-            @saldo[m.cuenta_id.to_i] = @saldo[m.cuenta_id.to_i] - deuda[m.cuenta_id.to_i][0]
+		while @saldo2[m.cuenta_id.to_i] > 0 && deuda[m.cuenta_id.to_i].count > 0 do
+		  if deuda[m.cuenta_id.to_i][0] <= @saldo2[m.cuenta_id.to_i]
+            @saldo2[m.cuenta_id.to_i] = @saldo2[m.cuenta_id.to_i] - deuda[m.cuenta_id.to_i][0]
             deuda[m.cuenta_id.to_i].delete_at(0)
             fecha[m.cuenta_id.to_i].delete_at(0)
           else
-            deuda[m.cuenta_id.to_i][0] = deuda[m.cuenta_id.to_i][0] - @saldo[m.cuenta_id.to_i]
-            @saldo[m.cuenta_id.to_i] = 0
+            deuda[m.cuenta_id.to_i][0] = deuda[m.cuenta_id.to_i][0] - @saldo2[m.cuenta_id.to_i]
+            @saldo2[m.cuenta_id.to_i] = 0
 		  end		  	
 		end
       end
 
 
-      @saldo.keys.each do |k|
-        @fecha[k] = DateTime.now.to_date
-        @deuda[k] = 0
+      @saldo2.keys.each do |k|
+        @fecha2[k] = DateTime.now.to_date
+        @deuda2[k] = 0
         if deuda[k].count > 0
-          @fecha[k] = fecha[k][0]
+          @fecha2[k] = fecha[k][0]
           deuda[k].each do |d|
-            @deuda[k] = @deuda[k] + d
+            @deuda2[k] = @deuda2[k] + d
           end
         end
       end
