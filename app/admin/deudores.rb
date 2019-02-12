@@ -10,57 +10,27 @@ ActiveAdmin.register_page "Deudores" do
   	def index
       @saldo = Hash.new
       @ultimo = Hash.new
-      Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec<='2014-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key?(m.movcta) )
-          @saldo[m.movcta] = 0
-          @ultimo[m.movcta] = Date.new(2013,12,31)
+
+      fecha_desde = Date.new(2000,12,31)
+      fecha_hasta = Date.new(2014,1,1)
+      ultima_fecha = Date.new(2019,1,1)
+
+      while fecha_hasta<ultima_fecha do
+
+        Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='#{fecha_desde.strftime('%Y-%m-%d')}' AND movfec<'#{fecha_hasta.strftime('%Y-%m-%d')}'").order(:movcta,:movfec).each do |m|
+          if ( !@saldo.has_key?(m.movcta) )
+            @saldo[m.movcta] = 0
+            @ultimo[m.movcta] = Date.new(2013,12,31)
+          end
+          @saldo[m.movcta] = @saldo[m.movcta] + m.movdeb - m.movhab
+          if @saldo[m.movcta] <= 0
+            @ultimo[m.movcta] = m.movfec
+          end
         end
-        @saldo[m.movcta] = @saldo[m.movcta] + m.movdeb - m.movhab
-        if @saldo[m.movcta] <= 0
-          @ultimo[m.movcta] = m.movfec
-        end
+      	fecha_desde = fecha_hasta
+      	fecha_hasta = fecha_hasta + 30.days
       end
-      Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2015-01-01' AND movfec<='2015-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key?(m.movcta) )
-          @saldo[m.movcta] = 0
-          @ultimo[m.movcta] = Date.new(2013,12,31)
-        end
-        @saldo[m.movcta] = @saldo[m.movcta] + m.movdeb - m.movhab
-        if @saldo[m.movcta] <= 0
-          @ultimo[m.movcta] = m.movfec
-        end
-      end
-      Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2016-01-01' AND movfec<='2016-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key?(m.movcta) )
-          @saldo[m.movcta] = 0
-          @ultimo[m.movcta] = Date.new(2013,12,31)
-        end
-        @saldo[m.movcta] = @saldo[m.movcta] + m.movdeb - m.movhab
-        if @saldo[m.movcta] <= 0
-          @ultimo[m.movcta] = m.movfec
-        end
-      end
-      Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2017-01-01' AND movfec<='2017-12-31'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key?(m.movcta) )
-          @saldo[m.movcta] = 0
-          @ultimo[m.movcta] = Date.new(2013,12,31)
-        end
-        @saldo[m.movcta] = @saldo[m.movcta] + m.movdeb - m.movhab
-        if @saldo[m.movcta] <= 0
-          @ultimo[m.movcta] = m.movfec
-        end
-      end
-      Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='2018-01-01'").order(:movcta,:movfec).each do |m|
-        if ( !@saldo.has_key?(m.movcta) )
-          @saldo[m.movcta] = 0
-          @ultimo[m.movcta] = Date.new(2013,12,31)
-        end
-        @saldo[m.movcta] = @saldo[m.movcta] + m.movdeb - m.movhab
-        if @saldo[m.movcta] <= 0
-          @ultimo[m.movcta] = m.movfec
-        end
-      end
-  	end
+    end
   end
 
 end
