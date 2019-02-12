@@ -15,7 +15,7 @@ ActiveAdmin.register_page "Deudores" do
       fecha_hasta = Date.new(2014,1,1)
       ultima_fecha = Date.new(2019,1,1)
 
-      begin fecha_desde < ultima_fecha do
+      while fecha_desde < ultima_fecha do
         Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='#{fecha_desde.strftime('%Y-%m-%d')}' AND movfec<'#{fecha_hasta.strftime('%Y-%m-%d')}'").order(:movcta,:movfec).each do |m|
           if ( !@saldo.has_key?(m.movcta) )
             @saldo[m.movcta] = 0
