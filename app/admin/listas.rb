@@ -70,7 +70,7 @@ ActiveAdmin.register Lista do
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + sectores() + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL) AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + Alumno.sector(current_admin_usuario) + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL) AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
       end
     end
     f.actions
