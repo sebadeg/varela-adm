@@ -62,7 +62,7 @@ ActiveAdmin.register Deudor do
       end
 
       saldos.keys.each do |cuenta_id|
-        while (saldos[cuenta_id] > 0) && (importes[cuenta_id].Count > 0) do
+        while (saldos[cuenta_id] > 0) && (importes[cuenta_id].count > 0) do
           if importes[cuenta_id][0] <= saldos[cuenta_id]
             saldos[cuenta_id] = saldos[cuenta_id] - importes[cuenta_id][0];
             importes[cuenta_id].delete_at(0);
@@ -79,7 +79,7 @@ ActiveAdmin.register Deudor do
         dias = [0,0,0,0,0,0]
 
         if fechas[cuenta_id] > 0 
-          (0..fechas[cuenta_id].Count).each do |i|
+          (0..fechas[cuenta_id].count).each do |i|
             (0..5).each do |d|
               if ((DateTime.now - fechas[cuenta][i]).to_i < n_dias[d] ) && ((DateTime.now - fechas[cuenta_id][i]).to_i >= n_dias[d+1])
                   dias[d] = dias[d] + importes[cuenta_id][i];
