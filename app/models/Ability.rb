@@ -22,6 +22,7 @@ class Ability
       can :manage, Mov
       can :manage, Placta
       can :manage, Movimiento
+      can :manage, Deudor
 
       can :manage, Recibo
 
