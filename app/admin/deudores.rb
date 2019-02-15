@@ -88,7 +88,7 @@ ActiveAdmin.register Deudor do
           end
         end
 
-        ActiveRecord::Base.connection.execute( "INSERT INTO deudores (cuenta_id,deuda360,deuda180,deuda90,deuda60,deuda30,deuda0) VALUES (#{cuenta_id},#{dias[0]},#{dias[1]},#{dias[2]},#{dias[3]},#{dias[4]},#{dias[5]});" )
+        ActiveRecord::Base.connection.execute( "INSERT INTO deudores (cuenta_id,deuda360,deuda180,deuda90,deuda60,deuda30,deuda0,created_at,updated_at) VALUES (#{cuenta_id},#{dias[0]},#{dias[1]},#{dias[2]},#{dias[3]},#{dias[4]},#{dias[5]},now(),now());" )
       end
 
     end
