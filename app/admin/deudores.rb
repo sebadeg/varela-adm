@@ -35,7 +35,7 @@ ActiveAdmin.register Deudor do
 
   #   end
 
-  #   Movimiento.all.order(:fecha).each do |m|
+  #   Movimiento.where("fecha>='2019-01-01'").order(:fecha).each do |m|
 
   #     if !saldos.has_key?(m.cuenta_id)
   #       saldos[m.cuenta_id] = 0
