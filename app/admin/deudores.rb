@@ -1,116 +1,96 @@
-ActiveAdmin.register_page "Deudores" do
+ActiveAdmin.register :Deudores do
 
-  menu priority: 70, label: "Deudores"
+  menu label: 'Deudores'
+  menu parent: 'Cuenta Corriente'
 
-  content do
-    render partial: 'deudores'
+  index do
+    #selectable_column
+
+    column "Cuenta", :cuenta_id
+    column "> 360", :deuda360
+    column "> 180", :deuda180
+    column "> 90", :deuda90
+    column "> 60", :deuda60
+    column "> 30", :deuda30
+    column "> 0", :deuda0
   end
+
+  filter :cuenta_id
 
   controller do
   	def index
-      @saldo = Hash.new
-      @deuda = Hash.new
-      @fecha = Hash.new
-      deuda = Hash.new
-      fecha = Hash.new
 
-      fecha_desde = Date.new(2000,1,1)
-      fecha_hasta = Date.new(2014,1,1)
-      ultima_fecha = Date.new(2019,1,1)
+      ActiveRecord::Base.connection.execute( "DELETE FROM deudores;" )
 
-      while fecha_desde < ultima_fecha do
+      saldos = Hash.new
+      fechas = Hash.new
+      importes = Hash.new
 
-        Mov.where("movgru=1 AND movcap=1 AND movrub=12 AND movsub=10 AND movfec>='#{fecha_desde.strftime('%Y-%m-%d')}' AND movfec<'#{fecha_hasta.strftime('%Y-%m-%d')}'").order(:movcta,:movfec).each do |m|
-          if ( !@saldo.has_key?(m.movcta.to_i) )
-            @saldo[m.movcta.to_i] = 0
-            deuda[m.movcta.to_i] = Array.new
-            fecha[m.movcta.to_i] = Array.new
-          end
-
-          d = m.movdeb - m.movhab
-		  if d <= 0
-		  	@saldo[m.movcta.to_i] = @saldo[m.movcta.to_i] - d
-		  else
-		  	deuda[m.movcta.to_i].push(d)
-		  	fecha[m.movcta.to_i].push(m.movfec)
-		  end
-
-		  while @saldo[m.movcta.to_i] > 0 && deuda[m.movcta.to_i].count > 0 do
-		  	if deuda[m.movcta.to_i][0] <= @saldo[m.movcta.to_i]
-              @saldo[m.movcta.to_i] = @saldo[m.movcta.to_i] - deuda[m.movcta.to_i][0]
-              deuda[m.movcta.to_i].delete_at(0)
-              fecha[m.movcta.to_i].delete_at(0)
-            else
-              deuda[m.movcta.to_i][0] = deuda[m.movcta.to_i][0] - @saldo[m.movcta.to_i]
-              @saldo[m.movcta.to_i] = 0
-		  	end		  	
-		  end
-        end
-
-      	fecha_desde = fecha_hasta
-      	fecha_hasta = fecha_hasta + 30.days
-      end
-
-      @saldo.keys.each do |k|
-        @fecha[k] = DateTime.now.to_date
-        @deuda[k] = 0
-        if deuda[k].count > 0
-          @fecha[k] = fecha[k][0]
-          deuda[k].each do |d|
-            @deuda[k] = @deuda[k] + d
-          end
-        end
-      end
-
-
-      @saldo2 = Hash.new
-      @deuda2 = Hash.new
-      @fecha2 = Hash.new
-      deuda = Hash.new
-      fecha = Hash.new
-
-      #Movimiento.where("id>=1300 AND fecha<='#{DateTime.now.strftime('%Y-%m-%d')}' AND (fecha>='2019-01-01' OR tipo=1005) ").order(:fecha).each do |m|
-      Movimiento.where("fecha<='#{DateTime.now.strftime('%Y-%m-%d')}'").order(:fecha).each do |m|
-        if ( !@saldo2.has_key?(m.cuenta_id.to_i) )
-          @saldo2[m.cuenta_id.to_i] = 0
-          deuda[m.cuenta_id.to_i] = Array.new
-          fecha[m.cuenta_id.to_i] = Array.new
-        end
+      Movimiento2018.all.order(:fecha).each do |m|
         
-        d = m.debe - m.haber
-        if d <= 0
-          @saldo2[m.cuenta_id.to_i] = @saldo2[m.cuenta_id.to_i] - d
-        else
-		  deuda[m.cuenta_id.to_i].push(d)
-		  fecha[m.cuenta_id.to_i].push(m.fecha)
-		end
+        if !saldos.has_key?(m.cuenta_id)
+          saldos[m.cuenta_id] = 0
+          fechas[m.cuenta_id] = Array.new
+          importes[m.cuenta_id] = Array.new
+        end
 
-		while @saldo2[m.cuenta_id.to_i] > 0 && deuda[m.cuenta_id.to_i].count > 0 do
-		  if deuda[m.cuenta_id.to_i][0] <= @saldo2[m.cuenta_id.to_i]
-            @saldo2[m.cuenta_id.to_i] = @saldo2[m.cuenta_id.to_i] - deuda[m.cuenta_id.to_i][0]
-            deuda[m.cuenta_id.to_i].delete_at(0)
-            fecha[m.cuenta_id.to_i].delete_at(0)
-          else
-            deuda[m.cuenta_id.to_i][0] = deuda[m.cuenta_id.to_i][0] - @saldo2[m.cuenta_id.to_i]
-            @saldo2[m.cuenta_id.to_i] = 0
-		  end		  	
-		end
+        if m.importe <= 0
+          saldos[m.cuenta_id] = saldos[m.cuenta_id] - m.importe
+        else
+          importes[m.cuenta_id].push(m.importe)
+          fechas[m.cuenta_id].push(m.fecha)
+        end
+
       end
 
+      Movimiento.all.order(:fecha).each do |m|
 
-      @saldo2.keys.each do |k|
-        @fecha2[k] = DateTime.now.to_date
-        @deuda2[k] = 0
-        if deuda[k].count > 0
-          @fecha2[k] = fecha[k][0]
-          deuda[k].each do |d|
-            @deuda2[k] = @deuda2[k] + d
+        if !saldos.has_key?(m.cuenta_id)
+          saldos[m.cuenta_id] = 0
+          fechas[m.cuenta_id] = Array.new
+          importes[m.cuenta_id] = Array.new
+        end
+
+        importe = m.debe-m.haber
+        if importe <= 0
+          saldos[m.cuenta_id] = saldos[m.cuenta_id] - importe
+        else
+          importes[m.cuenta_id].push(importe)
+          fechas[m.cuenta_id].push(m.fecha)
+        end
+      end
+
+      saldos.keys.each do |cuenta_id|
+        while saldos[cuenta_id] > 0 && importes[cuenta_id].Count > 0 do
+          if importes[cuenta_id][0] <= saldos[cuenta_id]
+            saldos[cuenta_id] = saldos[cuenta_id] - importes[cuenta_id][0];
+            importes[cuenta_id].delete_at(0);
+            fechas[cuenta_id].delete_at(0);
+          else
+            importes[cuenta_id][0] = importes[cuenta_id][0] - saldos[cuenta_id];
+            saldos[cuenta_id] = 0;
           end
         end
+      end
+
+      saldos.keys.each do |cuenta_id|
+        n_dias = [3600,360,180,90,60,30,0]
+        dias = [0,0,0,0,0,0]
+
+        if fechas[cuenta_id] > 0 
+          (0..fechas[cuenta_id].Count).each do |i|
+            (0..5).each do |d|
+              if (DateTime.now - fechas[cuenta][i]).to_i < n_dias[d] ) && (DateTime.now - fechas[cuenta_id][i]).to_i >= n_dias[d+1])
+                  dias[d] = dias[d] + importes[cuenta_id][i];
+              end
+            end
+          end
+        end
+
+        ActiveRecord::Base.connection.execute( "INSERT INTO deudores (cuenta_id,deuda360,deuda180,deuda90,deuda60,deuda30,deuda0) VALUES (#{cuenta_id},#{dias[0]},#{dias[1]},#{dias[2]},#{dias[3]},#{dias[4]},#{dias[5]});" )
       end
 
     end
-
   end
 
 end

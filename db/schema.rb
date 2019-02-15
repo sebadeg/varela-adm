@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_111330) do
+ActiveRecord::Schema.define(version: 2019_02_14_231011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,13 +251,17 @@ ActiveRecord::Schema.define(version: 2019_02_12_111330) do
     t.text "comentario"
   end
 
-  create_table "deudas", force: :cascade do |t|
+  create_table "deudores", force: :cascade do |t|
     t.bigint "cuenta_id"
-    t.date "fecha"
-    t.decimal "importe"
+    t.decimal "deuda360"
+    t.decimal "deuda180"
+    t.decimal "deuda90"
+    t.decimal "deuda60"
+    t.decimal "deuda30"
+    t.decimal "deuda0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cuenta_id"], name: "index_deudas_on_cuenta_id"
+    t.index ["cuenta_id"], name: "index_deudores_on_cuenta_id"
   end
 
   create_table "direcciones", force: :cascade do |t|
@@ -521,6 +525,15 @@ ActiveRecord::Schema.define(version: 2019_02_12_111330) do
     t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "movimiento2018s", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_movimiento2018s_on_cuenta_id"
   end
 
   create_table "movimientos", id: :serial, force: :cascade do |t|
@@ -833,7 +846,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_111330) do
   add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
-  add_foreign_key "deudas", "cuentas"
+  add_foreign_key "deudores", "cuentas"
   add_foreign_key "direcciones", "usuarios"
   add_foreign_key "especial_alumnos", "alumnos"
   add_foreign_key "especial_alumnos", "especiales"
@@ -853,6 +866,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_111330) do
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "listas", "sectores"
+  add_foreign_key "movimiento2018s", "cuentas"
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"

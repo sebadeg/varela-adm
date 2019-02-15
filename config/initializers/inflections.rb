@@ -25,6 +25,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'placta', 'plactas'
   inflect.irregular 'aactividad', 'aactividades'
   inflect.irregular 'aactividad_opcion', 'aactividad_opciones'
+  inflect.irregular 'deudor', 'deudores'
+  inflect.irregular 'movimiento2018', 'movimiento2018s'
 
 end
 

@@ -1,4 +1,4 @@
-class CreateDeudas < ActiveRecord::Migration[5.2]
+class CreateMovimiento2018s < ActiveRecord::Migration[5.2]
   def change
     create_table :deudas do |t|
       t.belongs_to :cuenta, foreign_key: true

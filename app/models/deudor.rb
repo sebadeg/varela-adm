@@ -1,0 +1,2 @@
+class Deudor < ApplicationRecord
+end
