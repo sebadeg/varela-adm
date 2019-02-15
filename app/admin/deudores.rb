@@ -6,6 +6,10 @@ ActiveAdmin.register Deudor do
   menu parent: 'Cuenta Corriente'
 
   action_item :calcular, only: :index do
+    link_to "Calcular", calcular_admin_deudores_path
+  end
+
+  collection_action :calcular do
 
     ActiveRecord::Base.connection.execute( "DELETE FROM deudores;" )
     ActiveRecord::Base.connection.execute( "ALTER SEQUENCE deudores_id_seq RESTART WITH 1;" )
