@@ -81,7 +81,7 @@ ActiveAdmin.register Deudor do
         if fechas[cuenta_id].count > 0 
           (0..fechas[cuenta_id].count-1).each do |i|
             (0..5).each do |d|
-              if ((DateTime.now - fechas[cuenta][i]).to_i < n_dias[d] ) && ((DateTime.now - fechas[cuenta_id][i]).to_i >= n_dias[d+1])
+              if ((DateTime.now - fechas[cuenta_id][i]).to_i < n_dias[d] ) && ((DateTime.now - fechas[cuenta_id][i]).to_i >= n_dias[d+1])
                   dias[d] = dias[d] + importes[cuenta_id][i];
               end
             end
