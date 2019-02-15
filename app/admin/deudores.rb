@@ -1,4 +1,4 @@
-ActiveAdmin.register :Deudores do
+ActiveAdmin.register Deudor do
 
   menu label: 'Deudores'
   menu parent: 'Cuenta Corriente'
@@ -43,52 +43,52 @@ ActiveAdmin.register :Deudores do
 
       end
 
-      Movimiento.all.order(:fecha).each do |m|
+      # Movimiento.all.order(:fecha).each do |m|
 
-        if !saldos.has_key?(m.cuenta_id)
-          saldos[m.cuenta_id] = 0
-          fechas[m.cuenta_id] = Array.new
-          importes[m.cuenta_id] = Array.new
-        end
+      #   if !saldos.has_key?(m.cuenta_id)
+      #     saldos[m.cuenta_id] = 0
+      #     fechas[m.cuenta_id] = Array.new
+      #     importes[m.cuenta_id] = Array.new
+      #   end
 
-        importe = m.debe-m.haber
-        if importe <= 0
-          saldos[m.cuenta_id] = saldos[m.cuenta_id] - importe
-        else
-          importes[m.cuenta_id].push(importe)
-          fechas[m.cuenta_id].push(m.fecha)
-        end
-      end
+      #   importe = m.debe-m.haber
+      #   if importe <= 0
+      #     saldos[m.cuenta_id] = saldos[m.cuenta_id] - importe
+      #   else
+      #     importes[m.cuenta_id].push(importe)
+      #     fechas[m.cuenta_id].push(m.fecha)
+      #   end
+      # end
 
-      saldos.keys.each do |cuenta_id|
-        while saldos[cuenta_id] > 0 && importes[cuenta_id].Count > 0 do
-          if importes[cuenta_id][0] <= saldos[cuenta_id]
-            saldos[cuenta_id] = saldos[cuenta_id] - importes[cuenta_id][0];
-            importes[cuenta_id].delete_at(0);
-            fechas[cuenta_id].delete_at(0);
-          else
-            importes[cuenta_id][0] = importes[cuenta_id][0] - saldos[cuenta_id];
-            saldos[cuenta_id] = 0;
-          end
-        end
-      end
+      # saldos.keys.each do |cuenta_id|
+      #   while saldos[cuenta_id] > 0 && importes[cuenta_id].Count > 0 do
+      #     if importes[cuenta_id][0] <= saldos[cuenta_id]
+      #       saldos[cuenta_id] = saldos[cuenta_id] - importes[cuenta_id][0];
+      #       importes[cuenta_id].delete_at(0);
+      #       fechas[cuenta_id].delete_at(0);
+      #     else
+      #       importes[cuenta_id][0] = importes[cuenta_id][0] - saldos[cuenta_id];
+      #       saldos[cuenta_id] = 0;
+      #     end
+      #   end
+      # end
 
-      saldos.keys.each do |cuenta_id|
-        n_dias = [3600,360,180,90,60,30,0]
-        dias = [0,0,0,0,0,0]
+      # saldos.keys.each do |cuenta_id|
+      #   n_dias = [3600,360,180,90,60,30,0]
+      #   dias = [0,0,0,0,0,0]
 
-        if fechas[cuenta_id] > 0 
-          (0..fechas[cuenta_id].Count).each do |i|
-            (0..5).each do |d|
-              if (DateTime.now - fechas[cuenta][i]).to_i < n_dias[d] ) && (DateTime.now - fechas[cuenta_id][i]).to_i >= n_dias[d+1])
-                  dias[d] = dias[d] + importes[cuenta_id][i];
-              end
-            end
-          end
-        end
+      #   if fechas[cuenta_id] > 0 
+      #     (0..fechas[cuenta_id].Count).each do |i|
+      #       (0..5).each do |d|
+      #         if (DateTime.now - fechas[cuenta][i]).to_i < n_dias[d] ) && (DateTime.now - fechas[cuenta_id][i]).to_i >= n_dias[d+1])
+      #             dias[d] = dias[d] + importes[cuenta_id][i];
+      #         end
+      #       end
+      #     end
+      #   end
 
-        ActiveRecord::Base.connection.execute( "INSERT INTO deudores (cuenta_id,deuda360,deuda180,deuda90,deuda60,deuda30,deuda0) VALUES (#{cuenta_id},#{dias[0]},#{dias[1]},#{dias[2]},#{dias[3]},#{dias[4]},#{dias[5]});" )
-      end
+      #   ActiveRecord::Base.connection.execute( "INSERT INTO deudores (cuenta_id,deuda360,deuda180,deuda90,deuda60,deuda30,deuda0) VALUES (#{cuenta_id},#{dias[0]},#{dias[1]},#{dias[2]},#{dias[3]},#{dias[4]},#{dias[5]});" )
+      # end
 
     end
   end
