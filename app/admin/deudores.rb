@@ -6,7 +6,7 @@ ActiveAdmin.register Deudor do
   menu parent: 'Cuenta Corriente'
 
   action_item :calcular, only: :index do
-  #   link_to "Calcular", calcular_admin_deudores_path
+    link_to "Calcular", admin_deudores_path
   end
 
   # member_action :calcular do
