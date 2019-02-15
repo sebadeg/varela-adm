@@ -21,6 +21,7 @@ ActiveAdmin.register Deudor do
   	def index
 
       ActiveRecord::Base.connection.execute( "DELETE FROM deudores;" )
+      ActiveRecord::Base.connection.execute( "ALTER SEQUENCE deudores_id_seq RESTART WITH 1;" )
 
       saldos = Hash.new
       fechas = Hash.new
