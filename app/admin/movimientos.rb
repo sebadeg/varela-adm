@@ -6,7 +6,7 @@ ActiveAdmin.register Movimiento do
   menu label: 'Movimientos'
   menu parent: 'Cuenta Corriente'
 
-  #before_action :reset_saldo, only: [:index]
+  before_action :reset_saldo, only: [:index]
 
   saldo = 0
 
@@ -25,13 +25,15 @@ ActiveAdmin.register Movimiento do
   filter :cuenta_id
 
   controller do    
-    # def reset_saldo
-    #   p "-----------"
-    #   p "-----------"
-    #   p "Reset saldo"
-    #   p "-----------"
-    #   p "-----------"
-    # end
+    def reset_saldo
+      p "-----------"
+      p "-----------"
+      p "Reset saldo"
+      p "-----------"
+      p "-----------"
+      saldo = 0
+
+    end
 
     def index
       index! do |format|
@@ -39,7 +41,7 @@ ActiveAdmin.register Movimiento do
 
         p "---------------"
         p "---------------"
-        p params[:cuenta_id]
+        p params
         p "---------------"
         p "---------------"
 
