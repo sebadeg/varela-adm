@@ -38,12 +38,17 @@ ActiveAdmin.register Movimiento do
     def index
       index! do |format|
         saldo = 0
+        params[:saldo] = "0"
 
+        p "---------------"
+        p "---------------"
+        p params[:q][:cuenta_id_equals]
         p "---------------"
         p "---------------"
         p params
         p "---------------"
         p "---------------"
+
 
         #@user_tasks = UserTask.where(:user_id => current_user.id).page(params[:page])
         format.html
