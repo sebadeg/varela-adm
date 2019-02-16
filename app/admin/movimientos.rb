@@ -34,12 +34,17 @@ ActiveAdmin.register Movimiento do
     # end
 
     def index
-       p "-----------"
-       p "-----------"
-       p "index"
-       p params
-       p "-----------"
-       p "-----------"
+      index! do |format|
+         p "-----------"
+         p "-----------"
+         p "index"
+         p params
+         P format
+         p "-----------"
+         p "-----------"
+        #@user_tasks = UserTask.where(:user_id => current_user.id).page(params[:page])
+        format.html
+      end
     end
 
     #   if params[:cuenta_id_equals] != nil
