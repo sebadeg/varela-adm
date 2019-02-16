@@ -1,6 +1,6 @@
 ActiveAdmin.register Movimiento do
 
-  config.sort_order = 'fecha_asc'
+  config.sort_order = 'fecha'
 
 
   menu label: 'Movimientos'
