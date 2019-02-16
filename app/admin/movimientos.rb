@@ -21,7 +21,7 @@ ActiveAdmin.register Movimiento do
 
   filter :cuenta_id
 
-  controller
+  controller do
 
     def index
       if params[:cuenta_id]==nil 
