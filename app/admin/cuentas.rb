@@ -1,6 +1,6 @@
 ActiveAdmin.register Cuenta do
 
-  permit_params :id, :nombre, :apellido, :comentario
+  permit_params :id, :nombre, :comentario
 
   menu priority: 21
 
@@ -10,19 +10,16 @@ ActiveAdmin.register Cuenta do
       link_to cuenta.id, admin_cuenta_path(cuenta.id)
     end
     column :nombre
-    column :apellido    
     actions
   end
 
   filter :id, label: "Cuenta"
   filter :nombre, as: :string
-  filter :apellido, as: :string
 
  show do
     attributes_table do
       row :id
       row :nombre 
-      row :apellido
       row :comentario
       row :info
     end
@@ -32,7 +29,6 @@ ActiveAdmin.register Cuenta do
     f.inputs "Cuentas" do
       f.input :id
       f.input :nombre
-      f.input :apellido
       f.input :comentario
     end
     f.actions
