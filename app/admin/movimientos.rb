@@ -23,12 +23,14 @@ ActiveAdmin.register Movimiento do
 
   filter :cuenta_id
 
-  #controller do    
-    # def index
+  controller do    
+    def index
+      saldo = 0
+    end
     #   if params[:cuenta_id_equals] != nil
     #     cuenta = params[:cuenta_id_equals].to_i
     #   end
     # end
-  #end
-  
+  end
+
 end
