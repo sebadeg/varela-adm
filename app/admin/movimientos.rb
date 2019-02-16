@@ -6,7 +6,8 @@ ActiveAdmin.register Movimiento do
   menu label: 'Movimientos'
   menu parent: 'Cuenta Corriente'
 
-  saldo = 0
+  before_action :reset_saldo, only: [:index]
+
   #cuenta = nil
 
   index do
@@ -18,14 +19,14 @@ ActiveAdmin.register Movimiento do
     column "Descripción", :descripcion
     column "Debe", :debe
     column "Haber", :haber
-    column "Saldo" do |mov| mov.cuenta_id == 12121 ? saldo = saldo + mov.debe - mov.haber : "" end
+    column "Saldo" do |mov| mov.cuenta_id == 12121 ? @saldo = @saldo + mov.debe - mov.haber : "" end
   end
 
   filter :cuenta_id
 
   controller do    
-    def index
-      saldo = 0
+    def reset_saldo
+      @saldo = 0
     end
     #   if params[:cuenta_id_equals] != nil
     #     cuenta = params[:cuenta_id_equals].to_i
