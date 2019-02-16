@@ -17,9 +17,7 @@ ActiveAdmin.register Movimiento do
     column "Descripción", :descripcion
     column "Debe", :debe
     column "Haber", :haber
-    column "Saldo" do |mov| 
-      saldo = saldo + mov.debe - mov.haber if mov.cuenta_id.to_s == params[:cuenta_id_equals]
-    end
+    column "Saldo" do |mov| (mov.cuenta_id.to_s == params[:cuenta_id_equals]) ? saldo = saldo + mov.debe - mov.haber : "" end
   end
 
   filter :cuenta_id
