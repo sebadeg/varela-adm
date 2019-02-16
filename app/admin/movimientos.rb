@@ -1,6 +1,6 @@
 ActiveAdmin.register Movimiento do
 
-  config.sort_order = 'fecha'
+  config.sort_order = 'fecha_asc,tipo_asc,id_asc'
 
 
   menu label: 'Movimientos'
@@ -9,13 +9,13 @@ ActiveAdmin.register Movimiento do
   index do
   	#selectable_column
 
-    column "Fecha", :fecha
-    column "Cuenta", :cuenta_id
-    column "Alumno", :alumno
-    column "Descripción", :descripcion
-    column "Debe", :debe
-    column "Haber", :haber
-    column "Saldo", :saldo
+    column "Fecha", :fecha, sortable: false
+    column "Cuenta", :cuenta_id, sortable: false
+    column "Alumno", :alumno, sortable: false
+    column "Descripción", :descripcion, sortable: false
+    column "Debe", :debe, sortable: false
+    column "Haber", :haber, sortable: false
+    column "Saldo", :saldo, sortable: false
   end
 
   filter :cuenta_id
