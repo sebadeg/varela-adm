@@ -7,7 +7,7 @@ ActiveAdmin.register Movimiento do
   menu parent: 'Cuenta Corriente'
 
   saldo = 0
-
+  cuenta = nil
   index do
   	#selectable_column
 
@@ -22,4 +22,13 @@ ActiveAdmin.register Movimiento do
 
   filter :cuenta_id
 
+  controller do    
+    def index
+      if params[:cuenta_id_equals] != nil
+        cuenta = params[:cuenta_id_equals].to_i
+      end
+    end
+
+    
+  end
 end
