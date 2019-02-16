@@ -25,7 +25,7 @@ ActiveAdmin.register Movimiento do
     def index
       index! do |format|
 
-        ActiveRecord::Base.connection.execute( "UPDATE movimientos SET saldo=nil;" )
+        ActiveRecord::Base.connection.execute( "UPDATE movimientos SET saldo=NULL;" )
 
         if params[:q] != nil && params[:q][:cuenta_id_equals] != nil
           s = 0
@@ -34,7 +34,7 @@ ActiveAdmin.register Movimiento do
             mov.update(saldo: s)
           end
         end
-        
+
         format.html
       end
     end
