@@ -25,13 +25,16 @@ ActiveAdmin.register Movimiento do
     def index
       index! do |format|
 
-        ActiveRecord::Base.connection.execute( "UPDATE movimientos SET saldo=0;" )
-        
-        s = 0
-        Movimiento.where("cuenta_id=#{params[:q][:cuenta_id_equals]}").order(:fecha,;tipo,:id).each do |mov|
-          s = s + mov.debe - mov.haber
-          mov.update(saldo: s)
+        ActiveRecord::Base.connection.execute( "UPDATE movimientos SET saldo=nil;" )
+
+        if params[:q] != nil && params[:q][:cuenta_id_equals] != nil
+          s = 0
+          Movimiento.where("cuenta_id=#{params[:q][:cuenta_id_equals]}").order(:fecha,:tipo,:id).each do |mov|
+            s = s + mov.debe - mov.haber
+            mov.update(saldo: s)
+          end
         end
+        
         format.html
       end
     end
