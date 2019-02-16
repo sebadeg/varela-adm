@@ -4,6 +4,9 @@ ActiveAdmin.register Cuenta do
 
   menu priority: 21
 
+  scope :concurre
+  scope :todos 
+
   index do
   	#selectable_column
     column "Cuenta" do |cuenta|
