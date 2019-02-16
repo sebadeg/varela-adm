@@ -24,6 +24,7 @@ ActiveAdmin.register Cuenta do
       row :nombre 
       row :apellido
       row :comentario
+      row :info
     end
   end
 
