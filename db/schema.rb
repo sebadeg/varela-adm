@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_230003) do
+ActiveRecord::Schema.define(version: 2019_02_15_230004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -562,6 +562,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_230003) do
     t.integer "factura"
     t.bigint "recibo_id"
     t.decimal "saldo"
+    t.integer "indice"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"

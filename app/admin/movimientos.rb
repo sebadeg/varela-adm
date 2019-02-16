@@ -1,6 +1,8 @@
 ActiveAdmin.register Movimiento do
 
-  config.sort_order = 'fecha_asc,tipo_asc,id_asc'
+  actions :index
+
+  config.sort_order = 'indice_asc'
 
 
   menu label: 'Movimientos'
@@ -25,13 +27,14 @@ ActiveAdmin.register Movimiento do
     def index
       index! do |format|
 
-        ActiveRecord::Base.connection.execute( "UPDATE movimientos SET saldo=NULL;" )
 
         if params[:q] != nil && params[:q][:cuenta_id_equals] != nil
+          i = 0
           s = 0
           Movimiento.where("cuenta_id=#{params[:q][:cuenta_id_equals]}").order(:fecha,:tipo,:id).each do |mov|
             s = s + mov.debe - mov.haber
-            mov.update(saldo: s)
+            mov.update(saldo: s, indice: i)
+            i = i + 1
           end
         end
 
