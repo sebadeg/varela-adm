@@ -8,7 +8,7 @@ ActiveAdmin.register Movimiento do
 
   before_action :reset_saldo, only: [:index]
 
-  #cuenta = nil
+  @saldo = 0
 
   index do
   	#selectable_column
@@ -27,6 +27,10 @@ ActiveAdmin.register Movimiento do
   controller do    
     def reset_saldo
       @saldo = 0
+    end
+
+    def index
+      p params
     end
     #   if params[:cuenta_id_equals] != nil
     #     cuenta = params[:cuenta_id_equals].to_i
