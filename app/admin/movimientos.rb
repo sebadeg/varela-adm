@@ -9,7 +9,6 @@ ActiveAdmin.register Movimiento do
   before_action :reset_saldo, only: [:index]
 
   saldo = 0
-  cuenta = nil
 
   index do
   	#selectable_column
@@ -36,7 +35,7 @@ ActiveAdmin.register Movimiento do
       p "-----------"
       p "-----------"
       p params
-      p cuenta
+      p @current_tab
       p "-----------"
       p "-----------"
       p "-----------"
