@@ -8,7 +8,7 @@ ActiveAdmin.register Movimiento do
 
   before_action :reset_saldo, only: [:index]
 
-  saldo = 0
+  #saldo = 0
 
   index do
   	#selectable_column
@@ -19,25 +19,26 @@ ActiveAdmin.register Movimiento do
     column "Descripción", :descripcion
     column "Debe", :debe
     column "Haber", :haber
-    column "Saldo" do |mov| mov.cuenta_id == 12121 ? saldo = saldo + mov.debe - mov.haber : "" end
+    #column "Saldo" do |mov| mov.cuenta_id == 12121 ? saldo = saldo + mov.debe - mov.haber : "" end
   end
 
   filter :cuenta_id
 
   controller do    
     def reset_saldo
-      saldo = 0
+      p "-----------"
+      p "-----------"
+      p "Reset saldo"
+      p "-----------"
+      p "-----------"
     end
 
     def index
       p "-----------"
       p "-----------"
-      p "-----------"
-      p "-----------"
+      p "index"
       p params
       p @current_tab
-      p "-----------"
-      p "-----------"
       p "-----------"
       p "-----------"
     end
