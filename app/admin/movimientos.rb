@@ -15,7 +15,7 @@ ActiveAdmin.register Movimiento do
     column "Descripción", :descripcion
     column "Debe", :debe
     column "Haber", :haber
-    column "Saldo" do |mov| mov.cuenta_id.to_s == params[:q][:cuenta_id_equals] ? params[:saldo] = (params[:saldo].to_f + mov.debe - mov.haber).to_s : "" end
+    column "Saldo", :saldo
   end
 
   filter :cuenta_id
@@ -24,8 +24,14 @@ ActiveAdmin.register Movimiento do
 
     def index
       index! do |format|
-        params[:saldo] = "0"
-        #@user_tasks = UserTask.where(:user_id => current_user.id).page(params[:page])
+
+        ActiveRecord::Base.connection.execute( "UPDATE movimientos SET saldo=0;" )
+        
+        s = 0
+        Movimiento.where("cuenta_id=#{params[:q][:cuenta_id_equals]}").order(:fecha,;tipo,:id).each do |mov|
+          s = s + mov.debe - mov.haber
+          mov.update(saldo: s)
+        end
         format.html
       end
     end
