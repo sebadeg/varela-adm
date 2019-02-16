@@ -1,9 +1,11 @@
 ActiveAdmin.register Movimiento do
 
+  config.sort_order = 'fecha_asc'
+
+
   menu label: 'Movimientos'
   menu parent: 'Cuenta Corriente'
 
-  config.sort_order = 'fecha_asc'
 
   index do
   	#selectable_column
@@ -38,7 +40,7 @@ ActiveAdmin.register Movimiento do
   #       mov.update!
   #     end
 
-  #   end 
+     end 
 
   end
 
