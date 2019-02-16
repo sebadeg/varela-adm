@@ -1,14 +1,10 @@
 ActiveAdmin.register Movimiento do
 
-  #config.sort_order = 'fecha'
+  config.sort_order = 'fecha'
 
 
   menu label: 'Movimientos'
   menu parent: 'Cuenta Corriente'
-
-  before_action :reset_saldo, only: [:index]
-
-  saldo = 0
 
   index do
   	#selectable_column
@@ -19,37 +15,16 @@ ActiveAdmin.register Movimiento do
     column "Descripción", :descripcion
     column "Debe", :debe
     column "Haber", :haber
-    column "Saldo" do |mov| mov.cuenta_id == 12121 ? saldo = saldo + mov.debe - mov.haber : "" end
+    column "Saldo" do |mov| mov.cuenta_id == params[:q][:cuenta_id_equals] ? params[:saldo] = (params[:saldo].to_f + mov.debe - mov.haber).to_s : "" end
   end
 
   filter :cuenta_id
 
   controller do    
-    def reset_saldo
-      p "-----------"
-      p "-----------"
-      p "Reset saldo"
-      p "-----------"
-      p "-----------"
-      saldo = 0
-
-    end
 
     def index
       index! do |format|
-        saldo = 0
         params[:saldo] = "0"
-
-        p "---------------"
-        p "---------------"
-        p params[:q][:cuenta_id_equals]
-        p "---------------"
-        p "---------------"
-        p params
-        p "---------------"
-        p "---------------"
-
-
         #@user_tasks = UserTask.where(:user_id => current_user.id).page(params[:page])
         format.html
       end
