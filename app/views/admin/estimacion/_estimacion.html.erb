@@ -3,7 +3,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <% h = Hash.new %>
-<% (1001..1004).each do |tipo| %>
+<% (1001..1005).each do |tipo| %>
     <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |m| %>
         <% if !h.has_key?(m.fecha) %>
             <% h[m.fecha] = Hash.new %>
@@ -18,7 +18,7 @@
     		<form>
                 <table class="index_table index">
                 <thead>
-                <tr><th>Fecha</th><th>Cuotas</th><th>Extracurricular</th><th>Recargos</th><th>Refinanciación</th><th>Total</th></tr>
+                <tr><th>Fecha</th><th>Cuotas</th><th>Extracurricular</th><th>Recargos</th><th>Refinanciación</th><th>Total</th><th>Cobrado</th></tr>
                 </thead>
                 <tbody>
                     <% i = 0 %>
@@ -29,6 +29,7 @@
                         <% recargos = (h[k].has_key?(1003) ? h[k][1003] : 0) %>
                         <% refin = (h[k].has_key?(1004) ? h[k][1004] : 0) %>
                         <% total = cuota + extra + recargos + refin %>
+                        <% cobrado = (h[k].has_key?(1005) ? h[k][1005] : 0) %>
 
                         <% if i % 2 == 0 %>
                             <tr class="odd">
@@ -36,7 +37,7 @@
                             <tr class="even">
                         <% end %>
                         <% i = i+1 %>
-                        <td><%= k.strftime('%d/%m/%Y') %></td><td><%= cuota %></td><td><%= extra %></td><td><%= recargos %></td><td><%= refin %></td><td><%= total %></td></tr>
+                        <td><%= k.strftime('%d/%m/%Y') %></td><td><%= cuota %></td><td><%= extra %></td><td><%= recargos %></td><td><%= refin %></td><td><%= total %></td><td><%= cobrado %></td></tr>
                     <% end %>
                 </tbody>
                 </table>
