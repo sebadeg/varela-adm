@@ -2,24 +2,41 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<% h = Hash.new %>
+<% (1001..1004).each do |tipo| %>
+    <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |m| %>
+        <% if !h.has_key?(m.fecha) %>
+            <% h[m.fecha] = Hash.new %>
+        <% end %>
+        h[m.fecha][tipo] = m.suma
+    <% end %>
+<% end %>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6">
     		<form>
                 <table class="index_table index">
                 <thead>
-                <tr><th>Fecha</th><th>Total</th></tr>
+                <tr><th>Fecha</th><th>Cuotas</th><th>Extracurricular</th><th>Recargos</th><th>Refinanciación</th><th>Total</th></tr>
                 </thead>
                 <tbody>
                     <% i = 0 %>
-                    <% Movimiento.where("fecha>='2019-01-01' AND tipo>=1001 AND tipo<=1004").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |x| %>
+                    <% h.keys.each do |k| %>
+                    
+                        <% cuota = (h[k].has_key?(1001) ? h[k][1001] : 0) %>
+                        <% extra = (h[k].has_key?(1002) ? h[k][1002] : 0) %>
+                        <% recargos = (h[k].has_key?(1003) ? h[k][1003] : 0) %>
+                        <% refin = (h[k].has_key?(1004) ? h[k][1004] : 0) %>
+                        <% total = cuota + extra + recargos + refin %>
+
                         <% if i % 2 == 0 %>
                             <tr class="odd">
                         <% else %>
                             <tr class="even">
                         <% end %>
                         <% i = i+1 %>
-                        <td><%= x.fecha.strftime('%d/%m/%Y') %></td><td><%= x.suma %></td></tr>
+                        <td><%= k.strftime('%d/%m/%Y') %></td><td><%= cuota %></td><td><%= extra %></td><td><%= recargos %></td><td><%= refin %></td><td><%= total %></td></tr>
                     <% end %>
                 </tbody>
                 </table>
