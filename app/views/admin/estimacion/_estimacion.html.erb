@@ -4,7 +4,8 @@
 
 <% h = Hash.new %>
 <% (1001..1005).each do |tipo| %>
-    <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |m| %>
+    <% columna = tipo == 1005 ? "haber" : "debe" %>
+    <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(#{columna}) as suma").group(:fecha).order(:fecha).each do |m| %>
         <% if !h.has_key?(m.fecha) %>
             <% h[m.fecha] = Hash.new %>
         <% end %>
