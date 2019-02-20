@@ -19,7 +19,7 @@
                             <tr class="even">
                         <% end %>
                         <% i = i+1 %>
-                        <td><%= x.fecha %></td><td><%= x.suma %></td></tr>
+                        <td><%= x.fecha.strftime('%d/%m/%Y') %></td><td><%= x.suma %></td></tr>
                     <% end %>
                 </tbody>
                 </table>
