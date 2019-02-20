@@ -131,12 +131,12 @@ ActiveAdmin.register_page "Pendiente" do
     file_name = "sistarbanc.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
-      vencimiento = "10/02/2019"
-      inicio = "01/02/2019"
-      mes = 2
+      vencimiento = "10/03/2019"
+      inicio = "01/03/2019"
+      mes = 3
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.where("fecha='2019-02-01'").each do |x|
+      Factura.where("fecha='2019-03-01'").each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
@@ -156,13 +156,13 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "redpagos.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "28/02/2019"
-       inicio = "01/02/2019"
-       mes = 2
+       vencimiento = "31/03/2019"
+       inicio = "01/03/2019"
+       mes = 3
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.where("fecha='2019-02-01'").each do |x|
+      Factura.where("fecha='2019-03-01'").each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
@@ -184,15 +184,15 @@ ActiveAdmin.register_page "Pendiente" do
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
 
-       vencimiento = "28/02/2019"
-       inicio = "01/02/2019"
-       titulo = "FACTURACION FEB/2019"      
+       vencimiento = "31/03/2019"
+       inicio = "01/03/2019"
+       titulo = "FACTURACION MAR/2019"      
 
        cantidad = 0
        suma = 0
 
        f.write("13|16|1\r\n")
-      Factura.where("fecha='2019-02-01'").each do |x|
+      Factura.where("fecha='2019-03-01'").each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
@@ -221,15 +221,15 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "brou.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "10/02/2019"
-       inicio = "01/02/2019"        
-       titulo = "FACTURACION FEB/2019"
-       dia = 10
-       mes = 2
+       vencimiento = "11/03/2019" #no puede ser sabado
+       inicio = "01/03/2019"        
+       titulo = "FACTURACION MAR/2019"
+       dia = 11           #no puede ser sabado
+       mes = 3
        anio = 2019
        cantidad = 0
        suma = 0
-       Factura.where("cuenta_id IN (11601,11624,11795,11983,12037,12776,13857) AND fecha='2019-02-01'").each do |x|
+       Factura.where("cuenta_id IN (11601,11624,11795,11983,12037,12776,13857) AND fecha='2019-03-01'").each do |x|
          cuenta = x.cuenta_id
          nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
          importe = x.total
@@ -238,7 +238,7 @@ ActiveAdmin.register_page "Pendiente" do
          str = ("#{nombre} -DEB.AUT.BROU" + ' ' * 48)[0,48]
          suma = suma + importe 
          cantidad = cantidad+1
-         f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000#{factura}A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\r\n" )
+         f.write("1 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}#{cuenta}000000000000450798A00000000000#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}00000#{(importe*100).round(0).to_s.rjust(10, "0")}0000000000000#{str}0000000000000000000000000000000000000000000000000000000000\r\n" )
        end
        f.write("2 00100#{(anio%100).to_s.rjust(2, "0")}#{mes.to_s.rjust(2, "0")}#{dia.to_s.rjust(2, "0")}0000#{cantidad.to_s.rjust(2, "0")}00000000#{(suma*100).round(0).to_s.rjust(10, "0")}00000000000000000000000000000000000000000000000000000000000000000000000000000000111111111110000000000000000000000000000000000000000000000000000000000\r\n")
 	end
