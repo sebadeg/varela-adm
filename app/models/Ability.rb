@@ -26,6 +26,9 @@ class Ability
 
       can :manage, Recibo
 
+      can :manage, ActiveAdmin::Page, :name => "Estimación"
+
+
       can :manage, Especial
       can :manage, Pago
       can :manage, ActiveAdmin::Page, :name => "Lote_pago"

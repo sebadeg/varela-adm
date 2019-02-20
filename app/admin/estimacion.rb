@@ -1,4 +1,4 @@
-ActiveAdmin.register_page "Estimacion" do
+ActiveAdmin.register_page "Estimación" do
 
   menu priority: 70, label: "Estimación"
   menu parent: 'Facturación'
