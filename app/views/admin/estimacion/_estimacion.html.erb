@@ -3,13 +3,22 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <% h = Hash.new %>
-<% (1001..1005).each do |tipo| %>
-    <% columna = tipo == 1005 ? "haber" : "debe" %>
-    <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(#{columna}) as suma").group(:fecha).order(:fecha).each do |m| %>
+<% (1001..1004).each do |tipo| %>
+    <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |m| %>
         <% if !h.has_key?(m.fecha) %>
             <% h[m.fecha] = Hash.new %>
         <% end %>
         <% h[m.fecha][tipo] = m.suma %>
+    <% end %>
+<% end %>
+
+<% fecha_ant = nil %>
+<% fecha_pos = nil %>
+<% h.keys.each do |k| %>
+    <% fecha_ant = fecha_pos %>
+    <% fecha_pos = k %>
+    <% if fecha_ant != nil %>
+        <% h[fecha_ant][1005] = Movimiento.where("fecha>='#{fecha_ant.strftime('%Y-%m-%d')}' AND fecha<'#{fecha_pos.strftime('%Y-%m-%d')}' AND tipo=1005").sum(:haber) %>
     <% end %>
 <% end %>
 
