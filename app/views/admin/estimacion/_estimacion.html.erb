@@ -1,0 +1,30 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6">
+    		<form>
+                <table class="index_table index">
+                <thead>
+                <tr><th>Fecha</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    <% i = 0 %>
+                    <% Movimiento.where("fecha>='2019-01-01' AND tipo>=1001 AND tipo<=1004").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |x| %>
+                        <% if i % 2 == 0 %>
+                            <tr class="odd">
+                        <% else %>
+                            <tr class="even">
+                        <% end %>
+                        <% i = i+1 %>
+                        <td><%= x.fecha %></td><td><%= x.suma %></td></tr>
+                    <% end %>
+                </tbody>
+                </table>
+    		</form>
+		</div>
+	</div>
+</div>
+
