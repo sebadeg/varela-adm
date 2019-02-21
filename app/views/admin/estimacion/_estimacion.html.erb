@@ -3,7 +3,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <% h = Hash.new %>
-<% [999,1001,1002,1003,1004].each do |tipo| %>
+<% [1001,999,1002,1003,1004].each do |tipo| %>
     <% Movimiento.where("fecha>='2019-01-01' AND tipo=#{tipo}").select("fecha, SUM(debe) as suma").group(:fecha).order(:fecha).each do |m| %>
         <% if !h.has_key?(m.fecha) %>
             <% h[m.fecha] = Hash.new %>
