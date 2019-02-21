@@ -39,13 +39,13 @@ ActiveAdmin.register Especial do
 
     f.inputs do
       f.has_many :especial_cuenta, heading: "Cuentas", allow_destroy: true, new_record: true do |l|
-        l.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.all.order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
+        l.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
       end
     end
 
     f.inputs do
       f.has_many :especial_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.where("NOT nombre IS NULL AND nombre != ''").all.order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
       end
     end
 
