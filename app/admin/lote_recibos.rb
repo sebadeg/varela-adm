@@ -1,6 +1,6 @@
 ActiveAdmin.register LoteRecibo do
 
-  #menu label: 'Recibos', priority: 22 
+  menu label: 'Recibos2', priority: 23 
 
   # permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
   #   recibo_attributes: [:id,:lote_recibo_id,:cuenta_id,:nombre,:fecha,:importe,:suma,:concepto,:cheque,:banco,:fecha_vto,:hoja_nro,:_destroy,:locale],
@@ -35,13 +35,16 @@ ActiveAdmin.register LoteRecibo do
     actions
   end
 
-  # show do
-  #   attributes_table do
-  #     row "Cuenta" do |r| "#{r.cuenta.id} - #{r.cuenta.nombre}" end
-  #     row :nombre
-  #     row :concepto
-  #     row :hoja_nro
-  #     row "Recibos" do |r|
+  filter :cuenta_id, :label => 'Cuenta', :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
+
+
+  show do
+    attributes_table do
+      row "Cuenta" do |r| "#{r.cuenta.id} - #{r.cuenta.nombre}" end
+      row :nombre
+      row :concepto
+      row :hoja_nro
+  #    row "Recibos" do |r|
   #       table_for Recibo.where("lote_recibo_id=#{r.id})").order(:id) do |t|
   #         t.column :fecha
   #         t.column :fecha_vto
@@ -50,16 +53,16 @@ ActiveAdmin.register LoteRecibo do
   #         t.column :importe
   #       end
   #     end
-  #   end
-  # end
+    end
+  end
 
-  # form do |f|
-  #   f.inputs do
-  #     f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
-  #     f.input :nombre
-  #     f.input :concepto
-  #     f.input :hoja_nro
-  #   end
+  form do |f|
+    f.inputs do
+      f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
+      f.input :nombre
+      f.input :concepto
+      f.input :hoja_nro
+    end
   #   f.inputs do
   #     f.has_many :especial_cuenta, heading: "Recibos", allow_destroy: true, new_record: true do |l|
   #       l.input :fecha
@@ -69,7 +72,7 @@ ActiveAdmin.register LoteRecibo do
   #       l.input :importe
   #     end
   #   end
-  #   f.actions
-  # end
+    f.actions
+  end
 
 end
