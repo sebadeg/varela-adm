@@ -46,7 +46,7 @@ ActiveAdmin.register Especial do
 
     f.inputs do
       f.has_many :especial_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.where("NOT nombre IS NULL AND nombre != ''").all.order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
       end
     end
 
