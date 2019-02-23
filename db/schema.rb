@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_230004) do
+ActiveRecord::Schema.define(version: 2019_02_16_000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_230004) do
     t.string "email"
     t.text "info"
     t.boolean "concurre"
+    t.index ["nombre"], name: "index_cuentas_on_nombre"
   end
 
   create_table "deudores", force: :cascade do |t|

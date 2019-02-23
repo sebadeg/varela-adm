@@ -80,7 +80,7 @@ ActiveAdmin.register Especial do
 
   filter :fecha_comienzo
   filter :fecha_fin
-  filter :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.order(:nombre).map{|u| ["#{u.id} - #{u.nombre}", u.id]}
+  #filter :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.order(:nombre).map{|u| ["#{u.id} - #{u.nombre}", u.id]}
 
   controller do
     before_action { @page_title = "Movimientos especiales" }
