@@ -73,7 +73,7 @@ ActiveAdmin.register LoteRecibo do
       f.input :hoja_nro
     end
     f.inputs do
-      f.has_many :especial_cuenta, heading: "Recibos", allow_destroy: true, new_record: true do |l|
+      f.has_many :recibo, heading: "Recibos", allow_destroy: true, new_record: true do |l|
         l.input :fecha_vto
         l.input :cheque
         l.input :banco
