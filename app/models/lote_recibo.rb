@@ -1,4 +1,8 @@
 class LoteRecibo < ApplicationRecord
+
+  has_many :recibo, :dependent => :delete_all
+  accepts_nested_attributes_for :recibo, allow_destroy: true
+
 	belongs_to :cuenta
 
     def fecha_tos(fecha)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_164000) do
+ActiveRecord::Schema.define(version: 2019_02_23_164100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -706,20 +706,13 @@ ActiveRecord::Schema.define(version: 2019_02_23_164000) do
   end
 
   create_table "recibos", force: :cascade do |t|
-    t.bigint "cuenta_id"
-    t.string "nombre"
-    t.date "fecha"
-    t.string "suma"
-    t.string "concepto"
     t.string "cheque"
     t.string "banco"
     t.date "fecha_vto"
     t.decimal "importe"
-    t.integer "hoja_nro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "lote_recibo_id"
-    t.index ["cuenta_id"], name: "index_recibos_on_cuenta_id"
     t.index ["lote_recibo_id"], name: "index_recibos_on_lote_recibo_id"
   end
 
@@ -905,7 +898,6 @@ ActiveRecord::Schema.define(version: 2019_02_23_164000) do
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
-  add_foreign_key "recibos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"

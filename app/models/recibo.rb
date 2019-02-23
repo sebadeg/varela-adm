@@ -1,5 +1,4 @@
 class Recibo < ApplicationRecord
-  belongs_to :cuenta
   belongs_to :lote_recibo
 
     # def fecha_tos(fecha)
