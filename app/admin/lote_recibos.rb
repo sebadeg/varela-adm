@@ -29,6 +29,7 @@ ActiveAdmin.register LoteRecibo do
   	#selectable_column
     column "Cuenta" do |r| "#{r.cuenta.id} - #{r.cuenta.nombre}" end
     column :nombre
+    column :fecha
     column :concepto
     column :hoja_nro
 
@@ -36,12 +37,13 @@ ActiveAdmin.register LoteRecibo do
   end
 
   filter :cuenta_id, :label => 'Cuenta', :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
-
+  filter :fecha
 
   show do
     attributes_table do
       row "Cuenta" do |r| "#{r.cuenta.id} - #{r.cuenta.nombre}" end
       row :nombre
+      row :fecha
       row :concepto
       row :hoja_nro
       row "Recibos" do |r|
@@ -60,6 +62,7 @@ ActiveAdmin.register LoteRecibo do
     f.inputs do
       f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
       f.input :nombre
+      f.input :fecha
       f.input :concepto
       f.input :hoja_nro
     end
