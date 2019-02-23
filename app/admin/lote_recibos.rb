@@ -5,25 +5,25 @@ ActiveAdmin.register LoteRecibo do
   permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
     recibo_attributes: [:id,:lote_recibo_id,:cuenta_id,:nombre,:fecha,:importe,:suma,:concepto,:cheque,:banco,:fecha_vto,:hoja_nro,:_destroy,:locale]
 
-  # action_item :imprimir, only: :show do
-  #   link_to "Imprimir", imprimir_admin_lote_recibo_path(lote_recibo), method: :put 
-  # end
+  action_item :imprimir, only: :show do
+    link_to "Imprimir", imprimir_admin_lote_recibo_path(lote_recibo), method: :put 
+  end
 
-  # member_action :imprimir, method: :put do
-  #   id = params[:id]
-  #   lote_recibo = LoteRecibo.find(id)
+  member_action :imprimir, method: :put do
+    id = params[:id]
+    lote_recibo = LoteRecibo.find(id)
   
-  #   file_name = "Recibo #{lote_recibo.id}.pdf"
-  #   file = Tempfile.new(file_name)
-  #   lote_recibo.imprimir(file.path)
+    file_name = "Recibo #{lote_recibo.id}.pdf"
+    file = Tempfile.new(file_name)
+    lote_recibo.imprimir(file.path)
 
-  #   send_file(
-  #       file.path,
-  #       filename: file_name,
-  #       type: "application/pdf"
-  #     )
+    send_file(
+        file.path,
+        filename: file_name,
+        type: "application/pdf"
+      )
     
-  # end
+  end
 
   index do
   	#selectable_column
@@ -63,15 +63,15 @@ ActiveAdmin.register LoteRecibo do
       f.input :concepto
       f.input :hoja_nro
     end
-  #   f.inputs do
-  #     f.has_many :especial_cuenta, heading: "Recibos", allow_destroy: true, new_record: true do |l|
-  #       l.input :fecha
-  #       l.input :fecha_vto
-  #       l.input :cheque
-  #       l.input :banco
-  #       l.input :importe
-  #     end
-  #   end
+    f.inputs do
+      f.has_many :especial_cuenta, heading: "Recibos", allow_destroy: true, new_record: true do |l|
+        l.input :fecha
+        l.input :fecha_vto
+        l.input :cheque
+        l.input :banco
+        l.input :importe
+      end
+    end
     f.actions
   end
 
