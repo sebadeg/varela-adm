@@ -2,17 +2,14 @@ class LoteRecibo < ApplicationRecord
 	belongs_to :cuenta
 
     def fecha_tos(fecha)
-      if ( fecha == nil )
-        return ""
-      end
-      return I18n.l(fecha, format: '%-d de %B de %Y')
+      
     end
 
     def fechavto_tos(fecha)
       if ( fecha == nil )
         return ""
       end
-      return I18n.l(fecha, format: '%d/%m/%Y')
+      return 
     end
 
 
@@ -33,6 +30,8 @@ class LoteRecibo < ApplicationRecord
         #dash(0.25, :space => 0.25, :phase => 0)
         #stroke_horizontal_line 0, 540, :at => 492
         #stroke_horizontal_line 0, 540, :at => 227
+
+        fec = (lote_recibo.fecha == nil ? "" : I18n.l(lote_recibo.fecha, format: '%-d de %B de %Y'))
 
         [0,265,530].each do |x|
       
@@ -74,7 +73,6 @@ class LoteRecibo < ApplicationRecord
             text "<b>Cuenta:</b> #{lote_recibo.cuenta_id}", align: :left, inline_format: true
           end
 
-          fec = fecha_tos(lote_recibo.fecha)
           bounding_box([270, x+123], :width => 270, :height => 10) do
             text "Montevideo, #{fec}", align: :right, inline_format: true
           end
@@ -102,7 +100,7 @@ class LoteRecibo < ApplicationRecord
 	            text "<b>Banco:</b> #{recibo.banco}", align: :left, inline_format: true
 	          end
 
-            fec_vto = fechavto_tos(recibo.fecha_vto)
+            fec_vto = (recibo.fecha_vto == nil ? "" : I18n.l(recibo.fecha_vto, format: '%d/%m/%Y'))
 	          bounding_box([270, xx], :width => 135, :height => 10) do
 	            text "<b>Vto.:</b> #{fec_vto}", align: :left, inline_format: true
 	          end
