@@ -116,7 +116,7 @@ class LoteRecibo < ApplicationRecord
           end
 
           bounding_box([0, xx], :width => 540, :height => 10) do
-            text "<b>Son: $</b> #{importe}", align: :center, inline_format: true
+            text "<b>Son: $</b> #{importe}", align: :left, inline_format: true
           end
 
           #font "Helvetica", :size => 10

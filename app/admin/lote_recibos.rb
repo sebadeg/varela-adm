@@ -32,6 +32,7 @@ ActiveAdmin.register LoteRecibo do
     column :nombre
     column :fecha
     column :concepto
+    column :suma
     column :hoja_nro
 
     actions
@@ -48,10 +49,10 @@ ActiveAdmin.register LoteRecibo do
       row :nombre
       row :fecha
       row :concepto
+      row :suma
       row :hoja_nro
       row "Recibos" do |r|
         table_for Recibo.where("lote_recibo_id=#{r.id}").order(:id) do |t|
-          t.column :fecha
           t.column :fecha_vto
           t.column :cheque
           t.column :banco
@@ -68,11 +69,11 @@ ActiveAdmin.register LoteRecibo do
       f.input :nombre
       f.input :fecha
       f.input :concepto
+      f.input :suma
       f.input :hoja_nro
     end
     f.inputs do
       f.has_many :especial_cuenta, heading: "Recibos", allow_destroy: true, new_record: true do |l|
-        l.input :fecha
         l.input :fecha_vto
         l.input :cheque
         l.input :banco
