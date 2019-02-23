@@ -45,7 +45,7 @@ ActiveAdmin.register LoteRecibo do
       row :concepto
       row :hoja_nro
       row "Recibos" do |r|
-        table_for Recibo.where("lote_recibo_id=#{r.id})").order(:id) do |t|
+        table_for Recibo.where("lote_recibo_id=#{r.id}").order(:id) do |t|
           t.column :fecha
           t.column :fecha_vto
           t.column :cheque
