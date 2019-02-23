@@ -56,7 +56,7 @@ ActiveAdmin.register LoteRecibo do
           t.column :fecha_vto
           t.column :cheque
           t.column :banco
-          t.column :importe
+          t.column :importe 
         end
       end
     end
