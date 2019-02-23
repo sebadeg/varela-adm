@@ -112,7 +112,7 @@ class LoteRecibo < ApplicationRecord
 
             importe = importe + recibo.importe
 
-	          xx = xx + 12
+	          xx = xx - 14
           end
 
           bounding_box([0, xx], :width => 540, :height => 10) do
