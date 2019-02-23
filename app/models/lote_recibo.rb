@@ -89,6 +89,7 @@ class LoteRecibo < ApplicationRecord
             text "<b>Por concepto de:</b> #{lote_recibo.concepto}", align: :left, inline_format: true
           end
 
+          importe = 0
           xx = x+67
           Recibo.where("lote_recibo_id=#{lote_recibo.id}").each do |recibo|
 
@@ -109,11 +110,13 @@ class LoteRecibo < ApplicationRecord
 	            text "<b>$</b> #{recibo.importe}", align: :left, inline_format: true
 	          end
 
+            importe = importe + recibo.importe
+
 	          xx = xx + 12
           end
 
           bounding_box([0, xx], :width => 540, :height => 10) do
-            text "<b>Son: $</b> #{recibo.importe}", align: :center, inline_format: true
+            text "<b>Son: $</b> #{importe}", align: :center, inline_format: true
           end
 
           #font "Helvetica", :size => 10
