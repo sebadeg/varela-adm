@@ -1,2 +1,2 @@
-class AactividadArchivo < ApplicationRecord
+class ActividadArchivo < ApplicationRecord
 end
