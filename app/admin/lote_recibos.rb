@@ -2,8 +2,8 @@ ActiveAdmin.register LoteRecibo do
 
   menu label: 'Recibos2', priority: 23 
 
-  # permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
-  #   recibo_attributes: [:id,:lote_recibo_id,:cuenta_id,:nombre,:fecha,:importe,:suma,:concepto,:cheque,:banco,:fecha_vto,:hoja_nro,:_destroy,:locale],
+  permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
+    recibo_attributes: [:id,:lote_recibo_id,:cuenta_id,:nombre,:fecha,:importe,:suma,:concepto,:cheque,:banco,:fecha_vto,:hoja_nro,:_destroy,:locale],
 
   # action_item :imprimir, only: :show do
   #   link_to "Imprimir", imprimir_admin_lote_recibo_path(lote_recibo), method: :put 
@@ -44,15 +44,15 @@ ActiveAdmin.register LoteRecibo do
       row :nombre
       row :concepto
       row :hoja_nro
-  #    row "Recibos" do |r|
-  #       table_for Recibo.where("lote_recibo_id=#{r.id})").order(:id) do |t|
-  #         t.column :fecha
-  #         t.column :fecha_vto
-  #         t.column :cheque
-  #         t.column :banco
-  #         t.column :importe
-  #       end
-  #     end
+      row "Recibos" do |r|
+        table_for Recibo.where("lote_recibo_id=#{r.id})").order(:id) do |t|
+          t.column :fecha
+          t.column :fecha_vto
+          t.column :cheque
+          t.column :banco
+          t.column :importe
+        end
+      end
     end
   end
 
