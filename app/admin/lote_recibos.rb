@@ -1,6 +1,6 @@
 ActiveAdmin.register LoteRecibo do
 
-  menu label: 'Recibos 2', priority: 23 
+  menu label: 'Recibos', priority: 23 
 
   permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
     recibo_attributes: [:id,:lote_recibo_id,:importe,:cheque,:banco,:fecha_vto,:_destroy,:locale]

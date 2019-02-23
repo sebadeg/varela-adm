@@ -25,6 +25,7 @@ class Ability
       can :manage, Deudor
 
       can :manage, Recibo
+      can :manage, LoteRecibo
 
       can :manage, ActiveAdmin::Page, :name => "Estimación"
 
