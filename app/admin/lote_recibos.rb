@@ -1,6 +1,6 @@
 ActiveAdmin.register LoteRecibo do
 
-  menu label: 'Recibos2', priority: 23 
+  menu label: 'Recibos', priority: 23 
 
   permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
     recibo_attributes: [:id,:lote_recibo_id,:cuenta_id,:nombre,:fecha,:importe,:suma,:concepto,:cheque,:banco,:fecha_vto,:hoja_nro,:_destroy,:locale]
@@ -27,6 +27,7 @@ ActiveAdmin.register LoteRecibo do
 
   index do
   	#selectable_column
+    column :id
     column "Cuenta" do |r| "#{r.cuenta.id} - #{r.cuenta.nombre}" end
     column :nombre
     column :fecha
@@ -36,11 +37,13 @@ ActiveAdmin.register LoteRecibo do
     actions
   end
 
+  filter :id
   filter :cuenta_id, :label => 'Cuenta', :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
   filter :fecha
 
   show do
     attributes_table do
+      row :id
       row "Cuenta" do |r| "#{r.cuenta.id} - #{r.cuenta.nombre}" end
       row :nombre
       row :fecha
@@ -60,6 +63,7 @@ ActiveAdmin.register LoteRecibo do
 
   form do |f|
     f.inputs do
+      f.input :id
       f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
       f.input :nombre
       f.input :fecha
