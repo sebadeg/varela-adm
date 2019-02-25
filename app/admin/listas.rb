@@ -45,29 +45,10 @@ ActiveAdmin.register Lista do
   end
 
   form do |f|
-    def sectores
-      s = ""
-      if current_admin_usuario.primaria
-        s = "1"
-      end
-      if current_admin_usuario.sec_mdeo
-        if s != ""
-          s = s + ","
-        end
-        s = s + "2"
-      end
-      if current_admin_usuario.sec_cc
-        if s != ""
-          s = s + ","
-        end
-        s = s + "3"
-      end
-      return s
-    end
-
-
     f.inputs do
       f.input :nombre
+      f.input :anio, :input_html => { :value => Config.find(1).anio }, as: :hidden
+      f.input :sector, :input_html => { :value => Alumno.sector_num(current_admin_usuario) }, as: :hidden
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|

@@ -2,7 +2,20 @@ class Alumno < ApplicationRecord
   has_many :lista_alumno
   accepts_nested_attributes_for :lista_alumno, allow_destroy: true
 
-  has_many :aactividad_alumno
+  has_many :actividad_alumno
+
+  def self.sector_num(user)
+    if user.primaria
+      return 1
+    end
+    if user.sec_mdeo
+      return 2
+    end
+    if user.sec_cc
+      return 3
+    end
+    return 0
+  end
 
   def self.consulta(user)
 
