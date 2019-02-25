@@ -114,10 +114,10 @@ ActiveAdmin.register Actividad do
       end
 
       row "Alumnos" do 
-        table_for ActividadAlumno.joins(:alumno).order("alumnos.nombre","alumnos.apellido") do |t|
-          t.column "alumnos.nombre"
-          t.column "alumnos.apellido"
-          t.column "actividad_alumnos.bajado"
+        table_for Alumno.where("id in (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
+          t.column :nombre
+          t.column :apellido
+          t.column "Bajado" do |x| ( actividad_alumnos = ActividadAlumnos.where( "alumno_id=#{x.id} AND actividad_id=#{r.id}" ).first rescue nil) != nil ? actividad_alumno.bajado : "" end
           #t.column "Inscripto" do |c| (ActividadAlumno.where( "actividad_id=#{r.id} AND alumno_id=#{c.id} AND NOT opcion IS NULL AND opcion<>0" ).count() > 0) end
         end
       end
