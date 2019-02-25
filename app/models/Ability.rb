@@ -100,12 +100,12 @@ class Ability
         true
       end
       
-      can :manage, Aactividad
-      can :manage, AactividadAlumno
-      can :manage, AactividadOpcion
-      can :manage, AactividadLista
-      can :manage, AactividadArchivo
-      can :manage, ActiveAdmin::Page, :name => "Ver_Aactividad"
+      can :manage, Actividad
+      can :manage, ActividadAlumno
+      can :manage, ActividadOpcion
+      can :manage, ActividadLista
+      can :manage, ActividadArchivo
+      can :manage, ActiveAdmin::Page, :name => "Ver_Actividad"
     end
 
     if user.inscripciones

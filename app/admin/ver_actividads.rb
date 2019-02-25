@@ -1,6 +1,6 @@
-ActiveAdmin.register_page "Ver_Aactividad" do
+ActiveAdmin.register_page "Ver_Actividad" do
 
-  menu priority: 3002, label: "Vista previa", parent: "Actividad 2019"
+  menu priority: 3002, label: "Vista previa", parent: "Actividad"
 
   page_action :descargar, method: :post do
     p "//////////"
@@ -10,14 +10,14 @@ ActiveAdmin.register_page "Ver_Aactividad" do
 
     # p params[:id]
 
-    actividad = Aactividad.find(params[:id])
+    actividad = Actividad.find(params[:id])
     if ( actividad != nil )
       file_name = "#{actividad.nombre}.pdf"
       file = Tempfile.new(file_name)
       
 
       pdf = CombinePDF.new
-      AactividadArchivo.where("aactividad_id=#{params[:id]}").order(:id).each do |arch|
+      ActividadArchivo.where("actividad_id=#{params[:id]}").order(:id).each do |arch|
         
         file2_name = "#{arch.nombre}"
         file2 = Tempfile.new(file2_name)
@@ -33,7 +33,7 @@ ActiveAdmin.register_page "Ver_Aactividad" do
         type: "application/pdf"
       )
     else
-      redirect_to admin_ver_aactividad_path
+      redirect_to admin_ver_actividad_path
     end
   end
 
@@ -42,20 +42,20 @@ ActiveAdmin.register_page "Ver_Aactividad" do
     p "Confirmar"
     p params
     p "//////////"
-    redirect_to admin_ver_aactividad_path
+    redirect_to admin_ver_actividad_path
   end
 
   page_action :ver, method: :post do
     Temp.create(usuario_id: current_admin_usuario.id, temp_id: params[:alumno_id] )
-    redirect_to admin_ver_aactividad_path
+    redirect_to admin_ver_actividad_path
   end
 
   content title: "Vista previa" do
     temp = Temp.where("usuario_id = #{current_admin_usuario.id}").order(id: :desc).limit(1).first rescue nil
     if temp == nil 
-      render partial: 'ver_aactividad', locals: { alumno_id: nil, usuario_id: current_admin_usuario.id }
+      render partial: 'ver_actividad', locals: { alumno_id: nil, usuario_id: current_admin_usuario.id }
     else
-      render partial: 'ver_aactividad', locals: { alumno_id: temp.temp_id, usuario_id: current_admin_usuario.id }
+      render partial: 'ver_actividad', locals: { alumno_id: temp.temp_id, usuario_id: current_admin_usuario.id }
     end
   end
 

@@ -145,26 +145,185 @@ ActiveAdmin.register Actividad do
       f.input :nombre
       f.input :fecha, label: "Autorización hasta", :as => :date_picker
       f.input :fechainfo, label: "Información hasta", :as => :date_picker
-      if f.object.new_record?
-        f.input :archivo, as: :file
-      else
-        f.input :archivo, as: :file, label: "Archivo ("+ f.object.archivo + ")"
+    end
+
+    f.inputs do
+      f.has_many :actividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
+        if l.object.new_record?
+          l.input :nombre, :input_html => { :value => "" }, as: :hidden
+          l.input :data, as: :file, label: "Archivo"
+        else
+          l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
+          l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
+        end
       end
     end
+    #   if f.object.new_record?
+    #     f.input :archivo, as: :file
+    #   else
+    #     f.input :archivo, as: :file, label: "Archivo ("+ f.object.archivo + ")"
+    #   end
+    # end
+
     f.inputs do
       f.has_many :actividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
-        l.input :valor
-        l.input :opcion
-        l.input :eleccion
+        l.input :concepto
+        l.input :opcion, :input_html => { :value => "" }, as: :hidden
+        l.input :eleccion, :input_html => { :value => "" }, as: :hidden
+        l.input :cuotas
+        l.input :importe
+        l.input :fecha
       end
     end
+
     f.inputs do
       f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
-        l.input :lista_id, :label => "Nombre", :as => :select, :collection => Lista.all.order(:nombre).map{|u| [u.nombre, u.id]}
+        l.input :lista_id, :label => 'Lista', :as => :select, :collection => Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]}
       end
     end
+    
+    # f.inputs do
+    #   f.has_many :actividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
+    #     l.input :valor
+    #     l.input :opcion
+    #     l.input :eleccion
+    #   end
+    # end
+    # f.inputs do
+    #   f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
+    #     l.input :lista_id, :label => "Nombre", :as => :select, :collection => Lista.all.order(:nombre).map{|u| [u.nombre, u.id]}
+    #   end
+    # end
     f.actions
   end
+
+  controller do
+
+    def create
+      attrs = permitted_params[:actividad]
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_opcion_attributes] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == "0"
+            cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:cuotas]
+            importe = params[:actividad][:actividad_opcion_attributes][i.to_s][:importe]
+            concepto = params[:actividad][:actividad_opcion_attributes][i.to_s][:concepto]
+            if concepto != ""
+              concepto = " " + concepto
+            end
+            if cuotas == ""
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
+            elsif importe == ""
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo#{concepto}" 
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado#{concepto}"
+            elsif cuotas == "1"
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} contado de $U #{importe}" 
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} contado de $U #{importe}"
+            else
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} en #{cuotas} cuotas de $U #{importe}" 
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} en #{cuotas} cuotas de $U #{importe}"
+            end
+          end
+          i = i+1
+        end
+      end while i >= 0
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_archivo_attributes] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:actividad][:actividad_archivo_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s][:_destroy] == "0"
+            p "----------"
+            p "CREATE"
+            p "----------"
+            file = params[:actividad][:actividad_archivo_attributes][i.to_s][:data]
+            if file.instance_of? ActionDispatch::Http::UploadedFile
+              p "----------"
+              p "ARCHIVO"
+              p "----------"
+              params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+              params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = file.read
+            end
+            p "----------"
+            p "----------"
+            p "----------"
+          end
+          i = i+1
+        end
+      end while i >= 0
+
+      create!
+    end
+
+    def update
+      attrs = permitted_params[:actividad]
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_opcion_attributes] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == "0"
+            cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:cuotas]
+            importe = params[:actividad][:actividad_opcion_attributes][i.to_s][:importe]
+            concepto = params[:actividad][:actividad_opcion_attributes][i.to_s][:concepto]
+            if concepto != ""
+              concepto = " " + concepto
+            end
+            if cuotas == ""
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
+            elsif importe == ""
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo#{concepto}" 
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado#{concepto}"
+            elsif cuotas == "1"
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} contado de $U #{importe}" 
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} contado de $U #{importe}"
+            else
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} en #{cuotas} cuotas de $U #{importe}" 
+              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} en #{cuotas} cuotas de $U #{importe}"
+            end
+          end
+          i = i+1
+        end
+      end while i >= 0
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_archivo_attributes] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:actividad][:actividad_archivo_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s][:_destroy] == "0"
+            p "----------"
+            p "UPDATE"
+            p "----------"
+            file = params[:actividad][:actividad_archivo_attributes][i.to_s][:data]
+            if file.instance_of? ActionDispatch::Http::UploadedFile
+              p "----------"
+              p "ARCHIVO"
+              p "----------"
+              params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+              params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = file.read
+            end
+            p "----------"
+            p "----------"
+            p "----------"
+          end
+          i = i+1
+        end
+      end while i >= 0
+
+      update!
+    end
+    
+  end
+
+end
 
   # action_item :descargar, only: :show do |f|
   #   link_to "Descargar", admin_descargar_factura_path(f), method: :post
@@ -292,4 +451,4 @@ ActiveAdmin.register Actividad do
     
   # end
 
-end
+#end
