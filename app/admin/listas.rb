@@ -12,7 +12,8 @@ ActiveAdmin.register Lista do
 #   permitted
 # end
 
-  permit_params :nombre, :locale, lista_alumno_attributes: [:id,:lista_id,:alumno_id,:_destroy,:locale]
+  permit_params :nombre, :locale, 
+    lista_alumno_attributes: [:id,:lista_id,:alumno_id,:_destroy,:locale]
 
   menu priority: 2001, label: "Listas"
 
@@ -70,39 +71,39 @@ ActiveAdmin.register Lista do
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| [u.nombre + " " + u.apellido, u.id]}
         #where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + Alumno.sector(current_admin_usuario) + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL) AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
       end
     end
     f.actions
   end
 
-  controller do
-    def update
-      i = 0
-      begin
-        if params[:lista][:lista_alumno_attributes][i.to_s] == nil
-          i = -1
-        else 
-          if params[:lista][:lista_alumno_attributes][i.to_s][:id] == nil
+  # controller do
+  #   def update
+  #     i = 0
+  #     begin
+  #       if params[:lista][:lista_alumno_attributes][i.to_s] == nil
+  #         i = -1
+  #       else 
+  #         if params[:lista][:lista_alumno_attributes][i.to_s][:id] == nil
 
-            p params[:id].to_i
-            p params[:lista][:lista_alumno_attributes][i.to_s][:alumno_id].to_i
-            lista_id = params[:id].to_i
-            alumno_id = params[:lista][:lista_alumno_attributes][i.to_s][:alumno_id].to_i
+  #           p params[:id].to_i
+  #           p params[:lista][:lista_alumno_attributes][i.to_s][:alumno_id].to_i
+  #           lista_id = params[:id].to_i
+  #           alumno_id = params[:lista][:lista_alumno_attributes][i.to_s][:alumno_id].to_i
 
-            ActiveRecord::Base.connection.execute( "INSERT INTO lista_alumnos (lista_id,alumno_id,created_at,updated_at) VALUES (#{lista_id},#{alumno_id},now(),now())" )
+  #           ActiveRecord::Base.connection.execute( "INSERT INTO lista_alumnos (lista_id,alumno_id,created_at,updated_at) VALUES (#{lista_id},#{alumno_id},now(),now())" )
 
-            params[:lista][:lista_alumno_attributes][i.to_s][:id] = ListaAlumno.where("lista_id=#{lista_id} AND alumno_id=#{alumno_id}").first.id.to_s
-            params[:lista][:lista_alumno_attributes][i.to_s][:_destroy] = "0"
+  #           params[:lista][:lista_alumno_attributes][i.to_s][:id] = ListaAlumno.where("lista_id=#{lista_id} AND alumno_id=#{alumno_id}").first.id.to_s
+  #           params[:lista][:lista_alumno_attributes][i.to_s][:_destroy] = "0"
 
      
-          end
-          i = i+1
-        end
-      end while i >= 0
-      update!
-    end 
-  end
+  #         end
+  #         i = i+1
+  #       end
+  #     end while i >= 0
+  #     update!
+  #   end 
+  # end
 
 end
