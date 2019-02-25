@@ -113,6 +113,14 @@ ActiveAdmin.register Actividad do
         end
       end
 
+      row "Alumnos" do 
+        table_for Alumno.where("id in (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
+          t.column :nombre
+          t.column :apellido
+          #t.column "Inscripto" do |c| (ActividadAlumno.where( "actividad_id=#{r.id} AND alumno_id=#{c.id} AND NOT opcion IS NULL AND opcion<>0" ).count() > 0) end
+        end
+      end
+
       # row "Opciones" do 
       #   table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
       #     t.column :valor
@@ -129,14 +137,6 @@ ActiveAdmin.register Actividad do
       #   end
       # end
 
-      # row "Alumnos" do 
-      #   table_for Alumno.where("id in (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre) do |t|
-      #     t.column :id
-      #     t.column :nombre
-      #     t.column :apellido
-      #     t.column "Inscripto" do |c| (ActividadAlumno.where( "actividad_id=#{r.id} AND alumno_id=#{c.id} AND NOT opcion IS NULL AND opcion<>0" ).count() > 0) end
-      #   end
-      # end
     end
   end
 
