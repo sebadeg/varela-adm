@@ -114,7 +114,7 @@ ActiveAdmin.register Actividad do
       end
 
       row "Alumnos" do 
-        table_for ActividadAlumno.joins(:alumnos).order("alumnos.nombre","alumnos.apellido") do |t|
+        table_for ActividadAlumno.joins(:alumno).order("alumnos.nombre","alumnos.apellido") do |t|
           t.column "alumnos.nombre"
           t.column "alumnos.apellido"
           t.column "actividad_alumnos.bajado"
