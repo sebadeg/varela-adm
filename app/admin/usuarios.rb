@@ -64,6 +64,8 @@ ActiveAdmin.register Usuario do
       f.input :email
       f.input :direccion
       f.input :celular
+      f.input :password
+      f.input :password_confirmation
     end
     f.actions
   end
