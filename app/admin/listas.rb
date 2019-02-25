@@ -12,7 +12,7 @@ ActiveAdmin.register Lista do
 #   permitted
 # end
 
-  permit_params :id, :nombre, :locale, 
+  permit_params :id, :nombre, :anio, :sector, :locale, 
     lista_alumno_attributes: [:id,:lista_id,:alumno_id,:_destroy,:locale]
 
   menu priority: 2001, label: "Listas"
@@ -50,8 +50,9 @@ ActiveAdmin.register Lista do
       f.input :anio, :input_html => { :value => Config.find(1).anio.to_s }, as: :hidden
       f.input :sector, :input_html => { :value => Alumno.sector_num(current_admin_usuario).to_s }, as: :hidden
     end
-    f.inputs do
+    f.inputs do |lista|
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
+        l.input :lista_id, :input_html => { :value => lista.id }, as: :hidden
         l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| [u.nombre + " " + u.apellido, u.id]}
         #where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (" + Alumno.sector(current_admin_usuario) + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL) AND NOT alumno_id IS NULL)").order(:nombre).map{|u| [u.nombre + " " + u.apellido, u.id]}
       end
