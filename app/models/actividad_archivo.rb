@@ -1,3 +1,3 @@
 class ActividadArchivo < ApplicationRecord
-  belongs_to :actividad, dependent: :destroy
+  belongs_to :actividad
 end

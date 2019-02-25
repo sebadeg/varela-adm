@@ -1,4 +1,4 @@
 class ActividadLista < ApplicationRecord
-  belongs_to :actividad, dependent: :destroy
-  belongs_to :lista, dependent: :destroy
+  belongs_to :actividad
+  belongs_to :lista
 end
