@@ -232,7 +232,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      menu.add label: 'Actividad 2019', priority: 3000
+      #menu.add label: 'Actividad 2019', priority: 3000
       menu.add label: 'Seguimiento', priority: 6000
     end
   end

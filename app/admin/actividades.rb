@@ -66,7 +66,7 @@ ActiveAdmin.register Actividad do
       emails = emails + m['email'] + ";"
     end
 
-    UserMailer.novedades( emails, actividad.descripcion ).deliver_now
+    UserMailer.novedades( emails, actividad.nombre ).deliver_now
 
     redirect_to admin_actividad_path(actividad)
   end
