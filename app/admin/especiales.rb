@@ -33,8 +33,10 @@ ActiveAdmin.register Especial do
       f.input :importe
       if f.object.new_record?
         f.input :nombre, as: :file
+      elsif f.object.nombre != nil
+        f.input :nombre, as: :file, label: "("+ f.object.nombre + ")"
       else
-        f.input :nombre, as: :file, label: "("+ f.object.nombre+")"
+        f.input :nombre, as: :file, label: "()"
       end
     end
 

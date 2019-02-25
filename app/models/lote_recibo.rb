@@ -24,6 +24,14 @@ class LoteRecibo < ApplicationRecord
       text_file = Tempfile.new("text.pdf")
       text_file_path = text_file.path
 
+      fec = (lote_recibo.fecha == nil ? "" : I18n.l(lote_recibo.fecha, format: '%-d de %B de %Y'))
+
+      nombre_cuenta = lote_recibo.cuenta_id.to_s;
+      cuenta = Cuenta.find(lote_recibo.cuenta_id)
+      if cuenta != nil 
+        nombre_cuenta = nombre_cuenta + " - " + cuenta.nombre
+      end
+
       Prawn::Document.generate(text_file_path) do
       	
         # stroke_color "000000"
@@ -35,7 +43,6 @@ class LoteRecibo < ApplicationRecord
         #stroke_horizontal_line 0, 540, :at => 492
         #stroke_horizontal_line 0, 540, :at => 227
 
-        fec = (lote_recibo.fecha == nil ? "" : I18n.l(lote_recibo.fecha, format: '%-d de %B de %Y'))
 
         [0,265,530].each do |x|
       
@@ -74,7 +81,7 @@ class LoteRecibo < ApplicationRecord
           end
 
           bounding_box([0, x+123], :width => 270, :height => 10) do
-            text "<b>Cuenta:</b> #{lote_recibo.cuenta_id}", align: :left, inline_format: true
+            text "<b>Cuenta:</b> #{cuenta}", align: :left, inline_format: true
           end
 
           bounding_box([270, x+123], :width => 270, :height => 10) do
