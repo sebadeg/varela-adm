@@ -147,22 +147,22 @@ ActiveAdmin.register Actividad do
       f.input :fechainfo, label: "Información hasta", :as => :date_picker
     end
 
-    f.inputs do
-      f.has_many :actividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
-        l.input :nombre
-        l.input :data, as: :file
-        #if l.object == nil
-        #  l.input :nombre, :input_html => { :value => "" }, as: :hidden
-        #  l.input :data, as: :file, label: "Archivo"
-        # elsif l.object.new_record?
-        #   l.input :nombre, :input_html => { :value => "" }, as: :hidden
-        #   l.input :data, as: :file, label: "Archivo"
-        #else
-        #  l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
-        #  l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
-        #end
-      end
-    end
+    # f.inputs do
+    #   f.has_many :actividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
+    #     l.input :nombre
+    #     l.input :data, as: :file
+    #     #if l.object == nil
+    #     #  l.input :nombre, :input_html => { :value => "" }, as: :hidden
+    #     #  l.input :data, as: :file, label: "Archivo"
+    #     # elsif l.object.new_record?
+    #     #   l.input :nombre, :input_html => { :value => "" }, as: :hidden
+    #     #   l.input :data, as: :file, label: "Archivo"
+    #     #else
+    #     #  l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
+    #     #  l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
+    #     #end
+    #   end
+    # end
     #   if f.object.new_record?
     #     f.input :archivo, as: :file
     #   else
