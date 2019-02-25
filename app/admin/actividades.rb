@@ -152,9 +152,9 @@ ActiveAdmin.register Actividad do
         if l.object == nil
           l.input :nombre, :input_html => { :value => "" }, as: :hidden
           l.input :data, as: :file, label: "Archivo"
-        elsif l.object.new_record?
-          l.input :nombre, :input_html => { :value => "" }, as: :hidden
-          l.input :data, as: :file, label: "Archivo"
+        # elsif l.object.new_record?
+        #   l.input :nombre, :input_html => { :value => "" }, as: :hidden
+        #   l.input :data, as: :file, label: "Archivo"
         else
           l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
           l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
