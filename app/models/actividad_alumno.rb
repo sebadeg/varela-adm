@@ -7,9 +7,9 @@ class ActividadAlumno < ApplicationRecord
 		opciones = Array.new
 		elecciones = Hash.new
 
-		autorizar = AactividadOpcion.where(["aactividad_id = ? AND importe>0",aactividad_id]).first rescue nil		
+		autorizar = ActividadOpcion.where(["actividad_id = ? AND importe>0",actividad_id]).first rescue nil		
 
-		AactividadOpcion.where(["aactividad_id = ?",aactividad_id]).order(:cuotas).each do |s|
+		ActividadOpcion.where(["actividad_id = ?",actividad_id]).order(:cuotas).each do |s|
 			if s.valor == 0
 				if s.opcion != nil && s.opcion != ""
 					o = s.opcion
