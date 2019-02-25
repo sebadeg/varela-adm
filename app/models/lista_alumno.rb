@@ -1,4 +1,4 @@
 class ListaAlumno < ApplicationRecord
-  belongs_to :linea, dependent: :destroy
-  belongs_to :alumno
+  belongs_to :lista, dependent: :destroy
+  belongs_to :alumno, dependent: :destroy
 end

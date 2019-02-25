@@ -1,7 +1,7 @@
 class ActividadAlumno < ApplicationRecord
 
-  belongs_to :aactividad
-  belongs_to :alumno
+  belongs_to :actividad, dependent: :destroy
+  belongs_to :alumno, dependent: :destroy
 
 	def opciones
 		opciones = Array.new
