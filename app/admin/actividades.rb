@@ -118,7 +118,7 @@ ActiveAdmin.register Actividad do
           t.column :nombre
           t.column :apellido
           #t.column "Bajado" do |x| ( ActividadAlumno.where( "alumno_id=#{x.id} AND actividad_id=#{r.id}" ).first rescue nil) != nil ? ActividadAlumno.where( "alumno_id=#{x.id} AND actividad_id=#{r.id}" ).first.bajado : "" end
-          t.column "Bajado" do |x| ( ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).bajado.strftime('%d/%m/%Y %H:%M:%S') end
+          #t.column "Bajado" do |x| ( ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).bajado.strftime('%d/%m/%Y %H:%M:%S') end
 
           #t.column "Inscripto" do |c| (ActividadAlumno.where( "actividad_id=#{r.id} AND alumno_id=#{c.id} AND NOT opcion IS NULL AND opcion<>0" ).count() > 0) end
         end
