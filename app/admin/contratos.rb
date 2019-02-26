@@ -18,13 +18,48 @@ ActiveAdmin.register Contrato do
 
   # menu priority: 31, label: "Contrato"
 
-  # action_item :actualizar, only: :show do
-  #   link_to "Actualizar", actualizar_admin_contrato_path(contrato), method: :put 
-  # end
+  action_item :actualizar, only: :show do
+    link_to "Asociar", asociar_admin_contrato_path(contrato), method: :put 
+  end
 
   # action_item :actualizarfunc, only: :show do
   #   link_to "Actualizar Func", actualizarfunc_admin_contrato_path(contrato), method: :put 
   # end
+
+  member_action :asociar, method: :put do
+    id = params[:id]
+
+    mov = Movimiento.where("contrato_id=#{id}").first rescue nil
+    if ( mov == nil )
+
+      contrato = Contrato.find(id)
+      (1..contrato.cuotas).each do |cuota|
+
+        importe = contrato.importe
+        if contrato.aguinaldos 
+          if cuota == 4 
+            importe = importe + (contrato.importe/2).floor
+          elsif cuota = 10
+            importe = importe + importe - (contrato.importe/2).floor
+          end
+        end
+
+        Movimiento.create(
+          cuenta_id: contrato.cuenta_id,
+          alumno: contrato.alumno_id,
+          fecha: contrato.comienzo + cuota*1.month 
+          descripcion: "CUOTA #{cuota}/#{contrato.cuotas}"
+          debe: importe,
+          haber: 0,
+          tipo: 1001 )
+
+  
+      end
+
+    end
+
+    redirect_to admin_contrato_path(contrato)
+  end
 
   # member_action :actualizar, method: :put do
   #   id = params[:id]

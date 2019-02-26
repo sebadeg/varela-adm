@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_170400) do
+ActiveRecord::Schema.define(version: 2019_02_23_170500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -532,7 +532,9 @@ ActiveRecord::Schema.define(version: 2019_02_23_170400) do
     t.bigint "recibo_id"
     t.decimal "saldo"
     t.integer "indice"
+    t.bigint "contrato_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
+    t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
@@ -836,6 +838,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_170400) do
   add_foreign_key "lote_recibos", "cuentas"
   add_foreign_key "movimiento2018s", "cuentas"
   add_foreign_key "movimientos", "conceptos"
+  add_foreign_key "movimientos", "contratos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"
