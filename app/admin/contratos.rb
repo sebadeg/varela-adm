@@ -51,7 +51,8 @@ ActiveAdmin.register Contrato do
           descripcion: "CUOTA #{cuota}/#{contrato.cuotas}"
           debe: importe,
           haber: 0,
-          tipo: 1001 )
+          tipo: 1001,
+          contrato_id: contrato.id )
 
   
       end
