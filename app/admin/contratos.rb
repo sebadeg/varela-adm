@@ -12,7 +12,7 @@ ActiveAdmin.register Contrato do
 #   permitted
 # end
 
-  permit_params :nombre, :cuenta_id, :alumno_id, :cuotas,:aguinaldos,:comienzo,:importe,:concepto_id
+  permit_params :id, :nombre, :cuenta_id, :alumno_id, :cuotas,:aguinaldos,:comienzo,:importe,:concepto_id
 
   /#,      contrato_cuota_attributes: [:id,:contrato_id,:fecha,:precio,:descuento,:_destroy]
 
@@ -150,6 +150,7 @@ ActiveAdmin.register Contrato do
 
   form do |f|
     f.inputs do
+      f.input :id
       f.input :cuenta_id
       f.input :alumno_id
       f.input :concepto_id
