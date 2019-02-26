@@ -47,8 +47,8 @@ ActiveAdmin.register Contrato do
         Movimiento.create(
           cuenta_id: contrato.cuenta_id,
           alumno: contrato.alumno_id,
-          fecha: contrato.comienzo + cuota*1.month 
-          descripcion: "CUOTA #{cuota}/#{contrato.cuotas}"
+          fecha: contrato.comienzo + cuota*1.month,
+          descripcion: "CUOTA #{cuota}/#{contrato.cuotas}",
           debe: importe,
           haber: 0,
           tipo: 1001,
