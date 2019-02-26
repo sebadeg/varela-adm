@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_170300) do
+ActiveRecord::Schema.define(version: 2019_02_23_170400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,10 @@ ActiveRecord::Schema.define(version: 2019_02_23_170300) do
     t.integer "alumno_id"
     t.string "descripcion"
     t.string "alumno"
+    t.integer "cuotas"
+    t.boolean "aguinaldos"
+    t.date "comienzo"
+    t.decimal "importe"
     t.index ["alumno_id"], name: "index_contratos_on_alumno_id"
     t.index ["concepto_id"], name: "index_contratos_on_concepto_id"
     t.index ["cuenta_id"], name: "index_contratos_on_cuenta_id"

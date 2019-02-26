@@ -12,8 +12,9 @@ ActiveAdmin.register Contrato do
 #   permitted
 # end
 
-  permit_params :nombre, :cuenta_id, :alumno_id, :concepto_id,
-      contrato_cuota_attributes: [:id,:contrato_id,:fecha,:precio,:descuento,:_destroy]
+  permit_params :nombre, :cuenta_id, :alumno_id, :cuotas,:aguinaldos,:comienzo,:importe,:concepto_id
+
+  /#,      contrato_cuota_attributes: [:id,:contrato_id,:fecha,:precio,:descuento,:_destroy]
 
   menu priority: 31, label: "Contrato"
 
@@ -109,14 +110,19 @@ ActiveAdmin.register Contrato do
 
     contrato = Contrato.find(id.to_i+1)
     redirect_to admin_contrato_path(contrato)
-  end
+  end#/
 
   index do
     #selectable_column
     column :id
     column :cuenta_id
     column :alumno_id
+    column :cuotas
+    column :aguinaldos
+    column :comienzo
+    column :importe
     column :concepto_id
+
     actions
   end
 
@@ -127,14 +133,18 @@ ActiveAdmin.register Contrato do
       row :id
       row :cuenta_id
       row :alumno_id
+      row :cuotas
+      row :aguinaldos
+      row :comienzo
+      row :importe
       row :concepto_id
-      row "Cuotas" do 
+      /#row "Cuotas" do 
         table_for ContratoCuota.where("contrato_id=#{r.id}").order(:fecha) do |t|
           t.column :fecha
           t.column :precio
           t.column :descuento
         end
-      end
+      end#/
     end
   end
 
@@ -143,14 +153,19 @@ ActiveAdmin.register Contrato do
       f.input :cuenta_id
       f.input :alumno_id
       f.input :concepto_id
+      f.input :cuotas
+      f.input :aguinaldos
+      f.input :comienzo
+      f.input :importe
     end
-    f.inputs do
+
+    /#f.inputs do
       f.has_many :contrato_cuota, heading: "Cuotas", allow_destroy: true, new_record: true do |l|
         l.input :fecha
         l.input :precio
         l.input :descuento
       end
-    end
+    end#/
     f.actions
   end
 
