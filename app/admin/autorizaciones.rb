@@ -54,8 +54,8 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
 
     f.inputs do
       f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        f.input :alumno_nombre, :input_html => { :readonly => true }
-        f.input :alumno_apellido, :input_html => { :readonly => true }
+        l.input :alumno_nombre, :input_html => { :readonly => true }
+        l.input :alumno_apellido, :input_html => { :readonly => true }
         
 
       # t.column "Opcion" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
