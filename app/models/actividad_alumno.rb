@@ -3,7 +3,7 @@ class ActividadAlumno < ApplicationRecord
   belongs_to :actividad
   belongs_to :alumno
 
-  def self.nombre_alumno
+  def nombre_alumno
     a = Alumno.find(alumno_id) rescue nil
     if a == nil
     	return ""
