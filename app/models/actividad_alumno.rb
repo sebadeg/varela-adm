@@ -12,6 +12,14 @@ class ActividadAlumno < ApplicationRecord
     end
   end
 
+  def nombre_alumno
+    return "Opcion"
+  end
+
+  def fecha_opcion
+    return "Fecha"
+  end
+
 
 	def opciones
 		opciones = Array.new

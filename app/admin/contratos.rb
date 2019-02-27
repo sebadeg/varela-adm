@@ -39,7 +39,7 @@ ActiveAdmin.register Contrato do
         if contrato.aguinaldos 
           if cuota == 4 
             importe = importe + (contrato.importe/2).floor
-          elsif cuota = 10
+          elsif cuota == 10
             importe = importe + importe - (contrato.importe/2).floor
           end
         end

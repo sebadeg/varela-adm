@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_170500) do
+ActiveRecord::Schema.define(version: 2019_02_23_170600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2019_02_23_170500) do
     t.boolean "secretaria"
     t.boolean "mail"
     t.datetime "bajado"
+    t.integer "opcion_secretaria"
+    t.date "fecha_secretaria"
     t.index ["actividad_id"], name: "index_actividad_alumnos_on_actividad_id"
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id"
   end
