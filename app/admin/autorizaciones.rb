@@ -54,7 +54,12 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
 
     f.inputs do
       f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.label Alumno.find(l.object.alumno_id).nombre + " " + Alumno.find(l.object.alumno_id).apellido
+        
+        alumno = Alumno.find(l.object.alumno_id) rescue nil
+        if alumno != nil
+          l.label alumno.nombre + " " + alumno.apellido
+        end
+        
       # t.column "Opcion" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
       # t.column "Fecha" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).fecha end
       # t.column "Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).secretaria end
