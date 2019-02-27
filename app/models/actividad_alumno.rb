@@ -12,7 +12,7 @@ class ActividadAlumno < ApplicationRecord
     end
   end
 
-  def nombre_alumno
+  def nombre_opcion
     return "Opcion"
   end
 

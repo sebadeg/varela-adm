@@ -47,9 +47,9 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
 
   form do |f|
     f.inputs do
-      f.input :nombre
-      f.input :fecha, label: "Autorización hasta", :as => :date_picker
-      f.input :fechainfo, label: "Información hasta", :as => :date_picker
+      f.input :nombre, input_html: { :readonly => true }
+      f.input :fecha, label: "Autorización hasta", :as => :date_picker, input_html: { :readonly => true }
+      f.input :fechainfo, label: "Información hasta", :as => :date_picker, input_html: { :readonly => true }
     end
 
     f.inputs do
