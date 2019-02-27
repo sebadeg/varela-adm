@@ -53,14 +53,12 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
     end
 
     f.inputs do
-      f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
+      f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: false, new_record: false do |l|
         l.input :nombre_alumno, label: "Alumno", input_html: { :readonly => true }
-        
-
-      # t.column "Opcion" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
-      # t.column "Fecha" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).fecha end
-      # t.column "Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).secretaria end
-      # t.column "Mail" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).mail end
+        l.input :nombre_opcion, label: "Opción", input_html: { :readonly => true }
+        l.input :fecha_opcion, label: "Fecha", input_html: { :readonly => true }
+       
+        l.input :opcion_secretaria, label: "Secretaría"        
       end
     end
 
