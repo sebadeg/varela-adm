@@ -10,6 +10,7 @@ ActiveAdmin.register_page "Pendiente" do
       usuarios.each do |usuario|
         passwd =  Digest::MD5.hexdigest(usuario.cedula.to_s + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
         ActiveRecord::Base.connection.execute( "UPDATE usuarios SET passwd='#{passwd}' WHERE id=#{usuario.id};" )
+        usuario.update( password: passwd, password_confirmation: passwd );
       end
     end
   end
