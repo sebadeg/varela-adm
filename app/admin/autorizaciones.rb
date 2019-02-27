@@ -52,13 +52,15 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
       f.input :fechainfo, label: "Información hasta", :as => :date_picker
     end
 
-    table_for Alumno.where("id IN (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
-      f.label t.nombre
-      t.column t.apellido
+    f.inputs do
+      f.has_many :actividad_opcion, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
+        l.label l.object.nombre
+        l.input l.object.apellido
       # t.column "Opcion" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
       # t.column "Fecha" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).fecha end
       # t.column "Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).secretaria end
       # t.column "Mail" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).mail end
+      end
     end
 
     f.actions
