@@ -2,7 +2,8 @@ ActiveAdmin.register Usuario do
 
   menu label: 'Padres', priority: 20 
 
-  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular
+  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation
+
 
   action_item :contrasena, only: :show do
     link_to "Resetear Contraseña", contrasena_admin_usuario_path(usuario), method: :put 
@@ -64,6 +65,7 @@ ActiveAdmin.register Usuario do
       f.input :email
       f.input :direccion
       f.input :celular
+      f.input :passwd
       f.input :password
       f.input :password_confirmation
     end
