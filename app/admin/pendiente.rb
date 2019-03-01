@@ -230,7 +230,7 @@ ActiveAdmin.register_page "Pendiente" do
        anio = 2019
        cantidad = 0
        suma = 0
-       Factura.where("cuenta_id IN (11601,11624,11795,11983,12037,12776,13857) AND fecha='2019-03-01'").each do |x|
+       Factura.where("cuenta_id IN (11869,11601,11624,11795,12037,12776,13857) AND fecha='2019-03-01'").each do |x|
          cuenta = x.cuenta_id
          nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
          importe = x.total
