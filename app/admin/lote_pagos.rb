@@ -21,11 +21,11 @@ ActiveAdmin.register_page "Lote_pago" do
 
     ActiveRecord::Base.connection.execute( 
       "INSERT INTO movimientos (pago_cuenta_id,cuenta_id,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
-      (SELECT id,cuenta_id,fecha,'PAGO','',0,importe,1005,false,now(),now() FROM pago_cuentas WHERE NOT id IN (SELECT pago_cuenta_id FROM movimientos WHERE NOT pago_cuenta_id IS NULL));" )
+      (SELECT pago_cuentas.id,pago_cuentas.cuenta_id,fecha,'PAGO','',0,pago_cuentas.importe,1005,false,now(),now() FROM pago_cuentas WHERE NOT id IN (SELECT pago_cuenta_id FROM movimientos WHERE NOT pago_cuenta_id IS NULL));" )
 
     ActiveRecord::Base.connection.execute( 
       "INSERT INTO movimientos (recibo_id,cuenta_id,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
-      (SELECT id,cuenta_id,fecha,'PAGO','',0,importe,1005,true,now(),now() FROM recibos WHERE NOT id IN (SELECT recibo_id FROM movimientos WHERE NOT recibo_id IS NULL));" )
+      (SELECT recibos.id,recibos.cuenta_id,fecha,'PAGO','',0,recibos.importe,1005,true,now(),now() FROM recibos WHERE NOT id IN (SELECT recibo_id FROM movimientos WHERE NOT recibo_id IS NULL));" )
 
     redirect_to admin_pagos_path, notice: "HECHO"
   end
