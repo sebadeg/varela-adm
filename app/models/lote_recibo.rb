@@ -81,7 +81,7 @@ class LoteRecibo < ApplicationRecord
           end
 
           bounding_box([0, x+123], :width => 270, :height => 10) do
-            text "<b>Cuenta:</b> #{nombre_cuenta}", align: :left, inline_format: true
+            text "<b>Cuenta:</b> #{nombre_cuenta}", align: :left
           end
 
           bounding_box([270, x+123], :width => 270, :height => 10) do
