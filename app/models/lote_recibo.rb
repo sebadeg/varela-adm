@@ -80,8 +80,8 @@ class LoteRecibo < ApplicationRecord
             text "<b>Comprobante Nro.:</b> #{lote_recibo.id}", align: :right, inline_format: true
           end
 
-          bounding_box([0, x+123], :width => 270, :height => 10) do
-            text "<b>Cuenta:</b> #{nombre_cuenta}", align: :left
+          bounding_box([0, x+123], :width => 540, :height => 10) do
+            text "<b>Cuenta:</b> #{nombre_cuenta}", align: :left, inline_format: true
           end
 
           bounding_box([270, x+123], :width => 270, :height => 10) do
