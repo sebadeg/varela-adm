@@ -252,7 +252,7 @@ ActiveAdmin.register_page "Pendiente" do
   end
 
 
-  page_action chequear_ingreso, method: :post do
+  page_action ingreso, method: :post do
     
     #SELECT * FROM inscripciones WHERE alumno_id NOT IN (SELECT alumno_id FROM cuenta_alumnos WHERE NOT alumno_id IS NULL)
 
