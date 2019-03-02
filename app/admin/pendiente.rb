@@ -263,16 +263,16 @@ ActiveAdmin.register_page "Pendiente" do
         inscripcion = Inscripcion.find_by(cuenta_id:cuenta_alumno.cuenta_id)
         if ( inscripcion != nil )
           if inscripcion.documento1 && inscripcion.email1
-            Usuario.create(cedula: inscripcion.documento1, email:inscripcion.email1, nombre: nombre1, cuenta: inscripcion.cuenta_id )
+            Usuario.create(cedula: inscripcion.documento1, email:inscripcion.email1, nombre: inscripcion.nombre1, cuenta: inscripcion.cuenta_id )
           end
           if inscripcion.documento2 && inscripcion.email2
-            Usuario.create(cedula: inscripcion.documento2, email:inscripcion.email2, nombre: nombre2, cuenta: inscripcion.cuenta_id )
+            Usuario.create(cedula: inscripcion.documento2, email:inscripcion.email2, nombre: inscripcion.nombre2, cuenta: inscripcion.cuenta_id )
           end
           if inscripcion.titular_padre && inscripcion.cedula_padre && inscripcion.email_padre
-             Usuario.create(cedula: inscripcion.cedula_padre, email:inscripcion.email_padre, nombre: nombre_padre, cuenta: inscripcion.cuenta_id )
+             Usuario.create(cedula: inscripcion.cedula_padre, email:inscripcion.email_padre, nombre: inscripcion.nombre_padre, cuenta: inscripcion.cuenta_id )
          end
           if inscripcion.titular_madre && inscripcion.cedula_madre && inscripcion.email_madre
-            Usuario.create(cedula: inscripcion.cedula_madre, email:inscripcion.email_madre, nombre: nombre_madre, cuenta: inscripcion.cuenta_id  )
+            Usuario.create(cedula: inscripcion.cedula_madre, email:inscripcion.email_madre, nombre: inscripcion.nombre_madre, cuenta: inscripcion.cuenta_id  )
           end
         end
 
