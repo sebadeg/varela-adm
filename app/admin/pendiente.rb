@@ -252,6 +252,39 @@ ActiveAdmin.register_page "Pendiente" do
   end
 
 
+  page_action chequear_ingreso, method: :post do
+    
+    #SELECT * FROM inscripciones WHERE alumno_id NOT IN (SELECT alumno_id FROM cuenta_alumnos WHERE NOT alumno_id IS NULL)
+
+    
+      CuentaAlumno.where( "cuenta_id NOT IN (SELECT cuenta_id FROM titular_cuentas WHERE NOT cuenta_id IS NULL) AND " + 
+                          "cuenta_id IN (SELECT cuenta_id FROM inscripciones WHERE NOT cuenta_id IS NULL)").each do |cuenta_alumno|
+        
+        inscripcion = Inscripcion.find_by(cuenta_id:cuenta_alumno.cuenta_id)
+        if ( inscripcion != nil )
+          if inscripcion.documento1 && inscripcion.email1
+            Usuario.create(cedula: inscripcion.documento1, email:inscripcion.email1, nombre: nombre1, cuenta: inscripcion.cuenta_id )
+          end
+          if inscripcion.documento2 && inscripcion.email2
+            Usuario.create(cedula: inscripcion.documento2, email:inscripcion.email2, nombre: nombre2, cuenta: inscripcion.cuenta_id )
+          end
+          if inscripcion.titular_padre && inscripcion.cedula_padre && inscripcion.email_padre
+             Usuario.create(cedula: inscripcion.cedula_padre, email:inscripcion.email_padre, nombre: nombre_padre, cuenta: inscripcion.cuenta_id )
+         end
+          if inscripcion.titular_madre && inscripcion.cedula_madre && inscripcion.email_madre
+            Usuario.create(cedula: inscripcion.cedula_madre, email:inscripcion.email_madre, nombre: nombre_madre, cuenta: inscripcion.cuenta_id  )
+          end
+        end
+
+      end
+
+    #SELECT * FROM cuenta_alumnos INNER JOIN inscripciones ON cuenta_alumnos.alumno_id=inscripciones.alumno_id WHERE cuenta_alumnos.cuenta_id NOT IN (SELECT cuenta_id FROM titular_cuentas WHERE NOT cuenta_id IS NULL)
+  end
+
+
+
+
+
  #  page_action :redpagos, method: :post do   
  #    #ActiveRecord::Base.connection.execute( "UPDATE movimientos SET pendiente=false WHERE cuenta_id=#{cuenta} AND fecha<='2018-06-01'" )
     
