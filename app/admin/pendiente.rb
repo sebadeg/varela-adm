@@ -277,6 +277,9 @@ ActiveAdmin.register_page "Pendiente" do
         end
       end
 
+      Inscripcion.where("NOT alumno_id IS NULL AND NOT cuenta_id IS NULL AND alumno_id NOT IN (SELECT alumno_id FROM cuenta_alumnos WHERE NOT alumno_id IS NULL)").each do |inscripcion|
+        CuentaAlumno.create(alumno_id: inscripcion.alumno_id, cuenta_id: inscripcion.cuenta_id)
+      end
 
 
       #CuentaAlumno.where( "cuenta_id NOT IN (SELECT cuenta_id FROM titular_cuentas WHERE NOT cuenta_id IS NULL) AND " + 
