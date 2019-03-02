@@ -281,6 +281,13 @@ ActiveAdmin.register_page "Pendiente" do
         CuentaAlumno.create(id: inscripcion.alumno_id, alumno_id: inscripcion.alumno_id, cuenta_id: inscripcion.cuenta_id, numero: inscripcion.alumno_id % 10 )
       end
 
+      Usuario.where( "(mail IS NULL OR mail=false) AND passwd IS NULL" ).each do |usuario|
+        gen_passwd =  Digest::MD5.hexdigest(usuario.cedula.to_s + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
+        usuario.update( password: gen_passwd, password_confirmation: gen_passwd );
+        usuario.update( passwd: gen_passwd )
+      end
+
+
 
       #CuentaAlumno.where( "cuenta_id NOT IN (SELECT cuenta_id FROM titular_cuentas WHERE NOT cuenta_id IS NULL) AND " + 
       #                   "cuenta_id IN (SELECT cuenta_id FROM inscripciones WHERE NOT cuenta_id IS NULL)").each do |cuenta_alumno|
