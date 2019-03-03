@@ -59,7 +59,7 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
         l.input :opcion, label: "Opción Responsable", input_html: { :readonly => true }
         l.input :fecha, label: "Fecha", input_html: { :readonly => true }
         l.input :opcion_secretaria, label: "Opción Secretaría"        
-        l.input :opcion_fecha, label: "Fecha"
+        l.input :fecha_secretaria, label: "Fecha"
       end
     end
 
