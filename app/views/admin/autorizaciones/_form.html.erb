@@ -1,4 +1,4 @@
-<%= semantic_form_for [:admin, Actividad.new], builder: ActiveAdmin::FormBuilder do |a| %>
+<%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
   <%= a.inputs "Autorizar actividad" do %>
       <%= a.input :nombre  %>
       <%= a.input :fecha  %>
@@ -26,6 +26,11 @@
         </tr>
       <% end %>
     </table>
+  <% end %>
+
+  <%= a.actions do %>
+    <%= a.action :submit %>
+    <li class="cancel"><%= link_to "Cancelar", [:admin, resource] %></li>
   <% end %>
 
 <% end %>
