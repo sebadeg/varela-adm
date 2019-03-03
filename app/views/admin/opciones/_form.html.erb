@@ -1,4 +1,6 @@
 <%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
+
+  <%= a.semantic_errors *a.object.errors.keys %>
   <%= a.inputs do %>
       <%= a.input :nombre, input_html: { :readonly => true }  %>
       <%= a.input :fecha, input_html: { :readonly => true }  %>
@@ -15,14 +17,38 @@
       </tr>
       
       <%= a.semantic_fields_for :actividad_opcion do |b| %>
+        <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= b.input :concepto, label: false %></td>
           <td><%= b.input :cuotas, label: false %></td>
           <td><%= b.input :importe, label: false %></td>
           <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
+
+      <% js = a.semantic_fields_for :actividad_opcion, ActividadOpcion.new do |b| %>
+        <tr>
+          <td><%= b.input :concepto, label: false %></td>
+          <td><%= b.input :cuotas, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
     </table>
+
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.actividad_opcion tr').last().after(
+                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+
   <% end %>
 
   <%= a.actions do %>
