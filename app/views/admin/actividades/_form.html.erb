@@ -45,47 +45,6 @@
     </span>
   <% end %>
 
-  <%= a.inputs "Opciones" do %>
-    <table class="actividad_opcion">
-      <tr>
-        <th>Concepto</th>
-        <th>Cuotas</th>
-        <th>Importe</th>
-        <th>Fecha</th>    
-      </tr>
-      
-      <%= a.semantic_fields_for :actividad_opcion do |b| %>
-        <%= b.semantic_errors *b.object.errors.keys %>
-        <tr>
-          <td><%= b.input :opcion_concepto, label: false, as: :select, collection: OpcionConcepto.all.collect {|x| [x.nombre, x.id] } %></td>
-          <td><%= b.input :cuotas, label: false %></td>
-          <td><%= b.input :importe, label: false %></td>
-          <td><%= b.input :fecha, label: false %></td>
-          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
-        </tr>
-      <% end %>
-
-      <% js = a.semantic_fields_for :actividad_opcion, ActividadOpcion.new do |b| %>
-        <tr>
-          <td><%= b.input :opcion_concepto, label: false, as: :select, collection: OpcionConcepto.all.collect {|x| [x.nombre, x.id] } %></td>
-          <td><%= b.input :cuotas, label: false %></td>
-          <td><%= b.input :importe, label: false %></td>
-          <td><%= b.input :fecha, label: false %></td>
-          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
-        </tr>
-      <% end %>
-    </table>
-    <span class="add-child">
-      <% js = escape_javascript(js) %>
-      <%= link_to I18n.t('active_admin.has_many_new',
-          model: @child.to_s.singularize.titlecase), "#",
-          onclick: "$('table.actividad_opcion tr').last().after(
-                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
-                    ); return false;",
-          class: "button" %>
-    </span>
-  <% end %>
-
   <%= a.inputs "Listas" do %>
     <table class="actividad_lista">
       <tr>
@@ -112,6 +71,49 @@
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
           onclick: "$('table.actividad_lista tr').last().after(
+                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.inputs "Opciones" do %>
+    <table class="actividad_opcion">
+      <tr>
+        <th>Concepto</th>
+        <th>Cuotas</th>
+        <th>Importe</th>
+        <th>Fecha</th>    
+      </tr>
+      
+      <%= a.semantic_fields_for :actividad_opcion do |b| %>
+        <%= b.semantic_errors *b.object.errors.keys %>
+        <tr>
+          <td><%= b.input :indice, label: false %></td>
+          <td><%= b.input :opcion_concepto, label: false, as: :select, collection: OpcionConcepto.all.collect {|x| [x.nombre, x.id] } %></td>
+          <td><%= b.input :cuotas, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :actividad_opcion, ActividadOpcion.new do |b| %>
+        <tr>
+          <td><%= b.input :indice, label: false %></td>
+          <td><%= b.input :opcion_concepto, label: false, as: :select, collection: OpcionConcepto.all.collect {|x| [x.nombre, x.id] } %></td>
+          <td><%= b.input :cuotas, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.actividad_opcion tr').last().after(
                       '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
                     ); return false;",
           class: "button" %>

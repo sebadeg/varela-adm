@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_180000) do
+ActiveRecord::Schema.define(version: 2019_03_03_190000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_180000) do
     t.date "fecha"
     t.string "concepto"
     t.bigint "opcion_concepto_id"
+    t.integer "indice"
     t.index ["actividad_id"], name: "index_actividad_opciones_on_actividad_id"
     t.index ["opcion_concepto_id"], name: "index_actividad_opciones_on_opcion_concepto_id"
   end

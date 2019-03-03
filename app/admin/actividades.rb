@@ -19,17 +19,12 @@ ActiveAdmin.register Actividad do
   permit_params :id, :nombre, :fecha, :fechainfo,
       actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:indice,:_destroy],
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
-      actividad_opcion_attributes: [:id,:actividad_id,:opcion_concepto_id,:cuotas,:importe,:fecha,:opcion,:_destroy],
+      actividad_opcion_attributes: [:id,:actividad_id,:opcion_concepto_id,:cuotas,:importe,:fecha,:indice,:opcion,:_destroy],
       actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:_destroy]
 
   # permit_params :nombre, :descripcion, :fecha, :fechainfo, :archivo, :data, 
   #     actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
   #     actividad_opcion_attributes: [:id,:actividad_id,:valor,:opcion,:eleccion,:_destroy]
-
-
-  action_item :opcion, only: :show do
-    link_to "Opciones", edit_admin_opcion_path(actividad)
-  end
 
   action_item :asociar, only: :show do
     link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
@@ -122,6 +117,7 @@ ActiveAdmin.register Actividad do
 
       row "Opciones" do 
         table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
+          t.column :indice
           t.column "Concepto" do |r| (r.opcion_concepto != nil ? "#{r.opcion_concepto.nombre}" : "" ) end
           t.column :cuotas
           t.column :importe
