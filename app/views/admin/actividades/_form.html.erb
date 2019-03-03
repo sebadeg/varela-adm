@@ -15,7 +15,7 @@
         <th></th>
       </tr>
       
-      <%= a.semantic_fields_for :actividad_archivo do |b| %>
+      <%= a.semantic_fields_for :actividad_archivo, sortable: :indice do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= b.input :indice, label: false %></td>
@@ -80,13 +80,14 @@
   <%= a.inputs "Opciones" do %>
     <table class="actividad_opcion">
       <tr>
+        <th>Indice</th>
         <th>Concepto</th>
         <th>Cuotas</th>
         <th>Importe</th>
         <th>Fecha</th>    
       </tr>
       
-      <%= a.semantic_fields_for :actividad_opcion do |b| %>
+      <%= a.semantic_fields_for :actividad_opcion, sortable: :indice do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= b.input :indice, label: false %></td>
