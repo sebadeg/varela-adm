@@ -24,24 +24,25 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
       row :fechainfo, label: "Información hasta" 
 
       row "Alumnos" do 
-        # table_for ActividadAlumno.where("actividad_id=#{r.id})").order(:id) do |t|
-        #   t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.id} - #{r.alumno.nombre} #{r.alumno.apellido}" : "") end
-        #   t.column :opcion
-        #   t.column :fecha 
-        #   t.column :secretaria 
-        #   t.column :mail
-        # end
-
-
-        table_for Alumno.where("id IN (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
-          t.column :nombre
-          t.column :apellido
+        table_for ActividadAlumno.where("actividad_id=#{r.id})").order(:id) do |t|
+          t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.nombre} #{r.alumno.apellido}" : "") end
           t.column :bajado
-          t.column "Opcion Responsable" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
-          t.column :fecha
-          t.column "Opción Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion_secretaria end
+          t.column :opcion
+          t.column :fecha 
+          t.column :opcion_secretaria 
           t.column :fecha_secretaria
         end
+
+
+        # table_for Alumno.where("id IN (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
+        #   t.column :nombre
+        #   t.column :apellido
+        #   t.column :bajado
+        #   t.column "Opcion Responsable" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
+        #   t.column :fecha
+        #   t.column "Opción Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion_secretaria end
+        #   t.column :fecha_secretaria
+        # end
       end
     end
   end
