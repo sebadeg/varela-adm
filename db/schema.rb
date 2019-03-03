@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_000000) do
+ActiveRecord::Schema.define(version: 2019_03_03_170000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,9 @@ ActiveRecord::Schema.define(version: 2019_03_03_000000) do
     t.decimal "importe"
     t.date "fecha"
     t.string "concepto"
+    t.bigint "opcion_concepto_id"
     t.index ["actividad_id"], name: "index_actividad_opciones_on_actividad_id"
+    t.index ["opcion_concepto_id"], name: "index_actividad_opciones_on_opcion_concepto_id"
   end
 
   create_table "actividades", id: :serial, force: :cascade do |t|
@@ -582,6 +584,12 @@ ActiveRecord::Schema.define(version: 2019_03_03_000000) do
     t.index ["placta_id"], name: "index_movs_on_placta_id"
   end
 
+  create_table "opcion_conceptos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "padre_alumnos", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "alumno_id"
@@ -820,6 +828,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_000000) do
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
+  add_foreign_key "actividad_opciones", "opcion_conceptos"
   add_foreign_key "contrato_cuotas", "contratos"
   add_foreign_key "contratos", "alumnos"
   add_foreign_key "contratos", "conceptos"

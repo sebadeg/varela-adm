@@ -1,5 +1,6 @@
 class ActividadOpcion < ApplicationRecord
   belongs_to :actividad
+  belongs_to :opcion_concepto
 
   def self.opciones(actividad_id)
     opciones = Array.new
