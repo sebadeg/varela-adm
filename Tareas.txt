@@ -1,0 +1,15 @@
+
+
+
+
+Inscribir y Reinscribir sean lo mismo
+
+Inscripcion:
+	te debe generar un numero de cuenta y un numero de alumno, teniendo en cuenta que puede ser una cuenta que ya existe
+	Generar alumno (esto puede no ser necesario si es un reingreso)
+	Generar cuenta (esto puede no ser necesario)
+	Generar cuenta-alumno
+	Generar usuario
+	Generar titular-cuenta
+
+	
