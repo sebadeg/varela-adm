@@ -116,7 +116,7 @@ ActiveAdmin.register Actividad do
       end
 
       row "Opciones" do 
-        table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
+        table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:indice) do |t|
           t.column :indice
           t.column "Concepto" do |r| (r.opcion_concepto != nil ? "#{r.opcion_concepto.nombre}" : "" ) end
           t.column :cuotas
