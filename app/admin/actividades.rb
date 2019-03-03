@@ -121,7 +121,7 @@ ActiveAdmin.register Actividad do
 
       row "Opciones" do 
         table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
-          t.column :opcion_concepto_nombre
+          t.column "Concepto" do |r| (r.opcion_concepto != nil ? "#{r.opcion_concepto.nombre}", "" ) end
           t.column :cuotas
           t.column :importe
           t.column :fecha
