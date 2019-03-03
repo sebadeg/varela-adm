@@ -132,7 +132,7 @@ ActiveAdmin.register Actividad do
       row "Alumnos" do 
         table_for ActividadAlumno.where("actividad_id=#{r.id}").order(:id) do |t|
           t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.nombre} #{r.alumno.apellido}" : "") end
-          t.column "Bajado" do |r| (r.bajado != nil ? r.bajado.strftime() : "%b %d, %Y" ) end
+          t.column "Bajado" do |r| (r.bajado != nil ? r.bajado.strftime("%b %d, %Y") : "" ) end
           t.column :opcion
           t.column :fecha 
           t.column :opcion_secretaria 
