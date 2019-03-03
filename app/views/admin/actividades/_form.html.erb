@@ -15,7 +15,7 @@
         <th></th>
       </tr>
       
-      <%= a.semantic_fields_for :actividad_archivo, @parent.actividad_archivo.sort_by(&:index) do |b| %>
+      <%= a.semantic_fields_for :actividad_archivo do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= b.input :indice, label: false %></td>
