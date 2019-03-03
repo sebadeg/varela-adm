@@ -6,7 +6,7 @@ class ActividadOpcion < ApplicationRecord
     opciones = Array.new
     elecciones = Hash.new
 
-    ActividadOpcion.where(["actividad_id=#{actividad_id}"]).order(:id).each do |opcion|
+    ActividadOpcion.where(["actividad_id=#{actividad_id}"]).order(:indice).each do |opcion|
       
       s = opcion.concepto != nil ? opcion.concepto : ""
       if ( opcion.cuotas != nil && opcion.cuotas > 0 )

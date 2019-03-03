@@ -1,6 +1,10 @@
 
 
 
+Autorizaciones de actividades
+
+	impactar en la cuenta corriente
+
 
 Inscribir y Reinscribir sean lo mismo
 
@@ -11,5 +15,14 @@ Inscripcion:
 	Generar cuenta-alumno
 	Generar usuario
 	Generar titular-cuenta
+
+	Generar password de usuario
+	Enviar mail de bienvenida
+
+	Generar cuotas
+	Generar matriculas
+
+
+
 
 	
