@@ -1,5 +1,5 @@
 <%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
-  <%= a.inputs "Autorizar actividad" do %>
+  <%= a.inputs do %>
       <%= a.input :nombre  %>
       <%= a.input :fecha  %>
       <%= a.input :fechainfo  %>
@@ -18,11 +18,10 @@
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
         <tr>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
-          <td><%= b.input :opcion, label: false %></td>
-          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.object.opcion != nil ? ActividadOpcion.find(b.object.opcion).eleccion : "", label: false %></td>
+          <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y') : "", label: false %></td>
           <td><%= b.input :opcion_secretaria, label: false %></td>
           <td><%= b.input :fecha_secretaria, label: false %></td>
-          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
     </table>
