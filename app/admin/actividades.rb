@@ -150,7 +150,8 @@ ActiveAdmin.register Actividad do
     end
 
     f.inputs do
-      f.has_many :actividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
+      f.has_many :actividad_archivo, heading: "Archivos", sortable: :order, allow_destroy: true, new_record: true do |l|
+        l.input :id
         if l.object == nil || l.object.new_record?
           l.input :nombre, :input_html => { :value => "" }, as: :hidden
           l.input :data, as: :file, label: "Archivo"
