@@ -103,6 +103,12 @@ ActiveAdmin.register Actividad do
         end
       end
 
+      row "Listas" do 
+        table_for Lista.where("id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{r.id})").order(:nombre) do |t|
+          t.column :nombre
+        end
+      end
+
       row "Opciones" do 
         table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
           t.column :valor
@@ -110,12 +116,6 @@ ActiveAdmin.register Actividad do
           t.column :cuotas
           t.column :importe
           t.column :fecha
-        end
-      end
-
-      row "Listas" do 
-        table_for Lista.where("id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{r.id})").order(:nombre) do |t|
-          t.column :nombre
         end
       end
 

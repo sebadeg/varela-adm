@@ -1,14 +1,8 @@
-<% p "------------------------------------------" %>
-<% p "------------------------------------------" %>
-<% p resource %>
-<% p "------------------------------------------" %>
-<% p "------------------------------------------" %>
-
 <%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
   <%= a.inputs do %>
-      <%= a.input :nombre  %>
-      <%= a.input :fecha  %>
-      <%= a.input :fechainfo  %>
+      <%= a.input :nombre, input_html: { :readonly => true }  %>
+      <%= a.input :fecha, input_html: { :readonly => true }  %>
+      <%= a.input :fechainfo, input_html: { :readonly => true }  %>
   <% end %>
 
   <%= a.inputs "Alumnos" do %>
@@ -40,4 +34,24 @@
     <li class="cancel"><%= link_to "Cancelar", [:admin, resource] %></li>
   <% end %>
 
+<!--
+  # form do |f|
+  #   f.inputs do
+  #     f.input :nombre, input_html: { :readonly => true }
+  #     f.input :fecha, label: "Autorización hasta", :as => :date_picker, input_html: { :readonly => true }
+  #     f.input :fechainfo, label: "Información hasta", :as => :date_picker, input_html: { :readonly => true }
+  #   end
+
+  #   f.inputs do
+  #     f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: false, new_record: false do |l|
+  #       l.input :opcion, label: "Opción Responsable", input_html: { :readonly => true }
+  #       l.input :fecha, label: "Fecha", input_html: { :readonly => true }
+  #       l.input :opcion_secretaria, label: "Opción Secretaría"        
+  #       l.input :fecha_secretaria, label: "Fecha"
+  #     end
+  #   end
+
+  #   f.actions
+  # end
+-->
 <% end %>
