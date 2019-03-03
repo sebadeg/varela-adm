@@ -22,19 +22,25 @@ ActiveAdmin.register Actividad do
   #     actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
   #     actividad_opcion_attributes: [:id,:actividad_id,:valor,:opcion,:eleccion,:_destroy]
 
-  menu priority: 3001, label: "Modificar", parent: "Actividad"
+  menu priority: 3001, label: "Actividad"
 
   action_item :opcion, only: :show do
     link_to "Opciones", edit_admin_opcion_path(actividad)
+  end
+
+  action_item :asociar, only: :show do
+    link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
   end
 
   action_item :autorizar, only: :show do
     link_to "Autorizaciones", edit_admin_autorizacion_path(actividad)
   end
 
-  action_item :asociar, only: :show do
-    link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
+  action_item :mail, only: :show do
+    link_to "Enviar Mail", mail_admin_actividad_path(actividad), method: :put 
   end
+
+
 
   member_action :asociar, method: :put do
     id = params[:id]
@@ -44,10 +50,6 @@ ActiveAdmin.register Actividad do
     ActiveRecord::Base.connection.execute( "INSERT INTO actividad_alumnos (actividad_id,alumno_id,created_at,updated_at) (SELECT #{id},id,now(),now() FROM alumnos WHERE id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{id})));" )
 
     redirect_to admin_actividad_path(actividad)
-  end
-
-  action_item :mail, only: :show do
-    link_to "Enviar Mail", mail_admin_actividad_path(actividad), method: :put 
   end
 
   member_action :mail, method: :put do
