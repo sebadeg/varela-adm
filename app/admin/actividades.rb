@@ -17,7 +17,7 @@ ActiveAdmin.register Actividad do
 # end
 
   permit_params :id, :nombre, :fecha, :fechainfo,
-      actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:_destroy],
+      actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:indice,:_destroy],
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
       actividad_opcion_attributes: [:id,:actividad_id,:concepto,:cuotas,:importe,:fecha,:opcion,:_destroy],
       actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:_destroy]
