@@ -108,7 +108,8 @@ ActiveAdmin.register Actividad do
       row :fechainfo, label: "Información hasta" 
 
       row "Archivos" do 
-        table_for ActividadArchivo.where("actividad_id=#{r.id}").order(:id) do |t|
+        table_for ActividadArchivo.where("actividad_id=#{r.id}").order(:indice) do |t|
+          t.column :indice
           t.column :nombre
         end
       end
@@ -150,8 +151,8 @@ ActiveAdmin.register Actividad do
     end
 
     f.inputs do
-      f.has_many :actividad_archivo, heading: "Archivos", sortable: :order, allow_destroy: true, new_record: true do |l|
-        l.input :id
+      f.has_many :actividad_archivo, heading: "Archivos", sortable: :indice, allow_destroy: true, new_record: true do |l|
+        l.input :indice
         if l.object == nil || l.object.new_record?
           l.input :nombre, :input_html => { :value => "" }, as: :hidden
           l.input :data, as: :file, label: "Archivo"

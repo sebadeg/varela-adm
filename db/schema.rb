@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_170000) do
+ActiveRecord::Schema.define(version: 2019_03_03_180000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_170000) do
     t.binary "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "indice"
     t.index ["actividad_id"], name: "index_actividad_archivos_on_actividad_id"
   end
 
