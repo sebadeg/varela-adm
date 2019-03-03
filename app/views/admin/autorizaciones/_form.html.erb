@@ -17,7 +17,7 @@
       
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
         <tr>
-          <td><%= Alumno.find(b.object.alumno).nombre + " " + Alumno.find(b.object.alumno).apellido %></td>
+          <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
           <td><%= b.input :opcion, label: false %></td>
           <td><%= b.input :fecha, label: false %></td>
           <td><%= b.input :opcion_secretaria, label: false %></td>
