@@ -10,7 +10,7 @@
       <tr>
         <th>Alumno</th>
         <th>Bajado</th>
-        <th>Opción Responsable</th>
+        <th>Opción</th>
         <th>Fecha</th>    
         <th>Opción Secretaria</th>
         <th>Fecha</th>
@@ -19,11 +19,11 @@
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
         <tr>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
-          <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y %H:%M:%S') : "" %></td>
+          <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.find(b.object.opcion).eleccion : "" %></td>
-          <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y %H:%M:%S') : "" %></td>
+          <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.input :opcion_secretaria, label: false %></td>
-          <td><%= b.input :fecha_secretaria, label: false %></td>
+          <td><%= b.input :fecha_secretaria, label: false, :input_html => { :value => Date.now }, as: :hidden %></td>
         </tr>
       <% end %>
     </table>
