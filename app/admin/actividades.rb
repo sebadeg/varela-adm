@@ -143,34 +143,36 @@ ActiveAdmin.register Actividad do
     end
   end
 
-  form do |f|
-    f.inputs do
-      f.input :nombre
-      f.input :fecha, label: "Autorización hasta", :as => :date_picker
-      f.input :fechainfo, label: "Información hasta", :as => :date_picker
-    end
+  form partial: 'form'
+  
+  # form do |f|
+  #   f.inputs do
+  #     f.input :nombre
+  #     f.input :fecha, label: "Autorización hasta", :as => :date_picker
+  #     f.input :fechainfo, label: "Información hasta", :as => :date_picker
+  #   end
 
-    f.inputs do
-      f.has_many :actividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
-        l.input :indice
-        if l.object == nil || l.object.new_record?
-          l.input :nombre, :input_html => { :value => "" }, as: :hidden
-          l.input :data, as: :file, label: "Archivo"
-        else
-          l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
-          l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
-        end
-      end
-    end
+  #   f.inputs do
+  #     f.has_many :actividad_archivo, heading: "Archivos", allow_destroy: true, new_record: true do |l|
+  #       l.input :indice
+  #       if l.object == nil || l.object.new_record?
+  #         l.input :nombre, :input_html => { :value => "" }, as: :hidden
+  #         l.input :data, as: :file, label: "Archivo"
+  #       else
+  #         l.input :nombre, :input_html => { :value => l.object.nombre }, as: :hidden
+  #         l.input :data, as: :file, label: "Archivo ("+ l.object.nombre + ")"
+  #       end
+  #     end
+  #   end
 
-    f.inputs do
-      f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
-        l.input :lista_id, :label => 'Lista', :as => :select, :collection => Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]}
-      end
-    end
+  #   f.inputs do
+  #     f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
+  #       l.input :lista_id, :label => 'Lista', :as => :select, :collection => Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]}
+  #     end
+  #   end
     
-    f.actions
-  end
+  #   f.actions
+  # end
 
   controller do
 
