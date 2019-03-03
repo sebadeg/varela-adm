@@ -25,7 +25,7 @@ ActiveAdmin.register Actividad do
   menu priority: 3001, label: "Modificar", parent: "Actividad"
 
   action_item :autorizar, only: :show do
-    link_to "Autorizar", admin_autorizacion_path(actividad), method: :put 
+    link_to "Autorizar", edit_admin_autorizacion_path(actividad), method: :put 
   end
 
   action_item :asociar, only: :show do
@@ -105,6 +105,7 @@ ActiveAdmin.register Actividad do
 
       row "Opciones" do 
         table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
+          t.column :valor
           t.column :concepto
           t.column :cuotas
           t.column :importe
@@ -156,6 +157,7 @@ ActiveAdmin.register Actividad do
         l.input :concepto
         l.input :opcion, :input_html => { :value => "" }, as: :hidden
         l.input :eleccion, :input_html => { :value => "" }, as: :hidden
+        l.input :valor
         l.input :cuotas
         l.input :importe
         l.input :fecha
@@ -194,6 +196,7 @@ ActiveAdmin.register Actividad do
           i = -1
         else
           if params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == "0"
+            cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:valor]
             cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:cuotas]
             importe = params[:actividad][:actividad_opcion_attributes][i.to_s][:importe]
             concepto = params[:actividad][:actividad_opcion_attributes][i.to_s][:concepto]
