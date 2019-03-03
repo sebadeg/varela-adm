@@ -1,6 +1,4 @@
-<%= semantic_form_for [:admin, :actividad], builder: ActiveAdmin::FormBuilder do |a| %>
-
-  <%= a.semantic_errors *a.object.errors.keys %>
+<%= semantic_form_for [:admin, @actividad], builder: ActiveAdmin::FormBuilder do |a| %>
   <%= a.inputs "Autorizar actividad" do %>
       <%= a.input :nombre  %>
       <%= a.input :fecha  %>
@@ -18,7 +16,6 @@
       </tr>
       
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
-        <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= Alumno.find(b.object.alumno).nombre + " " + Alumno.find(b.object.alumno).apellido %></td>
           <td><%= b.input :opcion, label: false %></td>
