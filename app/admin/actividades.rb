@@ -35,13 +35,14 @@ ActiveAdmin.register Actividad do
     link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
   end
 
+  action_item :mail, only: :show do
+    link_to "Mail", mail_admin_actividad_path(actividad), method: :put 
+  end
+
   action_item :autorizar, only: :show do
     link_to "Autorizaciones", edit_admin_autorizacion_path(actividad)
   end
 
-  action_item :mail, only: :show do
-    link_to "Enviar Mail", mail_admin_actividad_path(actividad), method: :put 
-  end
 
 
 
@@ -131,7 +132,7 @@ ActiveAdmin.register Actividad do
       row "Alumnos" do 
         table_for ActividadAlumno.where("actividad_id=#{r.id}").order(:id) do |t|
           t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.nombre} #{r.alumno.apellido}" : "") end
-          t.column :bajado
+          t.column "Bajado" do |r| (r.bajado != nil ? r.bajado.strftime() : "%b %d, %Y" ) end
           t.column :opcion
           t.column :fecha 
           t.column :opcion_secretaria 
