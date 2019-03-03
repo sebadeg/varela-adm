@@ -19,7 +19,7 @@
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
         <tr>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
-          <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y %H:%M:%S') %></td>
+          <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y %H:%M:%S') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.find(b.object.opcion).eleccion : "" %></td>
           <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y %H:%M:%S') : "" %></td>
           <td><%= b.input :opcion_secretaria, label: false %></td>
