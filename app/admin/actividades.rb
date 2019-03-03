@@ -177,37 +177,6 @@ ActiveAdmin.register Actividad do
 
       i = 0
       begin
-        if params[:actividad][:actividad_opcion_attributes] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s] == nil
-          i = -1
-        else
-          if params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == "0"
-            cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:valor]
-            cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:cuotas]
-            importe = params[:actividad][:actividad_opcion_attributes][i.to_s][:importe]
-            concepto = params[:actividad][:actividad_opcion_attributes][i.to_s][:concepto]
-            if concepto != ""
-              concepto = " " + concepto
-            end
-            if cuotas == ""
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
-            elsif importe == ""
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo#{concepto}" 
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado#{concepto}"
-            elsif cuotas == "1"
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} contado de $U #{importe}" 
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} contado de $U #{importe}"
-            else
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} en #{cuotas} cuotas de $U #{importe}" 
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} en #{cuotas} cuotas de $U #{importe}"
-            end
-          end
-          i = i+1
-        end
-      end while i >= 0
-
-      i = 0
-      begin
         if params[:actividad][:actividad_archivo_attributes] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s] == nil
           i = -1
         else
@@ -220,8 +189,15 @@ ActiveAdmin.register Actividad do
               p "----------"
               p "ARCHIVO"
               p "----------"
-              params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
-              params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = file.read
+
+              contents = file.read
+              if ( (contents =~ /\%PDF-\d+\.?\d+/) == 0 )
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = contents
+              else
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = ""
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = nil
+              end
             end
             p "----------"
             p "----------"
@@ -239,36 +215,6 @@ ActiveAdmin.register Actividad do
 
       i = 0
       begin
-        if params[:actividad][:actividad_opcion_attributes] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s] == nil
-          i = -1
-        else
-          if params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_opcion_attributes][i.to_s][:_destroy] == "0"
-            cuotas = params[:actividad][:actividad_opcion_attributes][i.to_s][:cuotas]
-            importe = params[:actividad][:actividad_opcion_attributes][i.to_s][:importe]
-            concepto = params[:actividad][:actividad_opcion_attributes][i.to_s][:concepto]
-            if concepto != ""
-              concepto = " " + concepto
-            end
-            if cuotas == ""
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "No autorizo"
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "No está autorizado"
-            elsif importe == ""
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo#{concepto}" 
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado#{concepto}"
-            elsif cuotas == "1"
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} contado de $U #{importe}" 
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} contado de $U #{importe}"
-            else
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:opcion] = "Autorizo a debitar#{concepto} en #{cuotas} cuotas de $U #{importe}" 
-              params[:actividad][:actividad_opcion_attributes][i.to_s][:eleccion] = "Está autorizado el débito#{concepto} en #{cuotas} cuotas de $U #{importe}"
-            end
-          end
-          i = i+1
-        end
-      end while i >= 0
-
-      i = 0
-      begin
         if params[:actividad][:actividad_archivo_attributes] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s] == nil
           i = -1
         else
@@ -281,8 +227,14 @@ ActiveAdmin.register Actividad do
               p "----------"
               p "ARCHIVO"
               p "----------"
-              params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
-              params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = file.read
+              contents = file.read
+              if ( (contents =~ /\%PDF-\d+\.?\d+/) == 0 )
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = contents
+              else
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = ""
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = nil
+              end
             end
             p "----------"
             p "----------"
