@@ -1,4 +1,4 @@
-<%= semantic_form_for [:admin, @actividad], builder: ActiveAdmin::FormBuilder do |a| %>
+<%= semantic_form_for [:admin, :actividad], builder: ActiveAdmin::FormBuilder do |a| %>
 
   <%= a.semantic_errors *a.object.errors.keys %>
   <%= a.inputs "Autorizar actividad" do %>
