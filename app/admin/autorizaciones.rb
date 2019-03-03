@@ -45,24 +45,26 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
     end
   end
 
-  form do |f|
-    f.inputs do
-      f.input :nombre, input_html: { :readonly => true }
-      f.input :fecha, label: "Autorización hasta", :as => :date_picker, input_html: { :readonly => true }
-      f.input :fechainfo, label: "Información hasta", :as => :date_picker, input_html: { :readonly => true }
-    end
+  form partial: 'form'
 
-    f.inputs do
-      f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: false, new_record: false do |l|
-        l.input :nombre_alumno, label: "Alumno", input_html: { :readonly => true }
-        l.input :nombre_opcion, label: "Opción", input_html: { :readonly => true }
-        l.input :fecha_opcion, label: "Fecha", input_html: { :readonly => true }
+  # form do |f|
+  #   f.inputs do
+  #     f.input :nombre, input_html: { :readonly => true }
+  #     f.input :fecha, label: "Autorización hasta", :as => :date_picker, input_html: { :readonly => true }
+  #     f.input :fechainfo, label: "Información hasta", :as => :date_picker, input_html: { :readonly => true }
+  #   end
+
+  #   f.inputs do
+  #     f.has_many :actividad_alumno, heading: "Alumnos", allow_destroy: false, new_record: false do |l|
+  #       l.input :nombre_alumno, label: "Alumno", input_html: { :readonly => true }
+  #       l.input :nombre_opcion, label: "Opción", input_html: { :readonly => true }
+  #       l.input :fecha_opcion, label: "Fecha", input_html: { :readonly => true }
        
-        l.input :opcion_secretaria, label: "Secretaría"        
-      end
-    end
+  #       l.input :opcion_secretaria, label: "Secretaría"        
+  #     end
+  #   end
 
-    f.actions
-  end
+  #   f.actions
+  # end
 
 end
