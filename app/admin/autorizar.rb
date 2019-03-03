@@ -1,9 +1,9 @@
-ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
+ActiveAdmin.register Actividad, :as => 'Autorizar' do
 
   permit_params :nombre, :fecha, :fechainfo,
       actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:_destroy]
 
-  menu priority: 3003, label: "Autorizaciones", parent: "Actividad"
+  #menu priority: 3003, label: "Autoriza", parent: "Actividad"
 
   index do
     #selectable_column

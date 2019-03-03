@@ -24,6 +24,10 @@ ActiveAdmin.register Actividad do
 
   menu priority: 3001, label: "Modificar", parent: "Actividad"
 
+  action_item :autorizar, only: :show do
+    link_to "Autorizar", admin_autorizar_path(actividad), method: :put 
+  end
+
   action_item :asociar, only: :show do
     link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
   end
@@ -115,31 +119,14 @@ ActiveAdmin.register Actividad do
       end
 
       row "Alumnos" do 
-        table_for Alumno.where("id in (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
-          t.column :nombre
-          t.column :apellido
-          #t.column "Bajado" do |x| ( ActividadAlumno.where( "alumno_id=#{x.id} AND actividad_id=#{r.id}" ).first rescue nil) != nil ? ActividadAlumno.where( "alumno_id=#{x.id} AND actividad_id=#{r.id}" ).first.bajado : "" end
-          t.column "Bajado" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).bajado != nil ? ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).bajado.strftime('%d/%m/%Y %H:%M:%S') : "" end
-          #t.column "Inscripto" do |c| (ActividadAlumno.where( "actividad_id=#{r.id} AND alumno_id=#{c.id} AND NOT opcion IS NULL AND opcion<>0" ).count() > 0) end
+        table_for ActividadAlumno.where("actividad_id=#{r.id}").order(:id) do |t|
+          t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.nombre} #{r.alumno.apellido}" : "") end
+          t.column :bajado
+          t.column :opcion
+          t.column :fecha 
+          t.column :opcion_secretaria 
+          t.column :fecha_secretaria
         end
-      end
-
-      # row "Opciones" do 
-      #   table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
-      #     t.column :valor
-      #     t.column :opcion
-      #     t.column :eleccion
-      #   end
-      # end
-
-
-      # row "Listas" do 
-      #   table_for Lista.where("id in (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{r.id})").order(:nombre) do |t|
-      #     t.column :id
-      #     t.column :nombre
-      #   end
-      # end
-
     end
   end
 
