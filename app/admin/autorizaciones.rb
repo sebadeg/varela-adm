@@ -1,7 +1,7 @@
 ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
 
   permit_params :nombre, :fecha, :fechainfo,
-      actividad_alumno_attributes: [:id,:actividad_id,:lista_id,:_destroy]
+      actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,opcion,fecha,opcion_secretaria,fecha_secretaria:_destroy]
 
   menu priority: 3003, label: "Autorizaciones", parent: "Actividad"
 
@@ -36,10 +36,11 @@ ActiveAdmin.register Actividad, :as => 'Autorizaciones' do
         table_for Alumno.where("id IN (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=#{r.id})").order(:nombre,:apellido) do |t|
           t.column :nombre
           t.column :apellido
-          t.column "Opcion" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
-          t.column "Fecha" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).fecha end
-          t.column "Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).secretaria end
-          t.column "Mail" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).mail end
+          t.column :bajado
+          t.column "Opcion Responsable" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion end
+          t.column :fecha
+          t.column "Opción Secretaría" do |x| ActividadAlumno.find_by(actividad_id: r.id, alumno_id: x.id).opcion_secretaria end
+          t.column :fecha_secretaria
         end
       end
     end
