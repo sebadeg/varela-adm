@@ -1,0 +1,126 @@
+<%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
+
+  <%= a.semantic_errors *a.object.errors.keys %>
+  <%= a.inputs do %>
+      <%= a.input :nombre  %>
+      <%= a.input :fecha  %>
+      <%= a.input :fechainfo  %>
+  <% end %>
+
+  <%= a.inputs "Archivos" do %>
+    <table class="actividad_archivo">
+      <tr>
+        <th>Indice</th>
+        <th>Archivo</th>
+        <th></th>
+      </tr>
+      
+      <%= a.semantic_fields_for :actividad_archivo do |b| %>
+        <%= b.semantic_errors *b.object.errors.keys %>
+        <tr>
+          <td><%= b.input :indice, label: false %></td>
+          <td><%= b.input :nombre, label: false, input_html: { :value => l.object.nombre } %></td>
+          <td><%= b.input :data, label: false, as: :file %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :actividad_archivo, ActividadArchivo.new do |b| %>
+        <tr>
+          <td><%= b.input :indice, label: false %></td>
+          <td><%= b.input :nombre, label: false, input_html: { :value => "" } %></td>
+          <td><%= b.input :data, label: false, as: :file %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.actividad_archivo tr').last().after(
+                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.inputs "Opciones" do %>
+    <table class="actividad_opcion">
+      <tr>
+        <th>Concepto</th>
+        <th>Cuotas</th>
+        <th>Importe</th>
+        <th>Fecha</th>    
+      </tr>
+      
+      <%= a.semantic_fields_for :actividad_opcion do |b| %>
+        <%= b.semantic_errors *b.object.errors.keys %>
+        <tr>
+          <td><%= b.input :opcion_concepto, label: false, as: :select, collection: OpcionConcepto.all.collect {|x| [x.nombre, x.id] } %></td>
+          <td><%= b.input :cuotas, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :actividad_opcion, ActividadOpcion.new do |b| %>
+        <tr>
+          <td><%= b.input :opcion_concepto, label: false, as: :select, collection: OpcionConcepto.all.collect {|x| [x.nombre, x.id] } %></td>
+          <td><%= b.input :cuotas, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.actividad_opcion tr').last().after(
+                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.inputs "Listas" do %>
+    <table class="actividad_lista">
+      <tr>
+        <th>Lista</th>
+      </tr>
+      
+      <%= a.semantic_fields_for :actividad_lista do |b| %>
+        <%= b.semantic_errors *b.object.errors.keys %>
+        <tr>
+          <td><%= b.input :lista, :label => false, :as => :select, collection: Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :actividad_lista, ActividadLista.new do |b| %>
+        <tr>
+          <td><%= b.input :lista, :label => false, :as => :select, collection: Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.actividad_lista tr').last().after(
+                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.actions do %>
+    <%= a.action :submit %>
+    <li class="cancel"><%= link_to "Cancelar", [:admin, resource] %></li>
+  <% end %>
+
+<% end %>
