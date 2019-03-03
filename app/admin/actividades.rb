@@ -14,8 +14,8 @@ ActiveAdmin.register Actividad do
 
   permit_params :id, :nombre, :fecha, :fechainfo,
       actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:_destroy],
-      actividad_opcion_attributes: [:id,:actividad_id,:valor,:concepto,:cuotas,:importe,:opcion,:eleccion,:fecha,:_destroy],
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
+      actividad_opcion_attributes: [:id,:actividad_id,:concepto,:cuotas,:importe,:fecha,:opcion,:_destroy],
       actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:_destroy]
 
   # permit_params :nombre, :descripcion, :fecha, :fechainfo, :archivo, :data, 
@@ -24,8 +24,12 @@ ActiveAdmin.register Actividad do
 
   menu priority: 3001, label: "Modificar", parent: "Actividad"
 
+  action_item :opcion, only: :show do
+    link_to "Opciones", edit_admin_opcion_path(actividad)
+  end
+
   action_item :autorizar, only: :show do
-    link_to "Autorizar", edit_admin_autorizacion_path(actividad)
+    link_to "Autorizaciones", edit_admin_autorizacion_path(actividad)
   end
 
   action_item :asociar, only: :show do
