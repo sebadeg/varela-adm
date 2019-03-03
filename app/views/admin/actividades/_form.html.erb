@@ -46,41 +46,26 @@
   <% end %>
 
   <%= a.inputs "Listas" do %>
-    <table class="actividad_lista index_table index">
-      <thead>
-        <th>Nombre</th>
-        <th></th>
-      </thead>
-
-      <tbody>
-      <% i = 0 %>
+    <table class="actividad_lista">
+      <tr>
+        <th>Lista</th>
+      </tr>
+      
       <%= a.semantic_fields_for :actividad_lista do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
-          <% if i % 2 == 0 %>
-            <tr class="odd">
-          <% else %>
-            <tr class="even">
-          <% end %>
-          <% i = i+1 %>
+        <tr>
           <td><%= b.input :lista, :label => false, :as => :select, collection: Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :actividad_lista, ActividadLista.new do |b| %>
-          <% if i % 2 == 0 %>
-            <tr class="odd">
-          <% else %>
-            <tr class="even">
-          <% end %>
-          <% i = i+1 %>
+        <tr>
           <td><%= b.input :lista, :label => false, :as => :select, collection: Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
-    </tbody>
     </table>
-
     <span class="add-child">
       <% js = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
