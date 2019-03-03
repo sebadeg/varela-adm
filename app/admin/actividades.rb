@@ -157,35 +157,11 @@ ActiveAdmin.register Actividad do
     end
 
     f.inputs do
-      f.has_many :actividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
-        l.input :concepto
-        l.input :opcion, :input_html => { :value => "" }, as: :hidden
-        l.input :eleccion, :input_html => { :value => "" }, as: :hidden
-        l.input :valor
-        l.input :cuotas
-        l.input :importe
-        l.input :fecha
-      end
-    end
-
-    f.inputs do
       f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
         l.input :lista_id, :label => 'Lista', :as => :select, :collection => Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]}
       end
     end
     
-    # f.inputs do
-    #   f.has_many :actividad_opcion, heading: "Opciones", allow_destroy: true, new_record: true do |l|
-    #     l.input :valor
-    #     l.input :opcion
-    #     l.input :eleccion
-    #   end
-    # end
-    # f.inputs do
-    #   f.has_many :actividad_lista, heading: "Listas", allow_destroy: true, new_record: true do |l|
-    #     l.input :lista_id, :label => "Nombre", :as => :select, :collection => Lista.all.order(:nombre).map{|u| [u.nombre, u.id]}
-    #   end
-    # end
     f.actions
   end
 
