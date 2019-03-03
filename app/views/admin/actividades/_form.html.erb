@@ -87,7 +87,7 @@
         <th>Fecha</th>    
       </tr>
       
-      <%= a.semantic_fields_for :actividad_opcion, sortable: :indice do |b| %>
+      <%= a.semantic_fields_for :actividad_opcion do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= b.input :indice, label: false %></td>
