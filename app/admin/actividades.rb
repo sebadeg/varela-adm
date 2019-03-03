@@ -127,6 +127,8 @@ ActiveAdmin.register Actividad do
           t.column :opcion_secretaria 
           t.column :fecha_secretaria
         end
+      end
+      
     end
   end
 
