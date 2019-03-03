@@ -46,9 +46,8 @@
   <% end %>
 
   <%= a.inputs "Listas" do %>
-  <table class="">
-                <thead>
-
+    <table class="actividad_lista">
+    <tr>
     <table class="index_table index">
       <thead>
         <th>Lista</th>
@@ -82,6 +81,9 @@
       <% end %>
     </tbody>
     </table>
+    </tr>
+    </table>
+
     <span class="add-child">
       <% js = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
