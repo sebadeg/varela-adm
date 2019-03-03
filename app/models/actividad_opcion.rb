@@ -5,10 +5,6 @@ class ActividadOpcion < ApplicationRecord
     opciones = Array.new
     elecciones = Hash.new
 
-    p "------------------------------------------"
-    p actividad.id
-    p "------------------------------------------"
-
     ActividadOpcion.where(["actividad_id=#{self.actividad_id}"]).order(:id).each do |opcion|
       
       s = opcion.concepto
