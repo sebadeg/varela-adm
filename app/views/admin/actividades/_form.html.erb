@@ -16,6 +16,7 @@
       </tr>
       
       <%= a.semantic_fields_for :actividad_archivo do |b| %>
+        <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
           <td><%= b.input :indice, label: false %></td>
           <td><%= b.input :nombre, label: false, input_html: { :value => b.object.nombre } %></td>
