@@ -1,7 +1,7 @@
 class ActividadOpcion < ApplicationRecord
   belongs_to :actividad
 
-  def self.opciones
+  def self.opciones(actividad_id)
     opciones = Array.new
     elecciones = Hash.new
 

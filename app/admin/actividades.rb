@@ -121,7 +121,6 @@ ActiveAdmin.register Actividad do
 
       row "Opciones" do 
         table_for ActividadOpcion.where("actividad_id=#{r.id}").order(:valor) do |t|
-          t.column :valor
           t.column :concepto
           t.column :cuotas
           t.column :importe
