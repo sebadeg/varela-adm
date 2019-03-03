@@ -24,10 +24,7 @@
           <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.find(b.object.opcion).eleccion : "" %></td>
           <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y') : "" %></td>
-          <td><%= b.input :opcion_secretaria, label: false %></td>
-
-<!--, :as => :select, :collection => Lista.all.order(:id).map{|u| ["#{u.nombre}",u.id]}-->
-
+          <td><%= b.input :opcion_secretaria, label: false, as: :select, collection: ActividadOpcion.opciones()[:opciones] %></td>
           <td><%= b.input :fecha_secretaria, label: false, :input_html => { :value => DateTime.now }, as: :hidden %></td>
         </tr>
       <% end %>
