@@ -18,7 +18,7 @@
       <%= a.semantic_fields_for :actividad_archivo do |b| %>
         <tr>
           <td><%= b.input :indice, label: false %></td>
-          <td><%= b.input :nombre, label: false, input_html: { :value => l.object.nombre } %></td>
+          <td><%= b.input :nombre, label: false, input_html: { :value => b.object.nombre } %></td>
           <td><%= b.input :data, label: false, as: :file %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
