@@ -1,4 +1,8 @@
 ActiveAdmin.register Actividad do
+
+  actions :all
+  menu priority: 3001, label: "Actividad"
+
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -22,7 +26,6 @@ ActiveAdmin.register Actividad do
   #     actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
   #     actividad_opcion_attributes: [:id,:actividad_id,:valor,:opcion,:eleccion,:_destroy]
 
-  menu priority: 3001, label: "Actividad"
 
   action_item :opcion, only: :show do
     link_to "Opciones", edit_admin_opcion_path(actividad)
