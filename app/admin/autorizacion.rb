@@ -1,4 +1,4 @@
-ActiveAdmin.register Actividad, :as => 'Autorizar' do
+ActiveAdmin.register Actividad, :as => 'Autorizacion' do
 
   permit_params :nombre, :fecha, :fechainfo,
       actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:_destroy]

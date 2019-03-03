@@ -14,6 +14,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'cuenta', 'cuentas'
   inflect.irregular 'titular_cuenta', 'titular_cuentas'
   inflect.irregular 'actividad', 'actividades'
+  inflect.irregular 'autorizacion', 'autorizaciones'
   inflect.irregular 'actividad_opcion', 'actividad_opciones'
   inflect.irregular 'lista', 'listas'
   inflect.irregular 'especial', 'especiales'

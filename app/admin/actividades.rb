@@ -25,7 +25,7 @@ ActiveAdmin.register Actividad do
   menu priority: 3001, label: "Modificar", parent: "Actividad"
 
   action_item :autorizar, only: :show do
-    link_to "Autorizar", admin_autorizar_path(actividad), method: :put 
+    link_to "Autorizar", admin_autorizacion_path(actividad), method: :put 
   end
 
   action_item :asociar, only: :show do
@@ -128,7 +128,7 @@ ActiveAdmin.register Actividad do
           t.column :fecha_secretaria
         end
       end
-      
+
     end
   end
 
