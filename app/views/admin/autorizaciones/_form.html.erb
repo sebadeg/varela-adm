@@ -11,18 +11,21 @@
     <table class="actividad_alumno">
       <tr>
         <th>Alumno</th>
-        <th>Opción</th>
+        <th>Opción Responsable</th>
+        <th>Fecha</th>
+        <th>Opción Secretaria</th>
         <th>Fecha</th>
       </tr>
       
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
         <tr>
-          <td><%= b.input :nombre_alumno, label: false %></td>
-          <td><%= b.input :nombre_opcion, label: false %></td>
-          <td><%= b.input :fecha_opcion, label: false %></td>
+          <td><%= Alumno.find(b.object.alumno).nombre + " " + Alumno.find(b.object.alumno).apellido %></td>
+          <td><%= b.input :opcion, label: false %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :opcion_secretaria, label: false %></td>
+          <td><%= b.input :fecha_secretaria, label: false %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
-        </tr>
         </tr>
       <% end %>
     </table>
