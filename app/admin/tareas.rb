@@ -10,6 +10,7 @@ ActiveAdmin.register Tarea do
     column "Tipo" do |c| 
       c.tarea_tipo.nombre
     end
+    column :prioridad
     column :realizada
     actions
   end
