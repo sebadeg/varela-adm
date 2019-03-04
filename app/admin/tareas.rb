@@ -17,7 +17,7 @@ ActiveAdmin.register Tarea do
     actions
   end
 
-  filter :tarea_tipo_id, :label => 'Tipo', :as => :select, :collection => TareaTipo.all.map{|u| ["#{u.nombre}", u.id]}
+  filter :tarea_tipo_id, :label => 'Tipo', :as => :select, :collection => TareaTipo.all.order(:nombre).map{|u| ["#{u.nombre}", u.id]}
   filter :prioridad
   filter :realizada
 
