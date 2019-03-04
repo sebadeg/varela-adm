@@ -1,5 +1,7 @@
 ActiveAdmin.register TareaTipo do
 
+  config.filters = false
+
   permit_params :id, :nombre
 
   menu priority: 60, parent: :tareas
@@ -9,8 +11,6 @@ ActiveAdmin.register TareaTipo do
     column :nombre
     actions
   end
-
-  filter false
 
   show do
     attributes_table do
