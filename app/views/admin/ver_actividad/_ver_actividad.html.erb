@@ -29,7 +29,6 @@
 		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
 				<% if arreglo[:opciones].count > 0 %>
 					<%= form_tag(admin_ver_actividad_confirmar_path, :method => "post") do %>
-				    	<br><br>					    
 						<%= select_tag :opcion, options_for_select(arreglo[:opciones], a.opcion) %><br><br>
 			            <%= submit_tag "Confirmar"  %>
 					<% end %>												
