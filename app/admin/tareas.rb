@@ -6,7 +6,6 @@ ActiveAdmin.register Tarea do
 
   index do
   	#selectable_column
-    column :id
     column :descripcion
     column "Tipo" do |c| 
       c.tarea_tipo.nombre
@@ -21,7 +20,6 @@ ActiveAdmin.register Tarea do
 
   show do
     attributes_table do
-      row :id
       row :descripcion 
       row :tarea_tipo_nombre
       row :prioridad
