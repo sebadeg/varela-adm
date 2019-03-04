@@ -41,13 +41,12 @@ ActiveAdmin.register AdminUsuario do
 
   controller do
 
-    model = :user
-
-    if params[model][:password].blank?
-      %w(password password_confirmation).each { |p| params[model].delete(p) }
+    def update
+      if params[:admin_usuario][:password].blank?
+        %w(password password_confirmation).each { |p| params[:admin_usuario].delete(p) }
+      end
+      super
     end
-
-    super
 
   end
 
