@@ -6,21 +6,20 @@ ActiveAdmin.register TareaTipo do
 
   index do
   	#selectable_column
-    column :id
     column :nombre
     actions
   end
 
+  filter false
+
   show do
     attributes_table do
-      row :id
       row :nombre
     end
   end
 
   form do |f| 
     f.inputs "Tareas" do
-      f.input :id
       f.input :nombre
     end
     f.actions
