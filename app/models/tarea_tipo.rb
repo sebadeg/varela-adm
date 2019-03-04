@@ -1,0 +1,2 @@
+class TareaTipo < ApplicationRecord
+end

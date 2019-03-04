@@ -1,6 +1,6 @@
 ActiveAdmin.register Tarea do
 
-  permit_params :id, :descripcion, :realizada
+  permit_params :id, :descripcion, :tarea_tipo_id, :prioridad, :realizada
 
   menu priority: 60
 
@@ -8,14 +8,21 @@ ActiveAdmin.register Tarea do
   	#selectable_column
     column :id
     column :descripcion
+    column :tarea_tipo_nombre
     column :realizada
     actions
   end
+
+  filter :tarea_tipo, :label => 'Tipo', :as => :select, :collection => TareaTipo.all.order(:nombre).map{|u| ["#{u.nombre}", u.id]}
+  filter :prioridad
+  filter :realizada
 
   show do
     attributes_table do
       row :id
       row :descripcion 
+      row :tarea_tipo_nombre
+      row :prioridad
       row :realizada
     end
   end
@@ -23,24 +30,11 @@ ActiveAdmin.register Tarea do
   form do |f| 
     f.inputs "Tareas" do
       f.input :descripcion
+      f.input :tarea_tipo, :label => 'Tipo', :as => :select, :collection => TareaTipo.all.order(:nombre).map{|u| ["#{u.nombre}",u.id]}
+      f.input :prioridad
       f.input :realizada
     end
     f.actions
   end
-
-  controller do
-
-	  def update
-	    update! do |format|
-	      format.html { redirect_to collection_path } if resource.valid?
-	    end
-	  end
-
-	  def create
-	    create! do |format|
-	      format.html { redirect_to collection_path } if resource.valid?
-	    end
-	  end
-
-	end  
+  
 end

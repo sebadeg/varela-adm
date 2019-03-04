@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_190000) do
+ActiveRecord::Schema.define(version: 2019_03_04_190000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -755,11 +755,20 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["grado_id"], name: "index_subgrados_on_grado_id"
   end
 
+  create_table "tarea_tipos", force: :cascade do |t|
+    t.integer "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tareas", id: :serial, force: :cascade do |t|
     t.string "descripcion"
     t.boolean "realizada"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tarea_tipo_id"
+    t.integer "prioridad"
+    t.index ["tarea_tipo_id"], name: "index_tareas_on_tarea_tipo_id"
   end
 
   create_table "temps", force: :cascade do |t|
@@ -884,6 +893,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
   add_foreign_key "subgrado_alumnos", "alumnos"
   add_foreign_key "subgrado_alumnos", "subgrados"
   add_foreign_key "subgrados", "grados"
+  add_foreign_key "tareas", "tarea_tipos"
   add_foreign_key "tipo_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
