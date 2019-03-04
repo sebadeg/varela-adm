@@ -26,7 +26,7 @@
 
 		    <% if @actividad.fecha == nil || @actividad.fecha >= DateTime.now %>
 
-		    	<% opciones = ActividadOpcion.opciones(@actividad.id) %>
+		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
 				<% if arreglo[:opciones].count > 0 %>
 					<%= form_tag(admin_ver_actividad_confirmar_path, :method => "post") do %>
 				    	<br><br>					    
