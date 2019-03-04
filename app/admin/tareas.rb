@@ -26,7 +26,7 @@ ActiveAdmin.register Tarea do
       row :descripcion 
       row "Tipo" do |c| 
         if c.tarea_tipo != nil
-          c.tarea_tipo.id.nombre 
+          c.tarea_tipo.nombre 
         end
       end
       row :prioridad
