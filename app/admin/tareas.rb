@@ -8,7 +8,9 @@ ActiveAdmin.register Tarea do
   	#selectable_column
     column :id
     column :descripcion
-    column :tarea_tipo_nombre
+    column "Tipo" do |c| 
+      c.nombre
+    end
     column :realizada
     actions
   end
