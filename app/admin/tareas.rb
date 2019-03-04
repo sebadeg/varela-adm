@@ -8,7 +8,9 @@ ActiveAdmin.register Tarea do
   	#selectable_column
     column :descripcion
     column "Tipo" do |c| 
-      c.tarea_tipo.nombre
+      if c.tarea_tipo != nil
+        c.tarea_tipo.nombre
+      end
     end
     column :prioridad
     column :realizada
