@@ -9,7 +9,7 @@ class Actividad < ApplicationRecord
   has_many :actividad_lista, :dependent => :delete_all
   accepts_nested_attributes_for :actividad_lista, allow_destroy: true
 
-  has_many :actividad_alumno, -> { order(nombre: :asc,apellido: :asc) }, :dependent => :delete_all
+  has_many :actividad_alumno, -> { joins(:alumno).order(alumno_nombre: :asc,alumno_apellido: :asc) }, :dependent => :delete_all
   accepts_nested_attributes_for :actividad_alumno, allow_destroy: true
 
   # def importar(attrs)
