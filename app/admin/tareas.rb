@@ -24,7 +24,11 @@ ActiveAdmin.register Tarea do
   show do
     attributes_table do
       row :descripcion 
-      row :tarea_tipo_nombre
+      row "Tipo" do |c| 
+        if c.tarea_tipo != nil
+          c.tarea_tipo.id.nombre 
+        end
+      end
       row :prioridad
       row :realizada
     end
