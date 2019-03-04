@@ -1,26 +1,38 @@
 ActiveAdmin.register AdminUsuario do
-  permit_params :email, :password, :password_confirmation
+
+  config.filters = false
+
+  permit_params :email, :soporte, :secretaria, :administracion, :inscripciones, :password, :password_confirmation
 
   menu priority: 10000, label: 'Usuarios'
 
   index do
-    selectable_column
-    id_column
+    #selectable_column
     column :email
-    column :current_sign_in_at
-    column :sign_in_count
-    column :created_at
+    column :soporte if current_admin_ususario.soporte?
+    column :secretaria if current_admin_ususario.soporte?
+    column :administracion if current_admin_ususario.soporte?
+    column :inscripciones if current_admin_ususario.soporte?
     actions
   end
 
-  filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
-  filter :created_at
+  show do
+    attributes_table do
+      row :email
+      row :soporte if current_admin_ususario.soporte?
+      row :secretaria if current_admin_ususario.soporte?
+      row :administracion if current_admin_ususario.soporte?
+      row :inscripciones if current_admin_ususario.soporte?
+    end
+  end
 
   form do |f|
     f.inputs do
       f.input :email
+      f.input :soporte if current_admin_ususario.soporte?
+      f.input :secretaria if current_admin_ususario.soporte?
+      f.input :administracion if current_admin_ususario.soporte?
+      f.input :inscripciones if current_admin_ususario.soporte?      
       f.input :password
       f.input :password_confirmation
     end
