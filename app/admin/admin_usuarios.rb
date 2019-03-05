@@ -2,7 +2,8 @@ ActiveAdmin.register AdminUsuario do
 
   config.filters = false
 
-  permit_params :email, :soporte, :secretaria, :administracion, :inscripciones, :password, :password_confirmation
+  permit_params :email, :soporte, :secretaria, :administracion, :inscripciones, :password, :password_confirmation,
+      actividad_usuario_sector: [:id,:admin_usuario_id,:sector_id,:indice,:_destroy]
 
   menu priority: 10000, label: 'Usuarios'
 
@@ -41,6 +42,7 @@ ActiveAdmin.register AdminUsuario do
       f.inputs do
         f.has_many :usuario_sector, heading: "Sectores", allow_destroy: true, new_record: true do |l|
           l.input :sector_id, :label => "Sectores", :as => :select, :collection => Sector.all.order(:nombre).map{|u| [u.nombre, u.id]}
+          l.input :indice
         end
       end
     end   
