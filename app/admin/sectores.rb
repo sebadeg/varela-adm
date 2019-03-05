@@ -2,7 +2,7 @@ ActiveAdmin.register Sector do
 
   permit_params :id, :nombre
 
-  menu priority: 1, parent: "Secretaría"
+  menu priority: 3, parent: "Soporte"
 
   index do
   	#selectable_column

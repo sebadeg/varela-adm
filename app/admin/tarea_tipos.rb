@@ -4,7 +4,7 @@ ActiveAdmin.register TareaTipo do
 
   permit_params :id, :nombre
 
-  menu priority: 2, label: "Tipo de tareas", parent: "Desarrollo"
+  menu priority: 2, label: "Tipo de tareas", parent: "Soporte"
 
   index do
   	#selectable_column
