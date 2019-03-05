@@ -52,17 +52,17 @@ class Ability
       return
     end
 
-    s = "1,2,3"
-
     if user.secretaria
-      pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))")
+
+
+      pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=2018))")
       can :read, Pase, pases do |x|
         true
       end
       can :update, Pase, pases do |x|
         true
       end
-      can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
+      can :manage, Lista, Lista.where("sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
         true
       end
       can :manage, Actividad
@@ -75,7 +75,7 @@ class Ability
 
     if user.inscripciones
       can :manage, InscripcionAlumno, InscripcionAlumno.where(
-        "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))"
+        "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=2018))"
         ) do |x|
         true
       end
