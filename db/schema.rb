@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_150000) do
+ActiveRecord::Schema.define(version: 2019_03_05_150100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 2019_03_05_150000) do
     t.date "fecha"
     t.date "fechainfo"
     t.binary "data"
+    t.bigint "sector_id"
+    t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
   create_table "admin_usuarios", id: :serial, force: :cascade do |t|
@@ -852,6 +854,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_150000) do
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "actividad_opciones", "opcion_conceptos"
+  add_foreign_key "actividades", "sectores"
   add_foreign_key "contrato_cuotas", "contratos"
   add_foreign_key "contratos", "alumnos"
   add_foreign_key "contratos", "conceptos"

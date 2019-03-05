@@ -68,7 +68,9 @@ class Ability
       can :manage, Lista, Lista.where("sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
         true
       end
-      can :manage, Actividad
+      can :manage, Actividad, Actividad.where("sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id})") do |x|
+        true
+      end
       can :manage, ActividadAlumno
       can :manage, ActividadOpcion
       can :manage, ActividadLista
