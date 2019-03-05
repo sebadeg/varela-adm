@@ -232,8 +232,9 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      #menu.add label: 'Actividad 2019', priority: 3000
-      menu.add label: 'Seguimiento', priority: 6000
+      menu.add label: "Secretaría", priority: 9001
+      menu.add label: "Seguimiento", priority: 9002
+      menu.add label: "Desarrollo", priority: 9003
     end
   end
   # == Download Links
