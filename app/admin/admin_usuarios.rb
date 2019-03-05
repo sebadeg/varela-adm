@@ -36,6 +36,15 @@ ActiveAdmin.register AdminUsuario do
       f.input :password
       f.input :password_confirmation
     end
+
+    if current_admin_usuario.soporte?
+      f.inputs do
+        f.has_many :usuario_sector, heading: "Sectores", allow_destroy: true, new_record: true do |l|
+          l.input :sector_id, :label => "Sectores", :as => :select, :collection => Sectores.all.order(:nombre).map{|u| [u.nombre, u.id]}
+        end
+      end
+    end   
+
     f.actions
   end
 

@@ -232,9 +232,13 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      menu.add label: "Secretaría", priority: 9001
-      menu.add label: "Seguimiento", priority: 9002
-      menu.add label: "Desarrollo", priority: 9003
+      menu.add label: "Administracion", priority: 9001
+      menu.add label: "Pagos", priority: 9002
+      menu.add label: "Deudores", priority: 9003
+      menu.add label: "Facturación", priority: 9004
+      menu.add label: "Secretaría", priority: 9005
+      menu.add label: "Inscripciones", priority: 9006
+      menu.add label: "Soporte", priority: 9007
     end
   end
   # == Download Links

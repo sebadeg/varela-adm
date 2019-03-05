@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_194651) do
+ActiveRecord::Schema.define(version: 2019_03_05_142036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -802,6 +802,16 @@ ActiveRecord::Schema.define(version: 2019_03_04_194651) do
     t.index ["usuario_id"], name: "index_titular_cuentas_on_usuario_id"
   end
 
+  create_table "usuario_sectores", force: :cascade do |t|
+    t.bigint "admin_usuario_id"
+    t.bigint "sector_id"
+    t.integer "indice", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_usuario_id"], name: "index_usuario_sectores_on_admin_usuario_id"
+    t.index ["sector_id"], name: "index_usuario_sectores_on_sector_id"
+  end
+
   create_table "usuarios", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -898,4 +908,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_194651) do
   add_foreign_key "tipo_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
+  add_foreign_key "usuario_sectores", "admin_usuarios"
+  add_foreign_key "usuario_sectores", "sectores"
 end

@@ -1,7 +1,7 @@
 ActiveAdmin.register Actividad do
 
   actions :all
-  menu priority: 2, label: "Actividad", parent: "Secretaría"
+  menu priority: 2, label: "Actividades", parent: "Secretaría"
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

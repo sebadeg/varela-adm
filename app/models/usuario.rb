@@ -9,6 +9,8 @@ class Usuario < ApplicationRecord
   validates :cedula, numericality: { only_integer: true, greater_than:0, less_than: 100000000 }
   validate :cedula_digit
 
+
+
   def password_required?
     super if validado?
   end
