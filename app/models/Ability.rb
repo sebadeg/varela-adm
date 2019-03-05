@@ -49,33 +49,12 @@ class Ability
       can :manage, Seguimiento
       can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
       can :manage, Subgrado
-
-
       return
     end
 
+    s = "1,2,3"
 
-
-
-
-
-    s = "0"
-    if user.primaria || user.sec_mdeo || user.sec_cc
-      if user.primaria
-        s = s + ",1"
-      end
-      if user.sec_mdeo
-        s = s + ",2"
-      end
-      if user.sec_cc
-        s = s + ",3"
-      end
-    elsif user.inscripciones
-      s = "0,1,2,3"
-    end
-
-
-    if user.primaria || user.sec_mdeo || user.sec_cc || user.inscripciones
+    if user.secretaria || user.inscripciones
       pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (" + s + ") AND anio=2018))")
       can :read, Pase, pases do |x|
         true
@@ -95,7 +74,7 @@ class Ability
       can :manage, Subgrado
     end
 
-    if user.primaria || user.sec_mdeo || user.sec_cc
+    if user.secretaria
       can :manage, Lista, Lista.where("sector_id IN (" + s + ") AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL)") do |x|
         true
       end
