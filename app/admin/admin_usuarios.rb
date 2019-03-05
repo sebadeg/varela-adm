@@ -32,7 +32,11 @@ ActiveAdmin.register AdminUsuario do
           sectores = admin_usuario.usuario_sector.order(:indice)
           table_for sectores do |s|
           #table_for Cuenta.where("id in (SELECT cuenta_id FROM especial_cuentas WHERE especial_id=#{r.id})").order(:id) do |t|
-            s.column :nombre
+            s.column "Nombre" do |c|
+              if c.sector != nil
+                c.sector.nombre
+              end
+            end
             s.column :indice
           end
         end
