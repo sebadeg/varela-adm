@@ -1,6 +1,6 @@
 ActiveAdmin.register Pase do
 
-  menu priority: 7001, label: 'Pases'
+  menu priority: 4, label: "Pases", parent: "Secretaría"
 
   permit_params :fecha, :destino
 

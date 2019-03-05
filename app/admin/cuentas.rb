@@ -2,7 +2,7 @@ ActiveAdmin.register Cuenta do
 
   permit_params :id, :nombre, :comentario
 
-  menu priority: 21
+  menu priority: 1, label: "Cuentas", parent: "Administración"
 
   scope :concurre
   scope :todos 

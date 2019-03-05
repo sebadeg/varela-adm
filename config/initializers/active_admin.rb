@@ -232,7 +232,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      menu.add label: "Administracion", priority: 9001
+      menu.add label: "Administración", priority: 9001
       menu.add label: "Pagos", priority: 9002
       menu.add label: "Deudores", priority: 9003
       menu.add label: "Facturación", priority: 9004
