@@ -3,7 +3,7 @@ ActiveAdmin.register AdminUsuario do
   config.filters = false
 
   permit_params :email, :soporte, :secretaria, :administracion, :inscripciones, :password, :password_confirmation,
-    admin_usuario_sector_attributes: [:id,:admin_usuario_id,:sector_id,:indice,:_destroy]
+    usuario_sector_attributes: [:id,:admin_usuario_id,:sector_id,:indice,:_destroy]
 
   menu priority: 10000, label: 'Usuarios'
 
