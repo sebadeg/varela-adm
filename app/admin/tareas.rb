@@ -2,7 +2,7 @@ ActiveAdmin.register Tarea do
 
   permit_params :id, :descripcion, :tarea_tipo_id, :prioridad, :realizada
 
-  menu priority: 1, parent: "Soporte"
+  menu priority: 2, parent: "Soporte"
 
   index do
   	#selectable_column

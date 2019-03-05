@@ -7,6 +7,9 @@ class Ability
 
     puts "Usuario " + user.email
 
+    anio = Config.find(1).anio
+    anio_pases = Config.find(1).anio_pases
+
     if user.soporte
       can :manage, :all
       return
@@ -55,7 +58,7 @@ class Ability
     if user.secretaria
 
 
-      pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=2018))")
+      pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=#{anio_pases}))")
       can :read, Pase, pases do |x|
         true
       end
@@ -75,7 +78,7 @@ class Ability
 
     if user.inscripciones
       can :manage, InscripcionAlumno, InscripcionAlumno.where(
-        "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=2018))"
+        "alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=#{anio_pases}))"
         ) do |x|
         true
       end
