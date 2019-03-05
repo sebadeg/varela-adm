@@ -26,9 +26,7 @@ ActiveAdmin.register Lista do
       item "Editar", edit_admin_lista_path(u), class: "edit_link member_link", title: "Editar"
       item "Eliminar", admin_lista_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete
     end
-  end
-
-  
+  end  
 
   filter :nombre
 
@@ -48,7 +46,7 @@ ActiveAdmin.register Lista do
     f.inputs do
       f.input :nombre
       f.input :anio, :input_html => { :value => Config.find(1).anio.to_s }, as: :hidden
-      f.input :sector_id, :input_html => { :value => Alumno.sector_num(current_admin_usuario).to_s }, as: :hidden
+      f.input :sector_id, :input_html => { :value => UsuarioSector.find_by(admin_usuario_id: current_admin_usuario.id).order(:indice).first.sector_id }, as: :hidden
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
