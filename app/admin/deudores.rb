@@ -2,8 +2,8 @@ ActiveAdmin.register Deudor do
   actions :index
 
 
-  menu label: 'Deudores'
-  menu parent: 'Cuenta Corriente'
+  menu label: 'Listado'
+  menu parent: 'Deudores'
 
   action_item :calcular, only: :index do
     link_to "Calcular", calcular_admin_deudores_path
