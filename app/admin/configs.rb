@@ -1,4 +1,4 @@
-ActiveAdmin.register Configs do
+ActiveAdmin.register Config do
 
   menu priority: 1, parent: "Soporte"
 
