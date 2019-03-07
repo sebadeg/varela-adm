@@ -14,7 +14,7 @@ ActiveAdmin.register InscripcionAlumno do
   
     file_name = "Reinscripcion #{alumno.nombre} #{alumno.apellido}.pdf"
     file = Tempfile.new(file_name)
-    Inscripcion.vale(file.path,inscripcionAlumno.alumno_id)
+    Inscripcion.vale(file.path,inscripcionAlumno.id)
 
     send_file(
         file.path,
