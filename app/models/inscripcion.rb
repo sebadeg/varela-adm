@@ -383,7 +383,7 @@ class Inscripcion < ApplicationRecord
     importe_cuota = (importe_total/cuotas+0.5).to_i
     importe_total = ( importe_cuota * cuotas).to_i
 
-    importe_letras = numero_a_letras(importe_total,true)
+    importe_letras = Inscripcion.numero_a_letras(importe_total,true)
 
     dia = inscripcion.dia
     mes = inscripcion.mes
@@ -553,7 +553,7 @@ class Inscripcion < ApplicationRecord
       importe_cuota = (importe_total/cuotas+0.5).to_i
       importe_total = ( importe_cuota * cuotas).to_i
 
-      importe_letras = numero_a_letras(importe_total,true)
+      importe_letras = Inscripcion.numero_a_letras(importe_total,true)
 
       if ( inscripcionAlumno.mes == 12 )
         desde = DateTime.new(2018,12,10)
