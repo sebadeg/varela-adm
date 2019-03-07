@@ -95,7 +95,7 @@ class Inscripcion < ApplicationRecord
   end
 
 
-  def numero_a_letras(n, uno)
+  def self.numero_a_letras(n, uno)
     s = ""
     if (n/1000>0)
       s = numero_a_letras((n/1000).to_i,false) + " mil ";
