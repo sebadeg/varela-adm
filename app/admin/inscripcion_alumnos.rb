@@ -3,6 +3,26 @@ ActiveAdmin.register InscripcionAlumno do
 
   permit_params :cedula
 
+  action_item :formulario, only: :show do
+    link_to "Formulario y Vale", formulario_admin_inscripcion_alumno_path(inscripcion), method: :put 
+  end
+
+  member_action :formulario, method: :put do
+    id = params[:id]
+    inscripcionAlumno = InscripcionAlumno.find(id)
+  
+    file_name = "Reinscripcion #{inscripcion.nombre} #{inscripcion.apellido}.pdf"
+    file = Tempfile.new(file_name)
+    inscripcion.vale(file.path,inscripcionAlumno.alumno_id)
+
+    send_file(
+        file.path,
+        filename: file_name,
+        type: "application/pdf"
+      )
+    
+  end
+
   action_item :habilitar, only: :show do
     if inscripcion_alumno.inhabilitado
       link_to "Habilitar", habilitar_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
