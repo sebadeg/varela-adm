@@ -222,7 +222,7 @@ class Inscripcion < ApplicationRecord
     return s
   end
 
-  def cedula_tos(cedula)
+  def self.cedula_tos(cedula)
     if ( cedula == nil )
       return ""
     end
@@ -315,7 +315,7 @@ class Inscripcion < ApplicationRecord
       "<br>"+
       "<b>ALUMNO</b><br>" +
       "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
-      "Documento de identidad: #{cedula_tos(inscripcion.cedula)}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
       "Domicilio: #{inscripcion.domicilio}<br>" + 
@@ -327,7 +327,7 @@ class Inscripcion < ApplicationRecord
       texto_padre =
       "<b>PADRE</b><br>" +
       "Nombre: #{inscripcion.nombre_padre}<br>" +
-      "Documento de identidad: #{cedula_tos(inscripcion.cedula_padre)}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
       "Mail: #{inscripcion.email_padre}<br>" + 
@@ -340,7 +340,7 @@ class Inscripcion < ApplicationRecord
       texto_madre =
       "<b>MADRE</b><br>" +
       "Nombre: #{inscripcion.nombre_madre}<br>" +
-      "Documento de identidad: #{cedula_tos(inscripcion.cedula_madre)}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
       "Mail: #{inscripcion.email_madre}<br>" + 
@@ -415,7 +415,7 @@ class Inscripcion < ApplicationRecord
     hoyS = "#{hoy.day} de #{hoy.month} de #{hoy.year}"
 
     nombre = inscripcion.nombre + " " + inscripcion.apellido
-    cedula = cedula_tos(inscripcion.cedula)
+    cedula = Inscripcion.cedula_tos(inscripcion.cedula)
     
     cabezal = 
       "$U <b>#{importe_total}</b>" + 
@@ -445,7 +445,7 @@ class Inscripcion < ApplicationRecord
       "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar éste documento, el deudor constituye como domicilio especial el abajo denunciado." +
       "<br><br><br>" + 
       "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
-      "DOCUMENTO DE IDENTIDAD: #{cedula_tos(documentoT[0])}<br><br>" +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
       "DOMICILIO: #{domicilioT[0]}<br><br>" +
       "MAIL: #{emailT[0]}<br><br>" +
       "TEL/CEL: #{celularT[0]}<br><br>" +
@@ -453,7 +453,7 @@ class Inscripcion < ApplicationRecord
       "Aclaración:<br><br>" +
       "<br><br>" +
       "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
-      "DOCUMENTO DE IDENTIDAD: #{cedula_tos(documentoT[1])}<br><br>" +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
       "DOMICILIO: #{domicilioT[1]}<br><br>" +
       "MAIL: #{emailT[1]}<br><br>" +
       "TEL/CEL: #{celularT[1]}<br><br>" +
@@ -572,7 +572,7 @@ class Inscripcion < ApplicationRecord
 
       if alumno != nil 
         nombre = alumno.nombre + " " + alumno.apellido
-        cedula = cedula_tos(inscripcionAlumno.cedula)
+        cedula = Inscripcion.cedula_tos(inscripcionAlumno.cedula)
         
         grado = ProximoGrado.find(inscripcionAlumno.grado)
         if grado != nil
@@ -601,7 +601,7 @@ class Inscripcion < ApplicationRecord
         "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar éste documento, el deudor constituye como domicilio especial el abajo denunciado." +
         "<br><br><br>" + 
         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre1}<br><br>" +
-        "DOCUMENTO DE IDENTIDAD: #{cedula_tos(inscripcionAlumno.documento1)}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(inscripcionAlumno.documento1)}<br><br>" +
         "DOMICILIO: #{inscripcionAlumno.domicilio1}<br><br>" +
         "MAIL: #{inscripcionAlumno.email1}<br><br>" +
         "TEL/CEL: #{inscripcionAlumno.celular1}<br><br>" +
@@ -609,7 +609,7 @@ class Inscripcion < ApplicationRecord
         "Aclaración:<br><br>" +
         "<br><br>" +
         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre2}<br><br>" +
-        "DOCUMENTO DE IDENTIDAD: #{cedula_tos(inscripcionAlumno.documento2)}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(inscripcionAlumno.documento2)}<br><br>" +
         "DOMICILIO: #{inscripcionAlumno.domicilio2}<br><br>" +
         "MAIL: #{inscripcionAlumno.email2}<br><br>" +
         "TEL/CEL: #{inscripcionAlumno.celular2}<br><br>" +
