@@ -4,7 +4,7 @@ ActiveAdmin.register InscripcionAlumno do
   permit_params :cedula
 
   action_item :formulario, only: :show do
-    link_to "Formulario y Vale", formulario_admin_inscripcion_alumno_path(inscripcion), method: :put 
+    link_to "Formulario y Vale", formulario_admin_inscripcion_alumno_path(inscripcion_alumno), method: :put 
   end
 
   member_action :formulario, method: :put do
@@ -13,7 +13,7 @@ ActiveAdmin.register InscripcionAlumno do
   
     file_name = "Reinscripcion #{inscripcion.nombre} #{inscripcion.apellido}.pdf"
     file = Tempfile.new(file_name)
-    inscripcion.vale(file.path,inscripcionAlumno.alumno_id)
+    Inscripcion.vale(file.path,inscripcionAlumno.alumno_id)
 
     send_file(
         file.path,

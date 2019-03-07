@@ -518,7 +518,7 @@ class Inscripcion < ApplicationRecord
 
 
 
-    def vale(file_path,inscripcionAlumno_id)
+  def self.vale(file_path,inscripcionAlumno_id)
 
   
 
