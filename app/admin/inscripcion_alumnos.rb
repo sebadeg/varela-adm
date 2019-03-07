@@ -10,8 +10,9 @@ ActiveAdmin.register InscripcionAlumno do
   member_action :formulario, method: :put do
     id = params[:id]
     inscripcionAlumno = InscripcionAlumno.find(id)
+    alumno = Alumno.find(inscripcionAlumno.alumno_id)
   
-    file_name = "Reinscripcion #{inscripcion.nombre} #{inscripcion.apellido}.pdf"
+    file_name = "Reinscripcion #{alumno.nombre} #{alumno.apellido}.pdf"
     file = Tempfile.new(file_name)
     Inscripcion.vale(file.path,inscripcionAlumno.alumno_id)
 
