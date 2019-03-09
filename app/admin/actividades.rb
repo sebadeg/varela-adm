@@ -48,7 +48,7 @@ ActiveAdmin.register Actividad do
     ActiveRecord::Base.connection.execute( "DELETE FROM actividad_alumnos WHERE actividad_id=#{id};" )
     ActiveRecord::Base.connection.execute( "INSERT INTO actividad_alumnos (actividad_id,alumno_id,created_at,updated_at) (SELECT #{id},id,now(),now() FROM alumnos WHERE id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{id})));" )
 
-    redirect_to admin_actividad_path(actividad)
+    redirect_to admin_actividad_path(actividad), notice: "Hecho!"
   end
 
   member_action :mail, method: :put do
@@ -76,9 +76,9 @@ ActiveAdmin.register Actividad do
       emails = emails + m['email'] + ";"
     end
 
-    UserMailer.novedades( emails, actividad.nombre ).deliver_now
+    #UserMailer.novedades( emails, actividad.nombre ).deliver_now
 
-    redirect_to admin_actividad_path(actividad)
+    redirect_to admin_actividad_path(actividad), notice: "Hecho!"
   end
 
 
