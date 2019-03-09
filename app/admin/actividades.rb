@@ -35,7 +35,7 @@ ActiveAdmin.register Actividad do
   end
 
   action_item :autorizar, only: :show do
-    link_to "Autorizaciones", edit_admin_autorizacion_path(actividad)
+    link_to "Autorizar", edit_admin_autorizacion_path(actividad)
   end
 
 

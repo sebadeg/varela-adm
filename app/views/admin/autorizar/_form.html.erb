@@ -25,6 +25,7 @@
           <% else %>
             <tr class="even">
           <% end %>
+          <% i = i + 1 %>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
           <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.opciones(b.object.actividad_id)[:elecciones][b.object.opcion] : "" %></td>
