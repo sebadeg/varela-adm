@@ -265,22 +265,28 @@ ActiveAdmin.register Actividad do
             secretaria = params[:actividad][:actividad_alumno_attributes][i.to_s][:opcion_secretaria]
 
             if id != nil && secretaria != nil
-              p Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion<>#{secretaria}").count
+              movs = Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion<>#{secretaria}") rescue nil
+              if ( movs != nil && movs.count != 0 )
+                movs.destroy_all
+
+                actividad_alumno = ActividadAlumno.find(id)
+                cuenta_id = CuentaAlumno.where(alumno_id: actividad_alumno.alumno_id).first.cuenta_id
+
+                actividad_opcion=ActividadOpcion.find(secretaria)
+                fecha = DateTime.new(actividad_opcion.fecha.year,actividad_opcion.fecha.month,1)
+
+                if actividad_opcion.cuotas >= 1 
+                  (1..actividad_opcion.cuotas).each do |cuota|
+                    Movimiento.create(cuenta_id: cuenta_id, alumno: actividad_alumno.alumno_id, fecha: fecha + (cuota-1).month,
+                      descripcion: "#{nombre.upcase} #{cuota}/#{actividad_opcion.cuotas}" , extra: "", debe: actividad_opcion.importe,
+                      haber: 0, tipo: 1002, actividad_alumno_id: actividad_alumno.id, actividad_alumno_opcion: secretaria )
+                  end
+                end
+
+              end
             end
 
-            # actividad_alumno = ActividadAlumno.find(id)
-            # cuenta_id = CuentaAlumno.where(alumno_id: actividad_alumno.alumno_id).first.cuenta_id
-
-            # actividad_opcion=ActividadOpcion.find(secretaria)
-            # fecha = DateTime.new(actividad_opcion.fecha.year,actividad_opcion.fecha.month,1)
-
-            # if actividad_opcion.cuotas >= 1 
-            #   (1..actividad_opcion.cuotas).each do |cuota|
-            #     Movimiento.create(cuenta_id: cuenta_id, alumno: actividad_alumno.alumno_id, fecha: fecha + (cuota-1).month,
-            #       descripcion: "#{nombre.upcase} #{cuota}/#{actividad_opcion.cuotas}" , extra: "", debe: actividad_opcion.importe,
-            #       haber: 0, tipo: 1002, actividad_alumno_id: actividad_alumno.id, actividad_alumno_opcion: secretaria )
-            #   end
-            # end
+            
 
             p "----------"
             p "----------"
