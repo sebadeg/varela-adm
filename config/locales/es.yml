@@ -114,6 +114,9 @@ es:
       codigo:
         one: "Código"
         other: "Códigos"
+      lista_alumno:
+        one: "Alumno en Lista"
+        other: "Alumnos en Listas"
 
     errors:
       models:
