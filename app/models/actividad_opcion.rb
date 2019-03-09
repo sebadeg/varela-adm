@@ -20,7 +20,7 @@ class ActividadOpcion < ApplicationRecord
       return s
     else
       return ""
-    if
+    end
   end
 
   def self.opcion_nombre_by_id(id)
