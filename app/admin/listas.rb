@@ -55,32 +55,15 @@ ActiveAdmin.register Lista do
     f.actions
   end
 
-  # controller do
-  #   def update
-  #     i = 0
-  #     begin
-  #       if params[:lista][:lista_alumno_attributes][i.to_s] == nil
-  #         i = -1
-  #       else 
-  #         if params[:lista][:lista_alumno_attributes][i.to_s][:id] == nil
+  controller do
 
-  #           p params[:id].to_i
-  #           p params[:lista][:lista_alumno_attributes][i.to_s][:alumno_id].to_i
-  #           lista_id = params[:id].to_i
-  #           alumno_id = params[:lista][:lista_alumno_attributes][i.to_s][:alumno_id].to_i
+    def show
+      @page_title = "Lista: "+ resource.nombre
+    end
 
-  #           ActiveRecord::Base.connection.execute( "INSERT INTO lista_alumnos (lista_id,alumno_id,created_at,updated_at) VALUES (#{lista_id},#{alumno_id},now(),now())" )
-
-  #           params[:lista][:lista_alumno_attributes][i.to_s][:id] = ListaAlumno.where("lista_id=#{lista_id} AND alumno_id=#{alumno_id}").first.id.to_s
-  #           params[:lista][:lista_alumno_attributes][i.to_s][:_destroy] = "0"
-
-     
-  #         end
-  #         i = i+1
-  #       end
-  #     end while i >= 0
-  #     update!
-  #   end 
-  # end
+    def edit
+      @page_title = "Lista: "+ resource.nombre
+    end
+  end
 
 end
