@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_150100) do
+ActiveRecord::Schema.define(version: 2019_03_06_160000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -546,6 +546,9 @@ ActiveRecord::Schema.define(version: 2019_03_05_150100) do
     t.decimal "saldo"
     t.integer "indice"
     t.bigint "contrato_id"
+    t.bigint "actividad_alumno_id"
+    t.integer "actividad_alumno_opcion"
+    t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
@@ -885,6 +888,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_150100) do
   add_foreign_key "listas", "sectores"
   add_foreign_key "lote_recibos", "cuentas"
   add_foreign_key "movimiento2018s", "cuentas"
+  add_foreign_key "movimientos", "actividad_alumnos"
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "contratos"
   add_foreign_key "movimientos", "cuentas"

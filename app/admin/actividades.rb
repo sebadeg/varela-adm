@@ -249,6 +249,48 @@ ActiveAdmin.register Actividad do
       end while i >= 0
 
       update!
+
+      i = 0
+      begin
+        if params[:actividad][:actividad_alumno_attributes] == nil || params[:actividad][:actividad_alumno_attributes][i.to_s] == nil
+          i = -1
+        else
+          if params[:actividad][:actividad_alumno_attributes][i.to_s][:_destroy] == nil || params[:actividad][:actividad_archivo_attributes][i.to_s][:_destroy] == "0"
+            p "----------"
+            p "UPDATE"
+            p "----------"
+
+            nombre = params[:actividad][:nombre]
+
+            id = params[:actividad][:actividad_alumno_attributes][i.to_s][:id]
+            alumno_id = params[:actividad][:actividad_alumno_attributes][i.to_s][:alumno]
+            cuenta_id = CuentaAlumno.find_by(alumno_id: alumno_id).cuenta_id
+            secretaria = params[:actividad][:actividad_alumno_attributes][i.to_s][:opcion_secretaria]            
+            actividad_opcion=ActividadOpcion.find(secretaria)
+            fecha = DateTime.new(actividad_opcion.fecha.year,actividad_opcion.fecha.month,1)
+
+            if actividad_opcion.cuotas >= 1 
+              (1..actividad_opcion.cuotas).each do |cuota|
+                Movimiento.create(cuenta_id: cuenta_id, alumno: alumno_id, fecha: fecha + (cuota-1).month,
+                  descripcion: "#{nombre} #{cuota}/#{actividad_opcion.cuotas}" , extra: "", debe: actividad_opcion.importe, haber: 0, tipo: 1002,
+                  actividad_alumno_id: id, actividad_alumno_opcion: secretaria )
+              end
+            end
+            # if id != nil && secretaria != nil 
+            #   Movimiento.where("alumno=#{alumno_id} AND actividad_alumno_id=#{id} AND actividad_alumno_opcion<>#{secretaria}").select(:alumno).distinct.each do |mov|
+            #     p mov.alumno                
+            #   end
+            # end
+            p "----------"
+            p "----------"
+            p "----------"
+
+          end
+          i = i+1
+        end
+      end while i >= 0
+
+
     end
     
   end
