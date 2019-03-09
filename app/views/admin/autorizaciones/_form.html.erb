@@ -8,7 +8,7 @@
   <% end %>
 
   <%= a.inputs "Alumnos" do %>
-    <table class="actividad_alumno">
+    <table class="actividad_alumno index_table index">
       <tr>
         <th>Alumno</th>
         <th>Bajado</th>
@@ -16,10 +16,15 @@
         <th>Fecha</th>    
         <th>Opción Secretaria</th>
       </tr>
-      
+
+      <% i = 0 %>
       <%= a.semantic_fields_for :actividad_alumno do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
-        <tr>
+          <% if i % 2 == 0 %>
+            <tr class="odd">
+          <% else %>
+            <tr class="even">
+          <% end %>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
           <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.opciones(b.object.actividad_id)[:elecciones][b.object.opcion] : "" %></td>
