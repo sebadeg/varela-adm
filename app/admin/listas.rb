@@ -19,7 +19,6 @@ ActiveAdmin.register Lista do
 
   index do
     #selectable_column
-    column :id
     column :nombre
     actions defaults: false do |u|
       item "Ver", admin_lista_path(u), class: "view_link member_link", title: "Ver"
