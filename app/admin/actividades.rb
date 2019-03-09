@@ -168,9 +168,6 @@ ActiveAdmin.register Actividad do
 
   controller do
 
-
-controller do
-
     def show
       @page_title = "Actividad: "+ resource.nombre
     end
