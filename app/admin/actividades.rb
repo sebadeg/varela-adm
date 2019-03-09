@@ -86,7 +86,7 @@ ActiveAdmin.register Actividad do
     #selectable_column
     column :id
     column :nombre
-    column :fecha, label: "Hasta" 
+    column :fecha
     actions
   end
 
@@ -98,7 +98,7 @@ ActiveAdmin.register Actividad do
     attributes_table do
       row :id
       row :nombre
-      row :fecha, label: "Hasta" 
+      row :fecha
 
       row "Archivos" do 
         table_for ActividadArchivo.where("actividad_id=#{r.id}").order(:indice) do |t|

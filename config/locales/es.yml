@@ -83,8 +83,7 @@ es:
         nombrearchivo: "Archivo"
         descripcion: "Descripción"
       actividad:
-        fecha: "Autorización hasta" 
-        fechainfo: "Información hasta" 
+        fecha: "Hasta" 
 
     models:
       aactividad:
