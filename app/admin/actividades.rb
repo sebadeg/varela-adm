@@ -268,7 +268,10 @@ ActiveAdmin.register Actividad do
               movs = Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion<>#{secretaria}") rescue nil
               if ( movs != nil && movs.count != 0 )
                 movs.destroy_all
-
+              end
+              
+              movs = Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion=#{secretaria}") rescue nil
+              if ( movs == nil || movs.count == 0 )
                 actividad_alumno = ActividadAlumno.find(id)
                 cuenta_id = CuentaAlumno.where(alumno_id: actividad_alumno.alumno_id).first.cuenta_id
 
