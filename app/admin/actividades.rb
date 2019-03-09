@@ -263,7 +263,7 @@ ActiveAdmin.register Actividad do
             nombre = params[:actividad][:nombre]
 
             id = params[:actividad][:actividad_alumno_attributes][i.to_s][:id]
-            alumno_id = params[:actividad][:actividad_alumno_attributes][i.to_s][:alumno]
+            alumno_id = params[:actividad][:actividad_alumno_attributes][i.to_s][:alumno_id]
             cuenta_id = CuentaAlumno.find_by(alumno_id: alumno_id).cuenta_id
             secretaria = params[:actividad][:actividad_alumno_attributes][i.to_s][:opcion_secretaria]            
             actividad_opcion=ActividadOpcion.find(secretaria)
