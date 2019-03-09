@@ -21,22 +21,19 @@ Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (SE
 <% if (@act != nil) %>
 	<% @act.each do |a| %>
 		<% @actividad = Actividad.find(a.actividad_id) rescue nil %>
-		<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
+		<% if @actividad != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
 		    <br>
 			
 			<%= link_to "Descargar información: #{@actividad.nombre}", admin_ver_actividad_descargar_path("id", id: @actividad.id), method: :post %><br><br>
 
-		    <% if @actividad.fecha == nil || @actividad.fecha >= DateTime.now %>
-
-		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
-				<% if arreglo[:opciones].count > 0 %>
-					<%= form_tag(admin_ver_actividad_confirmar_path, :method => "post") do %>
-						<%= select_tag :opcion, options_for_select(arreglo[:opciones], a.opcion) %><br><br>
-			            <%= submit_tag "Confirmar"  %>
-					<% end %>												
-				<% end %>	
-				<br>
-			<% end %>
+	    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
+			<% if arreglo[:opciones].count > 0 %>
+				<%= form_tag(admin_ver_actividad_confirmar_path, :method => "post") do %>
+					<%= select_tag :opcion, options_for_select(arreglo[:opciones], a.opcion) %><br><br>
+		            <%= submit_tag "Confirmar"  %>
+				<% end %>												
+			<% end %>	
+			<br>
 		<% end %>
 	<% end %>
 <% end %>
