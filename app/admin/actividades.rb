@@ -16,7 +16,7 @@ ActiveAdmin.register Actividad do
 #   permitted
 # end
 
-  permit_params :id, :nombre, :fecha,
+  permit_params :id, :nombre, :fecha, :sector_id
       actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:indice,:_destroy],
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
       actividad_opcion_attributes: [:id,:actividad_id,:opcion_concepto_id,:cuotas,:importe,:fecha,:indice,:opcion,:_destroy],
@@ -84,7 +84,6 @@ ActiveAdmin.register Actividad do
 
   index do
     #selectable_column
-    column :id
     column :nombre
     column :fecha
     actions
@@ -96,7 +95,6 @@ ActiveAdmin.register Actividad do
 
   show do |r|
     attributes_table do
-      row :id
       row :nombre
       row :fecha
 
