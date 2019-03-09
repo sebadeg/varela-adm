@@ -125,9 +125,9 @@ ActiveAdmin.register Actividad do
         table_for ActividadAlumno.where("actividad_id=#{r.id}").order(:id) do |t|
           t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.nombre} #{r.alumno.apellido}" : "") end
           t.column "Bajado" do |r| (r.bajado != nil ? r.bajado.strftime("%b %d, %Y") : "" ) end
-          t.column :opcion
+          t.column "Opcion" do |r| (ActividadOpcion.find(r.opcion) != nil ? "#{ActividadOpcion.find(r.opcion).nombre}" : "") end
           t.column :fecha 
-          t.column :opcion_secretaria 
+          t.column "Opcion Secretaría" do |r| (ActividadOpcion.find(r.opcion_secretaria) != nil ? "#{ActividadOpcion.find(r.opcion_secretaria).nombre}" : "") end
           t.column :fecha_secretaria
         end
       end
@@ -269,7 +269,7 @@ ActiveAdmin.register Actividad do
               if ( movs != nil && movs.count != 0 )
                 movs.destroy_all
               end
-              
+
               movs = Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion=#{secretaria}") rescue nil
               if ( movs == nil || movs.count == 0 )
                 actividad_alumno = ActividadAlumno.find(id)
