@@ -259,39 +259,13 @@ ActiveAdmin.register Actividad do
             p "----------"
             p "UPDATE"
             p "----------"
-
-            nombre = params[:actividad][:nombre]
-            id = params[:actividad][:actividad_alumno_attributes][i.to_s][:id]
-            secretaria = params[:actividad][:actividad_alumno_attributes][i.to_s][:opcion_secretaria]
-
-            if id != nil && secretaria != nil
-              movs = Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion<>#{secretaria}") rescue nil
-              if ( movs != nil && movs.count != 0 )
-                movs.destroy_all
-              end
-
-              movs = Movimiento.where("actividad_alumno_id=#{id} AND actividad_alumno_opcion=#{secretaria}") rescue nil
-              if ( movs == nil || movs.count == 0 )
-                actividad_alumno = ActividadAlumno.find(id)
-                cuenta_id = CuentaAlumno.where(alumno_id: actividad_alumno.alumno_id).first.cuenta_id
-
-                actividad_opcion=ActividadOpcion.find(secretaria)
-                if actividad_opcion.fecha != nil 
-                  fecha = DateTime.new(actividad_opcion.fecha.year,actividad_opcion.fecha.month,1)
-
-                  if actividad_opcion.cuotas >= 1 
-                    (1..actividad_opcion.cuotas).each do |cuota|
-                      Movimiento.create(cuenta_id: cuenta_id, alumno: actividad_alumno.alumno_id, fecha: fecha + (cuota-1).month,
-                        descripcion: "#{nombre.upcase} #{cuota}/#{actividad_opcion.cuotas}" , extra: "", debe: actividad_opcion.importe,
-                        haber: 0, tipo: 1002, actividad_alumno_id: actividad_alumno.id, actividad_alumno_opcion: secretaria )
-                    end
-                  end
-                end
-
-              end
-            end
-
             
+            id = params[:actividad][:actividad_alumno_attributes][i.to_s][:id]
+            opcion = params[:actividad][:actividad_alumno_attributes][i.to_s][:opcion_secretaria]
+            if id != nil && opcion != nil
+              actividad_alumno = ActividadAlumno.find(id)
+              actividad_alumno.elegir_opcion(opcion)
+            end
 
             p "----------"
             p "----------"
