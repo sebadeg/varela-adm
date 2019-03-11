@@ -7,38 +7,11 @@ ActiveAdmin.register_page "Pendiente" do
  
   page_action :enviarfactura, method: :post do
 
-    noticia = "Hecho!"
-    continuar = true
     (1..10).each do |x|
-      if continuar
-        p x
-        facturas = Factura.where("fecha='2019-03-01' AND cuenta_id=12121") rescue nil    
-        if facturas != nil
-          facturas.each do |factura|
-            cuenta_id = factura.cuenta_id
-            file_path = Rails.root.join("temp", "factura_#{cuenta_id}_#{factura.id}.pdf")
-            factura.imprimir(file_path,cuenta_id,factura)
-            usuarios = Usuario.where( "id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})") rescue nil
-            if ( usuarios != nil )
-              usuarios.each do |usuario|
-                p usuario.nombre + " " + usuario.apellido
-  
-                status = try_delivering_email do
-                  UserMailer.facturacion( usuario, "Marzo 2019", cuenta_id, "factura_#{cuenta_id}_#{factura.id}.pdf", file_path ).deliver_now
-                end
-   
-                unless status
-                  noticia = "Something went wrong when we tried sending you and email :("
-                  continuar = false
-                end
-              end
-            end          
-          end
-        end
-      end
+      SendEmailJob.set(wait: 5.seconds).perform_later
     end
 
-    redirect_to admin_pendiente_path, notice: noticia
+    redirect_to admin_pendiente_path
   end
 
 
@@ -442,46 +415,6 @@ ActiveAdmin.register_page "Pendiente" do
   content do
     render partial: 'pendiente'
   end
-
-  controller do
-
-     def log_exception(e, args = {})
-    extra_info = args[:info]
-
-    Rails.logger.error extra_info if extra_info
-    Rails.logger.error e.message
-    st = e.backtrace.join("\n")
-    Rails.logger.error st
-
-    extra_info ||= "<NO DETAILS>"
-    request = args[:request]
-    env = request ? request.env : {}
-    ExceptionNotifier::Notifier.exception_notification(env, e, :data => {:message => "Exception: #{extra_info}"}).deliver
-  end
-
-  def try_delivering_email(options = {}, &block)
-    begin
-      yield
-      return true
-    rescue  EOFError,
-            IOError,
-            TimeoutError,
-            Errno::ECONNRESET,
-            Errno::ECONNABORTED,
-            Errno::EPIPE,
-            Errno::ETIMEDOUT,
-            Net::SMTPAuthenticationError,
-            Net::SMTPServerBusy,
-            Net::SMTPSyntaxError,
-            Net::SMTPUnknownError,
-            OpenSSL::SSL::SSLError => e
-      log_exception(e, options)
-      return false
-    end
-  end
-  
-  end
-
 
 #  page_action :validar, method: :post do  	
 #  	cuenta = eval(params[:cuenta])[:value]
