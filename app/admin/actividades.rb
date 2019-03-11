@@ -46,7 +46,7 @@ ActiveAdmin.register Actividad do
     actividad = Actividad.find(id)
 
     ActiveRecord::Base.connection.execute( "DELETE FROM actividad_alumnos WHERE actividad_id=#{id};" )
-    ActiveRecord::Base.connection.execute( "INSERT INTO actividad_alumnos (actividad_id,alumno_id,created_at,updated_at) (SELECT #{id},id,now(),now() FROM alumnos WHERE id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{id})));" )
+    ActiveRecord::Base.connection.execute( "INSERT INTO actividad_alumnos (actividad_id,alumno_id,mail,created_at,updated_at) (SELECT #{id},id,false,now(),now() FROM alumnos WHERE id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT lista_id FROM actividad_listas WHERE actividad_id=#{id})));" )
 
     redirect_to admin_actividad_path(actividad), notice: "Hecho!"
   end
@@ -54,29 +54,9 @@ ActiveAdmin.register Actividad do
   member_action :mail, method: :put do
     id = params[:id]
     actividad = Actividad.find(id)
+    actividad.update(mail: true)
 
-    sql=
-      "SELECT DISTINCT foo.email FROM ( " +
-      "SELECT usuarios.email AS email FROM usuarios INNER JOIN titular_cuentas ON usuarios.id=titular_cuentas.usuario_id WHERE "+
-      "  titular_cuentas.cuenta_id IN (SELECT alumnos.id/10 FROM alumnos INNER JOIN actividad_alumnos ON alumnos.id=actividad_alumnos.alumno_id WHERE actividad_alumnos.actividad_id=#{id}) "+
-      "UNION "+
-      "SELECT usuarios.email AS email FROM usuarios INNER JOIN padre_alumnos ON usuarios.id=padre_alumnos.usuario_id WHERE "+
-      "  padre_alumnos.alumno_id IN (SELECT alumnos.id FROM alumnos INNER JOIN actividad_alumnos ON alumnos.id=actividad_alumnos.alumno_id WHERE actividad_alumnos.actividad_id=#{id}) "+
-      "UNION "+
-      "SELECT mail AS email FROM sinregistro_cuentas WHERE "+
-      "  sinregistro_cuentas.cuenta_id IN (SELECT alumnos.id/10 FROM alumnos INNER JOIN actividad_alumnos ON alumnos.id=actividad_alumnos.alumno_id WHERE actividad_alumnos.actividad_id=#{id})"  +
-      "  AND "+
-      "  NOT sinregistro_cuentas.cuenta_id IN (SELECT cuenta_id FROM titular_cuentas WHERE NOT titular_cuentas.cuenta_id IS NULL)"+
-      ") AS foo ORDER BY foo.email"
-
-    mailsQuery = ActiveRecord::Base.connection.execute(sql)
-
-    emails = ""
-    mailsQuery.each do |m|
-      emails = emails + m['email'] + ";"
-    end
-
-    #UserMailer.novedades( emails, actividad.nombre ).deliver_now
+    SendMailActividadJob.set(wait: 10.seconds).perform_later
 
     redirect_to admin_actividad_path(actividad), notice: "Hecho!"
   end
