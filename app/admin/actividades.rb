@@ -16,11 +16,11 @@ ActiveAdmin.register Actividad do
 #   permitted
 # end
 
-  permit_params :id, :nombre, :fecha, :sector_id,
+  permit_params :id, :nombre, :fecha, :sector_id, :mail,
       actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:indice,:_destroy],
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
       actividad_opcion_attributes: [:id,:actividad_id,:opcion_concepto_id,:cuotas,:importe,:fecha,:indice,:opcion,:_destroy],
-      actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:_destroy]
+      actividad_alumno_attributes: [:id,:actividad_id,:alumno_id,:opcion,:fecha,:opcion_secretaria,:fecha_secretaria,:mail,:_destroy]
 
   # permit_params :nombre, :descripcion, :fecha, :fechainfo, :archivo, :data, 
   #     actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
