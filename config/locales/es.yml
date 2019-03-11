@@ -84,6 +84,11 @@ es:
         descripcion: "Descripción"
       actividad:
         fecha: "Hasta" 
+      cuenta:
+        brou: "Débito BROU"
+        oca: "Débito OCA"
+        visa: "Débito VISA"
+        retencion: "Retención"
 
     models:
       aactividad:

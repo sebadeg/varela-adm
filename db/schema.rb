@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_010100) do
+ActiveRecord::Schema.define(version: 2019_03_11_010200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,8 @@ ActiveRecord::Schema.define(version: 2019_03_11_010100) do
     t.boolean "concurre"
     t.boolean "brou"
     t.string "retencion"
+    t.boolean "visa"
+    t.boolean "oca"
     t.index ["nombre"], name: "index_cuentas_on_nombre"
   end
 

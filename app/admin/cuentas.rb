@@ -6,6 +6,9 @@ ActiveAdmin.register Cuenta do
 
   scope :concurre
   scope :todos 
+  scope :brou
+  scope :visa
+  scope :oca
 
   index do
   	#selectable_column
@@ -13,6 +16,10 @@ ActiveAdmin.register Cuenta do
       link_to cuenta.id, admin_cuenta_path(cuenta.id)
     end
     column :nombre
+    column :brou
+    column :visa
+    column :oca
+    column :retencion
     actions
   end
 
@@ -23,7 +30,10 @@ ActiveAdmin.register Cuenta do
     attributes_table do
       row :id
       row :nombre 
-      row :brou, label: "Débito BROU"
+      row :brou
+      row :visa
+      row :oca
+      row :retencion
       row :comentario
       row :info
     end
@@ -34,6 +44,9 @@ ActiveAdmin.register Cuenta do
       f.input :id
       f.input :nombre
       f.input :brou, label: "Débito BROU"
+      f.input :visa
+      f.input :oca
+      f.input :retencion
       f.input :comentario
     end
     f.actions

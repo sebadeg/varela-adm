@@ -4,5 +4,8 @@ class Cuenta < ApplicationRecord
 
   scope :todos, -> { all }
   scope :concurre, -> { where("concurre") }
+  scope :brou, -> { where("brou") }
+  scope :visa, -> { where("visa") }
+  scope :oca, -> { where("oca") }
 
 end
