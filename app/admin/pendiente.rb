@@ -7,9 +7,7 @@ ActiveAdmin.register_page "Pendiente" do
  
   page_action :enviarfactura, method: :post do
 
-    (1..10).each do |x|
-      SendEmailJob.set(wait: 10.seconds).perform_later
-    end
+    SendEmailJob.set(wait: 10.seconds).perform_later
 
     redirect_to admin_pendiente_path
   end
