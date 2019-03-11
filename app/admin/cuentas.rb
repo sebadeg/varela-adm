@@ -23,6 +23,7 @@ ActiveAdmin.register Cuenta do
     attributes_table do
       row :id
       row :nombre 
+      row :brou
       row :comentario
       row :info
     end
@@ -32,6 +33,7 @@ ActiveAdmin.register Cuenta do
     f.inputs "Cuentas" do
       f.input :id
       f.input :nombre
+      f.input :brou
       f.input :comentario
     end
     f.actions
