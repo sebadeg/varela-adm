@@ -29,9 +29,7 @@ class Ability
 
       can :manage, Recibo
       can :manage, LoteRecibo
-
       can :manage, ActiveAdmin::Page, :name => "Estimación"
-
 
       can :manage, Especial
       can :manage, Pago
@@ -41,22 +39,11 @@ class Ability
       can :manage, Alumno
       can :manage, Tarea
       can :read, Usuario
-
       can :manage, Contrato
-      can :read, InscripcionAlumno
-      can :manage, Pase
       can :manage, Recargo
-
-      can :manage, Inscripcion
-
-      can :manage, Seguimiento
-      can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
-      can :manage, Subgrado
-      return
     end
 
     if user.secretaria
-
 
       pases = Pase.where("alumno_id IN (SELECT alumno_id FROM lista_alumnos WHERE lista_id IN (SELECT id FROM listas WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{user.id}) AND anio=#{anio_pases}))")
       can :read, Pase, pases do |x|
