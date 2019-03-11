@@ -177,7 +177,7 @@ ActiveAdmin.register Actividad do
               contents = file.read
               if ( (contents =~ /\%PDF-\d+\.?\d+/) == 0 )
                 params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = file.original_filename
-                params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = file.read
+                params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = contents
               else
                 params[:actividad][:actividad_archivo_attributes][i.to_s][:nombre] = ""
                 params[:actividad][:actividad_archivo_attributes][i.to_s][:data] = nil
