@@ -5,7 +5,7 @@
       <%= a.input :nombre  %>
       <%= a.input :fecha  %>
       <%= a.input :sector_id, :input_html => { :value => UsuarioSector.where(admin_usuario_id: current_admin_usuario.id).order(:indice).first.sector_id }, as: :hidden %>
-      <%= a.input :mail, :input_html => { :value => false }, as: :hidden %>
+      <%= a.input :mail, :input_html => { :value => 0 }, as: :hidden %>
   <% end %>
 
   <%= a.inputs "Archivos" do %>
