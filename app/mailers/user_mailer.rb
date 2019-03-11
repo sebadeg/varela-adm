@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
 	
 	end
 
-	def novedades(emails,titulo)
+	def novedades(reply_to,emails,titulo)
 
 		delivery_options = {
             address: "smtp.varela.edu.uy",
@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
 		}
 
 		@titulo = titulo
-		mail(from: 'novedades@varela.edu.uy', to: 'novedades@varela.edu.uy',  bcc: emails, subject: titulo, delivery_method_options: delivery_options)
+		mail(from: 'novedades@varela.edu.uy', to: "novedades@varela.edu.uy;#{reply_to}", reply_to: reply_to, bcc: emails, subject: titulo, delivery_method_options: delivery_options)
 	end
 
 

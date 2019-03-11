@@ -32,7 +32,9 @@ class SendMailActividadJob < ApplicationJob
     #   emails = emails + m['email'] + ";"
     # end
 
-    # UserMailer.novedades( emails, actividad.nombre ).deliver_now
+    # reply_to = ""
+
+    # UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
 
   end
 end

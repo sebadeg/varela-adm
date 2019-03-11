@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_010000) do
+ActiveRecord::Schema.define(version: 2019_03_11_010100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_010000) do
     t.binary "data"
     t.bigint "sector_id"
     t.boolean "mail"
+    t.string "creada"
     t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
