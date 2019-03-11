@@ -6,9 +6,9 @@ ActiveAdmin.register Cuenta do
 
   scope :concurre
   scope :todos 
-  scope :brou
-  scope :visa
-  scope :oca
+  scope :brou, label: "Débito BROU"
+  scope :visa, label: "Débito VISA"
+  scope :oca, label: "Débito OCA"
 
   index do
   	#selectable_column
