@@ -23,7 +23,7 @@ ActiveAdmin.register Cuenta do
     attributes_table do
       row :id
       row :nombre 
-      row :brou
+      row :brou, label: "Débito BROU"
       row :comentario
       row :info
     end
@@ -33,7 +33,7 @@ ActiveAdmin.register Cuenta do
     f.inputs "Cuentas" do
       f.input :id
       f.input :nombre
-      f.input :brou
+      f.input :brou, label: "Débito BROU"
       f.input :comentario
     end
     f.actions
