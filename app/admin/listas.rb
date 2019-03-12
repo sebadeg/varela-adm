@@ -17,11 +17,27 @@ ActiveAdmin.register Lista do
 
   menu priority: 1, label: "Listas", parent: "Secretaría"
 
+
+  member_action :copiar, method: :put do
+    id = params[:id]
+    lista = Lista.find(id)
+
+    Lista.create(nombre: "#{lista.nombre} Copia" ) do |lista|
+      ListaAlumno.where(lista_id: lista.id).each do |lista_alumno|
+        ListaAlumno.create(lista.id,lista_alumnos.alumno_id)
+      end
+      
+    end
+
+    redirect_to admin_lista_path(actividad), notice: "Hecho!"
+  end
+
   index do
     #selectable_column
     column :nombre
     actions defaults: false do |u|
       item "Ver", admin_lista_path(u), class: "view_link member_link", title: "Ver"
+      item "Copiar", copiar_admin_lista_path(u), class: "edit_link member_link", title: "Copiar"
       item "Editar", edit_admin_lista_path(u), class: "edit_link member_link", title: "Editar"
       item "Eliminar", admin_lista_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete
     end
