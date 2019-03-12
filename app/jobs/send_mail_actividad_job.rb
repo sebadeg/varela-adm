@@ -34,10 +34,10 @@ class SendMailActividadJob < ApplicationJob
         emails = ""
         ActividadAlumno.joins(:actividad).where("actividades.id=#{actividad.id} AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(100).each do |actividad_alumno|
 
-          Usuario.joins(:titular_cuenta).where("cuenta_id=#{actividad_alumno.alumno_id/10}") do |usuario|
+          Usuario.joins(:titular_cuenta).where("cuenta_id=#{actividad_alumno.alumno_id/10}").each do |usuario|
             emails = emails + "#{usuario.email};"
           end
-          Usuario.joins(:padre_alumno).where("alumno_id=#{actividad_alumno.alumno_id}") do |usuario|
+          Usuario.joins(:padre_alumno).where("alumno_id=#{actividad_alumno.alumno_id}").each do |usuario|
             emails = emails + "#{usuario.email};"
           end
 
