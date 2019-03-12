@@ -3,11 +3,15 @@ class Usuario < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:cedula]
+
+  has_many :titular_cuenta
+  has_many :padre_alumno
   
   validates_uniqueness_of :cedula
   validates :cedula, presence: true
   validates :cedula, numericality: { only_integer: true, greater_than:0, less_than: 100000000 }
   validate :cedula_digit
+
 
 
 
