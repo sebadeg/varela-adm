@@ -23,9 +23,13 @@ ActiveAdmin.register Lista do
     lista = Lista.find(id)
 
     lista_copia = Lista.create(nombre: "#{lista.nombre} Copia" )
+
+    anio = Config.find(1).anio
+    sector_id = UsuarioSector.where(admin_usuario_id: current_admin_usuario.id).order(:indice).first.sector_id
+
     p lista_copia
     ListaAlumno.where(lista_id: lista.id).each do |lista_alumno|
-      ListaAlumno.create(lista_id: lista_copia.id, alumno_id: lista_alumno.alumno_id)
+      ListaAlumno.create(lista_id: lista_copia.id, alumno_id: lista_alumno.alumno_id, anio: anio, sector_id: sector_id)
     end
 
     redirect_to admin_listas_path, notice: "Hecho!"
