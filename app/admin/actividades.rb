@@ -27,7 +27,7 @@ ActiveAdmin.register Actividad do
   #     actividad_opcion_attributes: [:id,:actividad_id,:valor,:opcion,:eleccion,:_destroy]
 
   action_item :asociar, only: :show do
-    link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put 
+    link_to "Asociar", asociar_admin_actividad_path(actividad), method: :put if !actividad.mail?
   end
 
   action_item :mail, only: :show do
