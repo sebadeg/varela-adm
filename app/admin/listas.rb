@@ -24,7 +24,7 @@ ActiveAdmin.register Lista do
 
     Lista.create(nombre: "#{lista.nombre} Copia" ) do |lista_copia|
       ListaAlumno.where(lista_id: lista.id).each do |lista_alumno|
-        ListaAlumno.create(lista_copia.id,lista_alumnos.alumno_id)
+        ListaAlumno.create(lista_copia.id,lista_alumno.alumno_id)
       end
       
     end
