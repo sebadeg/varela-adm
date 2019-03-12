@@ -31,9 +31,15 @@ class SendMailActividadJob < ApplicationJob
     continuar = true
     while continuar do
       continuar = false
+      p "----------"
+      p "----------"
+      p "----------"
       ActividadAlumno.joins(:actividad).where("actividades.mail AND NOT actividad_alumnos.mail").limit(30).each do |actividad|
-
+        p "#{actividad.actividad_id} - #{actividad.alumno_id}"
       end
+      p "----------"
+      p "----------"
+      p "----------"
     end
   end
 end
