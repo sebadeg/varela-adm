@@ -42,6 +42,8 @@ class SendMailActividadJob < ApplicationJob
             emails = emails + "#{usuario.email};"
           end
 
+          ActividadAlumno.find(actividad_alumno.id).update(mail: true)
+          
         end
         reply_to = actividad.creada
         p "#{actividad.nombre} - #{reply_to} - #{emails}"
