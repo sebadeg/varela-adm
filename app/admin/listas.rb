@@ -37,7 +37,7 @@ ActiveAdmin.register Lista do
     column :nombre
     actions defaults: false do |u|
       item "Ver", admin_lista_path(u), class: "view_link member_link", title: "Ver"
-      link_to "Copiar", copiar_admin_lista_path(u), method: :put
+      item "Copiar", copiar_admin_lista_path(u), class: "member_link", method: :put, title: "Copiar"
       item "Editar", edit_admin_lista_path(u), class: "edit_link member_link", title: "Editar"
       item "Eliminar", admin_lista_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete
     end

@@ -3,14 +3,6 @@ class SendMailActividadJob < ApplicationJob
 
   def perform(*args)
 
-  	p "----------"
-  	p "----------"
-  	p "Mail"
-  	p "----------"
-  	p "----------"
-
-    # Do something later
-
     # sql=
     #   "SELECT DISTINCT foo.email FROM ( " +
     #   "SELECT usuarios.email AS email FROM usuarios INNER JOIN titular_cuentas ON usuarios.id=titular_cuentas.usuario_id WHERE "+
