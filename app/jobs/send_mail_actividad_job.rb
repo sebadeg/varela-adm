@@ -34,7 +34,7 @@ class SendMailActividadJob < ApplicationJob
       p "----------"
       p "----------"
       p "----------"
-      ActividadAlumno.joins(:actividad).where("actividades.mail AND NOT actividad_alumnos.mail").limit(30).each do |actividad|
+      ActividadAlumno.joins(:actividad).where("actividades.mail AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(30).each do |actividad|
         p "#{actividad.actividad_id} - #{actividad.alumno_id}"
       end
       p "----------"
