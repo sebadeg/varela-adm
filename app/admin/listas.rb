@@ -23,6 +23,7 @@ ActiveAdmin.register Lista do
     lista = Lista.find(id)
 
     Lista.create(nombre: "#{lista.nombre} Copia" ) do |lista_copia|
+      p lista_copia
       ListaAlumno.where(lista_id: lista.id).each do |lista_alumno|
         ListaAlumno.create(lista_id: lista_copia.id, alumno_id: lista_alumno.alumno_id)
       end
