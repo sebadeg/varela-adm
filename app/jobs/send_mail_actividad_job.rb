@@ -28,5 +28,12 @@ class SendMailActividadJob < ApplicationJob
 
     # UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
 
+    continuar = true
+    while continuar do
+      continuar = false
+      ActividadAlumno.joins(:actividad).where("actividades.mail AND NOT actividad_alumnos.mail").limit(30).each do |actividad|
+
+      end
+    end
   end
 end

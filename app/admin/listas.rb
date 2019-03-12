@@ -22,14 +22,14 @@ ActiveAdmin.register Lista do
     id = params[:id]
     lista = Lista.find(id)
 
-    Lista.create(nombre: "#{lista.nombre} Copia" ) do |lista|
+    Lista.create(nombre: "#{lista.nombre} Copia" ) do |lista_copia|
       ListaAlumno.where(lista_id: lista.id).each do |lista_alumno|
-        ListaAlumno.create(lista.id,lista_alumnos.alumno_id)
+        ListaAlumno.create(lista_copia.id,lista_alumnos.alumno_id)
       end
       
     end
 
-    redirect_to admin_lista_path(actividad), notice: "Hecho!"
+    redirect_to admin_listas_path, notice: "Hecho!"
   end
 
   index do
