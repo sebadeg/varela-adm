@@ -39,8 +39,11 @@ class SendMailActividadJob < ApplicationJob
         ActividadAlumno.find(actividad_alumno.id).update(mail: true)
 
       end
+
       if actividad.creada == nil || actividad.creada == ""
         reply_to = "novedades@varela.edu.uy"
+      else
+        reply_to = actividad.creada
       end
       if emails != ""
         p "----------"
@@ -54,7 +57,7 @@ class SendMailActividadJob < ApplicationJob
         p "----------"
         p "----------"
         p "----------"
-        #UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
+        UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
       end
     end
 
