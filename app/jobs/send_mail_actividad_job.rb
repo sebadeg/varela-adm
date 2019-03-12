@@ -43,7 +43,18 @@ class SendMailActividadJob < ApplicationJob
         reply_to = "novedades@varela.edu.uy"
       end
       if emails != ""
-        UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
+        p "----------"
+        p "----------"
+        p "----------"
+        p "----------"
+        p "----------"
+        p "#{actividad.nombre} - #{reply_to} #{emails}"
+        p "----------"
+        p "----------"
+        p "----------"
+        p "----------"
+        p "----------"
+        #UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
       end
     end
 
