@@ -24,35 +24,28 @@ class SendMailActividadJob < ApplicationJob
     #   emails = emails + m['email'] + ";"
     # end
 
-    continuar = true
-    while continuar do
-      continuar = false
-      p "----------"
-      p "----------"
-      p "----------"
-      Actividad.joins(:actividad_alumno).where("actividades.mail AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").each do |actividad|
-        emails = ""
-        ActividadAlumno.joins(:actividad).where("actividades.id=#{actividad.id} AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(100).each do |actividad_alumno|
+    Actividad.joins(:actividad_alumno).where("actividades.mail AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").each do |actividad|
+      
+      emails = ""
+      ActividadAlumno.joins(:actividad).where("actividades.id=#{actividad.id} AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(100).each do |actividad_alumno|
 
-          Usuario.joins(:titular_cuenta).where("cuenta_id=#{actividad_alumno.alumno_id/10}").each do |usuario|
-            emails = emails + "#{usuario.email};"
-          end
-          Usuario.joins(:padre_alumno).where("alumno_id=#{actividad_alumno.alumno_id}").each do |usuario|
-            emails = emails + "#{usuario.email};"
-          end
-
-          ActividadAlumno.find(actividad_alumno.id).update(mail: true)
-
+        Usuario.joins(:titular_cuenta).where("cuenta_id=#{actividad_alumno.alumno_id/10}").each do |usuario|
+          emails = emails + "#{usuario.email};"
         end
-        reply_to = actividad.creada
-        p "#{actividad.nombre} - #{reply_to} - #{emails}"
+        Usuario.joins(:padre_alumno).where("alumno_id=#{actividad_alumno.alumno_id}").each do |usuario|
+          emails = emails + "#{usuario.email};"
+        end
+
+        ActividadAlumno.find(actividad_alumno.id).update(mail: true)
+
       end
-      p "----------"
-      p "----------"
-      p "----------"
-
-      #UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
-
+      if actividad.creada == nil || actividad.creada == ""
+        reply_to = "novedades@varela.edu.uy"
+      end
+      if emails != ""
+        UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
+      end
     end
+
   end
 end
