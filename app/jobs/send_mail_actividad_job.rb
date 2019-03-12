@@ -33,7 +33,6 @@ class SendMailActividadJob < ApplicationJob
       Actividad.joins(:actividad_alumno).where("actividades.mail AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").each do |actividad|
         emails = ""
         ActividadAlumno.joins(:actividad).where("actividades.id=#{actividad.id} AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(100).each do |actividad_alumno|
-          p "#{actividad.id} - #{actividad_alumno.alumno_id}"
 
           Usuario.joins(:titular_cuenta).where("cuenta_id=#{actividad_alumno.alumno_id/10}") do |usuario|
             emails = emails + "#{usuario.email};"
@@ -43,7 +42,7 @@ class SendMailActividadJob < ApplicationJob
           end
 
           ActividadAlumno.find(actividad_alumno.id).update(mail: true)
-          
+
         end
         reply_to = actividad.creada
         p "#{actividad.nombre} - #{reply_to} - #{emails}"
