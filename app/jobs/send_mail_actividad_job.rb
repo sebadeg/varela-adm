@@ -24,22 +24,34 @@ class SendMailActividadJob < ApplicationJob
     #   emails = emails + m['email'] + ";"
     # end
 
-    # reply_to = ""
-
-    # UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
-
     continuar = true
     while continuar do
       continuar = false
       p "----------"
       p "----------"
       p "----------"
-      ActividadAlumno.joins(:actividad).where("actividades.mail AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(30).each do |actividad|
-        p "#{actividad.actividad_id} - #{actividad.alumno_id}"
+      Actividad.joins(:actividad_alumno).where("actividades.mail AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").each do |actividad|
+        emails = ""
+        ActividadAlumno.joins(:actividad).where("actividades.id=#{actividad.id} AND (actividad_alumnos.mail IS NULL OR NOT actividad_alumnos.mail)").limit(100).each do |actividad_alumno|
+          p "#{actividad.actividad_id} - #{actividad.alumno_id}"
+
+          Usuario.joins(:titular_cuenta).where("cuenta_id=#{actividad.alumno_id/10}") do |usuario|
+            emails = emails + "#{usuario.email};"
+          end
+          Usuario.joins(:padre_alumno).where("alumno_id=#{actividad.alumno_id}") do |usuario|
+            emails = emails + "#{usuario.email};"
+          end
+
+        end
+        reply_to = actividad.creada
+        p "#{actividad.nombre} - #{reply_to} - #{emails}"
       end
       p "----------"
       p "----------"
       p "----------"
+
+      #UserMailer.novedades( reply_to, emails, actividad.nombre ).deliver_now
+
     end
   end
 end
