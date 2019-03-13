@@ -27,7 +27,7 @@
           <% end %>
           <% i = i + 1 %>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
-          <td><%= b.input :mail %></td>
+          <td><%= b.object.mail != nil && b.object.mail ? status_tag( "Si", :ok ) : status_tag( "No" ) %></td>
           <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.opciones(b.object.actividad_id)[:elecciones][b.object.opcion] : "" %></td>
           <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y') : "" %></td>
