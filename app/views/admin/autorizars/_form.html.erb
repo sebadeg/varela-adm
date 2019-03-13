@@ -27,7 +27,11 @@
           <% end %>
           <% i = i + 1 %>
           <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
-          <td><%= b.object.mail != nil && b.object.mail ? "Si" : "No", :input_html => { :class => (b.object.mail != nil && b.object.mail ? "status_tag yes" : "status_tag no") } %></td>
+          <% if b.object.mail != nil && b.object.mail %>
+            <td><span class="status_tag yes">Si</span></td>
+          <% else %>
+            <td><span class="status_tag no">No</span></td>
+          <% end %>
           <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.object.opcion != nil ? ActividadOpcion.opciones(b.object.actividad_id)[:elecciones][b.object.opcion] : "" %></td>
           <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y') : "" %></td>
