@@ -2,14 +2,14 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<% fecha_factura = DateTime.new(2019,03,01) %>
+<% fecha_factura = DateTime.new(2019,02,01) %>
 <% saldos = Hash.new %>
 <% corrientes = Hash.new %>
 <% Movimiento.where(["fecha < ?",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo| %>
   <% saldos[saldo.cuenta_id] = saldo.saldo %>
 <% end %>
 
-<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber == 0",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
+<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber = 0 AND ",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
   <% corrientes[corriente.cuenta_id] = corriente.debe %>
 <% end %>
 
