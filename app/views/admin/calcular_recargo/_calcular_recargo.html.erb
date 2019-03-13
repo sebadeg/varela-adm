@@ -9,7 +9,7 @@
   <% saldos[saldo.cuenta_id] = saldo.saldo %>
 <% end %>
 
-<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber = 0 AND ",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
+<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber = 0",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
   <% corrientes[corriente.cuenta_id] = corriente.debe %>
 <% end %>
 
