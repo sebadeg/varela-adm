@@ -60,13 +60,13 @@
                       <% if importe > saldo %>
                         <% importe = importe - saldo %>
                         <% if (pago.fecha - fecha_factura_anterior).to_i > 0 %>
-                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i-1))*saldo %>
+                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i)-1)*saldo %>
                         <% end %>
                         <% saldo = 0 %>
                       <% else %>
                         <% saldo = saldo - importe %>
                         <% if (pago.fecha - fecha_factura_anterior).to_i > 0 %>
-                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i-1))*importe %>
+                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i)-1)*importe %>
                         <% end %>
                         <% importe = 0 %>
                       <% end %>
@@ -76,13 +76,13 @@
                       <% if importe > corriente %>
                         <% importe = importe - corriente %>
                         <% if (pago.fecha - fecha_vencimiento_factura_anterior).to_i > 0 %>
-                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i-1))*corriente %>
+                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i)-1)*corriente %>
                         <% end %>
                         <% corriente = 0 %>
                       <% else %>
                         <% corriente = corriente - importe %>
                         <% if (pago.fecha - fecha_vencimiento_factura_anterior).to_i > 0 %>
-                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i-1))*importe %>
+                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i)-1)*importe %>
                         <% end %>
                         <% importe = 0 %>
                       <% end %>
@@ -97,14 +97,14 @@
 
                     <% if saldo > 0 %>
                       <% if (fecha_factura - fecha_factura_anterior).to_i > 0 %>
-                        <% recargo = (tea**((fecha_factura - fecha_factura_anterior).to_i-1))*saldo %>
+                        <% recargo = (tea**((fecha_factura - fecha_factura_anterior).to_i)-1)*saldo %>
                       <% end %>
                       <% saldo = 0 %>
                     <% end %>
 
                     <% if corriente > 0 %>
                       <% if (fecha_factura - fecha_vencimiento_factura_anterior).to_i > 0 %>
-                        <% recargo = recargo + (tea**((fecha_factura - fecha_vencimiento_factura_anterior).to_i-1))*corriente %>
+                        <% recargo = recargo + (tea**((fecha_factura - fecha_vencimiento_factura_anterior).to_i)-1)*corriente %>
                       <% end %>
                       <% corriente = 0 %>
                     <% end %>
