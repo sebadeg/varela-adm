@@ -45,7 +45,7 @@
 
 <% tea = 1.38 ** (1.0/365.0) %>
 <% total_recargo = 0 %>
-<% recargo = 0 %>
+
 <% saldo = saldos[cuenta_id] %>
 <% corriente = corrientes[cuenta_id] %>
 
@@ -55,7 +55,8 @@
 
                     <% fecha = pago.fecha %>
                     <% importe = pago.haber %>
-                    
+                    <% recargo = 0 %>
+
                     <% if saldo > 0 %>
                       <% if importe > saldo %>
                         <% importe = importe - saldo %>
@@ -94,7 +95,7 @@
                     </tr>
                   <% end %>
 
-
+                    <% recargo = 0 %>
                     <% if saldo > 0 %>
                       <% if (fecha_factura - fecha_factura_anterior).to_i > 0 %>
                         <% recargo = (tea**((fecha_factura - fecha_factura_anterior).to_i)-1)*saldo %>
