@@ -4,9 +4,15 @@
 
 <% fecha_factura = DateTime.new(2019,03,01) %>
 <% saldos = Hash.new %>
+<% corrientes = Hash.new %>
 <% Movimiento.where(["fecha < ?",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo| %>
   <% saldos[saldo.cuenta_id] = saldo.saldo %>
 <% end %>
+
+<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber == 0",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
+  <% corrientes[corriente.cuenta_id] = corriente.debe %>
+<% end %>
+
 
 <div class="container">
   <div class="row">
@@ -14,18 +20,18 @@
       <form>
         <table class="index_table index">
           <thead>
-            <tr><th>Cuenta</th><th>Saldo</th></tr>
+            <tr><th>Cuenta</th><th>Saldo</th><th>Corriente</th></tr>
           </thead>
+          <% i = 0 %>
           <tbody>
-            <% saldos.keys.each do |saldo| %>
-              <% i = 0 %>
+            <% saldos.keys.each do |cuenta_id| %>
               <% if i % 2 == 0 %>
                 <tr class="odd">
               <% else %>
                 <tr class="even">
               <% end %>
               <% i = i+1 %>
-                <td><%= saldo %></td><td><%= saldos[saldo] %></td></tr>
+                <td><%= cuenta_id %></td><td><%= saldos[cuenta_id] %></td><td><%= corrientes[cuenta_id] %></td></tr>
             <% end %>
           </tbody>
         </table>
