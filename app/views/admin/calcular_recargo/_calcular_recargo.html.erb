@@ -48,6 +48,10 @@
 
 <% saldo = saldos[cuenta_id] %>
 <% corriente = corrientes[cuenta_id] %>
+<% if saldo < 0 %>
+  <% corriente = corriente + saldo %>
+<% end %>
+
 
                 <td><table>
                   <% Movimiento.where(["cuenta_id = ? AND fecha >= ? AND fecha < ? AND haber>0",cuenta_id,fecha_factura_anterior,fecha_factura]).order(:fecha).select(:fecha,:haber).each do |pago| %>
