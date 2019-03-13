@@ -3,6 +3,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <% fecha_factura_anterior = DateTime.new(2019,02,01) %>
+<% fecha_vencimiento_factura_anterior = DateTime.new(2019,02,10) %>
 <% fecha_factura = DateTime.new(2019,03,01) %>
 <% saldos = Hash.new %>
 <% corrientes = Hash.new %>
@@ -40,10 +41,78 @@
               <% end %>
               <% i = i+1 %>
                 <td><%= cuenta_id %></td><td><%= saldos[cuenta_id] %></td><td><%= corrientes[cuenta_id] %></td>
+
+
+<% tea = 1.38 ** (1.0/365.0) %>
+<% total_recargo = 0 %>
+<% recargo = 0 %>
+<% saldo = saldos[cuenta_id] %>
+<% corriente = corrientes[cuenta_id] %>
+
                 <td><table>
                   <% Movimiento.where(["cuenta_id = ? AND fecha >= ? AND fecha < ? AND haber>0",cuenta_id,fecha_factura_anterior,fecha_factura]).order(:fecha).select(:fecha,:haber).each do |pago| %>
-                    <tr><td><%= pago.fecha %></td><td><%= pago.haber %></td></tr>
+                    <tr><td><%= pago.fecha %></td><td><%= pago.haber %></td>
+
+                    <% fecha = pago.fecha %>
+                    <% importe = pago.haber %>
+                    
+                    <% if saldo > 0 %>
+                      <% if importe > saldo %>
+                        <% importe = importe - saldo %>
+                        <% if pago.fecha - fecha_factura_anterior).days > 0 %>
+                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).days)-1)*saldo %>
+                        <% end %>
+                        <% saldo = 0 %>
+                      <% else %>
+                        <% saldo = saldo - importe %>
+                        <% if pago.fecha - fecha_factura_anterior).days > 0 %>
+                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).days)-1)*importe %>
+                        <% end %>
+                        <% importe = 0 %>
+                      <% end %>
+                    <% end %>
+
+                    <% if corriente > 0 %>
+                      <% if importe > corriente %>
+                        <% importe = importe - corriente %>
+                        <% if pago.fecha - fecha_vencimiento_factura_anterior).days > 0 %>
+                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).days)-1)*corriente %>
+                        <% end %>
+                        <% corriente = 0 %>
+                      <% else %>
+                        <% corriente = corriente - importe %>
+                        <% if pago.fecha - fecha_vencimiento_factura_anterior).days > 0 %>
+                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).days--1)*importe %>
+                        <% end %>
+                        <% importe = 0 %>
+                      <% end %>
+                    <% end %>
+
+                    <% total_recargo = total_recargo + recargo %>
+
+                    <td><%= recargo %></td>
+                    </tr>
                   <% end %>
+
+
+                    <% if saldo > 0 %>
+                      <% if fecha_factura - fecha_factura_anterior).days > 0 %>
+                        <% recargo = (tea**((fecha_factura - fecha_factura_anterior).days)-1)*saldo %>
+                      <% end %>
+                      <% saldo = 0 %>
+                    <% end %>
+
+                    <% if corriente > 0 %>
+                      <% if fecha_factura - fecha_vencimiento_factura_anterior).days > 0 %>
+                        <% recargo = recargo + (tea**((fecha_factura - fecha_vencimiento_factura_anterior).days)-1)*corriente %>
+                      <% end %>
+                      <% corriente = 0 %>
+                    <% end %>
+                    
+                    <% total_recargo = total_recargo + recargo %>
+
+                    <td></td><td></td><td><%= recargo %></td>
+                    <td></td><td></td><td><%= total_recargo %></td>
                 </table></td></tr>
             <% end %>
           </tbody>
