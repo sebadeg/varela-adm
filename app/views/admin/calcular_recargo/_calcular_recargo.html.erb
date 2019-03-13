@@ -41,7 +41,7 @@
               <% i = i+1 %>
                 <td><%= cuenta_id %></td><td><%= saldos[cuenta_id] %></td><td><%= corrientes[cuenta_id] %></td>
                 <td><table>
-                  <% Movimiento.where(["cuenta_id = ? AND fecha >= ? AND fecha < ? AND haber>0",cuenta_id,fecha_anterior_factura,fecha_factura]).order(:fecha).select(:fecha,:haber).each do |pago| %>
+                  <% Movimiento.where(["cuenta_id = ? AND fecha >= ? AND fecha < ? AND haber>0",cuenta_id,fecha_factura_anterior,fecha_factura]).order(:fecha).select(:fecha,:haber).each do |pago| %>
                     <tr><td><%= pago.fecha %></td><td><%= pago.haber %></td></tr>
                   <% end %>
                 </table></td></tr>
