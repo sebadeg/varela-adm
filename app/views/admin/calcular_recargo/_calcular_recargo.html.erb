@@ -27,7 +27,7 @@
           </thead>
           <% i = 0 %>
           <tbody>
-            <% saldos.keys.each do |cuenta_id| %>
+            <% saldos.sort.keys.each do |cuenta_id| %>
               <% if i % 2 == 0 %>
                 <tr class="odd">
               <% else %>
