@@ -4,8 +4,8 @@
 
 <% fecha_factura = DateTime.new(2019,03,01) %>
 <% saldos = Hash.new %>
-<% Movimiento.where(["fecha < ?",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber)").each do |saldo| %>
-  <% saldos[saldo.cuenta_id] = saldo %>
+<% Movimiento.where(["fecha < ?",fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo| %>
+  <% saldos[saldo.cuenta_id] = saldo.saldo %>
 <% end %>
 
 <div class="container">
