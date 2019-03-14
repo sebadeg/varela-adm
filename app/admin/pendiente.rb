@@ -148,9 +148,9 @@ ActiveAdmin.register_page "Pendiente" do
       Socio.all.each do |socio|
         contador_tmp = 0
         cuota.concepto.split.each do |s|
-      #     if (socio.nombre.upcase.include? s.upcase) || (socio.apellido.upcase.include? s.upcase)
-      #       contador_tmp = contador_tmp + 1
-      #     end
+          if socio.nombre.upcase.include?(s.upcase) || socio.apellido.upcase.include?(s.upcase)
+            contador_tmp = contador_tmp + 1
+          end
         end
         if contador_tmp > contador
           contador = contador_tmp
