@@ -141,26 +141,27 @@ ActiveAdmin.register_page "Pendiente" do
 
 
 
-   socio_id = 0
-   contador = 0
-   CuotaSocio.where("socio_id IS NULL").each do |cuota|
+    socio_id = 0
+    contador = 0
+    CuotaSocio.where("socio_id IS NULL").each do |cuota|
 
-     Socio.all.each do |socio|
-       contador_tmp = 0
-       cuota.concepto.split.each do |s|
-       if socio.nombre.upcase.include? s.upcase
-         contador_tmp = contador_tmp + 1
-       end
-       if contador_tmp > contador
-         socio_id = socio.id
-       end
-     end
+      Socio.all.each do |socio|
+        contador_tmp = 0
+        cuota.concepto.split.each do |s|
+          if socio.nombre.upcase.include? s.upcase || socio.apellido.upcase.include? s.upcase
+            contador_tmp = contador_tmp + 1
+          end
+        end
+        if contador_tmp > contador
+          socio_id = socio.id
+        end
+      end
 
-     if socio_id != 0
-       cuota.update( socio_id: socio_id )
-     end
+      if socio_id != 0
+        cuota.update( socio_id: socio_id )
+      end
      
-   end
+    end
 
 
     file_name = "sistarbanc.txt"
