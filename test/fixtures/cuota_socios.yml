@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2019-03-13
+  socio: 1
+  concepto: MyString
+  importe: 
+
+two:
+  fecha: 2019-03-13
+  socio: 1
+  concepto: MyString
+  importe: 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_010200) do
+ActiveRecord::Schema.define(version: 2019_03_14_020000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,16 @@ ActiveRecord::Schema.define(version: 2019_03_11_010200) do
     t.boolean "visa"
     t.boolean "oca"
     t.index ["nombre"], name: "index_cuentas_on_nombre"
+  end
+
+  create_table "cuota_socios", force: :cascade do |t|
+    t.bigint "socio_id"
+    t.date "fecha"
+    t.string "concepto"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["socio_id"], name: "index_cuota_socios_on_socio_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -754,6 +764,19 @@ ActiveRecord::Schema.define(version: 2019_03_11_010200) do
     t.index ["cuenta_id"], name: "index_sinregistro_cuentas_on_cuenta_id"
   end
 
+  create_table "socios", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "cedula"
+    t.string "email"
+    t.string "domicilio"
+    t.string "celular"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "apellido"
+    t.date "fecha_ingreso"
+    t.string "telefono"
+  end
+
   create_table "spams", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
@@ -885,6 +908,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_010200) do
   add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
+  add_foreign_key "cuota_socios", "socios"
   add_foreign_key "deudores", "cuentas"
   add_foreign_key "direcciones", "usuarios"
   add_foreign_key "especial_alumnos", "alumnos"

@@ -238,7 +238,8 @@ ActiveAdmin.setup do |config|
       menu.add label: "Facturación", priority: 9004
       menu.add label: "Secretaría", priority: 9005
       menu.add label: "Inscripciones", priority: 9006
-      menu.add label: "Soporte", priority: 9007
+      menu.add label: "SUE", priority: 9007
+      menu.add label: "Soporte", priority: 9008
     end
   end
   # == Download Links
