@@ -139,6 +139,30 @@ ActiveAdmin.register_page "Pendiente" do
 
   page_action :sistarbanc, method: :post do   
 
+
+
+   socio_id = 0
+   contador = 0
+   CuotaSocio.where("socio_id IS NULL").each do |cuota|
+
+     Socio.all.each do |socio|
+       contador_tmp = 0
+       cuota.concepto.split.each do |s|
+       if socio.nombre.upcase.include? s.upcase
+         contador_tmp = contador_tmp + 1
+       end
+       if contador_tmp > contador
+         socio_id = socio.id
+       end
+     end
+
+     if socio_id != 0
+       cuota.update( socio_id: socio_id )
+     end
+     
+   end
+
+
     file_name = "sistarbanc.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
