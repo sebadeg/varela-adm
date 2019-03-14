@@ -10,6 +10,7 @@ ActiveAdmin.register Socio do
     column :nombre
     column :apellido
     column :fecha_ingreso
+    column :fecha_egreso
     column :email
     column :domicilio
     column :celular
@@ -26,6 +27,7 @@ ActiveAdmin.register Socio do
       row :nombre
       row :apellido
       row :fecha_ingreso
+      row :fecha_egreso
       row :email
       row :domicilio
       row :celular
@@ -38,6 +40,7 @@ ActiveAdmin.register Socio do
       f.input :nombre
       f.input :apellido
       f.input :fecha_ingreso
+      f.input :fecha_egreso
       f.input :email
       f.input :domicilio
       f.input :celular
