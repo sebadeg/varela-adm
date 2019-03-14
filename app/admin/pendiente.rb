@@ -145,18 +145,18 @@ ActiveAdmin.register_page "Pendiente" do
     CuotaSocio.where("socio_id IS NULL").each do |cuota|
       contador = 0
 
-      # Socio.all.each do |socio|
-      #   contador_tmp = 0
-      #   cuota.concepto.split.each do |s|
+      Socio.all.each do |socio|
+        contador_tmp = 0
+        cuota.concepto.split.each do |s|
       #     if (socio.nombre.upcase.include? s.upcase) || (socio.apellido.upcase.include? s.upcase)
       #       contador_tmp = contador_tmp + 1
       #     end
-      #   end
-      #   if contador_tmp > contador
-      #     contador = contador_tmp
-      #     socio_id = socio.id
-      #   end
-      # end
+        end
+        if contador_tmp > contador
+          contador = contador_tmp
+          socio_id = socio.id
+        end
+      end
 
       if socio_id != 0
         cuota.update( socio_id: socio_id )
