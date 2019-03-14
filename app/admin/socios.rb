@@ -2,7 +2,7 @@ ActiveAdmin.register Socio do
 
   menu priority: 1, parent: "SUE" 
 
-  permit_params :id, :nombre, :apellido, :fecha_ingreso, :domicilio, :email, :celular, :telefono
+  permit_params :id, :nombre, :apellido, :fecha_ingreso, :fecha_egreso, :domicilio, :email, :celular, :telefono
 
   index do
   	#selectable_column
