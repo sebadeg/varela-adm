@@ -21,7 +21,6 @@ ActiveAdmin.register CuotaSocio do
   show do
     attributes_table do
       row "Socio" do |r| (r.socio != nil ? "#{r.socio.nombre} #{r.socio.apellido}" : "" ) end
-      row :socio_id
       row :fecha
       row :concepto
       row :importe
