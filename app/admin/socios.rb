@@ -57,6 +57,12 @@ ActiveAdmin.register Socio do
     f.actions
   end
 
+  csv do
+    column :nombre
+    column :apellido
+    column :fecha_ingreso
+  end
+
 	controller do
 
     def show
