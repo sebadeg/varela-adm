@@ -20,6 +20,11 @@ class Ability
     can :read, AdminUsuario, id: user.id 
     can :update, AdminUsuario, id: user.id      
 
+    if user.sue
+      can :manage, Socio
+      can :manage, CuotaSocio
+
+    end
 
     if user.administracion
       can :manage, Mov
