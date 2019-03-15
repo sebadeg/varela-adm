@@ -243,7 +243,7 @@ ActiveAdmin.register Actividad do
             
             id = params[:actividad][:actividad_alumno_attributes][i.to_s][:id]
             opcion = params[:actividad][:actividad_alumno_attributes][i.to_s][:opcion_secretaria]
-            if id != nil && opcion != nil
+            if id != nil && id != "" && opcion != nil && opcion != ""
               actividad_alumno = ActividadAlumno.find(id)
               actividad_alumno.elegir_opcion(opcion)
             end
