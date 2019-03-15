@@ -229,8 +229,6 @@ ActiveAdmin.register Actividad do
         end
       end while i >= 0
 
-      update!
-
       i = 0
       begin
         if params[:actividad][:actividad_alumno_attributes] == nil || params[:actividad][:actividad_alumno_attributes][i.to_s] == nil
@@ -246,6 +244,8 @@ ActiveAdmin.register Actividad do
             if id != nil && id != "" && opcion != nil && opcion != ""
               actividad_alumno = ActividadAlumno.find(id)
               actividad_alumno.elegir_opcion(opcion)
+            else
+              params[:actividad][:actividad_alumno_attributes][i.to_s][:fecha_secretaria] = ""
             end
 
             p "----------"
@@ -257,6 +257,7 @@ ActiveAdmin.register Actividad do
         end
       end while i >= 0
 
+      update!
 
     end
     
