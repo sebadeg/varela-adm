@@ -2,7 +2,12 @@ ActiveAdmin.register Socio do
 
   menu priority: 1, parent: "SUE" 
 
-  permit_params :id, :nombre, :apellido, :fecha_ingreso, :fecha_egreso, :domicilio, :email, :celular, :telefono
+  permit_params :id, :nombre, :apellido, :fecha_ingreso, :fecha_egreso, :cedula, :domicilio, :email, :celular, :telefono
+
+  scope :todos 
+  scope :activos
+  scope :suscriptores
+
 
   index do
   	#selectable_column
@@ -11,6 +16,7 @@ ActiveAdmin.register Socio do
     column :apellido
     column :fecha_ingreso
     column :fecha_egreso
+    column :cedula
     column :email
     column :domicilio
     column :celular
@@ -28,6 +34,7 @@ ActiveAdmin.register Socio do
       row :apellido
       row :fecha_ingreso
       row :fecha_egreso
+      row :cedula
       row :email
       row :domicilio
       row :celular
@@ -41,6 +48,7 @@ ActiveAdmin.register Socio do
       f.input :apellido
       f.input :fecha_ingreso
       f.input :fecha_egreso
+      f.input :cedula
       f.input :email
       f.input :domicilio
       f.input :celular
