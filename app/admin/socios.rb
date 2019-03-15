@@ -15,12 +15,12 @@ ActiveAdmin.register Socio do
     column :nombre
     column :apellido
     column :fecha_ingreso
-    column :fecha_egreso
-    column :cedula
-    column :email
-    column :domicilio
-    column :celular
-    column :telefono
+    column :fecha_egreso unless params['scope'] == 'activos' || params['scope'] == 'suscriptores'
+    column :cedula unless params['scope'] == 'activos' || params['scope'] == 'suscriptores'
+    column :email unless params['scope'] == 'activos' || params['scope'] == 'suscriptores'
+    column :domicilio unless params['scope'] == 'activos' || params['scope'] == 'suscriptores'
+    column :celular unless params['scope'] == 'activos' || params['scope'] == 'suscriptores'
+    column :telefono unless params['scope'] == 'activos' || params['scope'] == 'suscriptores'
 
     actions
   end
