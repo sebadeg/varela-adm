@@ -4,8 +4,7 @@ ActiveAdmin.register Especial do
      especial_alumno_attributes: [:id,:especial_id,:alumno_id,:_destroy,:locale],
      especial_cuenta_attributes: [:id,:especial_id,:cuenta_id,:_destroy,:locale]
 
-  menu priority: 2, label: "Movimientos especiales"
-  menu parent: 'Cuenta Corriente'
+  menu priority: 2, label: "Movimientos especiales", parent: "Cuenta Corriente"
 
   index do
     column :fecha_comienzo

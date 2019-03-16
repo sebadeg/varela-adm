@@ -4,9 +4,7 @@ ActiveAdmin.register Movimiento do
 
   config.sort_order = 'indice_asc'
 
-
-  menu priority: 1, label: 'Movimientos'
-  menu parent: 'Cuenta Corriente'
+  menu priority: 1, label: "Movimientos", parent: "Cuenta Corriente"
 
   index do
   	#selectable_column

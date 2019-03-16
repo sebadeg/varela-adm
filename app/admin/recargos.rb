@@ -2,8 +2,7 @@ ActiveAdmin.register Recargo do
 
   permit_params :cuenta_id, :fecha_comienzo, :fecha_fin, :comentario
 
-  menu priority: 3, label: 'Recargos'
-  menu parent: 'Cuenta Corriente'
+  menu priority: 3, label: "No recargo", parent: "Cuenta Corriente"
 
   index do
   	#selectable_column
