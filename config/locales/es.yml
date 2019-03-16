@@ -89,6 +89,8 @@ es:
         oca: "Débito OCA"
         visa: "Débito VISA"
         retencion: "Retención"
+      especial:
+        fecha_comienzo: "Fecha"
 
     models:
       aactividad:

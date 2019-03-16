@@ -5,7 +5,7 @@ ActiveAdmin.register Movimiento do
   config.sort_order = 'indice_asc'
 
 
-  menu label: 'Movimientos'
+  menu priority: 1, label: 'Movimientos'
   menu parent: 'Cuenta Corriente'
 
   index do

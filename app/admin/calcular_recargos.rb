@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Calcular_Recargo" do
 
-  menu priority: 3, label: "Calcular Recargo", parent: "Cuenta Corriente"
+  menu priority: 4, label: "Calcular Recargo", parent: "Cuenta Corriente"
 
   page_action :ver, method: :post do
     redirect_to admin_calcular_recargo_path

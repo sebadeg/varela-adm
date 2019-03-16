@@ -4,11 +4,12 @@ ActiveAdmin.register Especial do
      especial_alumno_attributes: [:id,:especial_id,:alumno_id,:_destroy,:locale],
      especial_cuenta_attributes: [:id,:especial_id,:cuenta_id,:_destroy,:locale]
 
-  menu priority: 30, label: "Movimientos especiales"
+  menu priority: 2, label: "Movimientos especiales"
+  menu parent: 'Cuenta Corriente'
 
   index do
     column :fecha_comienzo
-    column :fecha_fin
+    #column :fecha_fin
     column "Código" do |c| 
       if c.codigo != nil
         c.codigo.id.to_s + " - " + c.codigo.nombre 
@@ -27,24 +28,24 @@ ActiveAdmin.register Especial do
   form do |f|
     f.inputs do
       f.input :fecha_comienzo, :as => :date_picker
-      f.input :fecha_fin, as: :date_picker
+#      f.input :fecha_fin, as: :date_picker
       f.input :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
       f.input :descripcion
       f.input :importe
-      if f.object.new_record?
-        f.input :nombre, as: :file
-      elsif f.object.nombre != nil
-        f.input :nombre, as: :file, label: "("+ f.object.nombre + ")"
-      else
-        f.input :nombre, as: :file, label: "()"
-      end
+      # if f.object.new_record?
+      #   f.input :nombre, as: :file
+      # elsif f.object.nombre != nil
+      #   f.input :nombre, as: :file, label: "("+ f.object.nombre + ")"
+      # else
+      #   f.input :nombre, as: :file, label: "()"
+      # end
     end
 
-    f.inputs do
-      f.has_many :especial_cuenta, heading: "Cuentas", allow_destroy: true, new_record: true do |l|
-        l.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
-      end
-    end
+    # f.inputs do
+    #   f.has_many :especial_cuenta, heading: "Cuentas", allow_destroy: true, new_record: true do |l|
+    #     l.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
+    #   end
+    # end
 
     f.inputs do
       f.has_many :especial_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
@@ -66,11 +67,11 @@ ActiveAdmin.register Especial do
       end
       row :descripcion
       row :importe
-      row "Cuentas" do 
-        table_for Cuenta.where("id in (SELECT cuenta_id FROM especial_cuentas WHERE especial_id=#{r.id})").order(:id) do |t|
-          t.column :id
-        end
-      end
+      # row "Cuentas" do 
+      #   table_for Cuenta.where("id in (SELECT cuenta_id FROM especial_cuentas WHERE especial_id=#{r.id})").order(:id) do |t|
+      #     t.column :id
+      #   end
+      # end
       row "Alumnos" do 
         table_for Alumno.where("id in (SELECT alumno_id FROM especial_alumnos WHERE especial_id=#{r.id})").order(:nombre) do |t|
           t.column :id
@@ -82,7 +83,7 @@ ActiveAdmin.register Especial do
   end
 
   filter :fecha_comienzo
-  filter :fecha_fin
+  #filter :fecha_fin
   #filter :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.order(:nombre).map{|u| ["#{u.id} - #{u.nombre}", u.id]}
 
   # controller do
