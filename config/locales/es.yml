@@ -91,7 +91,9 @@ es:
         retencion: "Retención"
       especial:
         fecha_comienzo: "Fecha"
-
+      lote_recibo: 
+        nota_credito: "Nota de crédito"
+        
     models:
       aactividad:
         one: "Actividad"

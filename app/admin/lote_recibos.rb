@@ -32,6 +32,7 @@ ActiveAdmin.register LoteRecibo do
     column :nombre
     column :fecha
     column :concepto
+    column :nota_credito
     column :suma
     column :hoja_nro
 
@@ -49,6 +50,7 @@ ActiveAdmin.register LoteRecibo do
       row :nombre
       row :fecha
       row :concepto
+      row :nota_credito
       row :suma
       row :hoja_nro
       row "Recibos" do |r|
@@ -69,6 +71,7 @@ ActiveAdmin.register LoteRecibo do
       f.input :nombre
       f.input :fecha
       f.input :concepto
+      f.input :nota_credito
       f.input :suma
       f.input :hoja_nro
     end

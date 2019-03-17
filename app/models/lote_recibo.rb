@@ -32,6 +32,12 @@ class LoteRecibo < ApplicationRecord
         nombre_cuenta = nombre_cuenta + " - " + cuenta.nombre
       end
 
+      if !lote_recibo.nota_credito
+        nombre_recibo = "<b>RECIBO</b>"
+      else
+        nombre_recibo = "<b>NOTA DE CRÉDITO</b>"
+      end
+
       Prawn::Document.generate(text_file_path) do
       	
         # stroke_color "000000"
@@ -63,7 +69,7 @@ class LoteRecibo < ApplicationRecord
           font "Helvetica", :size => 8
 
           bounding_box([210, x+151], :width => 120, :height => 10) do
-            text "<b>RECIBO</b>", align: :center, inline_format: true
+            text nombre_recibo, align: :center, inline_format: true
           end
 
           if x == 530
