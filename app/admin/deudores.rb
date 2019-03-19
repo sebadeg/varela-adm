@@ -111,11 +111,11 @@ ActiveAdmin.register Deudor do
 
   csv do
     column :cuenta_id
-    # column "Nombre" do |c|
-    #   if c.cuenta != nil
-    #     c.cuenta.nombre 
-    #   end
-    # end
+    column "Nombre" do |c|
+      if c.cuenta != nil
+        c.cuenta.nombre 
+      end
+    end
     # column "Convenio" do |c|
     #   if c.cuenta != nil
     #     c.cuenta.convenio 
