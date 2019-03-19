@@ -1,0 +1,21 @@
+<%= form_tag(admin_ver_movimiento_ver_path, :method => "post") do %>
+	<%= select_tag :cuenta_id, options_for_select(
+		Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]},cuenta_id) %>
+    <%= submit_tag "Ver" %>
+<% end %>
+<br><br>
+
+<% if alumno_id != nil %>
+<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+	<div class="panel-group sub-grupo">
+		<div class="panel panel-default">
+			<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+
+
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
