@@ -88,7 +88,7 @@ ActiveAdmin.register Deudor do
   index do
     #selectable_column
 
-    column "Cuenta", :cuenta_id
+    column :cuenta_id
     column "Nombre" do |c|
       if c.cuenta != nil
         c.cuenta.nombre 
@@ -99,12 +99,12 @@ ActiveAdmin.register Deudor do
         c.cuenta.convenio 
       end
     end
-    column "> 360", :deuda360
-    column "> 180", :deuda180
-    column "> 90", :deuda90
-    column "> 60", :deuda60
-    column "> 30", :deuda30
-    column "> 0", :deuda0
+    column :deuda360
+    column :deuda180
+    column :deuda90
+    column :deuda60
+    column :deuda30
+    column :deuda0
   end
 
   filter :cuenta_id

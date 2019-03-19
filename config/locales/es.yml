@@ -93,6 +93,13 @@ es:
         fecha_comienzo: "Fecha"
       lote_recibo: 
         nota_credito: "Nota de crédito"
+      deudor:
+        deuda360: "> 360"
+        deuda180: "> 180"
+        deuda90: "> 90"
+        deuda60: "> 60"
+        deuda30: "> 30"
+        deuda0: "> 0"
         
     models:
       aactividad:
