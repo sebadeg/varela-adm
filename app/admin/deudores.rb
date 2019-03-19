@@ -110,7 +110,7 @@ ActiveAdmin.register Deudor do
   filter :cuenta_id
 
   csv do
-    column :cuenta_id
+    column "Cuenta", :cuenta_id
     column "Nombre" do |c|
       if c.cuenta != nil
         c.cuenta.nombre 
