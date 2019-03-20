@@ -23,6 +23,31 @@ ActiveAdmin.register Movimiento do
 
   filter :cuenta_id
 
+  show do
+    attributes_table do
+      row :fecha
+      row :cuenta_id
+      row :alumno
+      row :descripcion
+      row :debe
+      row :haber
+    end
+  end
+
+  form do |f| 
+    f.inputs "Cuentas" do
+      f.input :fecha
+      f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
+      f.input :alumno, :label => "Alumno", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
+      f.input :tipo_movimiento, :label => "Tipo", :as => :select, :collection => TipoMovimiento.all.order(:nombre).map{|u| [u.nombre, u.id]}
+      f.input :descripcion
+      f.input :debe
+      f.input :haber
+    end
+    f.actions
+  end
+
+
   controller do    
 
     def index
