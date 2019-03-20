@@ -2,6 +2,8 @@ ActiveAdmin.register Movimiento do
 
   config.sort_order = 'indice_asc'
 
+  permit_params :fecha, :cuenta_id, :alumno, :descripcion, :tipo_movimiento_id, :debe, :haber
+
   menu priority: 1, label: "Movimientos", parent: "Cuenta Corriente"
 
   index do
@@ -16,8 +18,8 @@ ActiveAdmin.register Movimiento do
     column "Saldo", :saldo, sortable: false
 
     actions defaults: false do |u|
-      item "Editar", edit_admin_lista_path(u), class: "edit_link member_link", title: "Editar" if u.fecha > DateTime.now
-      item "Eliminar", admin_lista_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete if u.fecha > DateTime.now
+      item "Editar", edit_admin_movimiento_path(u), class: "edit_link member_link", title: "Editar" if u.fecha > DateTime.now
+      item "Eliminar", admin_movimiento_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete if u.fecha > DateTime.now
     end
   end
 
@@ -39,7 +41,7 @@ ActiveAdmin.register Movimiento do
       f.input :fecha
       f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
       f.input :alumno, :label => "Alumno", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| [u.id.to_s + " - " + u.nombre + " " + u.apellido, u.id]}
-      f.input :tipo_movimiento, :label => "Tipo", :as => :select, :collection => TipoMovimiento.all.order(:nombre).map{|u| [u.nombre, u.id]}
+      f.input :tipo_movimiento_id, :label => "Tipo", :as => :select, :collection => TipoMovimiento.all.order(:nombre).map{|u| [u.nombre, u.id]}
       f.input :descripcion
       f.input :debe
       f.input :haber
