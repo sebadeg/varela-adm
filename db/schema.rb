@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_17_182915) do
+ActiveRecord::Schema.define(version: 2019_03_20_010000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -580,6 +580,7 @@ ActiveRecord::Schema.define(version: 2019_03_17_182915) do
     t.bigint "actividad_alumno_id"
     t.integer "actividad_alumno_opcion"
     t.bigint "especial_id"
+    t.bigint "tipo_movimiento_id"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
@@ -589,6 +590,7 @@ ActiveRecord::Schema.define(version: 2019_03_17_182915) do
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
     t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
+    t.index ["tipo_movimiento_id"], name: "index_movimientos_on_tipo_movimiento_id"
   end
 
   create_table "movs", force: :cascade do |t|
@@ -840,6 +842,12 @@ ActiveRecord::Schema.define(version: 2019_03_17_182915) do
     t.index ["cuenta_id"], name: "index_tipo_cuentas_on_cuenta_id"
   end
 
+  create_table "tipo_movimientos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tipo_pagos", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -943,6 +951,7 @@ ActiveRecord::Schema.define(version: 2019_03_17_182915) do
   add_foreign_key "movimientos", "especiales"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"
+  add_foreign_key "movimientos", "tipo_movimientos"
   add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"

@@ -1,7 +1,5 @@
 ActiveAdmin.register Movimiento do
 
-  actions :index
-
   config.sort_order = 'indice_asc'
 
   menu priority: 1, label: "Movimientos", parent: "Cuenta Corriente"
@@ -16,6 +14,11 @@ ActiveAdmin.register Movimiento do
     column "Debe", :debe, sortable: false
     column "Haber", :haber, sortable: false
     column "Saldo", :saldo, sortable: false
+
+    actions defaults: false do |u|
+      item "Editar", edit_admin_lista_path(u), class: "edit_link member_link", title: "Editar" if u.fecha > DateTime.now
+      item "Eliminar", admin_lista_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete if u.fecha > DateTime.now
+    end
   end
 
   filter :cuenta_id
