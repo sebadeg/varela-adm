@@ -90,7 +90,9 @@ es:
         visa: "Débito VISA"
         retencion: "Retención"
       especial:
-        fecha_comienzo: "Fecha"
+        fecha_comienzo: "Fecha Comienzo"
+        fecha_fin: "Fecha Fin"
+
       lote_recibo: 
         nota_credito: "Nota de crédito"
       deudor:

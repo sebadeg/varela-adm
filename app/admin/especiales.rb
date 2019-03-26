@@ -8,7 +8,7 @@ ActiveAdmin.register Especial do
 
   index do
     column :fecha_comienzo
-    #column :fecha_fin
+    column :fecha_fin
     column "Código" do |c| 
       if c.codigo != nil
         c.codigo.id.to_s + " - " + c.codigo.nombre 
@@ -19,7 +19,7 @@ ActiveAdmin.register Especial do
     column :nombre
 
     column "Alumnos" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count() end
-    column "Total" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count()*c.importe end
+    column "Total" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count()*(c.importe == nil? 0 : c.importe) end
 
     actions
   end
@@ -27,7 +27,7 @@ ActiveAdmin.register Especial do
   form do |f|
     f.inputs do
       f.input :fecha_comienzo, :as => :date_picker
-#      f.input :fecha_fin, as: :date_picker
+      f.input :fecha_fin, as: :date_picker
       f.input :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.map{|c| ["#{c.id} - #{c.nombre}", c.id]}
       f.input :descripcion
       f.input :importe
@@ -82,7 +82,7 @@ ActiveAdmin.register Especial do
   end
 
   filter :fecha_comienzo
-  #filter :fecha_fin
+  filter :fecha_fin
   #filter :codigo_id, :label => 'Código', :as => :select, :collection => Codigo.all.order(:nombre).map{|u| ["#{u.id} - #{u.nombre}", u.id]}
 
   # controller do
