@@ -19,7 +19,7 @@ ActiveAdmin.register Especial do
     column :nombre
 
     column "Alumnos" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count() end
-    column "Total" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count()*(c.importe == nil? 0 : c.importe) end
+    #column "Total" do |c| EspecialAlumno.where( "especial_id=#{c.id}" ).count()*c.importe  end 
 
     actions
   end
