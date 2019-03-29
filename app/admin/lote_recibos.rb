@@ -2,7 +2,7 @@ ActiveAdmin.register LoteRecibo do
 
   menu label: 'Recibos', priority: 23 
 
-  permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,
+  permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,:nota_credito
     recibo_attributes: [:id,:lote_recibo_id,:importe,:cheque,:banco,:fecha_vto,:_destroy,:locale]
 
   action_item :imprimir, only: :show do
