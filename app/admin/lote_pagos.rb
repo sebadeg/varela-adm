@@ -29,7 +29,13 @@ ActiveAdmin.register_page "Lote_pago" do
       "INSERT INTO movimientos (recibo_id,cuenta_id,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
       (SELECT recibos.id,lote_recibos.cuenta_id,fecha,'PAGO','',0,recibos.importe,1005,true,now(),now()
       FROM lote_recibos INNER JOIN recibos ON lote_recibos.id=recibos.lote_recibo_id
-      WHERE NOT recibos.id IN (SELECT recibo_id FROM movimientos WHERE NOT recibo_id IS NULL))" )
+      WHERE NOT lote_recibos.nota_credito AND NOT recibos.id IN (SELECT recibo_id FROM movimientos WHERE NOT recibo_id IS NULL))" )
+
+    ActiveRecord::Base.connection.execute( 
+      "INSERT INTO movimientos (recibo_id,cuenta_id,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
+      (SELECT recibos.id,lote_recibos.cuenta_id,fecha,lote_recibos.concepto,'',0,-recibos.importe,1005,true,now(),now()
+      FROM lote_recibos INNER JOIN recibos ON lote_recibos.id=recibos.lote_recibo_id
+      WHERE lote_recibos.nota_credito AND NOT recibos.id IN (SELECT recibo_id FROM movimientos WHERE NOT recibo_id IS NULL))" )
 
     ActiveRecord::Base.connection.execute( 
       "INSERT INTO movimientos (especial_id,cuenta_id,alumno,fecha,descripcion,extra,debe,haber,tipo,pendiente,created_at,updated_at)
