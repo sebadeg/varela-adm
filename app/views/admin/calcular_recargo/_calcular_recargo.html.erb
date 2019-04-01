@@ -7,11 +7,11 @@
 <% fecha_factura = DateTime.new(2019,04,01) %>
 <% saldos = Hash.new %>
 <% corrientes = Hash.new %>
-<% Movimiento.where(["fecha < ?",fecha_factura_anterior]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo| %>
+<% Movimiento.where(["fecha < ? AND NOT cuenta_id IN (SELECT cuenta_id FROM recargos WHERE fecha_comienzo<=? AND (fecha_fin IS NULL OR fecha_fin>?))",fecha_factura_anterior,fecha_factura,fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo| %>
   <% saldos[saldo.cuenta_id] = saldo.saldo %>
 <% end %>
 
-<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber = 0",fecha_factura_anterior]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
+<% Movimiento.where(["fecha = ? AND debe <> 0 AND haber = 0 AND NOT cuenta_id IN (SELECT cuenta_id FROM recargos WHERE fecha_comienzo<=? AND (fecha_fin IS NULL OR fecha_fin>?))",fecha_factura_anterior,fecha_factura,fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente| %>
   <% if !saldos.has_key?(corriente.cuenta_id) %>
     <% saldos[corriente.cuenta_id] = 0 %>
   <% end %>
@@ -30,6 +30,10 @@
           <% i = 0 %>
           <tbody>
             <% saldos.keys.sort.each do |cuenta_id| %>
+
+
+                fecha_comienzo<='2019-04-01' AND (fecha_fin IS NULL OR fecha_fin>'2019-04-01')
+
               <% if !corrientes.has_key?(cuenta_id) %>
                 <% corrientes[cuenta_id] = 0 %>
               <% end %>
