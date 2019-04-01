@@ -168,9 +168,9 @@ ActiveAdmin.register_page "Pendiente" do
     file_name = "sistarbanc.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
-      vencimiento = "10/03/2019"
-      inicio = "01/03/2019"
-      mes = 3
+      vencimiento = "10/04/2019"
+      inicio = "01/04/2019"
+      mes = 4
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
       Factura.where("fecha='2019-03-01'").each do |x|
@@ -193,9 +193,9 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "redpagos.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "31/03/2019"
-       inicio = "01/03/2019"
-       mes = 3
+       vencimiento = "30/04/2019"
+       inicio = "01/04/2019"
+       mes = 4
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
@@ -221,9 +221,9 @@ ActiveAdmin.register_page "Pendiente" do
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
 
-       vencimiento = "31/03/2019"
-       inicio = "01/03/2019"
-       titulo = "FACTURACION MAR/2019"      
+       vencimiento = "30/04/2019"
+       inicio = "01/04/2019"
+       titulo = "FACTURACION ABR/2019"      
 
        cantidad = 0
        suma = 0
@@ -258,11 +258,11 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "brou.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "11/03/2019" #no puede ser sabado
-       inicio = "01/03/2019"        
-       titulo = "FACTURACION MAR/2019"
-       dia = 11           #no puede ser sabado
-       mes = 3
+       vencimiento = "10/04/2019" #no puede ser sabado
+       inicio = "01/04/2019"        
+       titulo = "FACTURACION ABR/2019"
+       dia = 10           #no puede ser sabado
+       mes = 4
        anio = 2019
        cantidad = 0
        suma = 0
