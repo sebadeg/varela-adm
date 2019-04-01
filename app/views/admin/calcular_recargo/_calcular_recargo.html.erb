@@ -25,7 +25,113 @@
       <form>
         <table class="index_table index">
           <thead>
-            <tr><th>Cuenta</th><th>Saldo</th><th>Corriente</th></tr>
+            <tr><th>Cuenta</th><th>Recargo</th></tr>
+          </thead>
+          <% i = 0 %>
+          <tbody>
+            <% saldos.keys.sort.each do |cuenta_id| %>
+              <% if !corrientes.has_key?(cuenta_id) %>
+                <% corrientes[cuenta_id] = 0 %>
+              <% end %>
+
+              
+                
+
+
+<% tea = 1.38 ** (1.0/365.0) %>
+<% total_recargo = 0 %>
+
+<% saldo = saldos[cuenta_id] %>
+<% corriente = corrientes[cuenta_id] %>
+<% if saldo < 0 %>
+  <% corriente = corriente + saldo %>
+<% end %>
+
+
+                  <% Movimiento.where(["cuenta_id = ? AND fecha >= ? AND fecha < ? AND haber>0",cuenta_id,fecha_factura_anterior,fecha_factura]).order(:fecha).select(:fecha,:haber).each do |pago| %>
+
+                    <% fecha = pago.fecha %>
+                    <% importe = pago.haber %>
+                    <% recargo = 0 %>
+
+                    <% if saldo > 0 %>
+                      <% if importe > saldo %>
+                        <% importe = importe - saldo %>
+                        <% if (pago.fecha - fecha_factura_anterior).to_i > 0 %>
+                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i)-1)*saldo %>
+                        <% end %>
+                        <% saldo = 0 %>
+                      <% else %>
+                        <% saldo = saldo - importe %>
+                        <% if (pago.fecha - fecha_factura_anterior).to_i > 0 %>
+                          <% recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i)-1)*importe %>
+                        <% end %>
+                        <% importe = 0 %>
+                      <% end %>
+                    <% end %>
+
+                    <% if corriente > 0 %>
+                      <% if importe > corriente %>
+                        <% importe = importe - corriente %>
+                        <% if (pago.fecha - fecha_vencimiento_factura_anterior).to_i > 0 %>
+                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i)-1)*corriente %>
+                        <% end %>
+                        <% corriente = 0 %>
+                      <% else %>
+                        <% corriente = corriente - importe %>
+                        <% if (pago.fecha - fecha_vencimiento_factura_anterior).to_i > 0 %>
+                          <% recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i)-1)*importe %>
+                        <% end %>
+                        <% importe = 0 %>
+                      <% end %>
+                    <% end %>
+
+                    <% total_recargo = total_recargo + recargo %>
+
+                  <% end %>
+
+                    <% recargo = 0 %>
+                    <% if saldo > 0 %>
+                      <% if (fecha_factura - fecha_factura_anterior).to_i > 0 %>
+                        <% recargo = (tea**((fecha_factura - fecha_factura_anterior).to_i)-1)*saldo %>
+                      <% end %>
+                      <% saldo = 0 %>
+                    <% end %>
+
+                    <% if corriente > 0 %>
+                      <% if (fecha_factura - fecha_vencimiento_factura_anterior).to_i > 0 %>
+                        <% recargo = recargo + (tea**((fecha_factura - fecha_vencimiento_factura_anterior).to_i)-1)*corriente %>
+                      <% end %>
+                      <% corriente = 0 %>
+                    <% end %>
+                    
+                    <% total_recargo = total_recargo + recargo %>
+            <% end %>
+            <% if total_recargo > 0 %>
+              <% if i % 2 == 0 %>
+                <tr class="odd">
+              <% else %>
+                <tr class="even">
+              <% end %>
+              <% i = i+1 %>
+              <td><%= cuenta_id %></td><td><%= total_recargo.round %></td></tr>
+            <% end %>
+
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6">
+      <form>
+        <table class="index_table index">
+          <thead>
+            <tr><th>Cuenta</th><th>Saldo</th><th>Corriente</th><th>Recargo</th></tr>
           </thead>
           <% i = 0 %>
           <tbody>
