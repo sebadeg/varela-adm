@@ -141,39 +141,39 @@ ActiveAdmin.register_page "Pendiente" do
 
 
 
-    socio_id = 0
-    CuotaSocio.where("socio_id IS NULL").each do |cuota|
-      contador = 0
+    # socio_id = 0
+    # CuotaSocio.where("socio_id IS NULL").each do |cuota|
+    #   contador = 0
 
-      Socio.all.each do |socio|
-        contador_tmp = 0
-        cuota.concepto.split(' ').each do |s|
-          if socio.nombre.upcase.include?(s.upcase) || socio.apellido.upcase.include?(s.upcase)
-            contador_tmp = contador_tmp + 1
-          end
-        end
-        if contador_tmp > contador
-          contador = contador_tmp
-          socio_id = socio.id
-        end
-      end
+    #   Socio.all.each do |socio|
+    #     contador_tmp = 0
+    #     cuota.concepto.split(' ').each do |s|
+    #       if socio.nombre.upcase.include?(s.upcase) || socio.apellido.upcase.include?(s.upcase)
+    #         contador_tmp = contador_tmp + 1
+    #       end
+    #     end
+    #     if contador_tmp > contador
+    #       contador = contador_tmp
+    #       socio_id = socio.id
+    #     end
+    #   end
 
-      if socio_id != 0
-        cuota.update( socio_id: socio_id )
-      end
+    #   if socio_id != 0
+    #     cuota.update( socio_id: socio_id )
+    #   end
      
-    end
+    # end
 
 
     file_name = "sistarbanc.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
-      vencimiento = "10/04/2019"
-      inicio = "01/04/2019"
-      mes = 4
+      vencimiento = "10/05/2019"
+      inicio = "01/05/2019"
+      mes = 5
       anio = 2019
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.where("fecha='2019-04-01'").each do |x|
+      Factura.where("fecha='2019-05-01'").each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
@@ -193,13 +193,13 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "redpagos.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "30/04/2019"
-       inicio = "01/04/2019"
-       mes = 4
+       vencimiento = "31/05/2019"
+       inicio = "01/05/2019"
+       mes = 5
        anio = 2019
 
        f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.where("fecha='2019-04-01'").each do |x|
+      Factura.where("fecha='2019-05-01'").each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
@@ -221,15 +221,15 @@ ActiveAdmin.register_page "Pendiente" do
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
 
-       vencimiento = "30/04/2019"
-       inicio = "01/04/2019"
-       titulo = "FACTURACION ABR/2019"      
+       vencimiento = "31/05/2019"
+       inicio = "01/05/2019"
+       titulo = "FACTURACION MAY/2019"      
 
        cantidad = 0
        suma = 0
 
        f.write("13|16|1\r\n")
-      Factura.where("fecha='2019-04-01'").each do |x|
+      Factura.where("fecha='2019-05-01'").each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
@@ -258,15 +258,15 @@ ActiveAdmin.register_page "Pendiente" do
      file_name = "brou.txt"
      file = Tempfile.new(file_name)    
      File.open(file, "w+") do |f|
-       vencimiento = "10/04/2019" #no puede ser sabado
-       inicio = "01/04/2019"        
-       titulo = "FACTURACION ABR/2019"
+       vencimiento = "10/05/2019" #no puede ser sabado
+       inicio = "01/05/2019"        
+       titulo = "FACTURACION MAY/2019"
        dia = 10           #no puede ser sabado
-       mes = 4
+       mes = 5
        anio = 2019
        cantidad = 0
        suma = 0
-       Factura.where("cuenta_id IN (SELECT id FROM cuentas WHERE brou) AND fecha='2019-04-01'").each do |x|   #11869,11601,11624,11795,12037,12776,13857
+       Factura.where("cuenta_id IN (SELECT id FROM cuentas WHERE brou) AND fecha='2019-05-01'").each do |x|   #11869,11601,11624,11795,12037,12776,13857
          cuenta = x.cuenta_id
          nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
          importe = x.total
