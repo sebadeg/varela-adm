@@ -50,7 +50,7 @@ ActiveAdmin.register Movimiento do
   end
 
 
-  controller do    
+  controller do
 
     def index
       index! do |format|
@@ -67,6 +67,7 @@ ActiveAdmin.register Movimiento do
         end
 
         format.html
+        format.csv
       end
     end
 
