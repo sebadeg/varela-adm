@@ -53,7 +53,7 @@ ActiveAdmin.register Movimiento do
   controller do    
 
     def index
-      #index! do |format|
+      index! do |format|
 
 
         if params[:q] != nil && params[:q][:cuenta_id_equals] != nil
@@ -66,8 +66,8 @@ ActiveAdmin.register Movimiento do
           end
         end
 
-        #format.html
-      #end
+        format.html
+      end
     end
 
     #   if params[:cuenta_id_equals] != nil
