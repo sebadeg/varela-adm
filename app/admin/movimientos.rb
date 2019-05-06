@@ -75,4 +75,13 @@ ActiveAdmin.register Movimiento do
     #   end
   end
 
+  csv do
+    column :fecha
+    column :cuenta_id
+    column :alumno
+    column :descripcion
+    column :debe
+    column :haber
+  end
+
 end
