@@ -66,7 +66,7 @@ ActiveAdmin.register Movimiento do
           end
         end
 
-        format.html
+        #format.html
       end
     end
 
