@@ -6,6 +6,28 @@ ActiveAdmin.register Movimiento do
 
   menu priority: 1, label: "Movimientos", parent: "Cuenta Corriente"
 
+
+  action_item :exportar, only: :index do
+    link_to "Exportar", exportar_admin_movimientos_path
+  end
+
+  collection_action :exportar do
+
+    file_name = "movimientos.csv"
+    file = Tempfile.new(file_name)    
+    File.open(file, "w+") do |f|
+      Movimiento.all.order(:fecha,:cuenta_id).each do |mov|
+         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe};#{mov.haber};\r\n")
+      end
+    end
+    send_file(
+      file.path,
+      filename: file_name,
+      type: "application/csv"
+    )
+    
+  end
+
   index do
   	#selectable_column
 
@@ -67,22 +89,12 @@ ActiveAdmin.register Movimiento do
         end
 
         format.html
-        format.csv
       end
     end
 
     #   if params[:cuenta_id_equals] != nil
     #     cuenta = params[:cuenta_id_equals].to_i
     #   end
-  end
-
-  csv do
-    column :fecha
-    column :cuenta_id
-    column :alumno
-    column :descripcion
-    column :debe
-    column :haber
   end
 
 end
