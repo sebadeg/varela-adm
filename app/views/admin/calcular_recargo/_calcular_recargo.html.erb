@@ -2,9 +2,9 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<% fecha_factura_anterior = DateTime.new(2019,04,01) %>
-<% fecha_vencimiento_factura_anterior = DateTime.new(2019,04,10) %>
-<% fecha_factura = DateTime.new(2019,05,01) %>
+<% fecha_factura_anterior = DateTime.new(2019,05,01) %>
+<% fecha_vencimiento_factura_anterior = DateTime.new(2019,05,10) %>
+<% fecha_factura = DateTime.new(2019,06,01) %>
 <% saldos = Hash.new %>
 <% corrientes = Hash.new %>
 <% Movimiento.where(["fecha < ? AND NOT cuenta_id IN (SELECT cuenta_id FROM recargos WHERE fecha_comienzo<=? AND (fecha_fin IS NULL OR fecha_fin>?))",fecha_factura_anterior,fecha_factura,fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo| %>
