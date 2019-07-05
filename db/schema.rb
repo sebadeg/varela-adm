@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_010000) do
+ActiveRecord::Schema.define(version: 2019_07_04_142719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 2019_03_20_010000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "apellido"
+    t.bigint "cedula_id"
+    t.string "mutualista"
+    t.string "emergencia"
+    t.string "procede"
+    t.bigint "cedula_padre_id"
+    t.bigint "cedula_madre_id"
+    t.boolean "ingreso", default: false
+    t.index ["cedula_id"], name: "index_alumnos_on_cedula_id"
+    t.index ["cedula_madre_id"], name: "index_alumnos_on_cedula_madre_id"
+    t.index ["cedula_padre_id"], name: "index_alumnos_on_cedula_padre_id"
   end
 
   create_table "archivos", id: :serial, force: :cascade do |t|
@@ -677,6 +687,21 @@ ActiveRecord::Schema.define(version: 2019_03_20_010000) do
     t.index ["alumno_id"], name: "index_pases_on_alumno_id"
   end
 
+  create_table "personas", force: :cascade do |t|
+    t.string "nombre"
+    t.string "apellido"
+    t.string "lugar_nacimiento"
+    t.date "fecha_nacimiento"
+    t.string "email"
+    t.string "domicilio"
+    t.string "celular"
+    t.string "profesion"
+    t.string "trabajo"
+    t.string "telefono_trabajo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "plactas", force: :cascade do |t|
     t.integer "plagru"
     t.integer "placap"
@@ -913,6 +938,9 @@ ActiveRecord::Schema.define(version: 2019_03_20_010000) do
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "actividad_opciones", "opcion_conceptos"
   add_foreign_key "actividades", "sectores"
+  add_foreign_key "alumnos", "personas", column: "cedula_id"
+  add_foreign_key "alumnos", "personas", column: "cedula_madre_id"
+  add_foreign_key "alumnos", "personas", column: "cedula_padre_id"
   add_foreign_key "contrato_cuotas", "contratos"
   add_foreign_key "contratos", "alumnos"
   add_foreign_key "contratos", "conceptos"
