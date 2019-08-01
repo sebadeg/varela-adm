@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_142719) do
+ActiveRecord::Schema.define(version: 2019_08_01_130125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -591,6 +591,8 @@ ActiveRecord::Schema.define(version: 2019_07_04_142719) do
     t.integer "actividad_alumno_opcion"
     t.bigint "especial_id"
     t.bigint "tipo_movimiento_id"
+    t.integer "rubro_debe"
+    t.integer "rubro_haber"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
