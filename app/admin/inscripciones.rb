@@ -1,7 +1,7 @@
 ActiveAdmin.register Inscripcion do
   menu priority: 4001, label: 'Inscripción'
 
-  permit_params :fecha, :recibida, :reinscripcion
+  permit_params :fecha, :recibida, :reinscripcion, :anio, 
     :nombre,:apellido,:cedula,:lugar_nacimiento,:fecha_nacimiento,:domicilio,:celular,:mutualista,:emergencia,:procede,
     :proximo_grado_id,:convenio_id,:afinidad,:formulario,:matricula,:hermanos,:cuotas,
     :nombre_padre,:cedula_padre,:lugar_nacimiento_padre,:fecha_nacimiento_padre,:email_padre,:domicilio_padre,:celular_padre,:profesion_padre,:trabajo_padre,:telefono_trabajo_padre,:titular_padre,
@@ -34,12 +34,14 @@ ActiveAdmin.register Inscripcion do
     column :nombre
     column :apellido
     column :cedula
+    column :anio
     actions
   end
 
   filter :nombre
   filter :apellido
   filter :cedula
+  filter :anio
 
 
   show do
@@ -55,6 +57,7 @@ ActiveAdmin.register Inscripcion do
 
     attributes_table title:"Inscripcion" do
       row "Fecha" do |r| I18n.l(r.created_at, format: '%-d de %B de %Y') end
+      row :anio
       row :recibida
     end
 
@@ -132,14 +135,14 @@ ActiveAdmin.register Inscripcion do
       f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
       f.input :reinscripcion, input_html: { value: :false }, as: :hidden
       f.input :dia, input_html: { value: 10 }, as: :hidden
-      f.input :mes, input_html: { value: 1 }, as: :hidden
-      f.input :anio, input_html: { value: 2019 }, as: :hidden
+      f.input :mes, input_html: { value: 1 }, as: :hidden      
     end
 
     f.inputs "Alumno" do
       f.input :nombre, label: "Nombre"
       f.input :apellido, label: "Apellido"
       f.input :cedula, label: "Cédula"
+      f.input :anio
       f.input :lugar_nacimiento, label: 'Lugar de nacimiento'
       f.input :fecha_nacimiento, label: 'Fecha de nacimiento'
       f.input :domicilio, label: 'Domicilio'

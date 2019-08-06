@@ -8,16 +8,19 @@ ActiveAdmin.register ProximoGrado do
     column :nombre
     column :precio
     column :grado
+    column :anio
     actions
   end
 
   filter :nombre
+  filter :anio
 
   show do
     attributes_table do
       row :nombre
       row :precio
       row :grado
+      row :anio
     end
   end
 
@@ -26,6 +29,7 @@ ActiveAdmin.register ProximoGrado do
       f.input :nombre
       f.input :precio
       f.input :grado
+      f.input :anio
     end
     f.actions
   end
