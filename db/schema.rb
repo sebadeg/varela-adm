@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_130125) do
+ActiveRecord::Schema.define(version: 2019_08_06_122527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_130125) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "anio_pases"
+    t.integer "anio_inscripciones"
   end
 
   create_table "contrato_cuotas", id: :serial, force: :cascade do |t|
@@ -497,6 +498,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_130125) do
     t.string "especial"
     t.integer "cuenta_id"
     t.integer "alumno_id"
+    t.boolean "reinscripcion"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
@@ -735,6 +737,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_130125) do
     t.string "codigo"
     t.integer "grado_id"
     t.bigint "sector_id"
+    t.integer "anio"
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
