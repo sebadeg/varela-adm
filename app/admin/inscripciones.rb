@@ -1,7 +1,7 @@
 ActiveAdmin.register Inscripcion do
   menu priority: 4001, label: 'Inscripción'
 
-  permit_params :fecha, :recibida,
+  permit_params :fecha, :recibida, :reinscripcion
     :nombre,:apellido,:cedula,:lugar_nacimiento,:fecha_nacimiento,:domicilio,:celular,:mutualista,:emergencia,:procede,
     :proximo_grado_id,:convenio_id,:afinidad,:formulario,:matricula,:hermanos,:cuotas,
     :nombre_padre,:cedula_padre,:lugar_nacimiento_padre,:fecha_nacimiento_padre,:email_padre,:domicilio_padre,:celular_padre,:profesion_padre,:trabajo_padre,:telefono_trabajo_padre,:titular_padre,
@@ -130,6 +130,7 @@ ActiveAdmin.register Inscripcion do
   form do |f|    
     if f.object.new_record?
       f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
+      f.input :reinscripcion, input_html: { value: :false }, as: :hidden
       f.input :dia, input_html: { value: 10 }, as: :hidden
       f.input :mes, input_html: { value: 1 }, as: :hidden
       f.input :anio, input_html: { value: 2019 }, as: :hidden
