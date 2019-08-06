@@ -77,8 +77,9 @@ class Ability
         true
       end
 
-      can :manage, Inscripcion, Inscripcion.where( "NOT reinscripcion AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)")
-      can :manage, ProximoGrado, ProximoGrado.where( "anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)")
+      can :manage, Personas
+      can :manage, Inscripcion, Inscripcion.where( "NOT reinscripcion" )
+      can :manage, ProximoGrado
 
       can :manage, Seguimiento
       can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
