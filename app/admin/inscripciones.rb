@@ -130,6 +130,7 @@ ActiveAdmin.register Inscripcion do
     end
   end
 
+  form partial: 'form'
   form do |f|    
     if f.object.new_record?
       f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden

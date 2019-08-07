@@ -1,32 +1,15 @@
 ActiveAdmin.register Alumno do
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+
   menu label: 'Alumnos', priority: 22 
 
-  permit_params :id, :nombre, :apellido
-
-  # permit_params do
-  #   params = [:direccion]
-  #   params.push [:nombre,:cedula] if current_usuario.admin?
-  #   params
-  # end
-
+  permit_params :id, :nombre, :apellido, :cedula, :lugar_nacimiento, :fecha_nacimiento, :domicilio, :celular, :anio_ingreso
 
   index do
   	#selectable_column
     column :id
     column :nombre
     column :apellido
+    column :cedula
 
     actions
   end
@@ -40,6 +23,12 @@ ActiveAdmin.register Alumno do
       row :id
       row :nombre
       row :apellido
+      row :cedula
+      row :lugar_nacimiento
+      row :fecha_nacimiento
+      row :domicilio
+      row :celular
+      row :anio_ingreso
     end
   end
 
@@ -48,10 +37,13 @@ ActiveAdmin.register Alumno do
       f.input :id
       f.input :nombre
       f.input :apellido
-      # f.has_many :cuenta_alumno, heading: "Cuentas" do |ca|
-      #   ca.input :cuenta_id, :label => 'Cuenta', :as => :select, :collection => Cuenta.all.map{|u| ["#{u.numero}", u.id]}
-      # 	ca.input :numero
-      # end
+      f.input :cedula
+      f.input :lugar_nacimiento
+      f.input :fecha_nacimiento
+      f.input :domicilio
+      f.input :celular
+      f.input :anio_ingreso
+
     end
     f.actions
   end

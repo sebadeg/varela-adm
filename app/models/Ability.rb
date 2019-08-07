@@ -77,7 +77,8 @@ class Ability
         true
       end
 
-      can :manage, Personas
+      can :manage, Alumno
+      can :manage, Persona
       can :manage, Inscripcion, Inscripcion.where( "NOT reinscripcion" )
       can :manage, ProximoGrado
 

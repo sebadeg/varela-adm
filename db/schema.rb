@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_122527) do
+ActiveRecord::Schema.define(version: 2019_08_07_123639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,14 +126,17 @@ ActiveRecord::Schema.define(version: 2019_08_06_122527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "apellido"
-    t.bigint "cedula_id"
     t.string "mutualista"
     t.string "emergencia"
     t.string "procede"
     t.bigint "cedula_padre_id"
     t.bigint "cedula_madre_id"
-    t.boolean "ingreso", default: false
-    t.index ["cedula_id"], name: "index_alumnos_on_cedula_id"
+    t.integer "cedula"
+    t.string "lugar_nacimiento"
+    t.date "fecha_nacimiento"
+    t.string "domicilio"
+    t.string "celular"
+    t.integer "anio_ingreso"
     t.index ["cedula_madre_id"], name: "index_alumnos_on_cedula_madre_id"
     t.index ["cedula_padre_id"], name: "index_alumnos_on_cedula_padre_id"
   end
@@ -943,7 +946,6 @@ ActiveRecord::Schema.define(version: 2019_08_06_122527) do
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "actividad_opciones", "opcion_conceptos"
   add_foreign_key "actividades", "sectores"
-  add_foreign_key "alumnos", "personas", column: "cedula_id"
   add_foreign_key "alumnos", "personas", column: "cedula_madre_id"
   add_foreign_key "alumnos", "personas", column: "cedula_padre_id"
   add_foreign_key "contrato_cuotas", "contratos"
