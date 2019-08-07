@@ -1,0 +1,22 @@
+<%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
+
+  <%= a.semantic_errors *a.object.errors.keys %>
+
+  <%= if f.object.new_record? %>
+      <%= a.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden %>
+      <%= a.input :reinscripcion, input_html: { value: :false }, as: :hidden %>
+  <% end %>
+
+  <%= a.inputs "Nivel" do %>
+    <%= a.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]} %>
+    <%= a.input :convenio_id, :label => 'Convenio', :as => :select, :collection => Convenio.all.order(:nombre).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]} %>
+    <%= a.input :formulario, :label => 'Formulario', :as => :select, :collection => Convenio.where("formulario").order(:valor).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]} %>
+    <%= a.input :afinidad %>
+    <%= a.input :matricula, :label => 'Matrícula', :as => :select, :collection => [["Contado",5],["Exonerada",6]] %>
+    <%= a.input :hermanos, :label => 'Hermanos', :as => :select, :collection => [["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]] %>
+    <%= a.input :cuotas %>
+  <% end %>
+
+  <%= a.actions %>
+<% end %>
+
