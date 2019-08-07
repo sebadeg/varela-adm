@@ -2,7 +2,7 @@
 
   <%= a.semantic_errors *a.object.errors.keys %>
 
-  <%= if a.object.new_record? %>
+  <% if a.object.new_record? %>
       <%= a.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden %>
       <%= a.input :reinscripcion, input_html: { value: :false }, as: :hidden %>
   <% end %>
