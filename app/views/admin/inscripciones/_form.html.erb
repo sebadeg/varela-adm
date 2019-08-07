@@ -7,7 +7,7 @@
     <%= a.input :reinscripcion, input_html: { value: :false }, as: :hidden %>
   <% end %>
 
-  <%= a.semantic_fields_for :inscripcion_alumno, Alumno.new do |b| %>
+  <%= a.semantic_fields_for :inscripcion_alumno, builder: ActiveAdmin::FormBuilder, Alumno.new do |b| %>
     <%= b.semantic_errors *b.object.errors.keys %>
     <%= b.input :nombre %>
     <%= b.input :apellido %>
