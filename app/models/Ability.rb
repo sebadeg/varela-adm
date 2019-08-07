@@ -79,7 +79,7 @@ class Ability
 
       can :manage, Alumno
       can :manage, Persona
-      can :manage, Inscripcion, Inscripcion.where( "NOT reinscripcion" )
+      can :manage, Inscripcion
       can :manage, ProximoGrado
 
       can :manage, Seguimiento

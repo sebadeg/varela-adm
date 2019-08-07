@@ -41,6 +41,7 @@ ActiveAdmin.register Inscripcion do
   filter :nombre
   filter :apellido
   filter :cedula
+  filter :reinscripcion
   filter :anio
 
 
