@@ -140,17 +140,17 @@ ActiveAdmin.register Inscripcion do
 
       titulares = Array.new()
 
-      if attrs[:documento1] != nil
-        titulares.push(attrs[:documento1])
+      if attrs[:titular1][:id] != nil
+        titulares.push(attrs[:titular1][:id])
       end
-      if attrs[:documento2] != nil
-        titulares.push(attrs[:documento2])
+      if attrs[:titular2][:id] != nil
+        titulares.push(attrs[:titular2][:id])
       end
-      if attrs[:titular_padre] != nil
-        titulares.push(attrs[:titular_padre])
+      if attrs[:titular_padre] != nil && attrs[:padre][:id] != nil
+        titulares.push(attrs[:padre][:id])
       end
-      if attrs[:titular_madre] != nil
-        titulares.push(attrs[:titular_madre])
+      if attrs[:titular_madre] != nil && attrs[:madre][:id] != nil
+        titulares.push(attrs[:madre][:id])
       end
 
       if titulares.length <= 0 || titulares.length > 2
