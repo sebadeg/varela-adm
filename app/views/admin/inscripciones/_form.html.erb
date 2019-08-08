@@ -31,7 +31,7 @@
       <%= b.semantic_errors *b.object.errors.keys %>
       <%= b.input :nombre, label: 'Nombre' %>
       <%= b.input :apellido, label: 'Apellido' %>
-      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :id, label: 'Cédula' %>
       <%= b.input :lugar_nacimiento, label: 'Lugar de nacimiento' %>
       <%= b.input :fecha_nacimiento, label: 'Fecha de nacimiento' %>
       <%= b.input :email, label: 'Mail' %>
@@ -40,7 +40,7 @@
       <%= b.input :profesion, label: 'Profesión' %>
       <%= b.input :trabajo, label: 'Trabajo'  %>
       <%= b.input :telefono_trabajo, label: 'Teléfono Trabajo' %>
-      <%= b.input :titular, label: 'Titular', :as => :boolean %>
+      <%= a.input :titular_padre, label: 'Titular', :as => :boolean %>
     <% end %>
   <% end %>
 
@@ -49,7 +49,7 @@
       <%= b.semantic_errors *b.object.errors.keys %>
       <%= b.input :nombre, label: 'Nombre' %>
       <%= b.input :apellido, label: 'Apellido' %>
-      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :id, label: 'Cédula' %>
       <%= b.input :lugar_nacimiento, label: 'Lugar de nacimiento' %>
       <%= b.input :fecha_nacimiento, label: 'Fecha de nacimiento' %>
       <%= b.input :email, label: 'Mail' %>
@@ -58,7 +58,7 @@
       <%= b.input :profesion, label: 'Profesión'  %>
       <%= b.input :trabajo, label: 'Trabajo' %>
       <%= b.input :telefono_trabajo, label: 'Teléfono Trabajo' %>
-      <%= b.input :titular, label: 'Titular', as: :boolean %>
+      <%= b.input :titular_madre, label: 'Titular', as: :boolean %>
     <% end %>
   <% end %>
 
@@ -67,7 +67,7 @@
       <%= b.semantic_errors *b.object.errors.keys %>
       <%= b.input :nombre, label: 'Nombre' %>
       <%= b.input :apellido, label: 'Apellido' %>
-      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :id, label: 'Cédula' %>
       <%= b.input :email, label: 'Mail' %>
       <%= b.input :domicilio, label: 'Domicilio' %>
       <%= b.input :celular, label: 'Teléfono/Celular' %>
@@ -79,7 +79,7 @@
       <%= b.semantic_errors *b.object.errors.keys %>
       <%= b.input :nombre, label: 'Nombre' %>
       <%= b.input :apellido, label: 'Apellido' %>
-      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :id, label: 'Cédula' %>
       <%= b.input :email, label: 'Mail' %>
       <%= b.input :domicilio, label: 'Domicilio' %>
       <%= b.input :celular, label: 'Teléfono/Celular' %>
