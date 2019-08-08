@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_140350) do
+ActiveRecord::Schema.define(version: 2019_08_08_191047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,7 +213,17 @@ ActiveRecord::Schema.define(version: 2019_08_08_140350) do
     t.decimal "importe"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cantidad"
     t.index ["convenio_id"], name: "index_convenio_cuota_on_convenio_id"
+  end
+
+  create_table "convenio_descuentos", force: :cascade do |t|
+    t.bigint "convenio_id"
+    t.bigint "descuento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["convenio_id"], name: "index_convenio_descuentos_on_convenio_id"
+    t.index ["descuento_id"], name: "index_convenio_descuentos_on_descuento_id"
   end
 
   create_table "convenios", id: :serial, force: :cascade do |t|
@@ -283,6 +293,13 @@ ActiveRecord::Schema.define(version: 2019_08_08_140350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "descuentos", force: :cascade do |t|
+    t.string "nombre"
+    t.decimal "porcentaje"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "deudores", force: :cascade do |t|
@@ -397,6 +414,19 @@ ActiveRecord::Schema.define(version: 2019_08_08_140350) do
     t.index ["mail"], name: "index_facturas_on_mail"
   end
 
+  create_table "formulario_opciones", force: :cascade do |t|
+    t.integer "formulario"
+    t.integer "inscripcion_opcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "formularios", force: :cascade do |t|
+    t.integer "convenio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "grado_alumnos", id: :serial, force: :cascade do |t|
     t.integer "grado_id"
     t.integer "alumno_id"
@@ -451,6 +481,16 @@ ActiveRecord::Schema.define(version: 2019_08_08_140350) do
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
+  end
+
+  create_table "inscripcion_opciones", force: :cascade do |t|
+    t.integer "tipo"
+    t.integer "anio"
+    t.date "fecha"
+    t.decimal "valor"
+    t.string "formato"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "inscripciones", id: :serial, force: :cascade do |t|
@@ -969,6 +1009,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_140350) do
   add_foreign_key "convenio_alumnos", "alumnos"
   add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "convenio_cuota", "convenios"
+  add_foreign_key "convenio_descuentos", "convenios"
+  add_foreign_key "convenio_descuentos", "descuentos"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "cuota_socios", "socios"

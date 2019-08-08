@@ -28,6 +28,28 @@ ActiveAdmin.register Movimiento do
     
   end
 
+  action_item :exportarSAICO, only: :index do
+    link_to "Exportar SAICO", exportar_admin_movimientos_path
+  end
+
+  collection_action :exportarSAICO do
+
+    file_name = "movimientos.csv"
+    file = Tempfile.new(file_name)    
+    File.open(file, "w+") do |f|
+      Movimiento.all.order(:fecha,:cuenta_id).each do |mov|
+         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe};#{mov.haber};#{mov.rubro_debe};#{mov.rubro_haber};\r\n")
+      end
+    end
+    send_file(
+      file.path,
+      filename: file_name,
+      type: "application/csv"
+    )
+    
+  end
+
+
   index do
   	#selectable_column
 
