@@ -10,25 +10,80 @@
   <%= a.inputs "Alumno" do %>
     <%= a.semantic_fields_for :alumno, Alumno.new do |b| %>
       <%= b.semantic_errors *b.object.errors.keys %>
-      <%= b.input :nombre %>
-      <%= b.input :apellido %>
-      <%= b.input :cedula %>
-      <%= b.input :lugar_nacimiento %>
-      <%= b.input :fecha_nacimiento %>
-      <%= b.input :domicilio %>
-      <%= b.input :celular %>
-      <%= b.input :anio_ingreso %>
+      <%= b.input :nombre, label: 'Nombre' %>
+      <%= b.input :apellido, label: 'Apellido' %>
+      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :lugar_nacimiento, label: 'Lugar de nacimiento' %>
+      <%= b.input :fecha_nacimiento, label: 'Fecha de nacimiento' %>
+      <%= b.input :domicilio, label: 'Domicilio' %>
+      <%= b.input :celular, label: 'Teléfono/Celular' %>
+      <%= b.input :anio_ingreso, label: 'Año ingreso' %>
     <% end %>
   <% end %>
 
   <%= a.inputs "Nivel" do %>
     <%= a.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]} %>
     <%= a.input :convenio_id, :label => 'Convenio', :as => :select, :collection => Convenio.all.order(:nombre).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]} %>
-    <%= a.input :formulario, :label => 'Formulario', :as => :select, :collection => Convenio.where("formulario").order(:valor).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]} %>
-    <%= a.input :afinidad %>
-    <%= a.input :matricula, :label => 'Matrícula', :as => :select, :collection => [["Contado",5],["Exonerada",6]] %>
-    <%= a.input :hermanos, :label => 'Hermanos', :as => :select, :collection => [["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]] %>
-    <%= a.input :cuotas %>
+  <% end %>
+
+  <%= a.inputs "Padre" do %>
+    <%= a.semantic_fields_for :padre, Persona.new do |b| %>
+      <%= b.semantic_errors *b.object.errors.keys %>
+      <%= b.input :nombre, label: 'Nombre' %>
+      <%= b.input :apellido, label: 'Apellido' %>
+      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :lugar_nacimiento, label: 'Lugar de nacimiento' %>
+      <%= b.input :fecha_nacimiento, label: 'Fecha de nacimiento' %>
+      <%= b.input :email, label: 'Mail' %>
+      <%= b.input :domicilio, label: 'Domicilio' %>
+      <%= b.input :celular, label: 'Teléfono/Celular' %>
+      <%= b.input :profesion, label: 'Profesión' %>
+      <%= b.input :trabajo, label: 'Trabajo'  %>
+      <%= b.input :telefono_trabajo, label: 'Teléfono Trabajo' %>
+      <%= b.input :titular, label: 'Titular', :as => :boolean %>
+    <% end %>
+  <% end %>
+
+  <%= a.inputs "Madre" do %>
+    <%= a.semantic_fields_for :madre, Persona.new do |b| %>
+      <%= b.semantic_errors *b.object.errors.keys %>
+      <%= b.input :nombre, label: 'Nombre' %>
+      <%= b.input :apellido, label: 'Apellido' %>
+      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :lugar_nacimiento, label: 'Lugar de nacimiento' %>
+      <%= b.input :fecha_nacimiento, label: 'Fecha de nacimiento' %>
+      <%= b.input :email, label: 'Mail' %>
+      <%= b.input :domicilio, label: 'Domicilio' %>
+      <%= b.input :celular, label: 'Teléfono/Celular' %>
+      <%= b.input :profesion, label: 'Profesión'  %>
+      <%= b.input :trabajo, label: 'Trabajo' %>
+      <%= b.input :telefono_trabajo, label: 'Teléfono Trabajo' %>
+      <%= b.input :titular, label: 'Titular', as: :boolean %>
+    <% end %>
+  <% end %>
+
+  <%= a.inputs "Titular 1" do %>
+    <%= a.semantic_fields_for :titular1, Persona.new do |b| %>
+      <%= b.semantic_errors *b.object.errors.keys %>
+      <%= b.input :nombre, label: 'Nombre' %>
+      <%= b.input :apellido, label: 'Apellido' %>
+      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :email, label: 'Mail' %>
+      <%= b.input :domicilio, label: 'Domicilio' %>
+      <%= b.input :celular, label: 'Teléfono/Celular' %>
+    <% end %>
+  <% end %>
+
+  <%= a.inputs "Titular 2" do %>
+    <%= a.semantic_fields_for :titular2, Persona.new do |b| %>
+      <%= b.semantic_errors *b.object.errors.keys %>
+      <%= b.input :nombre, label: 'Nombre' %>
+      <%= b.input :apellido, label: 'Apellido' %>
+      <%= b.input :cedula, label: 'Cédula' %>
+      <%= b.input :email, label: 'Mail' %>
+      <%= b.input :domicilio, label: 'Domicilio' %>
+      <%= b.input :celular, label: 'Teléfono/Celular' %>
+    <% end %>
   <% end %>
 
   <%= a.actions %>
