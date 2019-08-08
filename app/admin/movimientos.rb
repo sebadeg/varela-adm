@@ -28,11 +28,11 @@ ActiveAdmin.register Movimiento do
     
   end
 
-  action_item :exportarSAICO, only: :index do
-    link_to "Exportar SAICO", exportar_admin_movimientos_path
+  action_item :exportar_saico, only: :index do
+    link_to "Exportar SAICO", exportar_saico_admin_movimientos_path
   end
 
-  collection_action :exportarSAICO do
+  collection_action :exportar_saico do
 
     file_name = "movimientos.csv"
     file = Tempfile.new(file_name)    
