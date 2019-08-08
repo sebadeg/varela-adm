@@ -136,7 +136,7 @@ ActiveAdmin.register Inscripcion do
   controller do
 
     def create
-      attrs = permitted_params[:inscripcion]
+      attrs = params[:inscripcion] #permitted_params[:inscripcion]
       p attrs
 
       #create!
