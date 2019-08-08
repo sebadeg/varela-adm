@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_123639) do
+ActiveRecord::Schema.define(version: 2019_08_08_130055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,6 +205,15 @@ ActiveRecord::Schema.define(version: 2019_08_07_123639) do
     t.datetime "updated_at", null: false
     t.index ["alumno_id"], name: "index_convenio_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_convenio_alumnos_on_convenio_id"
+  end
+
+  create_table "convenio_cuota", force: :cascade do |t|
+    t.bigint "convenio_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["convenio_id"], name: "index_convenio_cuota_on_convenio_id"
   end
 
   create_table "convenios", id: :serial, force: :cascade do |t|
@@ -954,6 +963,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_123639) do
   add_foreign_key "contratos", "cuentas"
   add_foreign_key "convenio_alumnos", "alumnos"
   add_foreign_key "convenio_alumnos", "convenios"
+  add_foreign_key "convenio_cuota", "convenios"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "cuota_socios", "socios"

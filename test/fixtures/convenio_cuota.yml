@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  convenio_id: 1
+  fecha: 2019-08-08
+  precio: 9.99
+
+two:
+  convenio_id: 1
+  fecha: 2019-08-08
+  precio: 9.99
