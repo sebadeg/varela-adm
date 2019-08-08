@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_130055) do
+ActiveRecord::Schema.define(version: 2019_08_08_140350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,11 @@ ActiveRecord::Schema.define(version: 2019_08_08_130055) do
     t.datetime "updated_at", null: false
     t.boolean "ocultar_porcentaje"
     t.boolean "formulario", default: false
+    t.integer "cedula"
+    t.decimal "importe"
+    t.decimal "porcentaje"
+    t.decimal "matricula_importe"
+    t.decimal "matricula_porcentaje"
   end
 
   create_table "cuenta_alumnos", id: :serial, force: :cascade do |t|

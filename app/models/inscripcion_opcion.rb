@@ -1,0 +1,2 @@
+class InscripcionOpcion < ApplicationRecord
+end
