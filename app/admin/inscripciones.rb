@@ -133,4 +133,22 @@ ActiveAdmin.register Inscripcion do
 
   form partial: 'form'
 
+  controller do
+
+    def create
+      attrs = permitted_params[:inscripcion]
+      p attrs
+
+      #create!
+    end
+
+    def update
+      attrs = permitted_params[:inscripcion]
+      p attrs
+
+      #update!
+    end
+    
+  end
+
 end
