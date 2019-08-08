@@ -1,13 +1,4 @@
 class Inscripcion < ApplicationRecord
-  has_one :alumno
-  accepts_nested_attributes_for :alumno
-
-  has_one :persona, as: :padre 
-  has_one :persona, as: :madre
-  has_one :persona, as: :titular1
-  has_one :persona, as: :titular2
-  accepts_nested_attributes_for :persona
-
   belongs_to :convenio
   belongs_to :proximo_grado
 

@@ -8,7 +8,7 @@
   <% end %>
 
   <%= a.inputs "Alumno" do %>
-    <%= a.semantic_fields_for :alumno do |b| %>
+    <%= a.semantic_fields_for :alumno, Alumno.new do |b| %>
       <%= b.semantic_errors *b.object.errors.keys %>
       <%= b.input :nombre %>
       <%= b.input :apellido %>
