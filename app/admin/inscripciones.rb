@@ -137,7 +137,42 @@ ActiveAdmin.register Inscripcion do
 
     def create
       attrs = params[:inscripcion] #permitted_params[:inscripcion]
+
+      titulares = Array.new()
+
+      if attr[:documento1] != nil
+        titulares.push(attr[:documento1])
+      end
+      if attr[:documento2] != nil
+        titulares.push(attr[:documento2])
+      end
+      if attr[:titular_padre] != nil
+        titulares.push(attr[:titular_padre])
+      end
+      if attr[:titular_madre] != nil
+        titulares.push(attr[:titular_madre])
+      end
+
+      if titulares.length <= 0 || titulares.length > 2
+        p "**************************************************************"
+        p "**************************************************************"
+        p "Error"
+        p "**************************************************************"
+        p "**************************************************************"
+        return
+      end
+
+      attrs[:documento1] = titulares[0]
+      if titulares.length > 1
+        attrs[:documento2] = titulares[1]
+      end
+
+      p "**************************************************************"
+      p "**************************************************************"
       p attrs
+      p "**************************************************************"
+      p "**************************************************************"
+
 
       #create!
     end
