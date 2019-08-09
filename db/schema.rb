@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_191047) do
+ActiveRecord::Schema.define(version: 2019_08_09_115948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -414,15 +414,18 @@ ActiveRecord::Schema.define(version: 2019_08_08_191047) do
     t.index ["mail"], name: "index_facturas_on_mail"
   end
 
-  create_table "formulario_opciones", force: :cascade do |t|
-    t.integer "formulario"
-    t.integer "inscripcion_opcion"
+  create_table "formulario_inscripcion_opciones", force: :cascade do |t|
+    t.bigint "formulario_id"
+    t.bigint "inscripcion_opcion_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["formulario_id"], name: "index_formulario_inscripcion_opciones_on_formulario_id"
+    t.index ["inscripcion_opcion_id"], name: "index_formulario_inscripcion_opciones_on_inscripcion_opcion_id"
   end
 
   create_table "formularios", force: :cascade do |t|
-    t.integer "convenio"
+    t.string "nombre"
+    t.integer "cedula"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -483,14 +486,22 @@ ActiveRecord::Schema.define(version: 2019_08_08_191047) do
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
   end
 
+  create_table "inscripcion_opcion_tipos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "inscripcion_opciones", force: :cascade do |t|
-    t.integer "tipo"
+    t.string "nombre"
     t.integer "anio"
+    t.bigint "inscripcion_opcion_tipo_id"
     t.date "fecha"
     t.decimal "valor"
     t.string "formato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["inscripcion_opcion_tipo_id"], name: "index_inscripcion_opciones_on_inscripcion_opcion_tipo_id"
   end
 
   create_table "inscripciones", id: :serial, force: :cascade do |t|
@@ -1022,11 +1033,14 @@ ActiveRecord::Schema.define(version: 2019_08_08_191047) do
   add_foreign_key "especial_cuentas", "especiales"
   add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
+  add_foreign_key "formulario_inscripcion_opciones", "formularios"
+  add_foreign_key "formulario_inscripcion_opciones", "inscripcion_opciones"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "convenios"
   add_foreign_key "inscripciones", "proximo_grados"
   add_foreign_key "linea_facturas", "alumnos"

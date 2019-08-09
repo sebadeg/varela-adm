@@ -1,0 +1,2 @@
+class FormularioInscripcionOpcion < ApplicationRecord
+end

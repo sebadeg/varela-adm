@@ -1,7 +1,8 @@
 class CreateFormularios < ActiveRecord::Migration[5.2]
   def change
     create_table :formularios do |t|
-      t.integer :convenio
+      t.string :nombre
+      t.integer :cedula
 
       t.timestamps
     end
