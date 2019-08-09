@@ -56,6 +56,9 @@ es:
 
   activerecord:
     attributes:
+      inscripcion_opcion:
+        anio: "Año"
+        inscripcion_opcion_tipo_id: "Tipo"
       config:
         anio: "Año"
         anio_pases: "Pases del año"
