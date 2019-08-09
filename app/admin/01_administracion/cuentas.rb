@@ -1,8 +1,8 @@
 ActiveAdmin.register Cuenta do
 
-  permit_params :id, :nombre, :comentario, :brou, :visa, :oca, :retencion 
-
   menu priority: 103, label: "Cuentas", parent: "Administración"
+  
+  permit_params :id, :nombre, :comentario, :brou, :visa, :oca, :retencion 
 
   scope :concurre
   scope :todos 

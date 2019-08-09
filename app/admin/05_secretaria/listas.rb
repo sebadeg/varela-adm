@@ -1,22 +1,9 @@
-  menu priority: 503, label: "Pases", parent: "Secretaría"
 ActiveAdmin.register Lista do
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+
+  menu priority: 501, label: "Listas", parent: "Secretaría"
 
   permit_params :id, :nombre, :anio, :sector_id, :locale, 
     lista_alumno_attributes: [:id,:lista_id,:alumno_id,:_destroy,:locale]
-
-  menu priority: 501, label: "Listas", parent: "Secretaría"
 
   member_action :copiar, method: :put do
     id = params[:id]

@@ -4,7 +4,6 @@ ActiveAdmin.register Usuario do
 
   permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation
 
-
   action_item :contrasena, only: :show do
     link_to "Resetear Contraseña", contrasena_admin_usuario_path(usuario), method: :put 
   end
