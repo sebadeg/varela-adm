@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Informe" do
 
-  menu priority: 602, label: "Informe", parent: "Inscripción"
+  menu priority: 602, label: "Informe", parent: "Inscripciones"
 
   content do
     collection = ActiveRecord::Base.connection.execute(

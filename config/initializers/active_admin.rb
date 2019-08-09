@@ -232,14 +232,18 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
-      menu.add label: "Administración", priority: 9001
-      menu.add label: "Pagos", priority: 9002
-      menu.add label: "Deudores", priority: 9003
-      menu.add label: "Facturación", priority: 9004
-      menu.add label: "Secretaría", priority: 9005
-      menu.add label: "Inscripciones", priority: 9006
-      menu.add label: "SUE", priority: 9007
-      menu.add label: "Soporte", priority: 9008
+      menu.add label: "Administración", priority: 100
+      menu.add label: "Cuenta Corriente", priority: 200
+      menu.add label: "Facturación", priority: 300
+      menu.add label: "Pagos", priority: 400
+      menu.add label: "Secretaría", priority: 500
+      menu.add label: "Inscripciones", priority: 600
+      menu.add label: "Consejo Directivo", priority: 700
+      menu.add label: "SUE", priority: 800
+      menu.add label: "Soporte", priority: 900
+      menu.add label: "Usuarios", priority: 1000
+      menu.add label: "Kaldor", priority: 1100
+      menu.add label: "Otros", priority: 1200
     end
   end
   # == Download Links
