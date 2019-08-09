@@ -1,5 +1,5 @@
 ActiveAdmin.register ProximoGrado do
-  menu priority: 1210, label: 'Grados'
+  menu priority: 1210, label: 'Grados', parent: 'Otros'
 
   permit_params :nombre, :precio, :grado, :anio 
 

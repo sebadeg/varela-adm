@@ -1,5 +1,5 @@
 ActiveAdmin.register InscripcionAlumno do
-  menu priority: 1204, label: 'Reinscripción Alumno'
+  menu priority: 1204, label: 'Reinscripción Alumno', parent: 'Otros'
 
   permit_params :cedula
 

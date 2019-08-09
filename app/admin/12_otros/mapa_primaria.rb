@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Mapa_primaria" do
 
-  menu priority: 1207, label: "Primaria", parent: "Mapa"
+  menu priority: 1207, label: "Primaria", parent: 'Otros'
 
   content do
    

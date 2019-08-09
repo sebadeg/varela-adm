@@ -16,8 +16,8 @@ ActiveAdmin.register Contrato do
 
   # /#,      contrato_cuota_attributes: [:id,:contrato_id,:fecha,:precio,:descuento,:_destroy]
 
-  # menu priority: 31, label: "Contrato"
-  menu priority: 1202
+  menu priority: 1202, label: "Contrato", parent: 'Otros'
+  
 
   action_item :actualizar, only: :show do
     link_to "Asociar", asociar_admin_contrato_path(contrato), method: :put 

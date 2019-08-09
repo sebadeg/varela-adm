@@ -1,5 +1,5 @@
 ActiveAdmin.register Direccion do
-  menu label: 'Direcciones', priority: 1203
+  menu priority: 1203, label: 'Direcciones', parent: 'Otros'
 
   permit_params :id, :direccion, :resultado, :latitude, :longitude
 
