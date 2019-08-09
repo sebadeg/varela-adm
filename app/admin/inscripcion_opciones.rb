@@ -2,7 +2,7 @@ ActiveAdmin.register InscripcionOpcion do
 
   menu label: 'Inscripción Opción', priority: 22 
 
-  permit_params :id, :nombre
+  permit_params :id, :nombre, :anio, :inscripcion_opcion_tipo_id, :fecha, :valor, :formato
 
   index do
   	#selectable_column
