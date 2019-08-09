@@ -6,7 +6,6 @@ ActiveAdmin.register InscripcionOpcionTipo do
 
   index do
   	#selectable_column
-    column :id
     column :nombre
 
     actions
@@ -16,14 +15,12 @@ ActiveAdmin.register InscripcionOpcionTipo do
 
   show do
     attributes_table do
-      row :id
       row :nombre
     end
   end
 
   form do |f|
     f.inputs do
-      f.input :id
       f.input :nombre
     end
     f.actions
