@@ -22,7 +22,7 @@ ActiveAdmin.register Formulario do
       row :cedula
 
       row "Opciones" do 
-        table_for InscripcionOpcion.where("formulario_id=#{r.id}") do |t|
+        table_for FormularioInscripcionOpcion.where("formulario_id=#{r.id}") do |t|
           t.column "Opcion" do |r| r.inscripcion_opcion.nombre_completo() end
         end
       end
