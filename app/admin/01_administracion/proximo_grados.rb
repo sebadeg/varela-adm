@@ -3,6 +3,10 @@ ActiveAdmin.register ProximoGrado do
 
   permit_params :nombre, :precio, :grado, :anio 
 
+
+  scope :todos
+  scope :corrientes
+
   index do
   	#selectable_column
     column :nombre
