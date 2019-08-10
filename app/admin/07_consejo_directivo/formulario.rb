@@ -3,7 +3,7 @@ ActiveAdmin.register Formulario do
   actions :all
   menu priority: 702, label: "Formularios", parent: "Consejo Directivo"
 
-  permit_params :id, :nombre, :cedula,
+  permit_params :id, :nombre, :cedula, :anio, :proximo_grado_id,
     formulario_inscripcion_opcion_attributes: [:id,:formulario_id,:inscripcion_opcion_id,:_destroy]
 
   scope :todos

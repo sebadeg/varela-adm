@@ -23,7 +23,8 @@ class Ability
     if user.sue
       can :manage, Socio
       can :manage, CuotaSocio
-
+      can :manage, InscripcionOpcion
+      can :manage, Formulario
     end
 
     if user.administracion
