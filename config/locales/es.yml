@@ -75,9 +75,12 @@ es:
         direccion: "Dirección"
         cedula: "Cédula"
       cuenta:
-        numero: "Número"
+        numero: "Número"        
       factura:
         numero: "Factura N°"
+      formulario:
+        proximo_grado_id: "Grado"
+        anio: "Año"
       linea_factura:
         descripcion: "Descripción"
       tipo_movimiento:

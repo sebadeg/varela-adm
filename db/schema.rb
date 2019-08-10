@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_021204) do
+ActiveRecord::Schema.define(version: 2019_08_10_172928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -428,6 +428,9 @@ ActiveRecord::Schema.define(version: 2019_08_10_021204) do
     t.integer "cedula"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "proximo_grado_id"
+    t.integer "anio"
+    t.index ["proximo_grado_id"], name: "index_formularios_on_proximo_grado_id"
   end
 
   create_table "grado_alumnos", id: :serial, force: :cascade do |t|
@@ -1038,6 +1041,7 @@ ActiveRecord::Schema.define(version: 2019_08_10_021204) do
   add_foreign_key "facturas", "cuentas"
   add_foreign_key "formulario_inscripcion_opciones", "formularios"
   add_foreign_key "formulario_inscripcion_opciones", "inscripcion_opciones"
+  add_foreign_key "formularios", "proximo_grados"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
   add_foreign_key "inscripcion_alumnos", "alumnos"

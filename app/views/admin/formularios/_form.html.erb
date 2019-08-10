@@ -4,6 +4,8 @@
   <%= a.inputs do %>
       <%= a.input :nombre  %>
       <%= a.input :cedula  %>
+      <%= a.input :anio  %>
+      <%= a.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]} %>
   <% end %>
 
   <%= a.inputs "Opciones" do %>
