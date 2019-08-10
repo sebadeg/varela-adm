@@ -2,6 +2,11 @@ class Inscripcion < ApplicationRecord
   belongs_to :convenio
   belongs_to :proximo_grado
 
+  scope :todos, -> { all }
+  scope :inscripciones, -> { where("NOT reinscripcion AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)") }
+  scope :reinscripciones, -> { where("reinscripcion AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)") }
+
+
   validates :nombre, presence: true
   validates :apellido, presence: true
   validates :cedula, presence: true
