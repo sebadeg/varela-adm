@@ -17,14 +17,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :inscripcion_opcion, :label => false, :as => :select, collection: InscripcionOpcion.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
+          <td><%= b.input :inscripcion_opcion_id, :label => false, :as => :select, collection: InscripcionOpcion.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :formulario_inscripcion_opcion, FormularioInscripcionOpcion.new do |b| %>
         <tr>
-          <td><%= b.input :inscripcion_opcion, :label => false, :as => :select, collection: InscripcionOpcion.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
+          <td><%= b.input :inscripcion_opcion_id, :label => false, :as => :select, collection: InscripcionOpcion.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
