@@ -17,14 +17,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :inscripcion_opcion_id, :label => false, :as => :select, collection: InscripcionOpcion.joins(:inscripcion_opcion_tipos).all.order("inscripcion_opcion_tipos.nombre, inscripcion_opciones.nombre").select( "inscripcion_opciones.id as id1, inscripcion_opciones_tipos.nombre || ': ' || inscripcion_opciones.nombre as nombre1").map{|u| ["#{u.nombre1}",u.id1]} %></td>
+          <td><%= b.input :inscripcion_opcion_id, :label => false, :as => :select, collection: InscripcionOpcion.joins("INNER JOIN inscripcion_opcion_tipos ON inscripcion_opciones.inscripcion_opcion_tipo_id=inscripcion_opcion_tipo.id").all.order("inscripcion_opcion_tipos.nombre, inscripcion_opciones.nombre").select( "inscripcion_opciones.id as id1, inscripcion_opciones_tipos.nombre || ': ' || inscripcion_opciones.nombre as nombre1").map{|u| ["#{u.nombre1}",u.id1]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :formulario_inscripcion_opcion, FormularioInscripcionOpcion.new do |b| %>
         <tr>
-          <td><%= b.input :inscripcion_opcion_id, :label => false, :as => :select, collection: InscripcionOpcion.joins(:inscripcion_opcion_tipos).all.order("inscripcion_opcion_tipos.nombre, inscripcion_opciones.nombre").select( "inscripcion_opciones.id as id1, inscripcion_opciones_tipos.nombre || ': ' || inscripcion_opciones.nombre as nombre1").map{|u| ["#{u.nombre1}",u.id1]} %></td>
+          <td><%= b.input :inscripcion_opcion_id, :label => false, :as => :select, collection: InscripcionOpcion.joins("INNER JOIN inscripcion_opcion_tipos ON inscripcion_opciones.inscripcion_opcion_tipo_id=inscripcion_opcion_tipo.id").all.order("inscripcion_opcion_tipos.nombre, inscripcion_opciones.nombre").select( "inscripcion_opciones.id as id1, inscripcion_opciones_tipos.nombre || ': ' || inscripcion_opciones.nombre as nombre1").map{|u| ["#{u.nombre1}",u.id1]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
