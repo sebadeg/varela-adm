@@ -10,6 +10,10 @@ ActiveAdmin.register Inscripcion do
     :nombre1,:documento1,:domicilio1,:email1,:celular1,
     :nombre2,:documento2,:domicilio2,:email2,:celular2
 
+  scope :todos
+  scope :inscripciones
+  scope :reinscripciones
+
   action_item :formulario, only: :show do
     link_to "Formulario y Vale", formulario_admin_inscripcion_path(inscripcion), method: :put 
   end
