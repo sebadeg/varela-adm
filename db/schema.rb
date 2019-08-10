@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_142851) do
+ActiveRecord::Schema.define(version: 2019_08_10_021204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -568,6 +568,8 @@ ActiveRecord::Schema.define(version: 2019_08_09_142851) do
     t.integer "cuenta_id"
     t.integer "alumno_id"
     t.boolean "reinscripcion"
+    t.boolean "registrado"
+    t.boolean "inscripto"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
