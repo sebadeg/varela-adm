@@ -20,6 +20,13 @@ ActiveAdmin.register Formulario do
     attributes_table do
       row :nombre
       row :cedula
+
+      row "Opciones" do 
+        table_for InscripcionOpcion.where("formulario_id=#{r.id}") do |t|
+          t.column "Opcion" do |r| r.inscripcion_opcion.nombre_completo() end
+        end
+      end
+
     end
   end
 
