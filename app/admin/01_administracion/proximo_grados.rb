@@ -1,5 +1,5 @@
 ActiveAdmin.register ProximoGrado do
-  menu priority: 1210, label: 'Grados', parent: 'Otros'
+  menu priority: 106, label: 'Próximos Grados', parent: 'Administración'
 
   permit_params :nombre, :precio, :grado, :anio 
 
@@ -7,7 +7,7 @@ ActiveAdmin.register ProximoGrado do
   	#selectable_column
     column :nombre
     column :precio
-    column :grado
+    column "Grado" do |c| (c.grado != nil ? c.grado.nombre : "" ) end
     column :anio
     actions
   end
