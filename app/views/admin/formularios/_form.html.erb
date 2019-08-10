@@ -13,7 +13,9 @@
       </tr>
       
       <%= a.semantic_fields_for :formulario_inscripcion_opcion do |b| %>
-        <%= b.semantic_errors *b.object.errors.keys %>
+        <% if b.object != nil %>
+          <%= b.semantic_errors *b.object.errors.keys %>
+        <% end %>
         <tr>
           <td><%= b.input :inscripcion_opcion, :label => false, :as => :select, collection: InscripcionOpcion.all.order(:id).map{|u| ["#{u.nombre}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
