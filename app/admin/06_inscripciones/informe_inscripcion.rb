@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Informe" do
     collection = ActiveRecord::Base.connection.execute(
       "SELECT cedula as cedula1, inscripciones.nombre as alumno1, proximo_grados.nombre as grado1, reinscripcion as reinscripto1 
          FROM inscripciones INNER JOIN proximo_grados ON inscripciones.proximo_grado_id=proximo_grados.id
-         WHERE anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL) AND
+         WHERE inscripciones.anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL) AND
          (NOT reinscripcion OR registrado)
          ORDER BY proximo_grados.nombre" 
 
