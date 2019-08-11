@@ -5,6 +5,7 @@ class Inscripcion < ApplicationRecord
   scope :todos, -> { all }
   scope :inscripciones, -> { where("NOT reinscripcion AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)") }
   scope :reinscripciones, -> { where("reinscripcion AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)") }
+  scope :pases, -> { where("reinscripcion AND NOT fecha_pase IS NULL AND NOT anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)") }
 
 
   validates :nombre, presence: true

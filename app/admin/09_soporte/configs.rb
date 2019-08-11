@@ -7,7 +7,6 @@ ActiveAdmin.register Config do
   index do
   	#selectable_column
     column :anio
-    column :anio_pases
     column :anio_inscripciones
     column :fecha_facturacion
 
@@ -17,7 +16,6 @@ ActiveAdmin.register Config do
   show do
     attributes_table do
       row :anio
-      row :anio_pases
       row :anio_inscripciones
       row :fecha_facturacion
     end
@@ -26,7 +24,6 @@ ActiveAdmin.register Config do
   form do |f|
     f.inputs do
       f.input :anio
-      f.input :anio_pases
       f.input :anio_inscripciones
       f.input :fecha_facturacion
     end

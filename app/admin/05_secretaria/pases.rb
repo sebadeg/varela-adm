@@ -1,30 +1,29 @@
-ActiveAdmin.register Pase do
+ActiveAdmin.register Inscripcion, :as => "Pase" do
 
   menu priority: 504, label: "Pases", parent: "Secretaría"
 
   permit_params :fecha, :destino
 
-  scope :todos 
+  scope :reinscripciones
   scope :pases
 
   index do
   	#selectable_column
     column :alumno_id
-    column "Nombre" do |c| 
-      if c.alumno != nil
-        c.alumno.nombre
-      end
-    end
-    column "Apellido" do |c| 
-      if c.alumno != nil
-        c.alumno.apellido
-      end
-    end
-    column "Grado" do |r| Alumno.grado(r.alumno_id) end
+    # column "Nombre" do |c| 
+    #   if c.alumno != nil
+    #     c.alumno.nombre
+    #   end
+    # end
+    # column "Apellido" do |c| 
+    #   if c.alumno != nil
+    #     c.alumno.apellido
+    #   end
+    # end
+    # column "Grado" do |r| Alumno.grado(r.alumno_id) end
 
-
-    column :fecha
-    column :destino
+    column :fecha_pase
+    column :destino_pase
     actions
   end
 
@@ -32,13 +31,15 @@ ActiveAdmin.register Pase do
 
   show do
     attributes_table do
-      row :fecha
-      row :destino
+      row :alumno_id
+      row :fecha_pase
+      row :destino_pase
     end
   end
 
   form do |f|
-    f.inputs do      
+    f.inputs do
+      f.input :alumno_id 
       f.input :fecha
       f.input :destino
     end
