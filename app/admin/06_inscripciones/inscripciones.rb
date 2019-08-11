@@ -136,59 +136,136 @@ ActiveAdmin.register Inscripcion do
     end
   end
 
-  form partial: 'form'
-
-  controller do
-
-    def create
-      attrs = params[:inscripcion] #permitted_params[:inscripcion]
-
-      titulares = Array.new()
-
-      if attrs[:titular1][:id] !=nil && attrs[:titular1][:id] != ""
-        titulares.push(attrs[:titular1][:id])
-      end
-      if attrs[:titular2][:id] != nil && attrs[:titular2][:id] != ""
-        titulares.push(attrs[:titular2][:id])
-      end
-      if attrs[:titular_padre] == "1" && attrs[:padre][:id] != nil && attrs[:padre][:id] != ""
-        titulares.push(attrs[:padre][:id])
-      end
-      if attrs[:titular_madre] == "1" && attrs[:madre][:id] != nil && attrs[:madre][:id] != ""
-        titulares.push(attrs[:madre][:id])
-      end
-
-      if titulares.length <= 0 || titulares.length > 2
-        p "**************************************************************"
-        p "**************************************************************"
-        p "Error"
-        p "**************************************************************"
-        p "**************************************************************"
-        return
-      end
-
-      attrs[:documento1] = titulares[0]
-      if titulares.length > 1
-        attrs[:documento2] = titulares[1]
-      end
-
-      p "**************************************************************"
-      p "**************************************************************"
-      p attrs
-      p "**************************************************************"
-      p "**************************************************************"
-
-
-      #create!
+  form do |f|    
+    if f.object.new_record?
+      f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
+      f.input :dia, input_html: { value: 10 }, as: :hidden
+      f.input :mes, input_html: { value: 1 }, as: :hidden
+      f.input :anio, input_html: { value: 2019 }, as: :hidden
     end
 
-    def update
-      attrs = permitted_params[:inscripcion]
-      p attrs
+    f.inputs "Alumno" do
+      f.input :nombre, label: "Nombre"
+      f.input :apellido, label: "Apellido"
+      f.input :cedula, label: "Cédula"
+      f.input :lugar_nacimiento, label: 'Lugar de nacimiento'
+      f.input :fecha_nacimiento, label: 'Fecha de nacimiento'
+      f.input :domicilio, label: 'Domicilio'
+      f.input :celular, label: 'Teléfono/Celular'
+      f.input :mutualista, label: 'Mutualista'
+      f.input :emergencia, label: 'Emergencia'
+      f.input :procede, label: 'Procede de'
+    end
 
-      #update!
+    f.inputs "Nivel" do
+      f.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]}
+      f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => Convenio.all.order(:nombre).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]}
+      f.input :formulario, :label => 'Formulario', :as => :select, :collection => Convenio.where("formulario").order(:valor).map{|c| ["#{c.nombre} - #{c.valor}%", c.id]}
+      f.input :afinidad
+      f.input :matricula, :label => 'Matrícula', :as => :select, :collection => [["Contado",5],["Exonerada",6]]
+      f.input :hermanos, :label => 'Hermanos', :as => :select, :collection => [["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]] 
+      f.input :cuotas
+      f.input :especial
     end
     
+    f.inputs "Padre" do
+      f.input :nombre_padre, label: 'Nombre'
+      f.input :cedula_padre, label: 'Cédula'
+      f.input :lugar_nacimiento_padre, label: 'Lugar de nacimiento'
+      f.input :fecha_nacimiento_padre, label: 'Fecha de nacimiento'
+      f.input :email_padre, label: 'Mail'
+      f.input :domicilio_padre, label: 'Domicilio'
+      f.input :celular_padre, label: 'Teléfono/Celular'
+      f.input :profesion_padre, label: 'Profesión'
+      f.input :trabajo_padre, label: 'Lugar de Trabajo'
+      f.input :telefono_trabajo_padre, label: 'Teléfono de Trabajo'
+      f.input :titular_padre, label: 'Titular'
+    end
+
+    f.inputs "Madre" do
+      f.input :nombre_madre, label: 'Nombre'
+      f.input :cedula_madre, label: 'Cédula'
+      f.input :lugar_nacimiento_madre, label: 'Lugar de nacimiento'
+      f.input :fecha_nacimiento_madre, label: 'Fecha de nacimiento'
+      f.input :email_madre, label: 'Mail'
+      f.input :domicilio_madre, label: 'Domicilio'
+      f.input :celular_madre, label: 'Teléfono/Celular'
+      f.input :profesion_madre, label: 'Profesión'
+      f.input :trabajo_madre, label: 'Lugar de Trabajo'
+      f.input :telefono_trabajo_madre, label: 'Teléfono de Trabajo'
+      f.input :titular_madre, label: 'Titular'
+    end
+
+    f.inputs "Titular 1" do
+      f.input :nombre1, label: "Nombre"
+      f.input :documento1, label: "Cédula"
+      f.input :domicilio1, label: "Domicilio"
+      f.input :email1, label: "Mail"
+      f.input :celular1, label: "Teléfono/Celular"
+    end
+    f.inputs "Titular 2" do
+      f.input :nombre2, label: "Nombre"
+      f.input :documento2, label: "Cédula"
+      f.input :domicilio2, label: "Domicilio"
+      f.input :email2, label: "Mail"
+      f.input :celular2, label: "Teléfono/Celular"
+    end
+    f.actions
   end
+
+  # form partial: 'form'
+
+  # controller do
+
+  #   def create
+  #     attrs = params[:inscripcion] #permitted_params[:inscripcion]
+
+  #     titulares = Array.new()
+
+  #     if attrs[:titular1][:id] !=nil && attrs[:titular1][:id] != ""
+  #       titulares.push(attrs[:titular1][:id])
+  #     end
+  #     if attrs[:titular2][:id] != nil && attrs[:titular2][:id] != ""
+  #       titulares.push(attrs[:titular2][:id])
+  #     end
+  #     if attrs[:titular_padre] == "1" && attrs[:padre][:id] != nil && attrs[:padre][:id] != ""
+  #       titulares.push(attrs[:padre][:id])
+  #     end
+  #     if attrs[:titular_madre] == "1" && attrs[:madre][:id] != nil && attrs[:madre][:id] != ""
+  #       titulares.push(attrs[:madre][:id])
+  #     end
+
+  #     if titulares.length <= 0 || titulares.length > 2
+  #       p "**************************************************************"
+  #       p "**************************************************************"
+  #       p "Error"
+  #       p "**************************************************************"
+  #       p "**************************************************************"
+  #       return
+  #     end
+
+  #     attrs[:documento1] = titulares[0]
+  #     if titulares.length > 1
+  #       attrs[:documento2] = titulares[1]
+  #     end
+
+  #     p "**************************************************************"
+  #     p "**************************************************************"
+  #     p attrs
+  #     p "**************************************************************"
+  #     p "**************************************************************"
+
+
+  #     #create!
+  #   end
+
+  #   def update
+  #     attrs = permitted_params[:inscripcion]
+  #     p attrs
+
+  #     #update!
+  #   end
+    
+  # end
 
 end
