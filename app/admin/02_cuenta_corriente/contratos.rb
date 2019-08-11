@@ -16,7 +16,7 @@ ActiveAdmin.register Contrato do
 
   # /#,      contrato_cuota_attributes: [:id,:contrato_id,:fecha,:precio,:descuento,:_destroy]
 
-  menu priority: 1202, label: "Contrato", parent: 'Otros'
+  menu priority: 205, label: "Contrato", parent: 'Cuenta Corriente'
   
 
   action_item :actualizar, only: :show do
