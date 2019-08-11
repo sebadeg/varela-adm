@@ -98,7 +98,6 @@ es:
       especial:
         fecha_comienzo: "Fecha Comienzo"
         fecha_fin: "Fecha Fin"
-
       lote_recibo: 
         nota_credito: "Nota de crédito"
       deudor:
@@ -108,6 +107,8 @@ es:
         deuda60: "> 60"
         deuda30: "> 30"
         deuda0: "> 0"
+      proximo_grado:
+        anio: "Año"
         
     models:
       aactividad:

@@ -8,4 +8,30 @@ class Cuenta < ApplicationRecord
   scope :visa, -> { where("visa") }
   scope :oca, -> { where("oca") }
 
+  def titular_mail
+  	s = ""
+  	TitularCuenta.where("cuenta_id=#{id}").each do |tc|
+      Usuario.where("id=#{tc.usuario_id}").each do |u|
+      	if s != ""
+      	  s = s + ","
+      	end
+      	s = s + u.email      	
+      end	
+  	end
+  	return s
+  end
+
+  def titular_celular
+  	s = ""
+  	TitularCuenta.where("cuenta_id=#{id}").each do |tc|
+      Usuario.where("id=#{tc.usuario_id}").each do |u|
+      	if s != ""
+      	  s = s + ","
+      	end
+      	s = s + u.celular      	
+      end	
+  	end
+  	return s
+  end
+
 end

@@ -110,6 +110,10 @@ ActiveAdmin.register Deudor do
   csv do
     column :cuenta_id
     column "Nombre" do |c| c.cuenta != nil && c.cuenta.nombre != nil ? c.cuenta.nombre : "" end
+    
+    column "Mail" do |c| c.cuenta != nil && c.cuenta.titular_mail : "" end
+    column "Celular" do |c| c.cuenta != nil && c.cuenta.titular_celular : "" end
+
     column "Convenio" do |c| c.cuenta != nil && c.cuenta.convenio != nil ? c.cuenta.convenio : "" end
     column :deuda360
     column :deuda180
