@@ -19,19 +19,21 @@ ActiveAdmin.register_page "Ejecutar" do
     fecha_vencimiento = fecha_facturacion + 9.days
     mes = fecha_vencimiento.month
     anio = fecha_vencimiento.year
+    cantidad = 1
 
     book = Spreadsheet::Workbook.new
     sheet = book.create_worksheet
 
     sheet.row(0).push  "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
-    #   Factura.where("fecha='#{fecha_facturacion}'").order(:cuenta_id).each do |x|
-    #     cuenta = x.cuenta_id
-    #     nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
-    #     importe = x.total
+    Factura.where("fecha='#{fecha_facturacion}'").order(:cuenta_id).each do |x|
+      cuenta = x.cuenta_id
+      nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
+      importe = x.total
 
-    #     f.write("#{anio};#{mes};0;#{cuenta};#{nombre};0;#{importe};#{fecha_vencimiento};#{fecha_facturacion};\r\n")
-    #   end
-    # end
+      sheet.row(cantidad).push "#{anio}","#{mes},"0","#{cuenta}","#{nombre}","0","#{importe}","#{fecha_vencimiento}","#{fecha_facturacion}"
+
+      cantidad = cantidad+1
+    end
 
     file_name = "redpafac.xls"
     file = Tempfile.new(file_name)
