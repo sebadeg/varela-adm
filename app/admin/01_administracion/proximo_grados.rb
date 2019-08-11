@@ -16,7 +16,7 @@ ActiveAdmin.register ProximoGrado do
   collection_action :clonar do
 
     ActiveRecord::Base.connection.execute(
-      "INSERT INTO proximo_grados (nombre,grado_id,sector_id,anio,created_at,updated_at) VALUES
+      "INSERT INTO proximo_grados (nombre,grado_id,sector_id,anio,created_at,updated_at) 
        SELECT nombre,grado_id,sector_id,anio+1,now(),now() FROM proximo_grados 
        WHERE anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL);" )
 
