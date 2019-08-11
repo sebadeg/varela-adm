@@ -11,27 +11,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
   end
 
-
   require 'spreadsheet'
-
-# create a new book and sheet
-
-
-5.times {|j| 5.times {|i| sheet[j,i] = (i+1)*10**j}}
-
-# column
-sheet.column(2).hidden = true
-sheet.column(3).hidden = true
-sheet.column(2).outline_level = 1
-sheet.column(3).outline_level = 1
-
-# row
-sheet.row(2).hidden = true
-sheet.row(3).hidden = true
-sheet.row(2).outline_level = 1
-sheet.row(3).outline_level = 1
-
-# save file
 
   page_action :sistarbanc, method: :post do   
 
@@ -40,10 +20,10 @@ sheet.row(3).outline_level = 1
     mes = fecha_vencimiento.month
     anio = fecha_vencimiento.year
 
-    book1 = Spreadsheet::Workbook.new
-    sheet1 = book1.create_worksheet
+    book = Spreadsheet::Workbook.new
+    sheet = book.create_worksheet
 
-    sheet1.row(0).push  "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
+    sheet.row(0).push  "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
     #   Factura.where("fecha='#{fecha_facturacion}'").order(:cuenta_id).each do |x|
     #     cuenta = x.cuenta_id
     #     nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
@@ -55,7 +35,7 @@ sheet.row(3).outline_level = 1
 
     file_name = "redpafac.xls"
     file = Tempfile.new(file_name)
-    book1.write file
+    book.write file
 
     send_file(
       file.path,
