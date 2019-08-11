@@ -2,7 +2,7 @@ ActiveAdmin.register Config do
 
   menu priority: 901, label: "Config", parent: "Soporte"
 
-  permit_params :id, :anio, :anio_pases
+  permit_params :id, :anio, :anio_pases, :anio_inscripciones, :fecha_facturacion
 
   index do
   	#selectable_column
