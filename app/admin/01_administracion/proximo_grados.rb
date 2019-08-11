@@ -11,7 +11,7 @@ ActiveAdmin.register ProximoGrado do
   	#selectable_column
     column :nombre
     column :precio
-    column "Grado" do |c| (c.grado != nil ? c.grado.nombre : "" ) end
+    column "Grado" do |c| (c.grado != nil ? "#{c.grado.nombre}" : "" ) end
     column :anio
     actions
   end
@@ -23,7 +23,7 @@ ActiveAdmin.register ProximoGrado do
     attributes_table do
       row :nombre
       row :precio
-      row "Grado" do |r| if r.grado != nil ? r.grado.nombre : "" end
+      row "Grado" do |c| (c.grado != nil ? "#{c.grado.nombre}" : "") end
       row :anio
     end
   end
@@ -32,7 +32,7 @@ ActiveAdmin.register ProximoGrado do
     f.inputs do
       f.input :nombre
       f.input :precio
-      f.input :grado_id, :as => :select, :collection => Grado.order(:nombre).map{|u| [u.nombre, u.id]}
+      f.input :grado_id, :label => 'Grado', :as => :select, :collection => Grado.order(:nombre).map{|u| [u.nombre, u.id]}
       f.input :anio
     end
     f.actions
