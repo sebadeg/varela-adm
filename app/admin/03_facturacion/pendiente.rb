@@ -1,7 +1,7 @@
 ActiveAdmin.register_page "Pendiente" do
 
-  menu priority: 304, label: "Pendiente", parent: "Facturación"
-
+  #menu priority: 304, label: "Pendiente", parent: "Facturación"
+  menu false
 
  
  
