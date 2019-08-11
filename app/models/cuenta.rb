@@ -12,10 +12,12 @@ class Cuenta < ApplicationRecord
   	s = ""
   	TitularCuenta.where("cuenta_id=#{id}").each do |tc|
       Usuario.where("id=#{tc.usuario_id}").each do |u|
-      	if s != ""
-      	  s = s + ","
-      	end
-      	s = s + u.email      	
+      	if u.email != nil
+          if s != ""
+        	  s = s + ","
+        	end
+        	s = s + u.email      	
+        end
       end	
   	end
   	return s
@@ -25,11 +27,13 @@ class Cuenta < ApplicationRecord
   	s = ""
   	TitularCuenta.where("cuenta_id=#{id}").each do |tc|
       Usuario.where("id=#{tc.usuario_id}").each do |u|
-      	if s != ""
-      	  s = s + ","
-      	end
-      	s = s + u.celular      	
-      end	
+        if u.celular != nil
+        	if s != ""
+        	  s = s + ","
+        	end
+        	s = s + u.celular      	
+        end	
+      end
   	end
   	return s
   end
