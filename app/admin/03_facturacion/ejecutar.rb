@@ -3,6 +3,14 @@ ActiveAdmin.register_page "Ejecutar" do
   menu priority: 301, label: "Ejecutar", parent: "Facturación"
 
 
+  page_action :recargos, method: :post do   
+  end
+
+  page_action :facturar, method: :post do   
+  end
+
+  page_action :sistarbanc, method: :post do   
+  end
 
   page_action :brou, method: :post do   
 
