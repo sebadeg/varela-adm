@@ -92,7 +92,7 @@ ActiveAdmin.register_page "Ejecutar" do
     cantidad = 0
     suma = 0
 
-    file_name = "brou.txt"
+    file_name = "BORU-DEBAUT4507.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
       Factura.where("cuenta_id IN (SELECT id FROM cuentas WHERE brou) AND fecha='#{fecha_facturacion}'").each do |x|
