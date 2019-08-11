@@ -56,12 +56,15 @@ es:
 
   activerecord:
     attributes:
-      inscripcion_opcion:
-        anio: "Año"
-        inscripcion_opcion_tipo_id: "Tipo"
       config:
         anio: "Año"
         anio_pases: "Pases del año"
+        anio_inscripciones: "Año de inscripciones"
+        fecha_facturacion: "Fecha de facturación"
+
+      inscripcion_opcion:
+        anio: "Año"
+        inscripcion_opcion_tipo_id: "Tipo"
       usuario:
         cedula: "Cédula"
         direccion: "Dirección"
