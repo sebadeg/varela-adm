@@ -40,10 +40,10 @@ sheet.row(3).outline_level = 1
     mes = fecha_vencimiento.month
     anio = fecha_vencimiento.year
 
-    book = Spreadsheet::Workbook.new
-    sheet = book.create_worksheet
+    book1 = Spreadsheet::Workbook.new
+    sheet1 = book1.create_worksheet
 
-    sheet.row(0).push  "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
+    sheet1.row(0).push  "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
     #   Factura.where("fecha='#{fecha_facturacion}'").order(:cuenta_id).each do |x|
     #     cuenta = x.cuenta_id
     #     nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
@@ -55,7 +55,7 @@ sheet.row(3).outline_level = 1
 
     file_name = "redpafac.xls"
     file = Tempfile.new(file_name)
-    book.write file
+    book1.write file
 
     send_file(
       file.path,
