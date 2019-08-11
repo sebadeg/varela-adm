@@ -30,7 +30,7 @@ ActiveAdmin.register_page "Ejecutar" do
       nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
       importe = x.total
 
-      sheet.row(cantidad).push "#{anio}","#{mes}","0","#{cuenta}","#{nombre}","0","#{importe}","#{fecha_vencimiento}","#{fecha_facturacion}"
+      sheet.row(cantidad).push anio,mes,0,cuenta,"#{nombre}",0,importe,fecha_vencimiento.strftime("%d/%m/%Y"),fecha_facturacion.strftime("%d/%m/%Y")
 
       cantidad = cantidad+1
     end
