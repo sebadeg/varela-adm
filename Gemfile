@@ -52,6 +52,7 @@ gem 'activeadmin_addons', '1.6'
 gem 'twitter-bootstrap-rails', '4.0'
 gem 'devise-bootstrap-views', '0.0.11'
 
+gem 'spreadsheet', '~> 1.2', '>= 1.2.4'
 gem 'dbf', '~> 3.1', '>= 3.1.1'
 gem 'roo', '~> 2.7', '>= 2.7.1'
 gem 'roo-xls', '~> 1.2'
