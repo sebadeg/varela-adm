@@ -24,13 +24,13 @@ ActiveAdmin.register_page "Ejecutar" do
     book = Spreadsheet::Workbook.new
     sheet = book.create_worksheet
 
-    sheet.row(0).push  "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
+    sheet.row(0).push "Año","Mes","Secuencial","Referencia","Nombre","Moneda","Importe","Fecha Vto.","Fecha Inicio"
     Factura.where("fecha='#{fecha_facturacion}'").order(:cuenta_id).each do |x|
       cuenta = x.cuenta_id
       nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
       importe = x.total
 
-      sheet.row(cantidad).push "#{anio}","#{mes},"0","#{cuenta}","#{nombre}","0","#{importe}","#{fecha_vencimiento}","#{fecha_facturacion}"
+      sheet.row(cantidad).push "#{anio}","#{mes}","0","#{cuenta}","#{nombre}","0","#{importe}","#{fecha_vencimiento}","#{fecha_facturacion}"
 
       cantidad = cantidad+1
     end
