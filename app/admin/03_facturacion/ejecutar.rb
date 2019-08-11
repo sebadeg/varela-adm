@@ -23,7 +23,7 @@ ActiveAdmin.register_page "Ejecutar" do
     File.open(file, "w+") do |f|
 
       f.write("Año;Mes;Secuencial;Referencia;Nombre;Moneda;Importe;Fecha Vto.;Fecha Inicio;\r\n")
-      Factura.where("fecha='#{fecha_facturacion}'").each do |x|
+      Factura.where("fecha='#{fecha_facturacion}'").order(:cuenta_id).each do |x|
         cuenta = x.cuenta_id
         nombre = Cuenta.where("id=#{x.cuenta_id}").first.nombre
         importe = x.total
