@@ -1,6 +1,7 @@
 ActiveAdmin.register_page "Mapa_secundaria" do
 
-  menu priority: 1208, label: "Secundaria Montevideo", parent: 'Otros'
+  menu false  
+  #menu priority: 1208, label: "Secundaria Montevideo", parent: 'Otros'
 
   content do
    

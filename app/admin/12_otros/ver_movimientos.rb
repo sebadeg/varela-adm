@@ -1,6 +1,7 @@
 ActiveAdmin.register_page "Ver_Movimiento" do
 
-  menu priority: 205, label: "Vista previa", parent: "Cuenta Corriente"
+  menu false  
+  #menu priority: 205, label: "Vista previa", parent: "Cuenta Corriente"
 
   page_action :ver, method: :post do
     Temp.create(usuario_id: current_admin_usuario.id, temp_id: params[:cuenta_id] )

@@ -1,6 +1,7 @@
 ActiveAdmin.register_page "Mapa_costa" do
 
-  menu priority: 1206, label: "Secundaria Costa", parent: 'Otros'
+  menu false  
+  #menu priority: 1206, label: "Secundaria Costa", parent: 'Otros'
 
   content do
    
