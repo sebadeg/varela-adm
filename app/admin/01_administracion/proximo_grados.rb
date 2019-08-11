@@ -7,6 +7,23 @@ ActiveAdmin.register ProximoGrado do
   scope :todos
   scope :corrientes
 
+
+  scope :corrientes, -> { where() }
+  action_item :clonar, only: :index do
+    link_to "Clonar año siguiente", clonar_admin_proximo_grados_path
+  end
+
+  collection_action :clonar do
+
+    ActiveRecord::Base.connection.execute(
+      "INSERT INTO proximo_grados (nombre,grado_id,sector_id,anio,created_at,updated_at) VALUES
+       SELECT nombre,grado_id,sector_id,anio+1,now(),now() FROM proximo_grados 
+       WHERE anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL);" )
+
+  end
+
+
+
   index do
   	#selectable_column
     column :nombre
