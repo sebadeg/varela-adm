@@ -23,7 +23,7 @@ ActiveAdmin.register ProximoGrado do
     attributes_table do
       row :nombre
       row :precio
-      row :grado
+      row "Grado" do |r| if r.grado != nil ? r.grado.nombre : "" end
       row :anio
     end
   end
@@ -32,7 +32,7 @@ ActiveAdmin.register ProximoGrado do
     f.inputs do
       f.input :nombre
       f.input :precio
-      f.input :grado
+      f.input :grado_id, :as => :select, :collection => Grado.order(:nombre).map{|u| [u.nombre, u.id]}
       f.input :anio
     end
     f.actions
