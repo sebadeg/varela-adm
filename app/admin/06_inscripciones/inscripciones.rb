@@ -88,7 +88,7 @@ ActiveAdmin.register Inscripcion do
     attributes_table title:"Nivel" do
       row "Grado" do |r| (r.proximo_grado != nil ? "#{r.proximo_grado.nombre} - $U #{r.proximo_grado.precio}" : "") end      
       row "Convenio" do |r| (r.convenio != nil ? "#{r.convenio.nombre} - #{r.convenio.valor}%" : "") end
-      row "Formulario" do |r| ( (formulario = Convenio.find(r.formulario)) != nil ? "#{formulario.nombre} - #{formulario.valor}%" : "") end
+      row "Formulario" do |r| ( (formulario = Convenio.find(r.formulario) rescue nil) != nil ? "#{formulario.nombre} - #{formulario.valor}%" : "") end
       row :afinidad
       row "Matrícula" do |r| find([["Contado",5],["Exonerada",6]],r.matricula) end
       row "Hermanos" do |r| find([["Sin hermanos",0],["1 hermano - 5%",1],["2 hermanos - 10%",2]],r.hermanos) end
