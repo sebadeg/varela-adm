@@ -39,6 +39,8 @@ ActiveAdmin.register Inscripcion do
     column :nombre
     column :apellido
     column :cedula
+    column :cuenta_id
+    column :alumno_id
     column :anio
     actions
   end
@@ -48,6 +50,8 @@ ActiveAdmin.register Inscripcion do
   filter :cedula
   filter :reinscripcion
   filter :anio
+  filter :cuenta_id
+  filter :alumno_id
 
   show do
 
@@ -69,6 +73,8 @@ ActiveAdmin.register Inscripcion do
     attributes_table title:"Alumno" do
       row :nombre
       row :apellido
+      row :cuenta_id
+      row :alumno_id
       row 'Cédula' do |r| r.cedula end
       row 'Lugar de nacimiento' do |r| r.lugar_nacimiento end
       row 'Fecha de nacimiento' do |r| r.fecha_nacimiento end
