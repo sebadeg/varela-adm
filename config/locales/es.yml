@@ -67,7 +67,6 @@ es:
         inscripcion_opcion_tipo_id: "Tipo"
       inscripciones:
         anio: "Año"
-
       usuario:
         cedula: "Cédula"
         direccion: "Dirección"

@@ -49,7 +49,6 @@ ActiveAdmin.register Inscripcion do
   filter :reinscripcion
   filter :anio
 
-
   show do
 
     def find(arr,v)
