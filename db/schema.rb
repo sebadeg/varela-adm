@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_121347) do
+ActiveRecord::Schema.define(version: 2019_08_15_170200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -413,6 +413,12 @@ ActiveRecord::Schema.define(version: 2019_08_15_121347) do
     t.datetime "bajado"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
     t.index ["mail"], name: "index_facturas_on_mail"
+  end
+
+  create_table "formulario_alumnos", force: :cascade do |t|
+    t.integer "formulario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "formulario_inscripcion_opciones", force: :cascade do |t|
