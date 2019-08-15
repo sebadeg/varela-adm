@@ -324,6 +324,7 @@ DEPENDENCIES
   roo-xls (~> 1.2)
   rubyzip (~> 1.2, >= 1.2.2)
   sass-rails (~> 5.0)
+  spreadsheet (~> 1.2, >= 1.2.4)
   sprockets (~> 3.5, >= 3.5.2)
   turbolinks (~> 5)
   twitter-bootstrap-rails (= 4.0)

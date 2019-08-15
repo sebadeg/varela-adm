@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_214928) do
+ActiveRecord::Schema.define(version: 2019_08_15_121347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -490,6 +490,14 @@ ActiveRecord::Schema.define(version: 2019_08_11_214928) do
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
   end
 
+  create_table "inscripcion_opcion_alumnos", force: :cascade do |t|
+    t.bigint "inscripcion_opcion_id"
+    t.integer "cedula"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_alumnos_on_inscripcion_opcion_id"
+  end
+
   create_table "inscripcion_opcion_tipos", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -506,6 +514,8 @@ ActiveRecord::Schema.define(version: 2019_08_11_214928) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "general"
+    t.integer "orden"
+    t.integer "valor_ent"
     t.index ["inscripcion_opcion_tipo_id"], name: "index_inscripcion_opciones_on_inscripcion_opcion_tipo_id"
   end
 
@@ -578,6 +588,11 @@ ActiveRecord::Schema.define(version: 2019_08_11_214928) do
     t.boolean "inhabilitado"
     t.date "fecha_pase"
     t.string "destino_pase"
+    t.integer "formulario_id"
+    t.integer "adicional_id"
+    t.integer "hermanos_id"
+    t.integer "cuotas_id"
+    t.integer "matricula_id"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
@@ -1053,6 +1068,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_214928) do
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripcion_opcion_alumnos", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "convenios"
   add_foreign_key "inscripciones", "grados"
