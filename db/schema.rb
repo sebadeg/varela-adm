@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_170200) do
+ActiveRecord::Schema.define(version: 2019_08_16_115703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,9 +416,11 @@ ActiveRecord::Schema.define(version: 2019_08_15_170200) do
   end
 
   create_table "formulario_alumnos", force: :cascade do |t|
-    t.integer "formulario"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "formulario_id"
+    t.integer "cedula"
+    t.index ["formulario_id"], name: "index_formulario_alumnos_on_formulario_id"
   end
 
   create_table "formulario_inscripcion_opciones", force: :cascade do |t|
@@ -599,6 +601,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_170200) do
     t.integer "hermanos_id"
     t.integer "cuotas_id"
     t.integer "matricula_id"
+    t.string "apellido1"
+    t.string "apellido2"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
@@ -1066,6 +1070,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_170200) do
   add_foreign_key "especial_cuentas", "especiales"
   add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
+  add_foreign_key "formulario_alumnos", "formularios"
   add_foreign_key "formulario_inscripcion_opciones", "formularios"
   add_foreign_key "formulario_inscripcion_opciones", "inscripcion_opciones"
   add_foreign_key "formularios", "proximo_grados"
