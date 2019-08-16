@@ -41,7 +41,7 @@ ActiveAdmin.register Movimiento do
          f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe-mov.haber};#{mov.cuenta_id};#{mov.rubro_haber};\r\n")
       end
       Movimiento.where("debe-haber<0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
-         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe-mov.haber};#{mov.rubro_haber};#{mov.cuenta_id};\r\n")
+         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.haber-mov.debe};#{mov.rubro_haber};#{mov.cuenta_id};\r\n")
       end
     end
     send_file(
