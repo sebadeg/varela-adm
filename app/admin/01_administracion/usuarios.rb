@@ -96,9 +96,6 @@ ActiveAdmin.register Usuario do
         format.html { redirect_to collection_path } if resource.valid?
       end
     end
-
-  end
-
   end  
 
 end
