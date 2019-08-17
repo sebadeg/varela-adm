@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_145500) do
+ActiveRecord::Schema.define(version: 2019_08_17_224049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1002,6 +1002,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_145500) do
     t.integer "cuenta_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "anio"
     t.index ["cuenta_id"], name: "index_titular_cuentas_on_cuenta_id"
     t.index ["usuario_id"], name: "index_titular_cuentas_on_usuario_id"
   end
@@ -1044,6 +1045,11 @@ ActiveRecord::Schema.define(version: 2019_08_17_145500) do
     t.boolean "titular"
     t.boolean "factura"
     t.boolean "habilitado"
+    t.string "lugar_nacimiento"
+    t.date "fecha_nacimiento"
+    t.string "profesion"
+    t.string "trabajo"
+    t.string "telefono_trabajo"
     t.index ["cedula"], name: "index_usuarios_on_cedula", unique: true
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true

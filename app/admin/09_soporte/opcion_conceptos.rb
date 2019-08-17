@@ -2,7 +2,7 @@ ActiveAdmin.register OpcionConcepto do
 
   permit_params :id, :nombre
 
-  menu priority: 907, label: "´Concepto de actividades", parent: "Soporte"
+  menu priority: 907, label: "Concepto de actividades", parent: "Soporte"
 
   index do
   	#selectable_column
