@@ -2,7 +2,7 @@ ActiveAdmin.register Movimiento do
 
   config.sort_order = 'indice_asc'
 
-  permit_params :fecha, :cuenta_id, :alumno, :descripcion, :tipo_movimiento_id, :debe, :haber
+  permit_params :fecha, :cuenta_id, :alumno, :descripcion, :tipo_movimiento_id, :debe, :haber, rubro_id
 
   menu priority: 201, label: "Movimientos", parent: "Cuenta Corriente"
 

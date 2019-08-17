@@ -1,6 +1,6 @@
 ActiveAdmin.register SectorAlumno do
 
-  permit_params :id, :nombre
+  permit_params :id, :sectro_id, alumno_id
 
   menu priority: 906, label: "Alumnos por Sector", parent: "Soporte"
 
