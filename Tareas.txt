@@ -7,7 +7,8 @@ Inscripcion:
     Generar el usuario de padre/madre/titulares
 	Generar titular-cuenta
 	Generar padre-alumnos
-	Generar o cambiar sector-alumno
+	
+	poner sector en grado y entonces se puede calcular el sector con las inscripciones
 
 	Generar password de usuario
 	Enviar mail de bienvenida
