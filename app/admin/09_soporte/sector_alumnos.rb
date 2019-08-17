@@ -7,7 +7,7 @@ ActiveAdmin.register SectorAlumno do
   index do
   	#selectable_column
     column "Sector" do |c| (c.sector != nil ? "#{c.sector.nombre}" : "" ) end
-    column "Alumno" do |c| (c.alumno != nil ? "#{c.id} - #{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
+    column "Alumno" do |c| (c.alumno != nil ? "#{c.alumno.id} - #{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
     column :anio
     actions
   end
@@ -15,7 +15,7 @@ ActiveAdmin.register SectorAlumno do
   show do
     attributes_table do
       row "Sector" do |c| (c.sector != nil ? "#{c.sector.nombre}" : "" ) end
-      row "Alumno" do |c| (c.alumno != nil ? "#{c.id} - #{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
+      row "Alumno" do |c| (c.alumno != nil ? "#{c.alumno.id} - #{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
       row :anio
     end
   end
