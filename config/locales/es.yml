@@ -112,6 +112,8 @@ es:
         deuda60: "> 60"
         deuda30: "> 30"
         deuda0: "> 0"
+      sector_alumno:
+        anio: "Año"
       proximo_grado:
         anio: "Año"
         
