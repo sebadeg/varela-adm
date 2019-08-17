@@ -1,4 +1,4 @@
-ActiveAdmin.register Sector do
+ActiveAdmin.register SectorAlumno do
 
   permit_params :id, :nombre
 
