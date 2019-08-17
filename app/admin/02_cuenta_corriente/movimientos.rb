@@ -34,22 +34,40 @@ ActiveAdmin.register Movimiento do
 
   collection_action :exportar_saico do
 
-    file_name = "movimientos.csv"
-    file = Tempfile.new(file_name)    
-    File.open(file, "w+") do |f|
-      Movimiento.where("debe-haber>=0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
-         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe-mov.haber};#{mov.cuenta_id};#{mov.rubro_haber};\r\n")
-      end
-      Movimiento.where("debe-haber<0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
-         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.haber-mov.debe};#{mov.rubro_haber};#{mov.cuenta_id};\r\n")
-      end
-    end
-    send_file(
-      file.path,
-      filename: file_name,
-      type: "application/csv"
-    )
-    
+    # cantidad = 1
+    # book = Spreadsheet::Workbook.new
+    # sheet = book.create_worksheet
+    # sheet.row(0).push "FechaMov","TipoAsiento","NroCuenta","Detalle","TipoImputacion","ImporteMn","Cotizacion","ImporteMe","Concepto1","Referencia1","Fecha1","Cantidad1","Concepto2","Referencia2","Fecha2","Cantidad2","Concepto3","Referencia3","Fecha3","Cantidad3","Moneda","NroTrf"
+    # Movimiento.where("debe-haber>=0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
+    #   sheet.row(cantidad).push ...
+    #   cantidad = cantidad+1
+    # end
+    # Movimiento.where("debe-haber<0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
+    #   sheet.row(cantidad).push ...
+    #   cantidad = cantidad+1
+    # end
+    # file_name = "asientos.xls"
+    # file = Tempfile.new(file_name)
+    # book.write file
+
+
+    # file_name = "movimientos.csv"
+    # file = Tempfile.new(file_name)    
+    # File.open(file, "w+") do |f|
+    #   Movimiento.where("debe-haber>=0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
+    #      f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe-mov.haber};#{mov.cuenta_id};#{mov.rubro};\r\n")
+    #   end
+    #   Movimiento.where("debe-haber<0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
+    #     f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.haber-mov.debe};#{mov.rubro};#{mov.cuenta_id};\r\n")
+    #     cantidad = cantidad+1
+    #   end
+    # end   
+    # send_file(
+    #   file.path,
+    #   filename: file_name,
+    #   type: "application/csv"
+    # )
+
   end
 
 

@@ -2,7 +2,7 @@ ActiveAdmin.register Usuario do
 
   menu priority: 104, label: "Padres", parent: "Administración"
 
-  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation
+  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation, :habilitado
 
   action_item :contrasena, only: :show do
     link_to "Resetear Contraseña", contrasena_admin_usuario_path(usuario), method: :put 
@@ -34,7 +34,7 @@ ActiveAdmin.register Usuario do
     column :email
     column :direccion
     column :celular
-
+    column :habilitado
     actions
   end
 
@@ -51,7 +51,7 @@ ActiveAdmin.register Usuario do
       row :email
       row :direccion
       row :celular
-      row :passwd
+      row :habilitado
     end
   end
 
@@ -64,6 +64,7 @@ ActiveAdmin.register Usuario do
       f.input :email
       f.input :direccion
       f.input :celular
+      f.input :habilitado
       f.input :passwd
       f.input :password
       f.input :password_confirmation
