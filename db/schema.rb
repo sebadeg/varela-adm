@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_140232) do
+ActiveRecord::Schema.define(version: 2019_08_17_145500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -698,8 +698,8 @@ ActiveRecord::Schema.define(version: 2019_08_17_140232) do
     t.integer "actividad_alumno_opcion"
     t.bigint "especial_id"
     t.bigint "tipo_movimiento_id"
-    t.integer "rubro"
     t.bigint "rubro_id"
+    t.datetime "fecha_exportado"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
