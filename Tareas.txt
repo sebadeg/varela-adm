@@ -1,12 +1,10 @@
 
 
 
+
 Autorizaciones de actividades
 
 	impactar en la cuenta corriente
-
-
-Inscribir y Reinscribir sean lo mismo
 
 Inscripcion:
 	te debe generar un numero de cuenta y un numero de alumno, teniendo en cuenta que puede ser una cuenta que ya existe
@@ -15,6 +13,7 @@ Inscripcion:
 	Generar cuenta-alumno
 	Generar usuario
 	Generar titular-cuenta
+	Generar sector-alumno
 
 	Generar password de usuario
 	Enviar mail de bienvenida
