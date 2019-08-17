@@ -83,6 +83,9 @@ ActiveAdmin.register Usuario do
     end
 
     def update
+      if params[:usuario][:password].blank?
+        %w(password password_confirmation).each { |p| params[:usuario].delete(p) }
+      end
       update! do |format|
         format.html { redirect_to collection_path } if resource.valid?
       end
@@ -93,6 +96,8 @@ ActiveAdmin.register Usuario do
         format.html { redirect_to collection_path } if resource.valid?
       end
     end
+
+  end
 
   end  
 
