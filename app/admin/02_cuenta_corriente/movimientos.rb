@@ -78,6 +78,7 @@ ActiveAdmin.register Movimiento do
     column "Cuenta", :cuenta_id, sortable: false
     column "Alumno", :alumno, sortable: false
     column "Descripción", :descripcion, sortable: false
+    column "Rubro" do |c| (c.rubro != nil ? "#{c.rubro.nombre}" : "" ) end
     column "Debe", :debe, sortable: false
     column "Haber", :haber, sortable: false
     column "Saldo", :saldo, sortable: false
@@ -96,6 +97,8 @@ ActiveAdmin.register Movimiento do
       row :cuenta_id
       row :alumno
       row :descripcion
+      row "Rubro" do |c| (c.rubro != nil ? "#{c.rubro.nombre}" : "" ) end
+
       row :debe
       row :haber
     end
@@ -106,10 +109,8 @@ ActiveAdmin.register Movimiento do
       f.input :fecha
       f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
       f.input :alumno, :label => "Alumno", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
-      f.input :tipo_movimiento_id, :label => "Tipo", :as => :select, :collection => TipoMovimiento.all.order(:nombre).map{|u| [u.nombre, u.id]}
-      f.input "Rubro" do |c| (c.rubro != nil ? "#{c.rubro.nombre}" : "" ) end
-
       f.input :descripcion
+      f.input :rubro_id, :label => 'Rubro', :as => :select, :collection => Rubro.order(:nombre).map{|u| [u.nombre, u.id]}
       f.input :debe
       f.input :haber
     end
