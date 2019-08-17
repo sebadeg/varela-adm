@@ -54,23 +54,11 @@ ActiveAdmin.register Movimiento do
     file = Tempfile.new(file_name)
     book.write file
 
-
-    # file_name = "movimientos.csv"
-    # file = Tempfile.new(file_name)    
-    # File.open(file, "w+") do |f|
-    #   Movimiento.where("debe-haber>=0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
-    #      f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe-mov.haber};#{mov.cuenta_id};#{mov.rubro};\r\n")
-    #   end
-    #   Movimiento.where("debe-haber<0 AND fecha>='2019-01-01' AND rubro_haber!=0").order(:fecha,:cuenta_id).each do |mov|
-    #     f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.haber-mov.debe};#{mov.rubro};#{mov.cuenta_id};\r\n")
-    #     cantidad = cantidad+1
-    #   end
-    # end   
-    # send_file(
-    #   file.path,
-    #   filename: file_name,
-    #   type: "application/csv"
-    # )
+    send_file(
+      file.path,
+      filename: file_name,
+      type: "application/xls"
+    )
 
   end
 
