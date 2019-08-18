@@ -38,6 +38,23 @@ class Inscripcion < ApplicationRecord
   validate :documento1_digit
   validate :documento2_digit
 
+  def self.calc_cedula_digit(cedula)
+    if cedula == nil || cedula == ""
+      return false
+    end
+    cedula = cedula.to_i
+    suma = 0
+    arr = [4,3,6,7,8,9,2]
+    digit = cedula%10 
+    c = cedula/10
+    (0..6).each do |i|
+       r = c%10
+       c = c/10
+       suma = (suma + r*arr[i]) % 10
+    end
+    return digit == ((10-(suma%10))%10)
+  end
+
   def calc_cedula(ced)
     if ( ced == nil )      
       return true

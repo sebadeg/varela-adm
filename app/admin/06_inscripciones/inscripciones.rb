@@ -71,7 +71,7 @@ ActiveAdmin.register Inscripcion do
       row :cuenta_id
       row :alumno_id
       row :lugar_nacimiento
-      row fecha_nacimiento
+      row :fecha_nacimiento
       row :domicilio
       row :celular
       row :mutualista
@@ -220,6 +220,39 @@ ActiveAdmin.register Inscripcion do
       f.input :celular2
     end
     f.actions
+  end
+
+
+  controller do
+
+    def create
+      p params
+      
+      if Inscripcion.calc_cedula_digit(params[:inscripcion][:cedula])
+        alumno = Alumno.find_or_create_by(cedula: params[:inscripcion][:cedula])
+        alumno.nombre = params[:inscripcion][:nombre]
+        alumno.apellido = params[:inscripcion][:apellido]
+        alumno.lugar_nacimiento = params[:inscripcion][:lugar_nacimiento]
+        alumno.fecha_nacimiento = params[:inscripcion][:fecha_nacimiento]
+        alumno.domicilio = params[:inscripcion][:domicilio]
+        alumno.celular = params[:inscripcion][:celular]
+        alumno.mutualista = params[:inscripcion][:mutualista]
+        alumno.emergencia = params[:inscripcion][:emergencia]
+        alumno.precede = params[:inscripcion][:precede]
+        alumno.save!
+      end
+
+      super
+    end
+
+    def update
+      p params
+
+      p permitted_params
+
+      super
+    end
+    
   end
 
 end
