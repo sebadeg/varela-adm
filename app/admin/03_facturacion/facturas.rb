@@ -27,7 +27,7 @@ ActiveAdmin.register Factura do
     column :dolar
 
     actions defaults: false do |u|
-      item "Descargar", descargar_admin_lista_path(u), class: "member_link", method: :put, title: "Descargar"
+      item "Descargar", descargar_admin_factura_path(u), class: "member_link", method: :put, title: "Descargar"
     end
   end
 
