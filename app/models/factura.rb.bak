@@ -17,8 +17,6 @@ class Factura < ApplicationRecord
 
     def imprimir(file_path,cuenta_id,factura)
 
-      dolar = factura.dolar
-
       s = factura.fecha.strftime('%Y%m') + 
         factura.id.to_s.rjust(6,'0') +
         cuenta_id.to_s.rjust(5,'0') + 
@@ -33,8 +31,8 @@ class Factura < ApplicationRecord
       lineas = LineaFactura.where( "factura_id=#{factura.id}" ).order(:indice)
       cuenta = Cuenta.find(cuenta_id)
 
-   	  text_file = Tempfile.new("text.pdf")
- 	    text_file_path = text_file.path
+      text_file = Tempfile.new("text.pdf")
+      text_file_path = text_file.path
       template_file = Rails.root.join("data", 'factura.pdf')
 
       i = 606 
@@ -45,13 +43,13 @@ class Factura < ApplicationRecord
       barcode = Barby::Code128B.new(codigo_barras)
       #barcode = Barby::Code39.new(codigo_barras, true)
 
- 	    barcode_file = Tempfile.new("barcode.png")
+      barcode_file = Tempfile.new("barcode.png")
         File.open(barcode_file.path, 'wb') do |f|
-		    f.write barcode.to_png(:height => 15, :margin => 0)
-	    end
+        f.write barcode.to_png(:height => 15, :margin => 0)
+      end
 
       Prawn::Document.generate(text_file_path) do
-
+        
         text_box "Titular", :at => [190, 710]
         text_box "Cuenta", :at => [190, 710-renglon]
         text_box "Factura", :at => [190, 710-2*renglon]
@@ -74,28 +72,12 @@ class Factura < ApplicationRecord
         indice = 1
         lineas.each do |linea|
 
-          bounding_box([10, i-indice*renglon], :width => 160, :height => renglon) do
-            text_box linea.nombre_alumno, align: :left
-            transparent(0) { stroke_bounds }
-          end
-
+          text_box linea.nombre_alumno, :at => [10, i-indice*renglon]
           text_box "", :at => [190, i-indice*renglon]
-
-          #text_box linea.descripcion, :at => [280, i-indice*renglon]
-          bounding_box([280, i-indice*renglon], :width => 160, :height => renglon) do
-            text_box linea.descripcion, align: :left
-            transparent(0) { stroke_bounds }
-          end
-
-
+          text_box linea.descripcion, :at => [280, i-indice*renglon]
 
           bounding_box([450, i-indice*renglon], :width => 70, :height => renglon) do
-           if dolar == nil
-              text_box linea.importe.to_s, align: :right
-            else
-              text_box "US$", align: :left
-              text_box (linea.importe/dolar).round(1).to_s, align: :right
-            end
+           text_box linea.importe.to_s, align: :right
            transparent(0) { stroke_bounds }
           end
 
@@ -104,12 +86,7 @@ class Factura < ApplicationRecord
 
         text_box "Total", :at => [200, 145]
         bounding_box([320, 145], :width => 200, :height => renglon) do
-          if dolar == nil
-            text_box factura.total.to_s, align: :right
-          else
-            text_box "US$", align: :left
-            text_box (factura.total/dolar).round(1).to_s, align: :right
-          end
+          text_box factura.total.to_s, align: :right
           transparent(0) { stroke_bounds }
         end
 
@@ -134,11 +111,7 @@ class Factura < ApplicationRecord
         text_box "Factura", :at => [20+2*delta, 33], size:8
         text_box cuenta_id.to_s, :at => [20+3*delta, 33], size:8
         text_box factura.id.to_s, :at => [20+4*delta, 33], size:8
-        if ( dolar == nil )
-          text_box "UYU", :at => [20+5*delta, 33], size:8
-        else
-          text_box "USD", :at => [20+5*delta, 33], size:8
-        end
+        text_box "UYU", :at => [20+5*delta, 33], size:8
         text_box factura.total.to_s , :at => [20+6*delta, 33], size:8
       end
 
@@ -147,8 +120,9 @@ class Factura < ApplicationRecord
       pdf.pages.each {|page| page <<  CombinePDF.load(text_file_path).pages[0]}
       pdf.save file_path
 
-	    text_file.unlink
-	    barcode_file.unlink
+      text_file.unlink
+      barcode_file.unlink
 
     end
+
 end

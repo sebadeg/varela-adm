@@ -1,4 +1,20 @@
 
+Me faltan chequear que esten bien los alumnos en los grados
+
+Faltan generar listas para 2020
+Falta sacar las listas del año anterior
+
+Para 2021
+Faltan sacar los alumnos que no cursan 2020
+Faltan pasar los alumnos de 2020 a inscripciones de 2021
+
+
+
+
+
+
+
+
 Inscripcion:
 	te debe generar un numero de cuenta y un numero de alumno, teniendo en cuenta que puede ser una cuenta que ya existe
 	Generar alumno (esto puede no ser necesario si es un reingreso)
