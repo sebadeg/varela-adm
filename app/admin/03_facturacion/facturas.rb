@@ -7,7 +7,7 @@ ActiveAdmin.register Factura do
     if factura != nil
       file_name = "factura_#{factura.cuenta_id}_#{factura.id}.pdf"
       file = Tempfile.new(file_name)
-      factura.imprimir(file.path,cuenta_id,factura)
+      factura.imprimir(file.path,factura.cuenta_id,factura)
 
       send_file(
         file.path,
