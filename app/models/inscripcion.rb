@@ -1,11 +1,5 @@
 class Inscripcion < ApplicationRecord
   belongs_to :proximo_grado
-  belongs_to :formulario
-  belongs_to :convenio, class_name: "InscripcionOpcion"
-  belongs_to :adicional, class_name: "InscripcionOpcion"
-  belongs_to :matricula, class_name: "InscripcionOpcion"
-  belongs_to :hermanos, class_name: "InscripcionOpcion"
-  belongs_to :cuotas, class_name: "InscripcionOpcion"
 
   scope :todos, -> { all }
   scope :inscripciones, -> { where("NOT reinscripcion AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)") }
@@ -121,6 +115,30 @@ class Inscripcion < ApplicationRecord
    
     return inscripcion
 
+  end
+
+  def Formulario() 
+    return ""
+  end
+
+  def Convenio() 
+    return ""
+  end
+
+  def Adicional() 
+    return ""
+  end
+
+  def Matricula() 
+    return ""
+  end
+
+  def Hermanos() 
+    return ""
+  end
+
+  def Cuotas() 
+    return ""
   end
 
   def PuedeInscribir()

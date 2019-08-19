@@ -84,12 +84,12 @@ ActiveAdmin.register Inscripcion do
       row :recibida
       row :anio
       row "Grado" do |r| (r.proximo_grado != nil ? "#{r.proximo_grado.nombre} - $U #{r.proximo_grado.precio}" : "") end      
-      row "Formulario" do |r| (r.formulario != nil ? "#{r.formulario.nombre}" : "") end
-      row "Convenio" do |r| (r.convenio != nil ? "#{r.convenio.nombre_completo}" : "") end
-      row "Adicional" do |r| (r.adicional != nil ? "#{r.adicional.nombre_completo}" : "") end
-      row "Matrícula" do |r| (r.matricula != nil ? "#{r.matricula.nombre_completo}" : "") end
-      row "Hermanos" do |r| (r.hermanos != nil ? "#{r.hermanos.nombre_completo}" : "") end
-      row "Cuotas" do |r| (r.cuotas != nil ? "#{r.cuotas.nombre_completo}" : "") end
+      row "Formulario" do |r| r.Formulario() end
+      row "Convenio" do |r| r.Convenio() end
+      row "Adicional" do |r| r.Adicional() end
+      row "Matrícula" do |r| r.Matricula() end
+      row "Hermanos" do |r| r.Hermanos() end
+      row "Cuotas" do |r| r.Cuotas() end
 
       row "Precio" do |r| r.CalcularPrecioToStr() end
     end
@@ -166,11 +166,11 @@ ActiveAdmin.register Inscripcion do
       f.input :anio
       f.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]}
       f.input :formulario_id, :label => 'Formulario', :as => :select, :collection => Formulario.all.map{|c| ["#{c.nombre}", c.id]}
-      f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Convenio' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :adicional_id, :label => 'Adicional', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Adicional' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :matricula_id, :label => 'Matrícula', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Matrícula' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :hermanos_id, :label => 'Hermanos', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Hermanos' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :cuota_id, :label => 'Cuotas', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Cuotas' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+      f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+      f.input :adicional_id, :label => 'Adicional', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+      f.input :matricula_id, :label => 'Matrícula', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Matrícula' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+      f.input :hermanos_id, :label => 'Hermanos', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+      f.input :cuota_id, :label => 'Cuotas', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
     end
     
     f.inputs "Padre" do
