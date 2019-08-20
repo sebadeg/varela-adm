@@ -29,7 +29,6 @@ class Inscripcion < ApplicationRecord
   validate :cedula_padre_digit
   validate :cedula_madre_digit
   validate :documento1_digit
-  validate :documento1_digit
   validate :documento2_digit
 
   def self.calc_cedula_digit(cedula)
