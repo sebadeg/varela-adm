@@ -290,18 +290,29 @@ ActiveAdmin.register Inscripcion do
         alumno.save!
       end
 
-      create! do |format|
-        format.html { redirect_to collection_path } if resource.valid?
-      end
+      create!
     end
 
 
     def update
       p params
       p permitted_params
-      update! do |format|
-        format.html { redirect_to collection_path } if resource.valid?
+
+      if Inscripcion.calc_cedula_digit(params[:inscripcion][:cedula])
+        alumno = Alumno.find_or_create_by(cedula: params[:inscripcion][:cedula])
+        alumno.nombre = params[:inscripcion][:nombre]
+        alumno.apellido = params[:inscripcion][:apellido]
+        alumno.lugar_nacimiento = params[:inscripcion][:lugar_nacimiento]
+        alumno.fecha_nacimiento = params[:inscripcion][:fecha_nacimiento]
+        alumno.domicilio = params[:inscripcion][:domicilio]
+        alumno.celular = params[:inscripcion][:celular]
+        alumno.mutualista = params[:inscripcion][:mutualista]
+        alumno.emergencia = params[:inscripcion][:emergencia]
+        alumno.precede = params[:inscripcion][:precede]
+        alumno.save!
       end
+      
+      update!
     end
     
   end
