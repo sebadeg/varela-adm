@@ -290,7 +290,7 @@ ActiveAdmin.register Inscripcion do
         alumno.save!
       end
 
-      super
+      create!
     end
 
     def update
@@ -298,7 +298,7 @@ ActiveAdmin.register Inscripcion do
 
       p permitted_params
 
-      super
+      update!
     end
     
   end
