@@ -65,7 +65,7 @@ es:
       inscripcion_opcion:
         anio: "Año"
         inscripcion_opcion_tipo_id: "Tipo"
-      inscripciones:
+      inscripcion:
         anio: "Año"
         cedula: "Cédula"
         lugar_nacimiento: "Lugar de nacimiento"
