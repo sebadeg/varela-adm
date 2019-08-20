@@ -192,10 +192,10 @@ ActiveAdmin.register Inscripcion do
   end
 
   form do |f|    
-    if f.object.new_record?
-      f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
-      f.input :reinscripcion, input_html: { value: false }, as: :hidden
-    end
+    # if f.object.new_record?
+    #   f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
+    #   f.input :reinscripcion, input_html: { value: false }, as: :hidden
+    # end
 
     f.inputs "Alumno" do
       f.input :nombre
