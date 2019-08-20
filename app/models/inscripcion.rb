@@ -120,8 +120,8 @@ class Inscripcion < ApplicationRecord
     return ""
   end
 
-  def FindInscripcionOpcion(id) 
-    inscripcionOpcion = InscripcionOpcion.Find(id) rescue nil
+  def FindInscripcionOpcion(inscripcionOpcion) 
+    inscripcionOpcion = InscripcionOpcion.where("id = #{inscripcionOpcion}").first rescue nil
     if inscripcionOpcion == nil
       return ""
     else
