@@ -290,15 +290,18 @@ ActiveAdmin.register Inscripcion do
         alumno.save!
       end
 
-      create!
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
     end
+
 
     def update
       p params
-
       p permitted_params
-
-      update!
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
     end
     
   end
