@@ -10,77 +10,77 @@ ActiveAdmin.register Inscripcion do
     :nombre1,:apellido1,:documento1,:domicilio1,:email1,:celular1,
     :nombre2,:apellido2,:documento2,:domicilio2,:email2,:celular2
 
-  scope :todos
-  scope :inscripciones
-  scope :reinscripciones
+  # scope :todos
+  # scope :inscripciones
+  # scope :reinscripciones
 
 
 
-  action_item :habilitar, only: :show do
-    if inscripcion.inhabilitado
-      link_to "Habilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put 
-    else
-      link_to "Inhabilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put   
-    end
-  end
+  # action_item :habilitar, only: :show do
+  #   if inscripcion.inhabilitado
+  #     link_to "Habilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put 
+  #   else
+  #     link_to "Inhabilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put   
+  #   end
+  # end
 
-  action_item :registrar, only: :show do
-    if inscripcion.registrado
-      link_to "Desregistrar", registrar_admin_inscripcion_path(inscripcion), method: :put   
-    else
-      link_to "Registrar", registrar_admin_inscripcion_path(inscripcion), method: :put 
-    end
-  end
+  # action_item :registrar, only: :show do
+  #   if inscripcion.registrado
+  #     link_to "Desregistrar", registrar_admin_inscripcion_path(inscripcion), method: :put   
+  #   else
+  #     link_to "Registrar", registrar_admin_inscripcion_path(inscripcion), method: :put 
+  #   end
+  # end
 
-  action_item :inscribir, only: :show do
-    if inscripcion.inscripto
-      link_to "Desinscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
-    else
-      link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
-    end
-  end
+  # action_item :inscribir, only: :show do
+  #   if inscripcion.inscripto
+  #     link_to "Desinscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+  #   else
+  #     link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+  #   end
+  # end
 
-  member_action :habilitar, method: :put do
-    id = params[:id]
-    inscripcion = Inscripcion.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion.inhabilitado} WHERE id=#{id};" )
-    redirect_to admin_inscripcion_path(inscripcion)
-  end
+  # member_action :habilitar, method: :put do
+  #   id = params[:id]
+  #   inscripcion = Inscripcion.find(id)
+  #   ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion.inhabilitado} WHERE id=#{id};" )
+  #   redirect_to admin_inscripcion_path(inscripcion)
+  # end
 
-  member_action :registrar, method: :put do
-    id = params[:id]
-    inscripcion = Inscripcion.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=#{!inscripcion.registrado} WHERE id=#{id};" )
-    redirect_to admin_inscripcion_path(inscripcion)
-  end
+  # member_action :registrar, method: :put do
+  #   id = params[:id]
+  #   inscripcion = Inscripcion.find(id)
+  #   ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=#{!inscripcion.registrado} WHERE id=#{id};" )
+  #   redirect_to admin_inscripcion_path(inscripcion)
+  # end
 
-  member_action :inscribir, method: :put do
-    id = params[:id]
-    inscripcion = Inscripcion.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=#{!inscripcion.inscripto} WHERE id=#{id};" )
-    redirect_to admin_inscripcion_path(inscripcion_alumno)
-  end
+  # member_action :inscribir, method: :put do
+  #   id = params[:id]
+  #   inscripcion = Inscripcion.find(id)
+  #   ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=#{!inscripcion.inscripto} WHERE id=#{id};" )
+  #   redirect_to admin_inscripcion_path(inscripcion_alumno)
+  # end
 
 
-  action_item :formulario, only: :show do
-    link_to "Formulario y Vale", formulario_admin_inscripcion_path(inscripcion), method: :put 
-  end
+  # action_item :formulario, only: :show do
+  #   link_to "Formulario y Vale", formulario_admin_inscripcion_path(inscripcion), method: :put 
+  # end
 
-  member_action :formulario, method: :put do
-    id = params[:id]
-    inscripcion = Inscripcion.find(id)
+  # member_action :formulario, method: :put do
+  #   id = params[:id]
+  #   inscripcion = Inscripcion.find(id)
   
-    file_name = "Inscripcion #{inscripcion.nombre} #{inscripcion.apellido}.pdf"
-    file = Tempfile.new(file_name)
-    inscripcion.vale(file.path)
+  #   file_name = "Inscripcion #{inscripcion.nombre} #{inscripcion.apellido}.pdf"
+  #   file = Tempfile.new(file_name)
+  #   inscripcion.vale(file.path)
 
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/pdf"
-      )
+  #   send_file(
+  #       file.path,
+  #       filename: file_name,
+  #       type: "application/pdf"
+  #     )
     
-  end
+  # end
 
   index do
   	#selectable_column
@@ -210,63 +210,63 @@ ActiveAdmin.register Inscripcion do
       f.input :procede
     end
 
-    f.inputs "Inscripción" do
-      f.input :anio
-      f.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]}
-      f.input :formulario_id, :label => 'Formulario', :as => :select, :collection => Formulario.all.map{|c| ["#{c.nombre}", c.id]}
-      f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :adicional_id, :label => 'Adicional', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :matricula_id, :label => 'Matrícula', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Matrícula' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :hermanos_id, :label => 'Hermanos', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-      f.input :cuotas_id, :label => 'Cuotas', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
-    end
+    # f.inputs "Inscripción" do
+    #   f.input :anio
+    #   f.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.all.order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]}
+    #   f.input :formulario_id, :label => 'Formulario', :as => :select, :collection => Formulario.all.map{|c| ["#{c.nombre}", c.id]}
+    #   f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+    #   f.input :adicional_id, :label => 'Adicional', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+    #   f.input :matricula_id, :label => 'Matrícula', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Matrícula' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+    #   f.input :hermanos_id, :label => 'Hermanos', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+    #   f.input :cuotas_id, :label => 'Cuotas', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre_completo}", c.id]}
+    # end
     
-    f.inputs "Padre" do
-      f.input :nombre_padre
-      f.input :apellido_padre
-      f.input :cedula_padre
-      f.input :lugar_nacimiento_padre
-      f.input :fecha_nacimiento_padre
-      f.input :email_padre
-      f.input :domicilio_padre
-      f.input :celular_padre
-      f.input :profesion_padre
-      f.input :trabajo_padre
-      f.input :telefono_trabajo_padre
-      f.input :titular_padre
-    end
+    # f.inputs "Padre" do
+    #   f.input :nombre_padre
+    #   f.input :apellido_padre
+    #   f.input :cedula_padre
+    #   f.input :lugar_nacimiento_padre
+    #   f.input :fecha_nacimiento_padre
+    #   f.input :email_padre
+    #   f.input :domicilio_padre
+    #   f.input :celular_padre
+    #   f.input :profesion_padre
+    #   f.input :trabajo_padre
+    #   f.input :telefono_trabajo_padre
+    #   f.input :titular_padre
+    # end
 
-    f.inputs "Madre" do
-      f.input :nombre_madre
-      f.input :apellido_madre
-      f.input :cedula_madre
-      f.input :lugar_nacimiento_madre
-      f.input :fecha_nacimiento_madre
-      f.input :email_madre
-      f.input :domicilio_madre
-      f.input :celular_madre
-      f.input :profesion_madre
-      f.input :trabajo_madre
-      f.input :telefono_trabajo_madre
-      f.input :titular_madre
-    end
+    # f.inputs "Madre" do
+    #   f.input :nombre_madre
+    #   f.input :apellido_madre
+    #   f.input :cedula_madre
+    #   f.input :lugar_nacimiento_madre
+    #   f.input :fecha_nacimiento_madre
+    #   f.input :email_madre
+    #   f.input :domicilio_madre
+    #   f.input :celular_madre
+    #   f.input :profesion_madre
+    #   f.input :trabajo_madre
+    #   f.input :telefono_trabajo_madre
+    #   f.input :titular_madre
+    # end
 
-    f.inputs "Titular 1" do
-      f.input :nombre1
-      f.input :apellido1
-      f.input :documento1
-      f.input :domicilio1
-      f.input :email1
-      f.input :celular1
-    end
-    f.inputs "Titular 2" do
-      f.input :nombre2
-      f.input :apellido2
-      f.input :documento2
-      f.input :domicilio2
-      f.input :email2
-      f.input :celular2
-    end
+    # f.inputs "Titular 1" do
+    #   f.input :nombre1
+    #   f.input :apellido1
+    #   f.input :documento1
+    #   f.input :domicilio1
+    #   f.input :email1
+    #   f.input :celular1
+    # end
+    # f.inputs "Titular 2" do
+    #   f.input :nombre2
+    #   f.input :apellido2
+    #   f.input :documento2
+    #   f.input :domicilio2
+    #   f.input :email2
+    #   f.input :celular2
+    # end
     f.actions
   end
 
