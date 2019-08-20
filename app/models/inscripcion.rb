@@ -16,7 +16,7 @@ class Inscripcion < ApplicationRecord
   validates :celular, presence: true
   validates :mutualista, presence: true
   validates :emergencia, presence: true
-  validates :procede, presence: true
+  validates :procede, presence: !reinscripcion
 
   validates :proximo_grado_id, presence: true
 

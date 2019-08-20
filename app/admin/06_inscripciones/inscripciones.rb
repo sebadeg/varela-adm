@@ -14,6 +14,54 @@ ActiveAdmin.register Inscripcion do
   scope :inscripciones
   scope :reinscripciones
 
+
+
+  action_item :habilitar, only: :show do
+    if inscripcion.inhabilitado
+      link_to "Habilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put 
+    else
+      link_to "Inhabilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put   
+    end
+  end
+
+  action_item :registrar, only: :show do
+    if inscripcion.registrado
+      link_to "Desregistrar", registrar_admin_inscripcion_path(inscripcion), method: :put   
+    else
+      link_to "Registrar", registrar_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+  action_item :inscribir, only: :show do
+    if inscripcion.inscripto
+      link_to "Desinscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+    else
+      link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+  member_action :habilitar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion.find(id)
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion.inhabilitado} WHERE id=#{id};" )
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+  member_action :registrar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion.find(id)
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=#{!inscripcion.registrado} WHERE id=#{id};" )
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+  member_action :inscribir, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion.find(id)
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=#{!inscripcion.inscripto} WHERE id=#{id};" )
+    redirect_to admin_inscripcion_path(inscripcion_alumno)
+  end
+
+
   action_item :formulario, only: :show do
     link_to "Formulario y Vale", formulario_admin_inscripcion_path(inscripcion), method: :put 
   end
