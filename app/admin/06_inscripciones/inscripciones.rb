@@ -286,7 +286,7 @@ ActiveAdmin.register Inscripcion do
         alumno.celular = params[:inscripcion][:celular]
         alumno.mutualista = params[:inscripcion][:mutualista]
         alumno.emergencia = params[:inscripcion][:emergencia]
-        alumno.precede = params[:inscripcion][:precede]
+        alumno.procede = params[:inscripcion][:procede]
         alumno.save!
       end
 
@@ -308,10 +308,10 @@ ActiveAdmin.register Inscripcion do
         alumno.celular = params[:inscripcion][:celular]
         alumno.mutualista = params[:inscripcion][:mutualista]
         alumno.emergencia = params[:inscripcion][:emergencia]
-        alumno.precede = params[:inscripcion][:precede]
+        alumno.procede = params[:inscripcion][:procede]
         alumno.save!
       end
-      
+
       update!
     end
     
