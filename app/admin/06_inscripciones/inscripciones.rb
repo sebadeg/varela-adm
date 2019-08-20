@@ -133,11 +133,11 @@ ActiveAdmin.register Inscripcion do
       row :anio
       row "Grado" do |r| (r.proximo_grado != nil ? "#{r.proximo_grado.nombre} - $U #{r.proximo_grado.precio}" : "") end      
       row "Formulario" do |r| r.Formulario() end
-      row "Convenio" do |r| r.Convenio() end
-      row "Adicional" do |r| r.Adicional() end
-      row "Matrícula" do |r| r.Matricula() end
-      row "Hermanos" do |r| r.Hermanos() end
-      row "Cuotas" do |r| r.Cuotas() end
+      row "Convenio" do |r| r.FindInscripcionOpcion(r.convenio_id) end 
+      row "Adicional" do |r| r.FindInscripcionOpcion(r.adicional_id) end
+      row "Matrícula" do |r| r.FindInscripcionOpcion(r.matricula_id) end
+      row "Hermanos" do |r| r.FindInscripcionOpcion(r.hermanos_id) end
+      row "Cuotas" do |r| r.FindInscripcionOpcion(r.cuotas_id) end
 
       row "Precio" do |r| r.CalcularPrecioToStr() end
     end

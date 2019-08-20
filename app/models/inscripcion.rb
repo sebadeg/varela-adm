@@ -120,24 +120,13 @@ class Inscripcion < ApplicationRecord
     return ""
   end
 
-  def Convenio() 
-    return ""
-  end
-
-  def Adicional() 
-    return ""
-  end
-
-  def Matricula() 
-    return ""
-  end
-
-  def Hermanos() 
-    return ""
-  end
-
-  def Cuotas() 
-    return ""
+  def FindInscripcionOpcion(id) 
+    inscripcionOpcion = InscripcionOpcion.Find(id) rescue nil
+    if inscripcionOpcion == nil
+      return ""
+    else
+      return inscripcionOpcion.nombre
+    end
   end
 
   def PuedeInscribir()
