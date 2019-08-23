@@ -26,7 +26,7 @@
         </tr>
       <% end %>
 
-      <% js = a.semantic_fields_for :refinanciacion_cuota, FormularioInscripcionOpcion.new do |b| %>
+      <% js = a.semantic_fields_for :refinanciacion_cuota, RefinanciacionCuota.new do |b| %>
         <tr>
           <td><%= b.input :fecha %></td>
           <td><%= b.input :cantidad %></td>
