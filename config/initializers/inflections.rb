@@ -29,6 +29,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'deudor', 'deudores'
   inflect.irregular 'movimiento2018', 'movimiento2018s'
   inflect.irregular 'usuario_sector', 'usuario_sectores'
+  inflect.irregular 'refinanciacion', 'refinanciaciones'
 
 end
 

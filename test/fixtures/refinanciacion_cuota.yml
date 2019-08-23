@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  refinanciacion_id: 1
+  fecha: 2019-08-23
+  cantidad: 1
+  importe: 9.99
+
+two:
+  refinanciacion_id: 1
+  fecha: 2019-08-23
+  cantidad: 1
+  importe: 9.99

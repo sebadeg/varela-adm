@@ -1,0 +1,2 @@
+class RefinanciacionCuotum < ApplicationRecord
+end
