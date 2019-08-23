@@ -25,7 +25,7 @@ ActiveAdmin.register Refinanciacion do
       row :importe
 
       row "Cuotas" do 
-        table_for Refinanciacion.where("refinanciacion_id=#{r.id}") do |t|
+        table_for RefinanciacionCuota.where("refinanciacion_id=#{r.id}") do |t|
           t.column :fecha
           t.column :cantidad
           t.column :importe
