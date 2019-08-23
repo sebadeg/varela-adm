@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_224049) do
+ActiveRecord::Schema.define(version: 2019_08_23_150701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -869,6 +869,25 @@ ActiveRecord::Schema.define(version: 2019_08_17_224049) do
     t.index ["lote_recibo_id"], name: "index_recibos_on_lote_recibo_id"
   end
 
+  create_table "refinanciacion_cuotas", force: :cascade do |t|
+    t.bigint "refinanciacion_id"
+    t.date "fecha"
+    t.integer "cantidad"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["refinanciacion_id"], name: "index_refinanciacion_cuotas_on_refinanciacion_id"
+  end
+
+  create_table "refinanciaciones", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_refinanciaciones_on_cuenta_id"
+  end
+
   create_table "rubros", force: :cascade do |t|
     t.string "nombre"
     t.string "descripcion"
@@ -1126,6 +1145,8 @@ ActiveRecord::Schema.define(version: 2019_08_17_224049) do
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"
+  add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
+  add_foreign_key "refinanciaciones", "cuentas"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"

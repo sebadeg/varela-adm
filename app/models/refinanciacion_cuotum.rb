@@ -1,2 +1,0 @@
-class RefinanciacionCuotum < ApplicationRecord
-end

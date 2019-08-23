@@ -11,6 +11,7 @@
 # end
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular 'refinanciacion_cuota', 'refinanciacion_cuotas'
   inflect.irregular 'cuenta', 'cuentas'
   inflect.irregular 'titular_cuenta', 'titular_cuentas'
   inflect.irregular 'actividad', 'actividades'
@@ -30,7 +31,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'movimiento2018', 'movimiento2018s'
   inflect.irregular 'usuario_sector', 'usuario_sectores'
   inflect.irregular 'refinanciacion', 'refinanciaciones'
-
 end
 
 # These inflection rules are supported but not enabled by default:

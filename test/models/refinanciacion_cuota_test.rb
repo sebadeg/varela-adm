@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RefinanciacionCuotumTest < ActiveSupport::TestCase
+class RefinanciacionCuotaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
