@@ -1,0 +1,54 @@
+<%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
+
+  <%= a.semantic_errors *a.object.errors.keys %>
+  <%= a.inputs do %>
+      <%= a.input :fecha  %>
+      <%= a.input :importe  %>
+  <% end %>
+
+  <%= a.inputs "Cuotas" do %>
+    <table class="refinanciacion_cuota">
+      <tr>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+        <th>Importe</th>
+      </tr>
+      
+      <%= a.semantic_fields_for :refinanciacion_cuota do |b| %>
+        <% if b.object != nil %>
+          <%= b.semantic_errors *b.object.errors.keys %>
+        <% end %>
+        <tr>
+          <td><%= b.input :fecha %></td>
+          <td><%= b.input :cantidad %></td>
+          <td><%= b.input :importe %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :refinanciacion_cuota, FormularioInscripcionOpcion.new do |b| %>
+        <tr>
+          <td><%= b.input :fecha %></td>
+          <td><%= b.input :cantidad %></td>
+          <td><%= b.input :importe %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.refinanciacion_cuota tr').last().after(
+                      '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.actions do %>
+    <%= a.action :submit %>
+    <li class="cancel"><%= link_to "Cancelar", [:admin, resource] %></li>
+  <% end %>
+
+<% end %>
