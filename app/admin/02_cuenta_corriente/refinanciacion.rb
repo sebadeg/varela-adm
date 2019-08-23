@@ -1,7 +1,7 @@
 ActiveAdmin.register Refinanciacion do
 
   actions :all
-  menu priority: 702, label: "Refinanciaciones", parent: "Consejo Directivo"
+  menu priority: 702, label: "Refinanciaciones", parent: "Cuenta Corriente"
 
   permit_params :id, :cuenta_id, :fecha, :importe,
     refinanciacion_cuota_attributes: [:id,:refinanciacion_id,:fecha,:cantidad,:importe,:_destroy]
