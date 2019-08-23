@@ -47,6 +47,10 @@ class Ability
       can :read, Usuario
       can :manage, Contrato
       can :manage, Recargo
+
+      can :manage, Refinanciacion
+      can :manage, RefinanciacionCuota
+
     end
 
     if user.secretaria
