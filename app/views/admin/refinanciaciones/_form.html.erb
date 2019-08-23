@@ -2,6 +2,7 @@
 
   <%= a.semantic_errors *a.object.errors.keys %>
   <%= a.inputs do %>
+      <%= a.input :cuenta_id  %>
       <%= a.input :fecha  %>
       <%= a.input :importe  %>
   <% end %>
