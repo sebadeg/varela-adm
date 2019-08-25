@@ -2,6 +2,8 @@ ActiveAdmin.register Factura do
 
   menu priority: 305, label: "Facturas", parent: "Facturación"
 
+  permit_params :id, :cuenta_id, :fecha, :fecha_vto, :total, :dolar
+
   member_action :descargar, method: :put do
     factura = Factura.find(params[:id]) rescue nil
     if factura != nil
@@ -23,15 +25,39 @@ ActiveAdmin.register Factura do
     column :id
     column :cuenta_id
     column :fecha
+    column :fecha_vto
     column :total
     column :dolar
 
-    actions defaults: false do |u|
+    actions defaults: true do |u|
       item "Descargar", descargar_admin_factura_path(u), class: "member_link", method: :put, title: "Descargar"
     end
   end
 
   filter :id
   filter :cuenta_id
+
+  show do
+    attributes_table do
+      row :id
+      row :cuenta_id
+      row :fecha
+      row :fecha_vto
+      row :total
+      row :dolar
+    end
+  end
+
+  form do |f| 
+    f.inputs "Factura" do
+      f.input :id
+      f.input :cuenta_id
+      f.input :fecha
+      f.input :fecha_vto
+      f.input :total
+      f.input :dolar
+    end
+    f.actions
+  end
 
 end
