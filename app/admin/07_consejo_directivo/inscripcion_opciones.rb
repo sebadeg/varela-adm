@@ -28,20 +28,29 @@ ActiveAdmin.register InscripcionOpcion do
       row :fecha
       row :valor
       row :formato
+
+      row "Cuotas" do 
+        table_for InscripcionOpcionCuota.where("inscripcion_opcion_id=#{r.id}") do |t|
+          t.column :fecha
+          t.column :cantidad
+          t.column :importe
+        end
+      end
     end
   end
 
-  form do |f|
-    f.inputs do
-      f.input :inscripcion_opcion_tipo_id, :as => :select, :collection => InscripcionOpcionTipo.all.order(:nombre).map{|u| ["#{u.nombre}",u.id]}
-      f.input :nombre
-      f.input :anio
-      f.input :general
-      f.input :fecha
-      f.input :valor
-      f.input :formato
-    end
-    f.actions
-  end
+  form partial: 'form'
+  # form do |f|
+  #   f.inputs do
+  #     f.input :inscripcion_opcion_tipo_id, :as => :select, :collection => InscripcionOpcionTipo.all.order(:nombre).map{|u| ["#{u.nombre}",u.id]}
+  #     f.input :nombre
+  #     f.input :anio
+  #     f.input :general
+  #     f.input :fecha
+  #     f.input :valor
+  #     f.input :formato
+  #   end
+  #   f.actions
+  # end
 
 end

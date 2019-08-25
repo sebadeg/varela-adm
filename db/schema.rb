@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_150701) do
+ActiveRecord::Schema.define(version: 2019_08_25_222353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -504,6 +504,16 @@ ActiveRecord::Schema.define(version: 2019_08_23_150701) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_alumnos_on_inscripcion_opcion_id"
+  end
+
+  create_table "inscripcion_opcion_cuotas", force: :cascade do |t|
+    t.bigint "inscripcion_opcion_id"
+    t.date "fecha"
+    t.integer "cantidad"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_cuotas_on_inscripcion_opcion_id"
   end
 
   create_table "inscripcion_opcion_tipos", force: :cascade do |t|
@@ -1114,6 +1124,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_150701) do
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
   add_foreign_key "inscripcion_opcion_alumnos", "inscripcion_opciones"
+  add_foreign_key "inscripcion_opcion_cuotas", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "convenios"
   add_foreign_key "inscripciones", "grados"
