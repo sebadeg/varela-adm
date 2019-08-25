@@ -19,9 +19,9 @@ ActiveAdmin.register InscripcionOpcion do
 
   filter :nombre
 
-  show do
+  show do |r|
     attributes_table do
-      row "Tipo" do |r| (r.inscripcion_opcion_tipo != nil ? "#{r.inscripcion_opcion_tipo.nombre}" : "" ) end
+      row "Tipo" do |tipo| (tipo.inscripcion_opcion_tipo != nil ? "#{tipo.inscripcion_opcion_tipo.nombre}" : "" ) end
       row :nombre
       row :anio
       row :general
