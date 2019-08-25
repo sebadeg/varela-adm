@@ -2,7 +2,7 @@
 
   <%= a.semantic_errors *a.object.errors.keys %>
   <%= a.inputs do %>
-      <%= .input :inscripcion_opcion_tipo_id, :as => :select, :collection => InscripcionOpcionTipo.all.order(:nombre).map{|u| ["#{u.nombre}",u.id]} %>
+      <%= a.input :inscripcion_opcion_tipo_id, :as => :select, :collection => InscripcionOpcionTipo.all.order(:nombre).map{|u| ["#{u.nombre}",u.id]} %>
       <%= a.input :nombre %>
       <%= a.input :anio %>
       <%= a.input :general %>
