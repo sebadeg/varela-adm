@@ -2,7 +2,8 @@ ActiveAdmin.register InscripcionOpcion do
 
   menu priority: 701, label: "Inscripción Opción", parent: "Consejo Directivo"
 
-  permit_params :id, :nombre, :anio, :inscripcion_opcion_tipo_id, :fecha, :valor, :formato, :general
+  permit_params :id, :nombre, :anio, :inscripcion_opcion_tipo_id, :fecha, :valor, :formato, :general,
+    inscripcion_opcion_cuota_attributes: [:id,:inscripcion_opcion_id,:fecha,:cantidad,:importe,:_destroy]
 
   index do
   	#selectable_column
