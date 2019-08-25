@@ -24,18 +24,18 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :fecha, label: '' %></td>
-          <td><%= b.input :cantidad, label: '' %></td>
-          <td><%= b.input :importe, label: '' %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :cantidad, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :inscripcion_opcion_cuota, InscripcionOpcionCuota.new do |b| %>
         <tr>
-          <td><%= b.input :fecha, label: '' %></td>
-          <td><%= b.input :cantidad, label: '' %></td>
-          <td><%= b.input :importe, label: '' %></td>
+          <td><%= b.input :fecha, label: false %></td>
+          <td><%= b.input :cantidad, label: false %></td>
+          <td><%= b.input :importe, label: false %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
