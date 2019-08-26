@@ -27,7 +27,7 @@ ActiveAdmin.register Cuenta do
   filter :id, label: "Cuenta"
   filter :nombre, as: :string
 
- show do
+ show do |r|
     attributes_table do
       row :id
       row :nombre 
@@ -37,6 +37,13 @@ ActiveAdmin.register Cuenta do
       row :retencion
       row :comentario
       row :info
+
+      row "Titular" do 
+        table_for TitularCuenta.where("cuenta_id=#{r.id}") do |t|
+          t.column "Titular" do |c| (c.usuario != nil ? "#{c.usuario.nombre} #{c.usuario.apellido}" : "" ) end
+        end
+      end
+
     end
   end
 
