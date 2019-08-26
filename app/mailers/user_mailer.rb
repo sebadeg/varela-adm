@@ -24,7 +24,7 @@ class UserMailer < ApplicationMailer
 
 
 	def facturacion(usuario,mes,cuenta,filename,file_path)
-		//"F4c7V@r3Pr0",
+		 #"F4c7V@r3Pr0",
 
         mail = "facturacion@varela.edu.uy"
         contrasena = Contrasena.Find("mail=#{mail}") rescue nil
