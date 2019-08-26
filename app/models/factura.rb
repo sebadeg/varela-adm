@@ -1,4 +1,8 @@
 class Factura < ApplicationRecord
+  has_many :linea_factura, :dependent => :delete_all
+  accepts_nested_attributes_for :linea_factura, allow_destroy: true
+
+
 
     require 'chunky_png'
     require 'barby'
