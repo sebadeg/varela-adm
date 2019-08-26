@@ -22,14 +22,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :titular_cuenta, TitularCuenta.new do |b| %>
         <tr>
-          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
