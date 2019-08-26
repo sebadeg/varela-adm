@@ -75,6 +75,19 @@ class UserMailer < ApplicationMailer
         contrasena = Contrasena.find_by(mail: mail) rescue nil
         passwd = contrasena != nil ? contrasena.password : ""
 
+        p "------------------------"
+        p "------------------------"
+        p "------------------------"
+        p "------------------------"
+        p "------------------------"
+        p mail
+        p passwd
+        p "------------------------"
+        p "------------------------"
+        p "------------------------"
+        p "------------------------"
+        p "------------------------"
+
 		delivery_options = {
             address: "smtp.varela.edu.uy",
 			port: 587,
