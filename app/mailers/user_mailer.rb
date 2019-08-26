@@ -1,16 +1,21 @@
 class UserMailer < ApplicationMailer
 
 	def novedades(reply_to,emails,titulo)
+		#"v@r18827664"
+
+        mail = "novedades@varela.edu.uy"
+        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
-            address: "smtp.varela.edu.uy",
-			port: 587,
-		   domain: "varela.edu.uy", 
-			user_name: "novedades@varela.edu.uy",
-			password: "v@r18827664",
-		   authentication: "plain",
-		   enable_starttls_auto: true,
-		   openssl_verify_mode: 'none'
+          address: "smtp.varela.edu.uy",
+		  port: 587,
+		  domain: "varela.edu.uy", 
+		  user_name: mail,
+		  password: passwd,
+		  authentication: "plain",
+		  enable_starttls_auto: true,
+		  openssl_verify_mode: 'none'
 		}
 
 		@titulo = titulo
@@ -19,13 +24,18 @@ class UserMailer < ApplicationMailer
 
 
 	def facturacion(usuario,mes,cuenta,filename,file_path)
+		//"F4c7V@r3Pr0",
+
+        mail = "facturacion@varela.edu.uy"
+        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
             address: "smtp.varela.edu.uy",
 			port: 587,
-		   domain: "varela.edu.uy", 
-			user_name: "facturacion@varela.edu.uy",
-			password: "F4c7V@r3Pr0",
+		    domain: "varela.edu.uy", 
+			user_name: mail,
+			password: passwd,
 		   authentication: "plain",
 		   enable_starttls_auto: true,
 		   openssl_verify_mode: 'none'
@@ -40,12 +50,17 @@ class UserMailer < ApplicationMailer
 	end
 
 	def resetear_contrasena_usuario(usuario)
+
+        mail = "soporte@varela.edu.uy"
+        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        passwd = contrasena != nil ? contrasena.password : ""
+
 		delivery_options = {
           address: "smtp.varela.edu.uy",
 		  port: 587,
 		  domain: "varela.edu.uy", 
-		  user_name: "soporte@varela.edu.uy",
-		  password: "v18827664@r",
+		  user_name: mail,
+		  password: passwd,
 		  authentication: "plain",
 		  enable_starttls_auto: true,
 		  openssl_verify_mode: 'none'
@@ -58,12 +73,16 @@ class UserMailer < ApplicationMailer
 
 	def mail_bienvenida_usuario(usuario)
 
+        mail = "soporte@varela.edu.uy"
+        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        passwd = contrasena != nil ? contrasena.password : ""
+
 		delivery_options = {
             address: "smtp.varela.edu.uy",
 			port: 587,
 		   domain: "varela.edu.uy", 
-			user_name: "soporte@varela.edu.uy",
-			password: "v18827664@r",
+			user_name: mail,
+			password: passwd,
 		   authentication: "plain",
 		   enable_starttls_auto: true,
 		   openssl_verify_mode: 'none'
