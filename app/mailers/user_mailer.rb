@@ -3,6 +3,8 @@ class UserMailer < ApplicationMailer
 	def novedades(reply_to,emails,titulo)
 		#"v@r18827664"
 
+v18827664@r
+
         mail = "novedades@varela.edu.uy"
         contrasena = Contrasena.Find("mail=#{mail}") rescue nil
         passwd = contrasena != nil ? contrasena.password : ""

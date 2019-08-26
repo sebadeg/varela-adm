@@ -2,26 +2,26 @@ ActiveAdmin.register Contrasena do
 
   menu priority: 908, parent: "Soporte"
 
-  permit_params :id, :anio, :anio_pases, :anio_inscripciones, :fecha_facturacion
+  permit_params :id, :mail, :password
 
   index do
   	#selectable_column
     column :mail
-    column :password
+    column :password, as: :text
     actions
   end
 
   show do
     attributes_table do
       row :mail
-      row :password
+      row :password, as: :text
     end
   end
 
   form do |f|
     f.inputs do
       f.input :mail
-      f.input :password
+      f.input :password, as: :text
     end
     f.actions
   end
