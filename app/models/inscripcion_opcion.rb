@@ -4,6 +4,8 @@ class InscripcionOpcion < ApplicationRecord
   has_many :inscripcion_opcion_cuota, :dependent => :delete_all
   accepts_nested_attributes_for :inscripcion_opcion_cuota, allow_destroy: true
 
+  has_many :inscripcion_opcion_alumno, :dependent => :delete_all
+  accepts_nested_attributes_for :inscripcion_opcion_alumno, allow_destroy: true
 
   def nombre_completo
     s = ""
