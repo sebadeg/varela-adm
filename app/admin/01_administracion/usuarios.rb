@@ -4,26 +4,43 @@ ActiveAdmin.register Usuario do
 
   permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation, :habilitado
 
-  action_item :contrasena, only: :show do
-    link_to "Resetear Contraseña", contrasena_admin_usuario_path(usuario), method: :put 
+  action_item :resetear_contrasena, only: :show do
+    link_to "Resetear Contraseña", resetear_contrasena_admin_usuario_path(usuario), method: :put 
+  end
+
+  action_item :mail_bienvenida, only: :show do
+    link_to "Mail Bienvenida", mail_bienvenida_admin_usuario_path(usuario), method: :put 
   end
 
   require 'digest/md5'
 
-  member_action :contrasena, method: :put do
+  member_action :resetear_contrasena, method: :put do
     id = params[:id]
     
     usuario = Usuario.find(id)
     passwd = Digest::MD5.hexdigest(usuario.cedula.to_s + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
-
     usuario.passwd = passwd
     usuario.save!
     usuario.update( password: passwd, password_confirmation: passwd );
     
-    UserMailer.aceptar_usuario(usuario).deliver_now
+    UserMailer.resetear_contrasena_usuario(usuario).deliver_now
 
     redirect_to admin_usuario_path(usuario)
   end
+
+  member_action :mail_bienvenida, method: :put do
+    id = params[:id]
+
+    usuario = Usuario.find(id)
+    passwd = Digest::MD5.hexdigest(usuario.cedula.to_s + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
+    usuario.passwd = passwd
+    usuario.save!
+    usuario.update( password: passwd, password_confirmation: passwd );
+
+    UserMailer.mail_bienvenida_usuario(usuario).deliver_now
+    redirect_to admin_usuario_path(usuario)
+  end
+
 
   index do
   	#selectable_column

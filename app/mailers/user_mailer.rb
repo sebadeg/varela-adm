@@ -1,20 +1,4 @@
 class UserMailer < ApplicationMailer
-	def aceptar_usuario(usuario)
-		delivery_options = {
-          address: "smtp.varela.edu.uy",
-		  port: 587,
-		  domain: "varela.edu.uy", 
-		  user_name: "soporte@varela.edu.uy",
-		  password: "v@r18827664",
-		  authentication: "plain",
-		  enable_starttls_auto: true,
-		  openssl_verify_mode: 'none'
-		}
-
-		@usuario = usuario
-		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
-	
-	end
 
 	def novedades(reply_to,emails,titulo)
 
@@ -55,15 +39,31 @@ class UserMailer < ApplicationMailer
         mail(from: 'facturacion@varela.edu.uy', to: usuario.email, bcc: 'facturacion@varela.edu.uy', subject: "Envío de copia de factura correspondiente a #{mes} de la cuenta #{cuenta}", delivery_method_options: delivery_options)
 	end
 
+	def resetear_contrasena_usuario(usuario)
+		delivery_options = {
+          address: "smtp.varela.edu.uy",
+		  port: 587,
+		  domain: "varela.edu.uy", 
+		  user_name: "soporte@varela.edu.uy",
+		  password: "v18827664@r",
+		  authentication: "plain",
+		  enable_starttls_auto: true,
+		  openssl_verify_mode: 'none'
+		}
 
-	def inscribir_usuario(usuario)
+		@usuario = usuario
+		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
+	
+	end
+
+	def mail_bienvenida_usuario(usuario)
 
 		delivery_options = {
             address: "smtp.varela.edu.uy",
 			port: 587,
 		   domain: "varela.edu.uy", 
 			user_name: "soporte@varela.edu.uy",
-			password: "v@r18827664",
+			password: "v18827664@r",
 		   authentication: "plain",
 		   enable_starttls_auto: true,
 		   openssl_verify_mode: 'none'
