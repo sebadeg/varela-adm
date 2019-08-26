@@ -3,7 +3,7 @@ ActiveAdmin.register Cuenta do
   menu priority: 103, label: "Cuentas", parent: "Administración"
   
   permit_params :id, :nombre, :comentario, :brou, :visa, :oca, :retencion,
-    titular_cuenta_attributes: [:id,:cuenta_id,:usuario_id,:_destroy]
+    titular_cuenta_attributes: [:id,:cuenta_id,:usuario_id,:anio,:_destroy]
 
   scope :concurre
   scope :todos 
@@ -41,6 +41,7 @@ ActiveAdmin.register Cuenta do
       row "Titular" do 
         table_for TitularCuenta.where("cuenta_id=#{r.id}") do |t|
           t.column "Titular" do |c| (c.usuario != nil ? "#{c.usuario.nombre} #{c.usuario.apellido}" : "" ) end
+          t.column :anio
         end
       end
 

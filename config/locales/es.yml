@@ -157,6 +157,8 @@ es:
         anio: "Año"
       proximo_grado:
         anio: "Año"
+      titular_cuenta:
+        anio: "Año"
         
     models:
       aactividad:
