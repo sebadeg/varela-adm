@@ -2,7 +2,7 @@ ActiveAdmin.register Factura do
 
   menu priority: 305, label: "Facturas", parent: "Facturación"
 
-  permit_params :id, :cuenta_id, :fecha, :fecha_vto, :total, :dolar,
+  permit_params :id, :cuenta_id, :fecha, :fecha_vencimiento, :total, :dolar,
     linea_factura_attributes: [:id,:factura_id,:indice,:alumno_id,:nombre_alumno,:descripcion,:importe,:_destroy]
 
   member_action :descargar, method: :put do
