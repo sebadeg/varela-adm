@@ -25,7 +25,7 @@ ActiveAdmin.register Factura do
     column :id
     column :cuenta_id
     column :fecha
-    column :fecha_vto
+    column :fecha_vencimiento
     column :total
     column :dolar
 
@@ -42,7 +42,7 @@ ActiveAdmin.register Factura do
       row :id
       row :cuenta_id
       row :fecha
-      row :fecha_vto
+      row :fecha_vencimiento
       row :total
       row :dolar
     end
@@ -53,7 +53,7 @@ ActiveAdmin.register Factura do
       f.input :id
       f.input :cuenta_id
       f.input :fecha
-      f.input :fecha_vto
+      f.input :fecha_vencimiento
       f.input :total
       f.input :dolar
     end
