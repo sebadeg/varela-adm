@@ -1,9 +1,6 @@
 class UserMailer < ApplicationMailer
 
 	def novedades(reply_to,emails,titulo)
-		#"v@r18827664"
-
-v18827664@r
 
         mail = "novedades@varela.edu.uy"
         contrasena = Contrasena.Find("mail=#{mail}") rescue nil
@@ -26,7 +23,6 @@ v18827664@r
 
 
 	def facturacion(usuario,mes,cuenta,filename,file_path)
-		 #"F4c7V@r3Pr0",
 
         mail = "facturacion@varela.edu.uy"
         contrasena = Contrasena.Find("mail=#{mail}") rescue nil

@@ -7,21 +7,21 @@ ActiveAdmin.register Contrasena do
   index do
   	#selectable_column
     column :mail
-    column :password, as: :text
+    column :password, as: :string
     actions
   end
 
   show do
     attributes_table do
       row :mail
-      row :password, as: :text
+      row :password, as: :string
     end
   end
 
   form do |f|
     f.inputs do
       f.input :mail
-      f.input :password, as: :text
+      f.input :password, as: :string
     end
     f.actions
   end
