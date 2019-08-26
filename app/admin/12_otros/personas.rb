@@ -1,6 +1,7 @@
 ActiveAdmin.register Persona do
 
-  menu priority: 102, label: "Personas", parent: "Administración"
+  #menu priority: 102, label: "Personas", parent: "Administración"
+  menu false
 
   permit_params :id, :nombre, :apellido, :lugar_nacimiento, :fecha_nacimiento, :email, :domicilio, :celular, :profesion, :trabajo, :telefono_trabajo
 
