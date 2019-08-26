@@ -78,7 +78,7 @@
       <% js = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
-          onclick: "$('table.inscripcion_opcion_cuota tr').last().after(
+          onclick: "$('table.inscripcion_opcion_alumno tr').last().after(
                       '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
                     ); return false;",
           class: "button" %>
