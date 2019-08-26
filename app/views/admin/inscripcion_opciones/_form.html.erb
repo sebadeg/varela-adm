@@ -62,14 +62,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :cedula, label: false %></td>
+          <td><%= b.input :cedula, label: false, :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.cedula} - #{u.nombre} #{u.apellido}",u.cedula]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :inscripcion_opcion_alumno, InscripcionOpcionAlumno.new do |b| %>
         <tr>
-          <td><%= b.input :cedula, label: false %></td>
+          <td><%= b.input :cedula, label: false, :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.cedula} - #{u.nombre} #{u.apellido}",u.cedula]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
