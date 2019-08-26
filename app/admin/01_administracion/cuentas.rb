@@ -2,7 +2,8 @@ ActiveAdmin.register Cuenta do
 
   menu priority: 103, label: "Cuentas", parent: "Administración"
   
-  permit_params :id, :nombre, :comentario, :brou, :visa, :oca, :retencion 
+  permit_params :id, :nombre, :comentario, :brou, :visa, :oca, :retencion,
+    titular_cuenta_attributes: [:id,:cuenta_id,:usuario_id,:_destroy]
 
   scope :concurre
   scope :todos 
@@ -39,18 +40,7 @@ ActiveAdmin.register Cuenta do
     end
   end
 
-  form do |f| 
-    f.inputs "Cuentas" do
-      f.input :id
-      f.input :nombre
-      f.input :brou, label: "Débito BROU"
-      f.input :visa
-      f.input :oca
-      f.input :retencion
-      f.input :comentario
-    end
-    f.actions
-  end
+  form partial: 'form'
 
   controller do
 
