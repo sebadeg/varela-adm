@@ -38,7 +38,7 @@ ActiveAdmin.register Factura do
   filter :id
   filter :cuenta_id
 
-  show do
+  show do |r|
     attributes_table do
       row :id
       row :cuenta_id
@@ -46,19 +46,19 @@ ActiveAdmin.register Factura do
       row :fecha_vencimiento
       row :total
       row :dolar
+
+      row "Líneas" do 
+        table_for LineaFactura.where("factura_id=#{r.id}").order(:indice) do |t|
+          t.column :indice
+          t.column :alumno_id
+          t.column :nombre_alumno
+          t.column :descripcion
+          t.column :importe
+        end
+      end      
     end
   end
 
-  form do |f| 
-    f.inputs "Factura" do
-      f.input :id
-      f.input :cuenta_id
-      f.input :fecha
-      f.input :fecha_vencimiento
-      f.input :total
-      f.input :dolar
-    end
-    f.actions
-  end
+  form partial: 'form'
 
 end
