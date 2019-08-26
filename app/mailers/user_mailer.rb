@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 	def novedades(reply_to,emails,titulo)
 
         mail = "novedades@varela.edu.uy"
-        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        contrasena = Contrasena.find_by(mail: mail) rescue nil
         passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
 	def facturacion(usuario,mes,cuenta,filename,file_path)
 
         mail = "facturacion@varela.edu.uy"
-        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        contrasena = Contrasena.find_by(mail: mail) rescue nil
         passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
@@ -50,7 +50,7 @@ class UserMailer < ApplicationMailer
 	def resetear_contrasena_usuario(usuario)
 
         mail = "soporte@varela.edu.uy"
-        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        contrasena = Contrasena.find_by(mail: mail) rescue nil
         passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
@@ -72,7 +72,7 @@ class UserMailer < ApplicationMailer
 	def mail_bienvenida_usuario(usuario)
 
         mail = "soporte@varela.edu.uy"
-        contrasena = Contrasena.Find("mail=#{mail}") rescue nil
+        contrasena = Contrasena.find_by(mail: mail) rescue nil
         passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
