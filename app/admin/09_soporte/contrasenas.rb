@@ -1,6 +1,6 @@
-ActiveAdmin.register Contrasenas do
+ActiveAdmin.register Contrasena do
 
-  menu priority: 908, label: "Contraseñas", parent: "Soporte"
+  menu priority: 908, parent: "Soporte"
 
   permit_params :id, :anio, :anio_pases, :anio_inscripciones, :fecha_facturacion
 
