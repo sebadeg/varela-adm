@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_000900) do
+ActiveRecord::Schema.define(version: 2019_08_27_113531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -621,6 +621,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_000900) do
     t.integer "matricula_id"
     t.string "apellido1"
     t.string "apellido2"
+    t.decimal "precio_anterior"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"

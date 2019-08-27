@@ -1,4 +1,6 @@
 
+Falta asociar todos los movimientos a los rubros
+
 Me faltan chequear que esten bien los alumnos en los grados
 
 Faltan generar listas para 2020
