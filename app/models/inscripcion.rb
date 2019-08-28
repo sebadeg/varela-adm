@@ -170,12 +170,25 @@ class Inscripcion < ApplicationRecord
     end
     descuentos.push(hermanos_id)
 
+    p "------------------------------"
+    p "------------------------------"
+    p "------------------------------"
+    p importe_total
+    p descuentos
+
+
     descuentos.each do |inscripcion_opcion_id|
       inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
       if inscripcion_opcion != nil 
+        p inscripcion_opcion.valor
         importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
       end
     end
+
+    p importe_total
+    p "------------------------------"
+    p "------------------------------"
+    p "------------------------------"
 
     cuotas = Array.new
     numero_cuotas = 0
