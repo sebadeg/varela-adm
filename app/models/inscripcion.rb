@@ -193,21 +193,21 @@ class Inscripcion < ApplicationRecord
     cuotas = Array.new
     numero_cuotas = 0
     fecha_cuota = nil
-    if formulario_id != nil
-      InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opciones " +
-        "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
-        "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)"
-        ).each do |inscripcion_opcion_cuotas|
-        if ( inscripcion_opcion_cuotas.valor == nil )
-          numero_cuotas = inscripcion_opcion_cuotas.valor_ent
-          if fecha_cuota == nil
-            fecha_cuota = inscripcion_opcion_cuotas.fecha
-          end
-        else            
-          cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
-        end
-      end        
-    else
+    # if formulario_id != nil
+    #   InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opciones " +
+    #     "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
+    #     "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)"
+    #     ).each do |inscripcion_opcion_cuotas|
+    #     if ( inscripcion_opcion_cuotas.valor == nil )
+    #       numero_cuotas = inscripcion_opcion_cuotas.valor_ent
+    #       if fecha_cuota == nil
+    #         fecha_cuota = inscripcion_opcion_cuotas.fecha
+    #       end
+    #     else            
+    #       cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
+    #     end
+    #   end        
+    # else
       inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
       if inscripcion_opcion_cuotas != nil
         if ( inscripcion_opcion_cuotas.valor == nil )
@@ -217,7 +217,7 @@ class Inscripcion < ApplicationRecord
           cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
         end
       end
-    end    
+    #end    
 
     if cuotas.count == 0 && numero_cuotas != 0 
       cuotas.push([numero_cuotas,(importe_total/numero_cuotas+0.5).to_i,fecha_cuota])
