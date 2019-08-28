@@ -19,8 +19,7 @@
 
 
       <% i = 0 %>
-      <%= a.semantic_fields_for :actividad_alumno, a.object.sort_by{|o| "#{o.alumno.nombre} #{o.alumno.apellido}" } do |b| %>
-
+      <%= a.semantic_fields_for :actividad_alumno, a.object.joins(actividad_alumnos: [:alumnos]).order("alumnos.nombre,alumnos.apellido").select("actividad_alumnos.*") do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
           <% if i % 2 == 0 %>
             <tr class="odd">
