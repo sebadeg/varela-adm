@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_113531) do
+ActiveRecord::Schema.define(version: 2019_08_28_000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -622,6 +622,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_113531) do
     t.string "apellido1"
     t.string "apellido2"
     t.decimal "precio_anterior"
+    t.boolean "hay_vale"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
@@ -1165,7 +1166,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_113531) do
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"
-  add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
+  add_foreign_key "refinanciacion_cuotas", "refinanciaciones", column: "refinanciacion_id"
   add_foreign_key "refinanciaciones", "cuentas"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
