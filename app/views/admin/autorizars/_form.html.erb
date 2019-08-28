@@ -27,7 +27,7 @@
             <tr class="even">
           <% end %>
           <% i = i + 1 %>
-          <td><%= Alumno.find(b.object.alumno_id).nombre + " " + Alumno.find(b.object.alumno_id).apellido %></td>
+          <td><%= "#{Alumno.find(b.object.alumno_id).apellido} #{Alumno.find(b.object.alumno_id).nombre}" %></td>
           <% if b.object.mail != nil && b.object.mail %>
             <td><span class="status_tag yes">Si</span></td>
           <% else %>
