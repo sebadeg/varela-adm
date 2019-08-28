@@ -103,7 +103,7 @@ ActiveAdmin.register Actividad do
 
       row "Alumnos" do 
 
-        table_for Actividad.joins(actividad_alumno: :alumno).where("actividades.id=#{r.id}").order("alumnos.apellido,alumnos.nombre").select("actividad_alumnos.*") do |t|
+        table_for ActividadAlumno.joins(:alumno).where("actividad_id=#{r.id}").order("alumnos.apellido,alumnos.nombre") do |t|
           t.column "Alumno" do |r| (r.alumno != nil ? "#{r.alumno.nombre} #{r.alumno.apellido}" : "") end
           t.column :mail
           t.column "Bajado" do |r| (r.bajado != nil ? r.bajado.strftime("%b %d, %Y") : "" ) end
