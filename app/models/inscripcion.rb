@@ -146,15 +146,28 @@ class Inscripcion < ApplicationRecord
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
     importe_total = proximo_grado.precio
 
+def CalcularPrecio()
+
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    importe_total = proximo_grado.precio
+
     descuentos = Array.new
-    if formulario_id != nil
-      formulario = Formulario.find(formulario_id) rescue nil
-      FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre IN ('Convenio','Adicional','Hermanos'))").each do |formulario_inscripcion_opcion|
-        descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-      end
-    else
-      descuentos = [convenio_id,adicional_id,hermanos_id]
+
+    formulario = Formulario.find(formulario_id) rescue nil
+    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE nombre='Convenio')").each do |formulario_inscripcion_opcion|
+      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
     end
+    descuentos.push(convenio_id)
+
+    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE nombre='Adicional')").each do |formulario_inscripcion_opcion|
+      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    end
+    descuentos.push(adicional_id)
+
+    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE nombre='Hermanos')").each do |formulario_inscripcion_opcion|
+      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    end
+    descuentos.push(hermanos_id)
 
     descuentos.each do |inscripcion_opcion_id|
       inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
@@ -169,7 +182,7 @@ class Inscripcion < ApplicationRecord
     if formulario_id != nil
       InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opcion " +
         "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
-        "inscripcion_opcion_tipo IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Cuotas' AND NOT id IS NULL)"
+        "inscripcion_opcion_tipo IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)"
         ).each do |inscripcion_opcion_cuotas|
         if ( inscripcion_opcion_cuotas.valor == nil )
           numero_cuotas = inscripcion_opcion_cuotas.valor_ent
