@@ -146,11 +146,6 @@ class Inscripcion < ApplicationRecord
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
     importe_total = proximo_grado.precio
 
-def CalcularPrecio()
-
-    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    importe_total = proximo_grado.precio
-
     descuentos = Array.new
 
     formulario = Formulario.find(formulario_id) rescue nil
@@ -180,7 +175,7 @@ def CalcularPrecio()
     numero_cuotas = 0
     fecha_cuota = nil
     if formulario_id != nil
-      InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opcion " +
+      InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opciones " +
         "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
         "inscripcion_opcion_tipo IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)"
         ).each do |inscripcion_opcion_cuotas|
