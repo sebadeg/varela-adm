@@ -149,17 +149,23 @@ class Inscripcion < ApplicationRecord
     descuentos = Array.new
 
     formulario = Formulario.find(formulario_id) rescue nil
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE nombre='Convenio')").each do |formulario_inscripcion_opcion|
+    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE "
+      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL))"
+      ).each do |formulario_inscripcion_opcion|
       descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
     end
     descuentos.push(convenio_id)
 
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE nombre='Adicional')").each do |formulario_inscripcion_opcion|
+    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE "
+      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL))"
+      ).each do |formulario_inscripcion_opcion|
       descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
     end
     descuentos.push(adicional_id)
 
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE nombre='Hermanos')").each do |formulario_inscripcion_opcion|
+    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE "
+      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL))"
+      ).each do |formulario_inscripcion_opcion|
       descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
     end
     descuentos.push(hermanos_id)
@@ -177,7 +183,7 @@ class Inscripcion < ApplicationRecord
     if formulario_id != nil
       InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opciones " +
         "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
-        "inscripcion_opcion_tipo IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)"
+        "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)"
         ).each do |inscripcion_opcion_cuotas|
         if ( inscripcion_opcion_cuotas.valor == nil )
           numero_cuotas = inscripcion_opcion_cuotas.valor_ent
