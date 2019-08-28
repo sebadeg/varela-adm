@@ -19,7 +19,7 @@
 
 
       <% i = 0 %>
-      <%= a.semantic_fields_for :actividad_alumno, Actividad.joins(actividad_alumno: :alumno).where("actividades.id=#{a.object.id}").order("alumnos.nombre,alumnos.apellido").select("actividad_alumnos.*") do |b| %>
+      <%= a.semantic_fields_for :actividad_alumno, Actividad.joins(actividad_alumno: :alumno).where("actividades.id=#{a.object.id}").order("alumnos.apellido,alumnos.nombre").select("actividad_alumnos.*") do |b| %>
         <%= b.semantic_errors *b.object.errors.keys %>
           <% if i % 2 == 0 %>
             <tr class="odd">
