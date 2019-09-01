@@ -207,7 +207,7 @@ ActiveAdmin.register Inscripcion do
       f.input :celular
       f.input :mutualista
       f.input :emergencia
-      f.input :procede
+      f.input :procede if !f.object.reinscripcion
     end
 
     f.inputs "Inscripción" do
