@@ -66,6 +66,7 @@ es:
         anio: "Año"
         inscripcion_opcion_tipo_id: "Tipo"
       inscripcion:
+        precio_anterior: "Precio Anterior"
         anio: "Año"
         cedula: "Cédula"
         lugar_nacimiento: "Lugar de nacimiento"
