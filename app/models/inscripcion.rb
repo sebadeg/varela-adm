@@ -148,26 +148,26 @@ class Inscripcion < ApplicationRecord
 
     descuentos = Array.new
 
-    formulario = Formulario.find(formulario_id) rescue nil
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
-      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL))"
-      ).each do |formulario_inscripcion_opcion|
-      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    end
+    # formulario = Formulario.find(formulario_id) rescue nil
+    # FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
+    #   "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL))"
+    #   ).each do |formulario_inscripcion_opcion|
+    #   descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    # end
     descuentos.push(convenio_id)
 
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
-      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL))"
-      ).each do |formulario_inscripcion_opcion|
-      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    end
+    # FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
+    #   "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL))"
+    #   ).each do |formulario_inscripcion_opcion|
+    #   descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    # end
     descuentos.push(adicional_id)
 
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
-      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL))"
-      ).each do |formulario_inscripcion_opcion|
-      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    end
+    # FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
+    #   "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL))"
+    #   ).each do |formulario_inscripcion_opcion|
+    #   descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    # end
     descuentos.push(hermanos_id)
 
     p "------------------------------"
