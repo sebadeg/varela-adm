@@ -237,7 +237,10 @@ class Inscripcion < ApplicationRecord
       if str != ""
         str = str + " + "        
       end
-      str = str + "(#{cuota[2].strftime("%d/%m/%Y")}) #{cuota[0]} x #{cuota[1]}"
+      if cuota[2] != nil
+        str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
+      end
+      str = str + " #{cuota[0]} x #{cuota[1]}"
 
       total = total + cuota[0]*cuota[1]
     end
