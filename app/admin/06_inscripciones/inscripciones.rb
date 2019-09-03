@@ -101,6 +101,10 @@ ActiveAdmin.register Inscripcion do
   filter :cuenta_id
   filter :alumno_id
 
+  filter :inhabilitado
+  filter :registrado
+  filter :inscripto
+
   show do
 
     def find(arr,v)
