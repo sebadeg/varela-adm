@@ -69,12 +69,12 @@ ActiveAdmin.register Inscripcion do
 
     inscripcion = Inscripcion.find(id)
     if inscripcion.hay_vale
-      TitularCuenta.where(cuenta_id).each do |titular_cuenta|
+      TitularCuenta.where("cuenta_id=#{inscripcion.cuenta_id}").each do |titular_cuenta|
         usuario = Usuario.find(titular_cuenta.usuario_id)
         UserMailer.hay_vale_usuario(usuario).deliver_now
       end
     end
-    
+
     redirect_to admin_inscripcion_path(inscripcion)
   end
 
