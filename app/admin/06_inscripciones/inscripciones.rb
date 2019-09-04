@@ -216,7 +216,7 @@ ActiveAdmin.register Inscripcion do
     end
 
     f.inputs "Inscripción" do
-      f.input :anio
+      f.input :anio, input_html: { value: Config.find(1).anio_inscripciones }
       f.input :proximo_grado_id, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)").order(:nombre).map{|c| ["#{c.nombre} - $U #{c.precio}", c.id]}
       f.input :formulario_id, :label => 'Formulario', :as => :select, :collection => Formulario.all.map{|c| ["#{c.nombre}", c.id]}
       f.input :convenio_id, :label => 'Convenio', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre}", c.id]}
