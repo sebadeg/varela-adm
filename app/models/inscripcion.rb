@@ -710,6 +710,19 @@ class Inscripcion < ApplicationRecord
           text informacion, align: :center, inline_format: true
         end
 
+        bounding_box([0, 180], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 160], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
+        end
+        bounding_box([0, 80], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 60], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
+        end
+
         start_new_page
       end
 
