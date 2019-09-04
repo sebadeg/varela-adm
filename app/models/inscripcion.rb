@@ -695,6 +695,11 @@ class Inscripcion < ApplicationRecord
         stroke_color "FF0000"
         stroke_rectangle [2, 718], 536, 516
 
+        stroke_color "000000"
+        dash 5, space: 5, phase:0
+        stroke_horizontal_line 0, 540, at:200
+
+
         image Rails.root.join("data", "logo.png"), at: [203,655], scale: 0.5
 
         bounding_box([20, 455], :width => 500, :height => 60) do
