@@ -691,9 +691,9 @@ class Inscripcion < ApplicationRecord
         font "Helvetica", :size => 12
 
         stroke_color "0000FF"
-        stroke_rectangle [0, 520], 540, 720   
+        stroke_rectangle [0, 720], 540, 520   
         stroke_color "FF0000"
-        stroke_rectangle [2, 518], 536, 716
+        stroke_rectangle [2, 718], 536, 516
 
         image Rails.root.join("data", "logo.png"), at: [203,655], scale: 0.5
 
