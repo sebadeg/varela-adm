@@ -716,10 +716,10 @@ class Inscripcion < ApplicationRecord
         bounding_box([0, 160], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
-        bounding_box([0, 80], :width => 500, :height => 60) do
+        bounding_box([0, 60], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 60], :width => 500, :height => 60) do
+        bounding_box([0, 40], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
 
