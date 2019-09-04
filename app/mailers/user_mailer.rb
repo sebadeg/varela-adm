@@ -105,7 +105,9 @@ class UserMailer < ApplicationMailer
 
     def hay_vale_usuario(usuario)
 
-        mail = "soporte@varela.edu.uy"
+        mail = "inscripciones@varela.edu.uy"
+        contrasena = Contrasena.find_by(mail: mail) rescue nil
+        passwd = contrasena != nil ? contrasena.password : ""
 
 		delivery_options = {
           address: "smtp.varela.edu.uy",
@@ -119,7 +121,7 @@ class UserMailer < ApplicationMailer
 		}
 
 		@usuario = usuario
-		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
+		mail(from: 'inscripciones@varela.edu.uy', to: usuario.email, bcc:'inscripciones@varela.edu.uy', subject: 'Vale disponible para descargar', delivery_method_options: delivery_options)
 	
 	end
 
