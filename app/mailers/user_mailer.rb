@@ -102,4 +102,25 @@ class UserMailer < ApplicationMailer
 		@usuario = usuario
 		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Bienvenido al Colegio Nacional José Pedro Varela', delivery_method_options: delivery_options)
 	end
+
+    def hay_vale_usuario(usuario)
+
+        mail = "soporte@varela.edu.uy"
+
+		delivery_options = {
+          address: "smtp.varela.edu.uy",
+		  port: 587,
+		  domain: "varela.edu.uy", 
+		  user_name: mail,
+		  password: passwd,
+		  authentication: "plain",
+		  enable_starttls_auto: true,
+		  openssl_verify_mode: 'none'
+		}
+
+		@usuario = usuario
+		mail(from: 'soporte@varela.edu.uy', to: usuario.email, bcc:'soporte@varela.edu.uy', subject: 'Envío de contraseña de acceso', delivery_method_options: delivery_options)
+	
+	end
+
 end

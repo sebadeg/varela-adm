@@ -65,10 +65,17 @@ ActiveAdmin.register Inscripcion do
 
   member_action :generar_vale, method: :put do
     id = params[:id]
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale = NOT hay_vale WHERE id=#{id};" )
+
     inscripcion = Inscripcion.find(id)
+    if inscripcion.hay_vale
+      TitularCuenta.where(cuenta_id).each do |titular_cuenta|
+        usuario = Usuario.find(titular_cuenta.usuario_id)
+        UserMailer.hay_vale_usuario(usuario).deliver_now
+      end
+    end
     
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=#{!inscripcion.hay_vale} WHERE id=#{id};" )
-    redirect_to admin_inscripcion_path(inscripcion_alumno)
+    redirect_to admin_inscripcion_path(inscripcion)
   end
 
 
