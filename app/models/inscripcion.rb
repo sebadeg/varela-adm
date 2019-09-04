@@ -690,6 +690,7 @@ class Inscripcion < ApplicationRecord
       if reinsc
         font "Helvetica", :size => 12
 
+        dash 5, space: 0, phase:0
         stroke_color "0000FF"
         stroke_rectangle [0, 720], 540, 520   
         stroke_color "FF0000"
@@ -729,6 +730,7 @@ class Inscripcion < ApplicationRecord
       if !reinsc
         font "Helvetica", :size => 10
         
+        dash 5, space: 0, phase:0
         stroke_color "0000FF"
         stroke_rectangle [0, 720], 540, 720   
         stroke_color "FF0000"
@@ -757,6 +759,7 @@ class Inscripcion < ApplicationRecord
 
       font "Helvetica", :size => 10
 
+      dash 5, space: 0, phase:0
       stroke_color "0000FF"
       stroke_rectangle [0, 720], 540, 720   
       stroke_color "FF0000"
