@@ -467,7 +467,7 @@ class Inscripcion < ApplicationRecord
         end
         cuota = cuota + c[0]
       end
-      mensaje "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+      mensaje = "<b>#{cuota}</b> cuotas, a saber: " + mensaje
     end
   end
 

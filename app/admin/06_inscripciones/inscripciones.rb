@@ -32,6 +32,15 @@ ActiveAdmin.register Inscripcion do
     end
   end
 
+  action_item :generar_vale, only: :show do
+    if inscripcion.hay_vale
+      link_to "Quitar vale", generar_vale_admin_inscripcion_path(inscripcion), method: :put   
+    else
+      link_to "Generar vale", generar_vale_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+
   action_item :inscribir, only: :show do
     if inscripcion.inscripto
       link_to "Desinscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
@@ -53,6 +62,15 @@ ActiveAdmin.register Inscripcion do
     ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=#{!inscripcion.registrado} WHERE id=#{id};" )
     redirect_to admin_inscripcion_path(inscripcion)
   end
+
+  member_action :generar_vale, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion.find(id)
+    
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=#{!inscripcion.hay_vale} WHERE id=#{id};" )
+    redirect_to admin_inscripcion_path(inscripcion_alumno)
+  end
+
 
   member_action :inscribir, method: :put do
     id = params[:id]
