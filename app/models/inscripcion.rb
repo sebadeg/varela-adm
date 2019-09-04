@@ -691,17 +691,17 @@ class Inscripcion < ApplicationRecord
         font "Helvetica", :size => 12
 
         stroke_color "0000FF"
-        stroke_rectangle [0, 720], 540, 720   
+        stroke_rectangle [0, 520], 540, 720   
         stroke_color "FF0000"
-        stroke_rectangle [2, 718], 536, 716
+        stroke_rectangle [2, 518], 536, 716
 
-        image Rails.root.join("data", "logo.png"), at: [203,555], scale: 0.5
+        image Rails.root.join("data", "logo.png"), at: [203,655], scale: 0.5
 
-        bounding_box([20, 355], :width => 500, :height => 60) do
+        bounding_box([20, 455], :width => 500, :height => 60) do
           text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([60, 325], :width => 420, :height => 60) do
+        bounding_box([60, 425], :width => 420, :height => 60) do
           text informacion, align: :center, inline_format: true
         end
 
