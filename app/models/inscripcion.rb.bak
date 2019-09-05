@@ -10,13 +10,13 @@ class Inscripcion < ApplicationRecord
   validates :apellido, presence: true
   validates :cedula, presence: true
   validates :cedula, numericality: { only_integer: true, greater_than:0, less_than: 100000000 }
-  validates :lugar_nacimiento, presence: true
-  validates :fecha_nacimiento, presence: true
-  validates :domicilio, presence: true
-  validates :celular, presence: true
-  validates :mutualista, presence: true
-  validates :emergencia, presence: true
-  validates :procede, presence: true if !reinscripcion 
+  # validates :lugar_nacimiento, presence: true
+  # validates :fecha_nacimiento, presence: true
+  # validates :domicilio, presence: true
+  # validates :celular, presence: true
+  # validates :mutualista, presence: true
+  # validates :emergencia, presence: true
+  #validates :procede, presence: true if !reinscripcion 
 
   validates :proximo_grado_id, presence: true
 
@@ -148,26 +148,26 @@ class Inscripcion < ApplicationRecord
 
     descuentos = Array.new
 
-    formulario = Formulario.find(formulario_id) rescue nil
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
-      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL))"
-      ).each do |formulario_inscripcion_opcion|
-      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    end
+    # formulario = Formulario.find(formulario_id) rescue nil
+    # FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
+    #   "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Convenio' AND NOT id IS NULL))"
+    #   ).each do |formulario_inscripcion_opcion|
+    #   descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    # end
     descuentos.push(convenio_id)
 
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
-      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL))"
-      ).each do |formulario_inscripcion_opcion|
-      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    end
+    # FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
+    #   "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Adicional' AND NOT id IS NULL))"
+    #   ).each do |formulario_inscripcion_opcion|
+    #   descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    # end
     descuentos.push(adicional_id)
 
-    FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
-      "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL))"
-      ).each do |formulario_inscripcion_opcion|
-      descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    end
+    # FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM inscripcion_opciones WHERE " +
+    #   "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL))"
+    #   ).each do |formulario_inscripcion_opcion|
+    #   descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    # end
     descuentos.push(hermanos_id)
 
     p "------------------------------"
@@ -237,7 +237,10 @@ class Inscripcion < ApplicationRecord
       if str != ""
         str = str + " + "        
       end
-      str = str + "(#{cuota[2].strftime("%d/%m/%Y")}) #{cuota[0]} x #{cuota[1]}"
+      if cuota[2] != nil
+        str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
+      end
+      str = str + " #{cuota[0]} x #{cuota[1]}"
 
       total = total + cuota[0]*cuota[1]
     end
@@ -464,7 +467,7 @@ class Inscripcion < ApplicationRecord
         end
         cuota = cuota + c[0]
       end
-      mensaje "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+      mensaje = "<b>#{cuota}</b> cuotas, a saber: " + mensaje
     end
   end
 
@@ -687,19 +690,38 @@ class Inscripcion < ApplicationRecord
       if reinsc
         font "Helvetica", :size => 12
 
+        dash 5, space: 0, phase:0
         stroke_color "0000FF"
-        stroke_rectangle [0, 720], 540, 720   
+        stroke_rectangle [0, 720], 540, 520   
         stroke_color "FF0000"
-        stroke_rectangle [2, 718], 536, 716
+        stroke_rectangle [2, 718], 536, 516
 
-        image Rails.root.join("data", "logo.png"), at: [203,555], scale: 0.5
+        stroke_color "000000"
+        dash 5, space: 5, phase:0
+        stroke_horizontal_line -40, 580, at:100
 
-        bounding_box([20, 355], :width => 500, :height => 60) do
+
+        image Rails.root.join("data", "logo.png"), at: [203,655], scale: 0.5
+
+        bounding_box([20, 455], :width => 500, :height => 60) do
           text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([60, 325], :width => 420, :height => 60) do
+        bounding_box([60, 425], :width => 420, :height => 60) do
           text informacion, align: :center, inline_format: true
+        end
+
+        bounding_box([0, 180], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 160], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
+        end
+        bounding_box([0, 60], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 40], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
         end
 
         start_new_page
@@ -708,6 +730,7 @@ class Inscripcion < ApplicationRecord
       if !reinsc
         font "Helvetica", :size => 10
         
+        dash 5, space: 0, phase:0
         stroke_color "0000FF"
         stroke_rectangle [0, 720], 540, 720   
         stroke_color "FF0000"
@@ -736,6 +759,7 @@ class Inscripcion < ApplicationRecord
 
       font "Helvetica", :size => 10
 
+      dash 5, space: 0, phase:0
       stroke_color "0000FF"
       stroke_rectangle [0, 720], 540, 720   
       stroke_color "FF0000"

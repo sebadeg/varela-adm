@@ -65,7 +65,12 @@ ActiveAdmin.register Inscripcion do
 
   member_action :generar_vale, method: :put do
     id = params[:id]
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale = NOT hay_vale WHERE id=#{id};" )
+    inscripcion = Inscripcion.find(id)
+    if inscripcion.hay_vale == nil || !inscripcion.hay_vale
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=true WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=false WHERE id=#{id};" )
+    end
 
     inscripcion = Inscripcion.find(id)
     if inscripcion.hay_vale
