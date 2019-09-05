@@ -540,8 +540,8 @@ class Inscripcion < ApplicationRecord
     emailT = Array.new
     celularT = Array.new
 
-    if inscripcion.titular_padre != nil && inscripcion.titular_padre)
-      nombreT[idx] = inscripcion.nombre_padre + " " + inscripcion.apellido_padre
+    if inscripcion.titular_padre != nil && inscripcion.titular_padre
+      nombreT[idx] = "#{inscripcion.nombre_padre} #{inscripcion.apellido_padre}"
       documentoT[idx] = inscripcion.cedula_padre
       domicilioT[idx] = inscripcion.domicilio_padre
       emailT[idx] = inscripcion.email_padre
@@ -550,7 +550,7 @@ class Inscripcion < ApplicationRecord
     end
 
     if inscripcion.titular_madre != nil && inscripcion.titular_madre
-      nombreT[idx] = inscripcion.nombre_madre + " " + inscripcion.apellido_madre
+      nombreT[idx] = "#{inscripcion.nombre_madre} #{inscripcion.apellido_madre}"
       documentoT[idx] = inscripcion.cedula_madre
       domicilioT[idx] = inscripcion.domicilio_madre
       emailT[idx] = inscripcion.email_madre
