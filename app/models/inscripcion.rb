@@ -191,7 +191,7 @@ class Inscripcion < ApplicationRecord
     p "------------------------------"
 
     cuotas = Array.new
-    #numero_cuotas = 0
+    numero_cuotas = 0
     #fecha_cuota = nil
     # if formulario_id != nil
     #   InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opciones " +
@@ -220,11 +220,11 @@ class Inscripcion < ApplicationRecord
         #   cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
         # end
       end
-    #end    
+    #end     
 
-    if cuotas.count == 0 && numero_cuotas != 0 
-      cuotas.push([numero_cuotas,(importe_total/numero_cuotas+0.5).to_i,fecha_cuota])
-    end
+    # if cuotas.count == 0 && numero_cuotas != 0 
+    #   cuotas.push([numero_cuotas,(importe_total/numero_cuotas+0.5).to_i,fecha_cuota])
+    # end
 
     return cuotas
   end
