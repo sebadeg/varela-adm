@@ -262,6 +262,26 @@ class Inscripcion < ApplicationRecord
     return cuotas
   end
 
+  def CalcularPrecioTotal()
+    cuotas = CalcularPrecio()
+    total = 0
+    cuotas.each do |cuota|
+      total = total + cuota[0]*cuota[1]
+    end
+
+    return total
+  end
+
+  def CalcularPrecioAnteriorTotal()
+    cuotas = CalcularPrecioAnterior()
+    total = 0
+    cuotas.each do |cuota|
+      total = total + cuota[0]*cuota[1]
+    end
+
+    return total
+  end
+
   def CalcularPrecioAnteriorToStr()
 
     str = ""
