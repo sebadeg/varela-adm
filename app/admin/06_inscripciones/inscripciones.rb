@@ -178,7 +178,8 @@ ActiveAdmin.register Inscripcion do
       row "Precio 2019" do |r| r.CalcularPrecioAnteriorToStr() end
       row :precio_anterior
       
-      row "Coeficiente" do |r| r.CalcularPrecioAnterior()/r.CalcularPrecio() end
+      row "Coeficiente contra 2019" do |r| r.CalcularPrecioAnterior()/r.CalcularPrecio() end
+      row "Coeficiente contra Precio" do |r| r.precio_anterior == nil ? nil : r.precio_anterior/r.CalcularPrecio()  end
     end
 
     attributes_table title:"Padre" do
