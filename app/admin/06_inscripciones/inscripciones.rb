@@ -134,6 +134,7 @@ ActiveAdmin.register Inscripcion do
   filter :inhabilitado
   filter :registrado
   filter :inscripto
+  filter :hay_vale
 
   show do
 
