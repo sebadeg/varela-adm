@@ -68,16 +68,14 @@ ActiveAdmin.register Inscripcion do
     inscripcion = Inscripcion.find(id)
     if inscripcion.hay_vale == nil || !inscripcion.hay_vale
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=true WHERE id=#{id};" )
-    else
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=false WHERE id=#{id};" )
-    end
 
-    inscripcion = Inscripcion.find(id)
-    if inscripcion.hay_vale
       TitularCuenta.where("cuenta_id=#{inscripcion.cuenta_id}").each do |titular_cuenta|
         usuario = Usuario.find(titular_cuenta.usuario_id)
         UserMailer.hay_vale_usuario(usuario).deliver_now
       end
+      
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=false WHERE id=#{id};" )
     end
 
     redirect_to admin_inscripcion_path(inscripcion)
