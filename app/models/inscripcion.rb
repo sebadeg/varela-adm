@@ -531,7 +531,7 @@ class Inscripcion < ApplicationRecord
       end
     end
 
-    inscripcion = Inscripcion.FindInscripcion(alumno_id)
+    #inscripcion = Inscripcion.FindInscripcion(alumno_id)
 
     idx=0
     nombreT = Array.new
@@ -540,39 +540,39 @@ class Inscripcion < ApplicationRecord
     emailT = Array.new
     celularT = Array.new
 
-    if inscripcion.titular_padre != nil && inscripcion.titular_padre
-      nombreT[idx] = "#{inscripcion.nombre_padre} #{inscripcion.apellido_padre}"
-      documentoT[idx] = inscripcion.cedula_padre
-      domicilioT[idx] = inscripcion.domicilio_padre
-      emailT[idx] = inscripcion.email_padre
-      celularT[idx] = inscripcion.celular_padre
+    if titular_padre != nil && titular_padre
+      nombreT[idx] = "#{nombre_padre} #{apellido_padre}"
+      documentoT[idx] = cedula_padre
+      domicilioT[idx] = domicilio_padre
+      emailT[idx] = email_padre
+      celularT[idx] = celular_padre
       idx = idx+1
     end
 
-    if inscripcion.titular_madre != nil && inscripcion.titular_madre
-      nombreT[idx] = "#{inscripcion.nombre_madre} #{inscripcion.apellido_madre}"
-      documentoT[idx] = inscripcion.cedula_madre
-      domicilioT[idx] = inscripcion.domicilio_madre
-      emailT[idx] = inscripcion.email_madre
-      celularT[idx] = inscripcion.celular_madre
+    if titular_madre != nil && titular_madre
+      nombreT[idx] = "#{nombre_madre} #{apellido_madre}"
+      documentoT[idx] = cedula_madre
+      domicilioT[idx] = domicilio_madre
+      emailT[idx] = email_madre
+      celularT[idx] = celular_madre
       idx = idx+1
     end
 
-    if inscripcion.documento1 != nil
-      nombreT[idx] = "#{inscripcion.nombre1} #{inscripcion.apellido1}"
-      documentoT[idx] = inscripcion.documento1
-      domicilioT[idx] = inscripcion.domicilio1
-      emailT[idx] = inscripcion.email1
-      celularT[idx] = inscripcion.celular1
+    if documento1 != nil
+      nombreT[idx] = "#{nombre1} #{apellido1}"
+      documentoT[idx] = documento1
+      domicilioT[idx] = domicilio1
+      emailT[idx] = email1
+      celularT[idx] = celular1
       idx = idx+1
     end
 
-    if inscripcion.documento2 != nil
-      nombreT[idx] = "#{inscripcion.nombre2} #{inscripcion.apellido2}"
-      documentoT[idx] = inscripcion.documento2
-      domicilioT[idx] = inscripcion.domicilio2
-      emailT[idx] = inscripcion.email2
-      celularT[idx] = inscripcion.celular2
+    if documento2 != nil
+      nombreT[idx] = "#{nombre2} #{apellido2}"
+      documentoT[idx] = documento2
+      domicilioT[idx] = domicilio2
+      emailT[idx] = email2
+      celularT[idx] = celular2
       idx = idx+1
     end
 
@@ -585,8 +585,8 @@ class Inscripcion < ApplicationRecord
 
     texto_inscripcion =
       "#{titulo}<br>"+      
-      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
-      "Recibida por: #{inscripcion.recibida}<br>" +
+      "Fecha: #{fecha_tos(created_at)}<br>" +
+      "Recibida por: #{recibida}<br>" +
       "<br>" +
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
@@ -595,41 +595,41 @@ class Inscripcion < ApplicationRecord
       "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
       "<b>ALUMNO</b><br>" +
-      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
-      "Domicilio: #{inscripcion.domicilio}<br>" + 
-      "Teléfono/Celular: #{inscripcion.celular}<br>" + 
-      "Mutualista: #{inscripcion.mutualista}<br>" + 
-      "Emergencia: #{inscripcion.emergencia}<br>" + 
-      "Procede de: #{inscripcion.procede}<br>"
+      "Nombre: #{nombre} #{apellido}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(cedula)}<br>" +
+      "Lugar de nacimiento: #{lugar_nacimiento}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(fecha_nacimiento)}<br>" +
+      "Domicilio: #{domicilio}<br>" + 
+      "Teléfono/Celular: #{celular}<br>" + 
+      "Mutualista: #{mutualista}<br>" + 
+      "Emergencia: #{emergencia}<br>" + 
+      "Procede de: #{procede}<br>"
 
       texto_padre =
       "<b>PADRE</b><br>" +
-      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
-      "Mail: #{inscripcion.email_padre}<br>" + 
-      "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
-      "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
-      "Profesión: #{inscripcion.profesion_padre}<br>" + 
-      "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
-      "Teléfono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
+      "Nombre: #{nombre_padre} #{apellido_padre}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(cedula_padre)}<br>" +
+      "Lugar de nacimiento: #{lugar_nacimiento_padre}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(fecha_nacimiento_padre)}<br>" +
+      "Mail: #{email_padre}<br>" + 
+      "Domicilio: #{domicilio_padre}<br>" + 
+      "Teléfono/Celular: #{celular_padre}<br>" + 
+      "Profesión: #{profesion_padre}<br>" + 
+      "Lugar de trabajo: #{trabajo_padre}<br>" + 
+      "Teléfono de trabajo: #{telefono_trabajo_padre}<br>" 
 
       texto_madre =
       "<b>MADRE</b><br>" +
-      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
-      "Mail: #{inscripcion.email_madre}<br>" + 
-      "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
-      "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
-      "Profesión: #{inscripcion.profesion_madre}<br>" + 
-      "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
-      "Teléfono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
+      "Nombre: #{nombre_madre} #{apellido_madre}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(cedula_madre)}<br>" +
+      "Lugar de nacimiento: #{lugar_nacimiento_madre}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(fecha_nacimiento_madre)}<br>" +
+      "Mail: #{email_madre}<br>" + 
+      "Domicilio: #{domicilio_madre}<br>" + 
+      "Teléfono/Celular: #{celular_madre}<br>" + 
+      "Profesión: #{profesion_madre}<br>" + 
+      "Lugar de trabajo: #{trabajo_madre}<br>" + 
+      "Teléfono de trabajo: #{telefono_trabajo_madre}<br><br>"
 
     texto_nota = "<b>NOTA: Para la inscripción deberá presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del último pago realizado en la Institución de donde proviene.<br><br>" +
            "LA AUTORIZACIÓN DEFINITIVA SERÁ DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
