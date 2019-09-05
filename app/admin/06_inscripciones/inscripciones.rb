@@ -73,7 +73,7 @@ ActiveAdmin.register Inscripcion do
         usuario = Usuario.find(titular_cuenta.usuario_id)
         UserMailer.hay_vale_usuario(usuario).deliver_now
       end
-      
+
     else
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=false WHERE id=#{id};" )
     end
@@ -118,6 +118,7 @@ ActiveAdmin.register Inscripcion do
     column :cuenta_id
     column :alumno_id
     column :anio
+    column :updated_at
     actions
   end
 
