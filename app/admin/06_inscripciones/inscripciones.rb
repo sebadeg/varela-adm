@@ -118,7 +118,8 @@ ActiveAdmin.register Inscripcion do
     column :cuenta_id
     column :alumno_id
     column :anio
-    column :updated_at
+    column "Modificado" do |r| r.updated_at == nil ? "" : I18n.l(r.updated_at, format: '%d/%m/%Y %H:%M:%S') end
+
     actions
   end
 
