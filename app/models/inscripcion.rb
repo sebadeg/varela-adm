@@ -10,12 +10,12 @@ class Inscripcion < ApplicationRecord
   validates :apellido, presence: true
   validates :cedula, presence: true
   validates :cedula, numericality: { only_integer: true, greater_than:0, less_than: 100000000 }
-  validates :lugar_nacimiento, presence: true
-  validates :fecha_nacimiento, presence: true
-  validates :domicilio, presence: true
-  validates :celular, presence: true
-  validates :mutualista, presence: true
-  validates :emergencia, presence: true
+  # validates :lugar_nacimiento, presence: true
+  # validates :fecha_nacimiento, presence: true
+  # validates :domicilio, presence: true
+  # validates :celular, presence: true
+  # validates :mutualista, presence: true
+  # validates :emergencia, presence: true
   #validates :procede, presence: true if !reinscripcion 
 
   validates :proximo_grado_id, presence: true
