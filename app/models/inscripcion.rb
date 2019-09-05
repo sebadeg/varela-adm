@@ -191,8 +191,8 @@ class Inscripcion < ApplicationRecord
     p "------------------------------"
 
     cuotas = Array.new
-    numero_cuotas = 0
-    fecha_cuota = nil
+    #numero_cuotas = 0
+    #fecha_cuota = nil
     # if formulario_id != nil
     #   InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opciones " +
     #     "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
