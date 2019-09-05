@@ -174,9 +174,11 @@ ActiveAdmin.register Inscripcion do
       row "Hermanos" do |r| r.FindInscripcionOpcion(r.hermanos_id) end
       row "Cuotas" do |r| r.FindInscripcionOpcion(r.cuotas_id) end
 
-      row "Precio" do |r| r.CalcularPrecioToStr() end
-      row "Precio" do |r| r.CalcularPrecioAnteriorToStr() end
+      row "Precio 2020" do |r| r.CalcularPrecioToStr() end
+      row "Precio 2019" do |r| r.CalcularPrecioAnteriorToStr() end
       row :precio_anterior
+      
+      row "Coeficiente" do |r| r.CalcularPrecioAnterior()/r.CalcularPrecio() end
     end
 
     attributes_table title:"Padre" do
