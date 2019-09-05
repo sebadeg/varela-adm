@@ -87,6 +87,7 @@ class Ability
       can :manage, Inscripcion
       can :manage, ProximoGrado
 
+      can :manage, ActiveAdmin::Page, :name => "Informe"
       can :manage, Seguimiento
       can :manage, ActiveAdmin::Page, :name => "Seguimiento Cuenta"
       can :manage, Subgrado
