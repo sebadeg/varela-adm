@@ -255,6 +255,7 @@ ActiveAdmin.register Inscripcion do
       f.input :matricula_id, :label => 'Matrícula', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Matrícula' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre}", c.id]}
       f.input :hermanos_id, :label => 'Hermanos', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre}", c.id]}
       f.input :cuotas_id, :label => 'Cuotas', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre}", c.id]}
+      f.input :precio_anterior
     end
     
     f.inputs "Padre" do
