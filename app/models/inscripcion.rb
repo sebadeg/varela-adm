@@ -229,6 +229,63 @@ class Inscripcion < ApplicationRecord
     return cuotas
   end
 
+
+    def CalcularPrecioAnterior()
+
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    importe_total = proximo_grado.descuento
+
+    descuentos = Array.new
+
+    if proximo_grado.matricula == 1
+      descuentos.push(convenio_id)
+      descuentos.push(adicional_id)
+    end
+    descuentos.push(hermanos_id)
+
+    descuentos.each do |inscripcion_opcion_id|
+      inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
+      if inscripcion_opcion != nil 
+        p inscripcion_opcion.valor
+        importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+      end
+    end
+
+    cuotas = Array.new
+      inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
+      if inscripcion_opcion_cuotas != nil
+        InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
+          cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha])
+        end
+      end
+
+    return cuotas
+  end
+
+  def CalcularPrecioAnteriorToStr()
+
+    str = ""
+
+    cuotas = CalcularPrecioAnterior()
+
+    total = 0
+    cuotas.each do |cuota|
+      if str != ""
+        str = str + " + "        
+      end
+      if cuota[2] != nil
+        str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
+      end
+      str = str + " #{cuota[0]} x #{cuota[1]}"
+
+      total = total + cuota[0]*cuota[1]
+    end
+    str = str + " = #{total}"
+
+    return str
+  end
+
+
   def CalcularPrecioToStr()
 
     str = ""

@@ -175,6 +175,7 @@ ActiveAdmin.register Inscripcion do
       row "Cuotas" do |r| r.FindInscripcionOpcion(r.cuotas_id) end
 
       row "Precio" do |r| r.CalcularPrecioToStr() end
+      row "Precio" do |r| r.CalcularPrecioAnteriorToStr() end
       row :precio_anterior
     end
 
