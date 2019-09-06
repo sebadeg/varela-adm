@@ -180,6 +180,10 @@ ActiveAdmin.register Inscripcion do
       
       row "Coeficiente contra 2019" do |r| r.CalcularPrecioAnteriorTotal()*1.0/r.CalcularPrecioTotal() end
       row "Coeficiente contra Precio" do |r| r.precio_anterior == nil ? nil : r.precio_anterior*1.0/r.CalcularPrecioTotal()  end
+
+      row :registrado
+      row :hay_vale
+      row :inscripto
     end
 
     attributes_table title:"Padre" do
@@ -260,6 +264,10 @@ ActiveAdmin.register Inscripcion do
       f.input :hermanos_id, :label => 'Hermanos', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Hermanos' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre}", c.id]}
       f.input :cuotas_id, :label => 'Cuotas', :as => :select, :collection => InscripcionOpcion.where( "inscripcion_opcion_tipo_id IN (SELECT id FROM inscripcion_opcion_tipos WHERE nombre='Cuotas' AND NOT id IS NULL)" ).order(:nombre).map{|c| ["#{c.nombre}", c.id]}
       f.input :precio_anterior
+      f.input :registrado
+      f.input :hay_vale
+      f.input :inscripto
+
     end
     
     f.inputs "Padre" do
