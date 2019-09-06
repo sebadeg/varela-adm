@@ -143,7 +143,13 @@ class Inscripcion < ApplicationRecord
 
   def CalcularPrecio()
 
+    cuotas = Array.new
+
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil
+      return cuotas
+    end
+
     importe_total = proximo_grado.precio
 
     descuentos = Array.new
@@ -196,7 +202,6 @@ class Inscripcion < ApplicationRecord
     p "------------------------------"
     p "------------------------------"
 
-    cuotas = Array.new
     #numero_cuotas = 0
     #fecha_cuota = nil
     # if formulario_id != nil
