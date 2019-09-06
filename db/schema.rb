@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_000000) do
+ActiveRecord::Schema.define(version: 2019_09_06_112757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -419,6 +419,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_000000) do
     t.boolean "mail", default: false
     t.decimal "dolar"
     t.datetime "bajado"
+    t.date "fecha_pagos"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
     t.index ["mail"], name: "index_facturas_on_mail"
   end
@@ -1136,7 +1137,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_000000) do
   add_foreign_key "inscripcion_opcion_alumnos", "inscripcion_opciones"
   add_foreign_key "inscripcion_opcion_cuotas", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
-  add_foreign_key "inscripciones", "convenios"
   add_foreign_key "inscripciones", "grados"
   add_foreign_key "inscripciones", "proximo_grados"
   add_foreign_key "linea_facturas", "alumnos"
@@ -1166,7 +1166,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_000000) do
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"
-  add_foreign_key "refinanciacion_cuotas", "refinanciaciones", column: "refinanciacion_id"
+  add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
   add_foreign_key "refinanciaciones", "cuentas"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
