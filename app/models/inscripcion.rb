@@ -241,9 +241,13 @@ class Inscripcion < ApplicationRecord
   end
 
 
-    def CalcularPrecioAnterior()
+  def CalcularPrecioAnterior()
+    cuotas = Array.new
 
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil
+      return cuotas
+    end
     importe_total = proximo_grado.descuento
 
     descuentos = Array.new
@@ -262,13 +266,12 @@ class Inscripcion < ApplicationRecord
       end
     end
 
-    cuotas = Array.new
-      inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
-      if inscripcion_opcion_cuotas != nil
-        InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
-          cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha])
-        end
+    inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
+    if inscripcion_opcion_cuotas != nil
+      InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
+        cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha])
       end
+    end
 
     return cuotas
   end
@@ -783,35 +786,51 @@ class Inscripcion < ApplicationRecord
 
         dash 5, space: 0, phase:0
         stroke_color "0000FF"
-        stroke_rectangle [0, 520], 540, 520   
+        stroke_rectangle [0, 720], 540, 280
         stroke_color "FF0000"
-        stroke_rectangle [2, 518], 536, 516
+        stroke_rectangle [2, 718], 536, 276
 
-        stroke_color "000000"
-        dash 5, space: 5, phase:0
-        stroke_horizontal_line -40, 580, at: 620
+        image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
 
-
-        image Rails.root.join("data", "logo.png"), at: [203,455], scale: 0.5
-
-        bounding_box([20, 255], :width => 500, :height => 60) do
+        bounding_box([20, 550], :width => 500, :height => 60) do
           text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([60, 225], :width => 420, :height => 60) do
+        bounding_box([60, 530], :width => 420, :height => 60) do
           text informacion, align: :center, inline_format: true
         end
 
-        bounding_box([0, 580], :width => 500, :height => 60) do
+        bounding_box([0, 410], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 560], :width => 500, :height => 60) do
+        bounding_box([0, 390], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
-        bounding_box([0, 700], :width => 500, :height => 60) do
+
+        stroke_color "000000"
+        dash 5, space: 5, phase:0
+        stroke_horizontal_line -40, 580, at: 360
+
+        dash 5, space: 0, phase:0
+        stroke_color "0000FF"
+        stroke_rectangle [0, 330], 540, 280
+        stroke_color "FF0000"
+        stroke_rectangle [2, 328], 536, 276
+
+        image Rails.root.join("data", "logo.png"), at: [203,310], scale: 0.5
+
+        bounding_box([20, 160], :width => 500, :height => 60) do
+          text titulo, align: :center, inline_format: true
+        end
+
+        bounding_box([60, 140], :width => 420, :height => 60) do
+          text informacion, align: :center, inline_format: true
+        end
+
+        bounding_box([0, 20], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 680], :width => 500, :height => 60) do
+        bounding_box([0, 0], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
 
