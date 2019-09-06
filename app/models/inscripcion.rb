@@ -245,8 +245,8 @@ class Inscripcion < ApplicationRecord
 
     if proximo_grado.matricula == 1
       descuentos.push(convenio_id)
-      descuentos.push(adicional_id)
     end
+    descuentos.push(adicional_id)
     descuentos.push(hermanos_id)
 
     descuentos.each do |inscripcion_opcion_id|
