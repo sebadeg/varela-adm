@@ -222,7 +222,7 @@ class Inscripcion < ApplicationRecord
       inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
       if inscripcion_opcion_cuotas != nil
         InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
-          cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha])
+          cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha + 9.days])
         end
         # if ( inscripcion_opcion_cuotas.valor == nil )
         #   numero_cuotas = inscripcion_opcion_cuotas.valor_ent
@@ -241,7 +241,7 @@ class Inscripcion < ApplicationRecord
   end
 
 
-  def CalcularPrecioAnterior()
+  def CalcularPrecioAnterior(b)
     cuotas = Array.new
 
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
@@ -254,8 +254,8 @@ class Inscripcion < ApplicationRecord
 
     if proximo_grado.matricula == 1
       descuentos.push(convenio_id)
+      descuentos.push(adicional_id)
     end
-    descuentos.push(adicional_id)
     descuentos.push(hermanos_id)
 
     descuentos.each do |inscripcion_opcion_id|
