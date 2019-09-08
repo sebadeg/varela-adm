@@ -241,7 +241,7 @@ class Inscripcion < ApplicationRecord
   end
 
 
-  def CalcularPrecioAnterior(b)
+  def CalcularPrecioAnterior()
     cuotas = Array.new
 
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
