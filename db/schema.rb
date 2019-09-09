@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_08_135107) do
+ActiveRecord::Schema.define(version: 2019_09_09_221310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -507,12 +507,6 @@ ActiveRecord::Schema.define(version: 2019_09_08_135107) do
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
   end
 
-  create_table "inscripcion_estados", force: :cascade do |t|
-    t.string "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "inscripcion_opcion_alumnos", force: :cascade do |t|
     t.bigint "inscripcion_opcion_id"
     t.integer "cedula"
@@ -630,10 +624,13 @@ ActiveRecord::Schema.define(version: 2019_09_08_135107) do
     t.string "apellido2"
     t.decimal "precio_anterior"
     t.boolean "hay_vale"
-    t.bigint "inscripcion_estado_id"
+    t.datetime "fecha_registrado"
+    t.datetime "fecha_vale"
+    t.datetime "fecha_descargado"
+    t.datetime "fecha_entregado"
+    t.datetime "fecha_inscripto"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
-    t.index ["inscripcion_estado_id"], name: "index_inscripciones_on_inscripcion_estado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
 
@@ -1146,7 +1143,6 @@ ActiveRecord::Schema.define(version: 2019_09_08_135107) do
   add_foreign_key "inscripcion_opcion_cuotas", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "grados"
-  add_foreign_key "inscripciones", "inscripcion_estados"
   add_foreign_key "inscripciones", "proximo_grados"
   add_foreign_key "linea_facturas", "alumnos"
   add_foreign_key "linea_facturas", "facturas"

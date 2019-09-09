@@ -40,6 +40,13 @@ ActiveAdmin.register Inscripcion do
     end
   end
 
+  action_item :entregar, only: :show do
+    if inscripcion.fecha_entregado != nil
+      link_to "Quitar entregado", entregar_admin_inscripcion_path(inscripcion), method: :put   
+    else
+      link_to "Generar entregado", entregar_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
 
   action_item :inscribir, only: :show do
     if inscripcion.inscripto
@@ -59,7 +66,12 @@ ActiveAdmin.register Inscripcion do
   member_action :registrar, method: :put do
     id = params[:id]
     inscripcion = Inscripcion.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=#{!inscripcion.registrado} WHERE id=#{id};" )
+    if inscripcion.hay_vale == nil || !inscripcion.hay_vale
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=true, fecha_registrado=now() WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET registrado=false, fecha_registrado=NULL WHERE id=#{id};" )
+    end
+
     redirect_to admin_inscripcion_path(inscripcion)
   end
 
@@ -67,7 +79,7 @@ ActiveAdmin.register Inscripcion do
     id = params[:id]
     inscripcion = Inscripcion.find(id)
     if inscripcion.hay_vale == nil || !inscripcion.hay_vale
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=true WHERE id=#{id};" )
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=true, fecha_vale=now() WHERE id=#{id};" )
 
       TitularCuenta.where("cuenta_id=#{inscripcion.cuenta_id}").each do |titular_cuenta|
         usuario = Usuario.find(titular_cuenta.usuario_id)
@@ -75,17 +87,33 @@ ActiveAdmin.register Inscripcion do
       end
 
     else
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=false WHERE id=#{id};" )
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET hay_vale=false, fecha_vale=NULL WHERE id=#{id};" )
     end
 
     redirect_to admin_inscripcion_path(inscripcion)
   end
 
+  member_action :entregar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion.find(id)
+    if inscripcion.entregado == nil
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=NULL WHERE id=#{id};" )
+    end
+    
+    redirect_to admin_inscripcion_path(inscripcion_alumno)
+  end
 
   member_action :inscribir, method: :put do
     id = params[:id]
     inscripcion = Inscripcion.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=#{!inscripcion.inscripto} WHERE id=#{id};" )
+    if inscripcion.hay_vale == nil || !inscripcion.hay_vale
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=true, fecha_inscripto=now() WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=false, fecha_inscripto=NULL WHERE id=#{id};" )
+    end
+    
     redirect_to admin_inscripcion_path(inscripcion_alumno)
   end
 
