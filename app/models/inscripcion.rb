@@ -69,7 +69,7 @@ class Inscripcion < ApplicationRecord
 
   def cedula_digit
     if (!calc_cedula(cedula))
-      errors.add(:cedula, "con dígito verificador mal")
+      errors.add(:cedula, "con dígito verificador mal " + Inscripcion.calc_cedula_digit(cedula).to_s)
     end
   end
 
