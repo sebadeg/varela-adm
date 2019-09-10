@@ -40,7 +40,7 @@ ActiveAdmin.register Inscripcion do
     end
   end
 
-  action_item :entregar, only: :show do
+  action_item :entregar, only: :show, if: proc {current_admin_usuario.inscripciones} do
     if inscripcion.fecha_entregado != nil
       link_to "Quitar entregado", entregar_admin_inscripcion_path(inscripcion), method: :put   
     else
