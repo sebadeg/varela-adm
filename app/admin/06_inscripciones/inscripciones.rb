@@ -96,7 +96,7 @@ ActiveAdmin.register Inscripcion do
   member_action :entregar, method: :put do
     id = params[:id]
     inscripcion = Inscripcion.find(id)
-    if inscripcion.entregado == nil
+    if inscripcion.fecha_entregado == nil
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
     else
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=NULL WHERE id=#{id};" )
