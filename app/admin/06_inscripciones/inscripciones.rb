@@ -212,6 +212,14 @@ ActiveAdmin.register Inscripcion do
       row :registrado
       row :hay_vale
       row :inscripto
+
+      row :fecha_registrado
+      row :fecha_vale
+      row :fecha_descargado
+      row :fecha_entregado
+      row :fecha_inscripto
+
+
     end
 
     attributes_table title:"Padre" do
