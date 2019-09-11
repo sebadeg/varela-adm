@@ -102,19 +102,19 @@ ActiveAdmin.register Inscripcion do
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=NULL WHERE id=#{id};" )
     end
     
-    redirect_to admin_inscripcion_path(inscripcion_alumno)
+    redirect_to admin_inscripcion_path(inscripcion)
   end
 
   member_action :inscribir, method: :put do
     id = params[:id]
     inscripcion = Inscripcion.find(id)
-    if inscripcion.hay_vale == nil || !inscripcion.hay_vale
+    if inscripcion.inscripto == nil || !inscripcion.inscripto
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=true, fecha_inscripto=now() WHERE id=#{id};" )
     else
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inscripto=false, fecha_inscripto=NULL WHERE id=#{id};" )
     end
     
-    redirect_to admin_inscripcion_path(inscripcion_alumno)
+    redirect_to admin_inscripcion_path(inscripcion)
   end
 
 
