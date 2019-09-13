@@ -43,4 +43,17 @@ class ActividadOpcion < ApplicationRecord
 
     return { :opciones => opciones, :elecciones => elecciones }
   end
+
+  def self.todas_opciones(actividad_id)
+    opciones = Array.new
+    elecciones = Hash.new
+
+    ActividadOpcion.where(["actividad_id=#{actividad_id}"]).order(:indice).each do |opcion|
+      s = opcion_nombre(opcion)
+      opciones.push( [s,opcion.id] )
+      elecciones[opcion.id] = s
+    end
+
+    return { :opciones => opciones, :elecciones => elecciones }
+  end
 end
