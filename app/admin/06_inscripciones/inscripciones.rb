@@ -225,7 +225,7 @@ ActiveAdmin.register Inscripcion do
       row "Cuotas" do |r| r.FindInscripcionOpcion(r.cuotas_id) end
 
       row "Precio 2020" do |r| r.CalcularPrecioToStr() end
-      row "Precio 2019" do |r| r.CalcularPrecioAnteriorToStr() end
+      row "Precio 2019" do |r| r.CalcularPrecioAnteriorToStr(true) + " - " +  r.CalcularPrecioAnteriorToStr(false) end
       row :precio_anterior
       
       row "Coeficiente contra 2019" do |r| r.CalcularPrecioAnteriorTotal()*1.0/r.CalcularPrecioTotal() end
