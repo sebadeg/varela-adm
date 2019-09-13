@@ -14,6 +14,9 @@ ActiveAdmin.register Inscripcion do
   scope :inscripciones
   scope :reinscripciones
 
+  action_item :actualizar, only: :show do
+    link_to "Actualizar", actualizar_admin_inscripcion_path(inscripcion), method: :put 
+  end
 
 
   action_item :habilitar, only: :show do
@@ -55,6 +58,24 @@ ActiveAdmin.register Inscripcion do
       link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
     end
   end
+
+  member_action :actualizar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion.find(id)
+
+    suma = 0
+    Movimiento.where("alumno=#{inscripcion.alumno_id} AND rubro_id>=510101001 AND rubro_id<=510101004" ).each do |mov|
+      if mov.fecha < Date.new(2019,7,1)
+        suma = suma + fecha.debe
+      else
+        suma = suma + fecha.debe/1.05
+      end
+    end
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET precio_anterior=#{suma} WHERE id=#{id};" )
+
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
 
   member_action :habilitar, method: :put do
     id = params[:id]
