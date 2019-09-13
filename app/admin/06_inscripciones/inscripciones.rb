@@ -66,9 +66,9 @@ ActiveAdmin.register Inscripcion do
     suma = 0
     Movimiento.where("alumno=#{inscripcion.alumno_id} AND rubro_id>=510101001 AND rubro_id<=510101004" ).each do |mov|
       if mov.fecha < Date.new(2019,7,1)
-        suma = suma + fecha.debe
+        suma = suma + mov.debe
       else
-        suma = suma + fecha.debe/1.05
+        suma = suma + mov.debe/1.05
       end
     end
     suma = suma*1.05*1.05
