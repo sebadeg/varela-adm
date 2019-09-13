@@ -269,8 +269,10 @@ class Inscripcion < ApplicationRecord
 
     descuentos = Array.new
 
-    if proximo_grado.matricula == 1 && aplica_convenio
+    if proximo_grado.matricula == 1
       descuentos.push(convenio_id)
+    end
+    if aplica_convenio
       descuentos.push(adicional_id)
     end
     descuentos.push(hermanos_id)
@@ -303,8 +305,8 @@ class Inscripcion < ApplicationRecord
     return total
   end
 
-  def CalcularPrecioAnteriorTotal()
-    cuotas = CalcularPrecioAnterior()
+  def CalcularPrecioAnteriorTotal(aplica_convenio)
+    cuotas = CalcularPrecioAnterior(aplica_convenio)
     total = 0
     cuotas.each do |cuota|
       total = total + cuota[0]*cuota[1]
