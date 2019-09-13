@@ -71,6 +71,7 @@ ActiveAdmin.register Inscripcion do
         suma = suma + fecha.debe/1.05
       end
     end
+    suma = suma*1.05*1.05
     ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET precio_anterior=#{suma} WHERE id=#{id};" )
 
     redirect_to admin_inscripcion_path(inscripcion)
