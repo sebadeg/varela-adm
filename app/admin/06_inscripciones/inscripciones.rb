@@ -228,8 +228,8 @@ ActiveAdmin.register Inscripcion do
       row "Precio 2019" do |r| r.CalcularPrecioAnteriorToStr(true) + " - " +  r.CalcularPrecioAnteriorToStr(false) end
       row :precio_anterior
       
-      row "Coeficiente contra 2019" do |r| "#{r.CalcularPrecioAnteriorTotal(true)*1.0/r.CalcularPrecioTotal()} - #{r.CalcularPrecioAnteriorTotal(false)*1.0/r.CalcularPrecioTotal()}" end
-      row "Coeficiente contra Precio" do |r| r.precio_anterior == nil ? nil : r.precio_anterior*1.0/r.CalcularPrecioTotal()  end
+      row "Coeficiente contra 2019" do |r| "#{r.CalcularPrecioTotal()*1.0/r.CalcularPrecioAnteriorTotal(true)} - #{r.CalcularPrecioTotal()*1.0/r.CalcularPrecioAnteriorTotal(false)}" end
+      row "Coeficiente contra Precio" do |r| r.precio_anterior == nil ? nil : r.CalcularPrecioTotal()*1.0/r.precio_anterior  end
 
       row :registrado
       row :hay_vale
