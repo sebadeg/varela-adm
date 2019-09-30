@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_221310) do
+ActiveRecord::Schema.define(version: 2019_09_30_112242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -726,12 +726,15 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.bigint "tipo_movimiento_id"
     t.bigint "rubro_id"
     t.datetime "fecha_exportado"
+    t.integer "ejercicio"
+    t.bigint "inscripcion_id"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
     t.index ["especial_id"], name: "index_movimientos_on_especial_id"
+    t.index ["inscripcion_id"], name: "index_movimientos_on_inscripcion_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
     t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
@@ -1156,6 +1159,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
   add_foreign_key "movimientos", "contratos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "especiales"
+  add_foreign_key "movimientos", "inscripciones"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"
   add_foreign_key "movimientos", "rubros"
