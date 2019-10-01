@@ -4,7 +4,8 @@ ActiveAdmin.register_page "Ejecutar" do
 
 
   page_action :recargos, method: :post do
-
+   ActiveRecord::Base.connection.execute( 
+      "UPDATE facturas SET fecha_pagos='2019-09-29' WHERE fecha='2019-10-01';" )
   end
 
   page_action :facturar, method: :post do
