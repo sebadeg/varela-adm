@@ -51,6 +51,11 @@ class Ability
       can :manage, Refinanciacion
       can :manage, RefinanciacionCuota
 
+      can :manage, ActiveAdmin::Page, :name => "Ejecutar"
+      can :read, Formulario
+
+
+
     end
 
     if user.secretaria

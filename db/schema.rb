@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_112242) do
+ActiveRecord::Schema.define(version: 2019_10_02_140337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 2019_09_30_112242) do
     t.integer "anio_inscripciones"
     t.date "fecha_facturacion"
     t.string "mail_inscripcion"
+    t.date "fecha_pagos"
+    t.date "fecha_descarga"
   end
 
   create_table "contrasenas", force: :cascade do |t|

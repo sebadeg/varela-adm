@@ -1,19 +1,42 @@
+<% config = Config.find(1) %>
+<% p "'#{config.fecha_descarga.strftime('%Y-%m-%d')}'" %>
 
-<%= form_tag(admin_ejecutar_recargos_path, :method => "post") do %>
-   <%= submit_tag "Calcular Recargos" %>
+<%= form_tag(admin_ejecutar_actualizar_fechas_path, :method => "post") do %>
+  <%= label_tag "Fecha facturación: " %>
+  <%= date_field_tag "fecha_facturacion", config.fecha_facturacion, :required => "required" %><br><br>
+  <%= label_tag "Fecha pagos: " %>
+  <%= date_field_tag "fecha_pagos", config.fecha_pagos, required: "required" %><br><br>
+  <%= label_tag "Fecha descarga: " %>
+  <%= date_field_tag "fecha_descarga", config.fecha_descarga, required: "required" %><br><br>
+  <%= submit_tag "Actualizar fechas" %>
 <% end %>
 <br><br>
 
-<%= form_tag(admin_ejecutar_facturar_path, :method => "post") do %>
-   <%= submit_tag "Facturar" %>
+<%= form_tag(admin_ejecutar_generar_recargos_path, :method => "post") do %>
+  <%= submit_tag "Generar recargos" %>
+<% end %>
+<br><br>
+
+<%= form_tag(admin_ejecutar_eliminar_recargos_path, :method => "post") do %>
+  <%= submit_tag "Eliminar recargos" %>
+<% end %>
+<br><br>
+
+<%= form_tag(admin_ejecutar_generar_facturacion_path, :method => "post") do %>
+  <%= submit_tag "Generar facturación" %>
+<% end %>
+<br><br>
+
+<%= form_tag(admin_ejecutar_eliminar_facturacion_path, :method => "post") do %>
+  <%= submit_tag "Eliminar facturación" %>
 <% end %>
 <br><br>
 
 <%= form_tag(admin_ejecutar_sistarbanc_path, :method => "post") do %>
-   <%= submit_tag "Sistarbanc" %>
+  <%= submit_tag "Sistarbanc" %>
 <% end %>
 <br><br>
 
 <%= form_tag(admin_ejecutar_brou_path, :method => "post") do %>
-   <%= submit_tag "BROU" %>
+  <%= submit_tag "BROU" %>
 <% end %>
