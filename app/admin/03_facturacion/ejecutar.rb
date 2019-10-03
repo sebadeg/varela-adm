@@ -2,17 +2,14 @@ ActiveAdmin.register_page "Ejecutar" do
 
   menu priority: 301, label: "Ejecutar", parent: "Facturación"
 
-  page_action :actualizar_fechas, method: :post do
+
+  page_action :generar_facturacion, method: :post do
+
     ActiveRecord::Base.connection.execute( 
       "UPDATE configs SET " + 
       "fecha_facturacion='#{params[:fecha_facturacion]}'," +
-      "fecha_pagos='#{params[:fecha_pagos]}'," + 
-      "fecha_descarga='#{params[:fecha_descarga]}';" 
+      "fecha_pagos='#{params[:fecha_pagos]}';" 
     )
-    redirect_to admin_ejecutar_path, notice: "Fecha de pagos actualizada"
-  end
-
-  page_action :generar_recargos, method: :post do
 
     config = Config.find(1)
 
@@ -120,19 +117,17 @@ ActiveAdmin.register_page "Ejecutar" do
       end
     end
 
-    redirect_to admin_ejecutar_path, notice: "Calculo de recargos hecho!"
-  end
-
-  page_action :eliminar_recargos, method: :post do
-
-  end
-
-  page_action :generar_facturacion, method: :post do
-
+    redirect_to admin_ejecutar_path, notice: "Facturación generada!"
   end
 
   page_action :eliminar_facturacion, method: :post do
 
+    redirect_to admin_ejecutar_path, notice: "Facturación eliminada!"
+  end
+
+  page_action :habilitar_facturacion, method: :post do
+
+    redirect_to admin_ejecutar_path, notice: "Facturación habilitada!"
   end
 
   require 'spreadsheet'

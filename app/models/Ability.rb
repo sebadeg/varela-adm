@@ -52,7 +52,7 @@ class Ability
       can :manage, RefinanciacionCuota
 
       can :manage, ActiveAdmin::Page, :name => "Ejecutar"
-      can :read, Formulario
+      can :manage, Formulario
 
 
 
