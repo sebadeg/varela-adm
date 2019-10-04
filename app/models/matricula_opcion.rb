@@ -1,0 +1,2 @@
+class MatriculaOpcion < ApplicationRecord
+end

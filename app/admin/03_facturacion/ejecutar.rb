@@ -5,127 +5,44 @@ ActiveAdmin.register_page "Ejecutar" do
 
   page_action :generar_facturacion, method: :post do
 
+    fecha = params[:fecha_facturacion].to_datetime
+
+    if !Factura.verificar_fecha_facturacion(fecha)
+      redirect_to admin_ejecutar_path, notice: "Error en fecha de facturación!"
+      return;
+    end
+
+    fecha_facturacion = DateTime.new(fecha.year,fecha.month,1)
+
     ActiveRecord::Base.connection.execute( 
       "UPDATE configs SET " + 
-      "fecha_facturacion='#{params[:fecha_facturacion]}'," +
+      "fecha_facturacion='#{fecha_facturacion}'," +
       "fecha_pagos='#{params[:fecha_pagos]}';" 
     )
 
-    config = Config.find(1)
-
-    fecha_factura = config.fecha_facturacion
-    fecha_factura_anterior = fecha_factura - 1.month #DateTime.new(2019,05,01)
-    fecha_vencimiento_factura_anterior = fecha_factura_anterior + 9.days #DateTime.new(2019,05,10)
-
-    rubro = Rubro.find_by(nombre: "Intereses por atraso")
-    p "********************"
-    p rubro.id
-    p "********************"
-
-
-    saldos = Hash.new
-    corrientes = Hash.new
-    Movimiento.where(["fecha < ? AND NOT cuenta_id IN (SELECT cuenta_id FROM recargos WHERE fecha_comienzo<=? AND (fecha_fin IS NULL OR fecha_fin>?))",fecha_factura_anterior,fecha_factura,fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe-haber) as saldo").each do |saldo|
-      saldos[saldo.cuenta_id] = saldo.saldo
-    end
-    Movimiento.where(["fecha = ? AND debe <> 0 AND haber = 0 AND NOT cuenta_id IN (SELECT cuenta_id FROM recargos WHERE fecha_comienzo<=? AND (fecha_fin IS NULL OR fecha_fin>?))",fecha_factura_anterior,fecha_factura,fecha_factura]).group(:cuenta_id).order(:cuenta_id).select("cuenta_id, sum(debe) as debe").each do |corriente|
-      if !saldos.has_key?(corriente.cuenta_id)
-        saldos[corriente.cuenta_id] = 0
-      end
-      corrientes[corriente.cuenta_id] = corriente.debe
-    end
-    i = 0
-    saldos.keys.sort.each do |cuenta_id|
-
-      if cuenta_id != 9493
-          next
-      end
-
-      if !corrientes.has_key?(cuenta_id)
-        corrientes[cuenta_id] = 0
-      end
-
-      tea = 1.38 ** (1.0/365.0)
-      total_recargo = 0
-
-      saldo = saldos[cuenta_id]
-      corriente = corrientes[cuenta_id]
-      if saldo < 0
-        corriente = corriente + saldo
-      end
-
-      Movimiento.where(["cuenta_id = ? AND fecha >= ? AND fecha < ? AND haber>0",cuenta_id,fecha_factura_anterior,fecha_factura]).order(:fecha).select(:fecha,:haber).each do |pago|
-
-        fecha = pago.fecha
-        importe = pago.haber
-        recargo = 0
-        if saldo > 0
-          if importe > saldo
-            importe = importe - saldo
-            if (pago.fecha - fecha_factura_anterior).to_i > 0
-              recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i)-1)*saldo
-            end
-            saldo = 0
-          else
-            saldo = saldo - importe
-            if (pago.fecha - fecha_factura_anterior).to_i > 0
-              recargo = (tea**((pago.fecha - fecha_factura_anterior).to_i)-1)*importe
-            end
-            importe = 0
-          end
-        end
-
-        if corriente > 0
-          if importe > corriente
-            importe = importe - corriente
-            if (pago.fecha - fecha_vencimiento_factura_anterior).to_i > 0
-              recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i)-1)*corriente
-            end
-            corriente = 0
-          else
-            corriente = corriente - importe
-            if (pago.fecha - fecha_vencimiento_factura_anterior).to_i > 0
-              recargo = recargo + (tea**((pago.fecha - fecha_vencimiento_factura_anterior).to_i)-1)*importe
-            end
-            importe = 0
-          end
-        end
-        total_recargo = total_recargo + recargo
-      end
-
-      recargo = 0
-      if saldo > 0
-        if (fecha_factura - fecha_factura_anterior).to_i > 0
-          recargo = (tea**((fecha_factura - fecha_factura_anterior).to_i)-1)*saldo
-        end
-        saldo = 0
-      end
-
-      if corriente > 0
-        if (fecha_factura - fecha_vencimiento_factura_anterior).to_i > 0
-          recargo = recargo + (tea**((fecha_factura - fecha_vencimiento_factura_anterior).to_i)-1)*corriente
-        end
-        corriente = 0
-      end
-      
-      total_recargo = total_recargo + recargo
-
-      if total_recargo > 0
-        ActiveRecord::Base.connection.execute( 
-         "INSERT INTO movimientos (fecha,cuenta_id,descripcion,debe,haber,tipo,rubro_id,created_at,updated_at) VALUES ('#{fecha_factura}',#{cuenta_id},'RECARGOS',#{total_recargo.round},0,1003,#{rubro.id},now(),now());" 
-        )
-      end
-    end
+    Factura.generar_recargos()
+    Factura.generar_facturacion()
 
     redirect_to admin_ejecutar_path, notice: "Facturación generada!"
   end
 
   page_action :eliminar_facturacion, method: :post do
+  
+    config = Config.find(1)
+
+    if !Factura.verificar_fecha_facturacion(config.fecha_facturacion)
+      redirect_to admin_ejecutar_path, notice: "Error en fecha de facturación!"
+      return;
+    end
+
+    Factura.eliminar_recargos()
+    Factura.eliminar_facturacion()
 
     redirect_to admin_ejecutar_path, notice: "Facturación eliminada!"
   end
 
   page_action :habilitar_facturacion, method: :post do
+    Factura.habilitar_facturacion()
 
     redirect_to admin_ejecutar_path, notice: "Facturación habilitada!"
   end

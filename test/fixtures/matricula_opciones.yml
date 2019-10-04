@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  matricula_id: 1
+  cuotas: 1
+  fecha: 2019-10-04
+
+two:
+  matricula_id: 1
+  cuotas: 1
+  fecha: 2019-10-04

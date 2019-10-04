@@ -61,7 +61,8 @@ es:
         anio_pases: "Pases del año"
         anio_inscripciones: "Año de inscripciones"
         fecha_facturacion: "Fecha de facturación"
-
+      matricula:
+        anio: "Año"
       inscripcion_opcion:
         anio: "Año"
         inscripcion_opcion_tipo_id: "Tipo"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_140337) do
+ActiveRecord::Schema.define(version: 2019_10_04_173732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -684,12 +684,21 @@ ActiveRecord::Schema.define(version: 2019_10_02_140337) do
     t.index ["cuenta_id"], name: "index_lote_recibos_on_cuenta_id"
   end
 
+  create_table "matricula_opciones", force: :cascade do |t|
+    t.integer "matricula_id"
+    t.integer "cuotas"
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matriculas", force: :cascade do |t|
     t.string "nombre"
     t.integer "codigo"
     t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "importe"
   end
 
   create_table "movimiento2018s", force: :cascade do |t|
@@ -730,6 +739,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_140337) do
     t.datetime "fecha_exportado"
     t.integer "ejercicio"
     t.bigint "inscripcion_id"
+    t.boolean "generado"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
