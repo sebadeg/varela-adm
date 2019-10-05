@@ -67,8 +67,8 @@ ActiveAdmin.register Movimiento do
   	#selectable_column
 
     column "Fecha", :fecha, sortable: false
-    column "Cuenta" do |mov| (mov.cuenta_id != nil ? link_to mov.cuenta_id, admin_cuenta_path(mov.cuenta_id) : "" ) end
-    column "Alumno" do |mov| (mov.alumno != nil ? link_to mov.alumno, admin_alumno_path(mov.alumno) : "" ) end
+    column "Cuenta" do |mov| (mov.cuenta_id != nil ? link_to(mov.cuenta_id, admin_cuenta_path(mov.cuenta_id)) : "" ) end
+    column "Alumno" do |mov| (mov.alumno != nil ? link_to(mov.alumno, admin_alumno_path(mov.alumno)) : "" ) end
     column "Descripción", :descripcion, sortable: false
     column "Rubro" do |mov| (mov.rubro != nil ? "#{mov.rubro.nombre}" : "" ) end
     column "Debe", :debe, sortable: false
@@ -86,8 +86,8 @@ ActiveAdmin.register Movimiento do
   show do
     attributes_table do
       row :fecha
-      row "Cuenta" do |mov| (mov.cuenta_id != nil ? link_to mov.cuenta_id, admin_cuenta_path(mov.cuenta_id) : "" ) end
-      row "Alumno" do |mov| (mov.alumno != nil ? link_to mov.alumno, admin_alumno_path(mov.alumno) : "" ) end
+      row "Cuenta" do |mov| (mov.cuenta_id != nil ? link_to(mov.cuenta_id, admin_cuenta_path(mov.cuenta_id)) : "" ) end
+      row "Alumno" do |mov| (mov.alumno != nil ? link_to(mov.alumno, admin_alumno_path(mov.alumno)) : "" ) end
       row :descripcion
       row "Rubro" do |mov| (mov.rubro != nil ? "#{mov.rubro.nombre}" : "" ) end
 
