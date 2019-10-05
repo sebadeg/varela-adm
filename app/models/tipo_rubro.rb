@@ -1,0 +1,2 @@
+class TipoRubro < ApplicationRecord
+end

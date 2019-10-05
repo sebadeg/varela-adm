@@ -1,4 +1,5 @@
 class Actividad < ApplicationRecord
+  belongs_to :rubro
 
   has_many :actividad_archivo, :dependent => :delete_all
   accepts_nested_attributes_for :actividad_archivo, allow_destroy: true

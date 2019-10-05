@@ -4,11 +4,12 @@ ActiveAdmin.register Rubro do
 
   menu priority: 206, label: "Rubros", parent: "Cuenta Corriente"
 
-  permit_params :id, :nombre, :descripcion
+  permit_params :id, :nombre, :tipo_rubro_id, :descripcion
 
   index do
     column :id
     column :nombre
+    column "Tipo" do |r| (r.tipo_rubro != nil ? "#{r.tipo_rubro.nombre}" : "" ) end
     column :descripcion
     actions
   end
@@ -21,6 +22,7 @@ ActiveAdmin.register Rubro do
     attributes_table do
       row :id
       row :nombre
+      row "Tipo" do |r| (r.tipo_rubro != nil ? "#{r.tipo_rubro.nombre}" : "" ) end
       row :descripcion
     end
   end
@@ -29,6 +31,7 @@ ActiveAdmin.register Rubro do
     f.inputs do
       f.input :id
       f.input :nombre
+      f.input :tipo_rubro_id, as: :select, collection: TipoRubro.all.order(:nombre).map{|u| ["#{u.nombre}",u.id]}
       f.input :descripcion
     end
     f.actions

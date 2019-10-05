@@ -16,7 +16,7 @@ ActiveAdmin.register Actividad do
 #   permitted
 # end
 
-  permit_params :id, :nombre, :fecha, :sector_id, :mail, :creada,
+  permit_params :id, :nombre, :fecha, :rubro_id, :sector_id, :mail, :creada,
       actividad_archivo_attributes: [:id,:actividad_id,:nombre,:data,:indice,:_destroy],
       actividad_lista_attributes: [:id,:actividad_id,:lista_id,:_destroy],
       actividad_opcion_attributes: [:id,:actividad_id,:opcion_concepto_id,:cuotas,:importe,:fecha,:indice,:opcion,:_destroy],
@@ -77,6 +77,7 @@ ActiveAdmin.register Actividad do
     attributes_table do
       row :nombre
       row :fecha
+      row "Rubro" do |r| (r.rubro != nil ? "#{r.rubro.nombre}" : "" ) end
 
       row "Archivos" do 
         table_for ActividadArchivo.where("actividad_id=#{r.id}").order(:indice) do |t|

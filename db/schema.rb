@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_173732) do
+ActiveRecord::Schema.define(version: 2019_10_05_000259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 2019_10_04_173732) do
     t.bigint "sector_id"
     t.boolean "mail"
     t.string "creada"
+    t.bigint "rubro_id"
+    t.index ["rubro_id"], name: "index_actividades_on_rubro_id"
     t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
@@ -934,6 +936,8 @@ ActiveRecord::Schema.define(version: 2019_10_04_173732) do
     t.string "descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tipo_rubro_id"
+    t.index ["tipo_rubro_id"], name: "index_rubros_on_tipo_rubro_id"
   end
 
   create_table "sector_alumnos", force: :cascade do |t|
@@ -1057,6 +1061,13 @@ ActiveRecord::Schema.define(version: 2019_10_04_173732) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tipo_rubros", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "total"
+  end
+
   create_table "titular_cuentas", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "cuenta_id"
@@ -1122,6 +1133,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_173732) do
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "actividad_opciones", "opcion_conceptos"
+  add_foreign_key "actividades", "rubros"
   add_foreign_key "actividades", "sectores"
   add_foreign_key "alumnos", "personas", column: "cedula_madre_id"
   add_foreign_key "alumnos", "personas", column: "cedula_padre_id"
@@ -1189,6 +1201,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_173732) do
   add_foreign_key "recibos", "lote_recibos"
   add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
   add_foreign_key "refinanciaciones", "cuentas"
+  add_foreign_key "rubros", "tipo_rubros"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"
