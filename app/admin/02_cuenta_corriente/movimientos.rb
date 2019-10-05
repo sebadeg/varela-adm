@@ -67,10 +67,10 @@ ActiveAdmin.register Movimiento do
   	#selectable_column
 
     column "Fecha", :fecha, sortable: false
-    column "Cuenta", :cuenta_id, sortable: false
-    column "Alumno", :alumno, sortable: false
+    column "Cuenta" do |mov| link_to mov.cuenta_id, admin_cuenta_path(mov.cuenta_id) end
+    column "Alumno" do |mov| link_to mov.alumno, admin_alumno_path(mov.alumno) end
     column "Descripción", :descripcion, sortable: false
-    column "Rubro" do |c| (c.rubro != nil ? "#{c.rubro.nombre}" : "" ) end
+    column "Rubro" do |mov| (mov.rubro != nil ? "#{mov.rubro.nombre}" : "" ) end
     column "Debe", :debe, sortable: false
     column "Haber", :haber, sortable: false
     column "Saldo", :saldo, sortable: false

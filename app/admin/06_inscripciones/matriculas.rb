@@ -2,8 +2,9 @@ ActiveAdmin.register Matricula do
 
   menu priority: 603, label: "Matrículas", parent: "Inscripciones"
 
-  permit_params :id, :nombre, :importe, :anio
-
+  permit_params :id, :nombre, :importe, :anio,
+    matricula_opcion_attributes: [:id,:matricula_id,:cuotas,:fecha,:_destroy]
+   
   index do
     column :id
     column :nombre
@@ -16,23 +17,22 @@ ActiveAdmin.register Matricula do
   filter :nombre
   filter :anio
 
-  show do
+  show do |r|
     attributes_table do
       row :id
       row :nombre
       row :importe
       row :anio
+
+      row "Opciones" do 
+        table_for MatriculaOpcion.where("matricula_id=#{r.id}").order(:cuotas) do |t|
+          t.column :cuotas
+          t.column :fecha
+        end
+      end      
     end
   end
 
-  form do |f|
-    f.inputs do
-      f.input :id
-      f.input :nombre
-      f.input :importe
-      f.input :anio
-    end
-    f.actions
-  end
+  form partial: 'form'
 
 end
