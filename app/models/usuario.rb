@@ -5,7 +5,10 @@ class Usuario < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:cedula]
 
   has_many :titular_cuenta
+  accepts_nested_attributes_for :titular_cuenta, allow_destroy: true
+
   has_many :padre_alumno
+  accepts_nested_attributes_for :padre_alumno, allow_destroy: true
   
   validates_uniqueness_of :cedula
   validates :cedula, presence: true

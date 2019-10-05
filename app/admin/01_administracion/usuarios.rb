@@ -2,7 +2,10 @@ ActiveAdmin.register Usuario do
 
   menu priority: 104, label: "Padres", parent: "Administración"
 
-  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation, :habilitado
+  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :passwd,:password,:password_confirmation, :habilitado,
+    padre_alumno_attributes: [:id,:alumno_id,:usuario_id,:_destroy],
+    titular_cuenta_attributes: [:id,:cuenta_id,:usuario_id,:_destroy]
+
 
   action_item :resetear_contrasena, only: :show do
     link_to "Resetear Contraseña", resetear_contrasena_admin_usuario_path(usuario), method: :put 
@@ -59,7 +62,7 @@ ActiveAdmin.register Usuario do
   filter :nombre
   filter :apellido
 
-  show do
+  show do |r|
     attributes_table do
       row :id
       row :cedula
@@ -69,25 +72,38 @@ ActiveAdmin.register Usuario do
       row :direccion
       row :celular
       row :habilitado
+
+      row "Hijos" do 
+        table_for PadreAlumno.where("usuario_id=#{r.id}") do |t|
+          t.column "Hijo" do |c| (c.alumno != nil ? "#{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
+        end
+      end
+      row "Cuentas" do 
+        table_for TitularCuenta.where("usuario_id=#{r.id}") do |t|
+          t.column "Cuenta" do |c| (c.cuenta != nil ? "#{c.cuenta.id}" : "" ) end
+        end
+      end
     end
   end
 
-  form do |f|
-    f.inputs do
-      f.input :id
-      f.input :cedula
-      f.input :nombre
-      f.input :apellido
-      f.input :email
-      f.input :direccion
-      f.input :celular
-      f.input :habilitado
-      f.input :passwd
-      f.input :password
-      f.input :password_confirmation
-    end
-    f.actions
-  end
+  form partial: 'form'
+
+  # form do |f|
+  #   f.inputs do
+  #     f.input :id
+  #     f.input :cedula
+  #     f.input :nombre
+  #     f.input :apellido
+  #     f.input :email
+  #     f.input :direccion
+  #     f.input :celular
+  #     f.input :habilitado
+  #     f.input :passwd
+  #     f.input :password
+  #     f.input :password_confirmation
+  #   end
+  #   f.actions
+  # end
 
 	controller do
 

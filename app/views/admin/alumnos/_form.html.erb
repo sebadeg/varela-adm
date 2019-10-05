@@ -4,20 +4,22 @@
   <%= a.inputs do %>
       <%= a.input :id %>
       <%= a.input :nombre %>
-      <%= a.input :brou %>
-      <%= a.input :visa %>
-      <%= a.input :oca %>
-      <%= a.input :retencion %>
-      <%= a.input :comentario %>
+      <%= a.input :apellido %>
+      <%= a.input :cedula %>
+      <%= a.input :lugar_nacimiento %>
+      <%= a.input :fecha_nacimiento %>
+      <%= a.input :domicilio %>
+      <%= a.input :celular %>
+      <%= a.input :anio_ingreso %>
   <% end %>
 
-  <%= a.inputs "Titulares" do %>
-    <table class="titular_cuenta">
+  <%= a.inputs "Padres" do %>
+    <table class="padre_alumno">
       <tr>
-        <th>Titular</th>
+        <th>Padre</th>
       </tr>
       
-      <%= a.semantic_fields_for :titular_cuenta do |b| %>
+      <%= a.semantic_fields_for :padre_alumno do |b| %>
         <% if b.object != nil %>
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
@@ -27,7 +29,7 @@
         </tr>
       <% end %>
 
-      <% js = a.semantic_fields_for :titular_cuenta, TitularCuenta.new do |b| %>
+      <% js = a.semantic_fields_for :padre_alumno, PadreAlumno.new do |b| %>
         <tr>
           <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
@@ -38,17 +40,17 @@
       <% js = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
-          onclick: "$('table.titular_cuenta tr').last().after(
+          onclick: "$('table.padre_alumno tr').last().after(
                       '#{js}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
                     ); return false;",
           class: "button" %>
     </span>
   <% end %>
 
-  <%= a.inputs "Alumnos" do %>
+  <%= a.inputs "Cuentas" do %>
     <table class="cuenta_alumno">
       <tr>
-        <th>Alumno</th>
+        <th>Cuenta</th>
       </tr>
       
       <%= a.semantic_fields_for :cuenta_alumno do |b| %>
@@ -56,14 +58,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :cuenta_alumno, CuentaAlumno.new do |b| %>
         <tr>
-          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
