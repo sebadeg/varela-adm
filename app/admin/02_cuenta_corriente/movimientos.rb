@@ -1,11 +1,13 @@
 ActiveAdmin.register Movimiento do
 
   config.sort_order = 'indice_asc'
-
+  
   permit_params :fecha, :cuenta_id, :alumno, :descripcion, :tipo_movimiento_id, :debe, :haber, :rubro_id
 
   menu priority: 201, label: "Movimientos", parent: "Cuenta Corriente"
 
+  scope :corrientes, default: true
+  scope :todos 
 
   action_item :exportar, only: :index do
     link_to "Exportar", exportar_admin_movimientos_path
