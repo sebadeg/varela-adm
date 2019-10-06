@@ -114,9 +114,9 @@ ActiveAdmin.register Movimiento do
 
   controller do
 
-    before_action only: :index do
-      @per_page = 100
-    end
+    # before_action only: :index do
+    #   @per_page = 100
+    # end
 
     def index
       index! do |format|
