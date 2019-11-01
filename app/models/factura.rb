@@ -313,7 +313,7 @@ class Factura < ApplicationRecord
       "ORDER BY cuenta_id " +
       ")) AS movs " +
       "ORDER BY movs.cuenta_id, tipo, alumno, descripcion) AS lineas, " +
-      "(SELECT * FROM facturas WHERE fecha='#{config.fecha_facturacion}' AS facturas " +
+      "(SELECT * FROM facturas WHERE fecha='#{config.fecha_facturacion}') AS facturas " +
       "WHERE lineas.cuenta_id=facturas.cuenta_id " +
       "ORDER BY facturas.id, lineas.tipo, lineas.alumno, lineas.descripcion; " +
 
