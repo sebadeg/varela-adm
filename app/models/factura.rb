@@ -283,7 +283,7 @@ class Factura < ApplicationRecord
 
   def self.generar_facturacion()
 
-    config = Congif.find(1)
+    config = Config.find(1)
     fecha_vencimiento = config.fecha_facturacion + 9.days
 
     ActiveRecord::Base.connection.execute( 
@@ -329,7 +329,7 @@ class Factura < ApplicationRecord
   end  
 
   def self.eliminar_facturacion()
-    config = Congif.find(1)
+    config = Config.find(1)
 
     ActiveRecord::Base.connection.execute( 
       "DELETE FROM linea_facturas " + 
