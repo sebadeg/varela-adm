@@ -78,8 +78,8 @@ ActiveAdmin.register Movimiento do
     column "Saldo", :saldo, sortable: false
 
     actions defaults: false do |u|
-      item "Editar", edit_admin_movimiento_path(u), class: "edit_link member_link", title: "Editar" if u.fecha > DateTime.now
-      item "Eliminar", admin_movimiento_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete if u.fecha > DateTime.now
+      item "Editar", edit_admin_movimiento_path(u), class: "edit_link member_link", title: "Editar" if current_admin_usuario.soporte || u.fecha > DateTime.now
+      item "Eliminar", admin_movimiento_path(u), class: "delete_link member_link", title:"Eliminar", "data-confirm": "¿Está seguro de que quiere eliminar esto?", rel: "nofollow", "data-method": :delete if current_admin_usuario.soporte || u.fecha > DateTime.now
     end
   end
 
