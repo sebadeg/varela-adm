@@ -87,17 +87,28 @@ ActiveAdmin.register LoteRecibo do
     f.actions
   end
 
-  # controller do
+  controller do
 
-  #   def show
-  #     @page_title = "Recibos"
-  #   end
+    def show
+      @page_title = "Recibos"
+    end
 
-  #   def edit
-  #     @page_title = "Recibos"
-  #   end
+    def edit
+      @page_title = "Recibos"
+    end
 
-  # end  
+    def update
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
 
+    def create
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
+  end
 
 end
