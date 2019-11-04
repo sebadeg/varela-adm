@@ -5,6 +5,11 @@ ActiveAdmin.register LoteRecibo do
   permit_params :id,:cuenta_id,:nombre,:fecha,:suma,:concepto,:hoja_nro,:nota_credito,
     recibo_attributes: [:id,:lote_recibo_id,:importe,:cheque,:banco,:fecha_vto,:_destroy,:locale]
 
+
+  action_item :imprimir, only: :show do
+    link_to "Añadir", new_admin_lote_recibo_path(lote_recibo), method: :put 
+  end
+
   action_item :imprimir, only: :show do
     link_to "Imprimir", imprimir_admin_lote_recibo_path(lote_recibo), method: :put 
   end
