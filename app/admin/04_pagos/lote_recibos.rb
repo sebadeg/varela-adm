@@ -7,7 +7,7 @@ ActiveAdmin.register LoteRecibo do
 
 
   action_item :imprimir, only: :show do
-    link_to "Añadir", new_admin_lote_recibo_path(lote_recibo), method: :put 
+    link_to "Añadir", new_admin_lote_recibo_path, method: :get 
   end
 
   action_item :imprimir, only: :show do
