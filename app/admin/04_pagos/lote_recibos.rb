@@ -90,10 +90,12 @@ ActiveAdmin.register LoteRecibo do
   controller do
 
     def show
+      super
       @page_title = "Recibos"
     end
 
     def edit
+      super
       @page_title = "Recibos"
     end
 
