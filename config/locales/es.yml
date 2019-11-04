@@ -153,8 +153,7 @@ es:
       especial:
         fecha_comienzo: "Fecha Comienzo"
         fecha_fin: "Fecha Fin"
-      lote_recibo: 
-        nota_credito: "Nota de crédito"
+
       deudor:
         deuda360: "> 360"
         deuda180: "> 180"
@@ -162,6 +161,9 @@ es:
         deuda60: "> 60"
         deuda30: "> 30"
         deuda0: "> 0"
+      lote_recibo: 
+        nota_credito: "Nota de crédito"
+        update: "Editar"
       sector_alumno:
         anio: "Año"
       proximo_grado:
