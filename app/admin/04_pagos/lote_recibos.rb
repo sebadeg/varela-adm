@@ -87,4 +87,17 @@ ActiveAdmin.register LoteRecibo do
     f.actions
   end
 
+  controller do
+
+    def show
+      @page_title = "Recibos"
+    end
+
+    def edit
+      @page_title = "Recibos"
+    end
+
+  end  
+
+
 end
