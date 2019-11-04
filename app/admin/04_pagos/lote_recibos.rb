@@ -6,7 +6,7 @@ ActiveAdmin.register LoteRecibo do
     recibo_attributes: [:id,:lote_recibo_id,:importe,:cheque,:banco,:fecha_vto,:_destroy,:locale]
 
 
-  action_item :imprimir, only: :show do
+  action_item :agregar, only: :show do
     link_to "Añadir", new_admin_lote_recibo_path, method: :get 
   end
 
