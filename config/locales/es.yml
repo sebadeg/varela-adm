@@ -36,11 +36,6 @@ es:
       links:
         sign_up: "Registrarse"
         sign_in: "Ingresar"
-    resources:
-      lote_recibo:
-        new_model: 'Añadir'
-        edit_model: 'Editar'
-        delete_model: 'Eliminar'
 
   time:
     formats:
