@@ -29,7 +29,6 @@ es:
     :cancel: 'Cancelar'
     :reset: 'Resetear'
 
-en:
   active_admin:
     devise:
       cedula:
