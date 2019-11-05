@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_000259) do
+ActiveRecord::Schema.define(version: 2019_10_07_144540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -701,6 +701,8 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "importe"
+    t.integer "cuotas"
+    t.date "fecha"
   end
 
   create_table "movimiento2018s", force: :cascade do |t|
@@ -875,6 +877,15 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["alumno_id"], name: "index_proximo_grado_alumnos_on_alumno_id"
   end
 
+  create_table "proximo_grado_matriculas", force: :cascade do |t|
+    t.bigint "proximo_grado_id"
+    t.bigint "matricula_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matricula_id"], name: "index_proximo_grado_matriculas_on_matricula_id"
+    t.index ["proximo_grado_id"], name: "index_proximo_grado_matriculas_on_proximo_grado_id"
+  end
+
   create_table "proximo_grados", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.decimal "precio"
@@ -887,6 +898,9 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.integer "grado_id"
     t.bigint "sector_id"
     t.integer "anio"
+    t.bigint "rubro_id"
+    t.integer "matricula_rubro"
+    t.index ["rubro_id"], name: "index_proximo_grados_on_rubro_id"
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
@@ -1196,6 +1210,9 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
   add_foreign_key "pagos", "tipo_pagos"
   add_foreign_key "pases", "alumnos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "proximo_grado_matriculas", "matriculas"
+  add_foreign_key "proximo_grado_matriculas", "proximo_grados"
+  add_foreign_key "proximo_grados", "rubros"
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"

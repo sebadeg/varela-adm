@@ -100,6 +100,7 @@ ActiveAdmin.register Movimiento do
 
   form do |f| 
     f.inputs "Cuentas" do
+      f.input :ejercicio
       f.input :fecha
       f.input :cuenta_id, :label => "Cuentas", :as => :select, :collection => Cuenta.where("NOT nombre IS NULL AND nombre != ''").order(:nombre).map{|u| [u.id.to_s + " - " + u.nombre, u.id]}
       f.input :alumno, :label => "Alumno", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}

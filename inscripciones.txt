@@ -1,0 +1,7 @@
+SELECT inscripciones.id, inscripciones.nombre,inscripciones.apellido,cuenta_id,alumno_id,proximo_grados.nombre,
+proximo_grados.rubro_id,proximo_grados.precio,proximo_grados.matricula_rubro,matriculas.importe 
+
+FROM
+inscripciones INNER JOIN proximo_grados ON inscripciones.proximo_grado_id=proximo_grados.id 
+              INNER JOIN matriculas ON inscripciones.matricula=matriculas.id
+WHERE inscripciones.anio = 2020 AND reinscripcion AND inscripto 
