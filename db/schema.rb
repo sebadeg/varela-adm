@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_144540) do
+ActiveRecord::Schema.define(version: 2019_11_11_011640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -683,7 +683,9 @@ ActiveRecord::Schema.define(version: 2019_10_07_144540) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "nota_credito", default: false
+    t.bigint "rubro_id"
     t.index ["cuenta_id"], name: "index_lote_recibos_on_cuenta_id"
+    t.index ["rubro_id"], name: "index_lote_recibos_on_rubro_id"
   end
 
   create_table "matricula_opciones", force: :cascade do |t|
@@ -1191,6 +1193,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_144540) do
   add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "listas", "sectores"
   add_foreign_key "lote_recibos", "cuentas"
+  add_foreign_key "lote_recibos", "rubros"
   add_foreign_key "movimiento2018s", "cuentas"
   add_foreign_key "movimientos", "actividad_alumnos"
   add_foreign_key "movimientos", "conceptos"
