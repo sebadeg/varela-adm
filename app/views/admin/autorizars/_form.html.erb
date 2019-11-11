@@ -34,7 +34,7 @@
             <td><span class="status_tag no">No</span></td>
           <% end %>
           <td><%= b.object.bajado != nil ? b.object.bajado.strftime('%d/%m/%Y') : "" %></td>
-          <td><%= b.object.opcion != nil ? ActividadOpcion.opciones(b.object.actividad_id)[:elecciones][b.object.opcion] : "" %></td>
+          <td><%= b.object.opcion != nil ? ActividadOpcion.todas_opciones(b.object.actividad_id)[:elecciones][b.object.opcion] : "" %></td>
           <td><%= b.object.fecha != nil ? b.object.fecha.strftime('%d/%m/%Y') : "" %></td>
           <td><%= b.input :opcion_secretaria, label: false, as: :select, collection: ActividadOpcion.todas_opciones(b.object.actividad_id)[:opciones] %></td>
           <td><%= b.input :fecha_secretaria, label: false, :input_html => { :value => DateTime.now }, as: :hidden %></td>

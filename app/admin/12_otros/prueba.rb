@@ -46,6 +46,9 @@ ActiveAdmin.register_page "Prueba" do
 
   page_action :chequear_usuarios, method: :post do
 
+    Inscripcion.where("")
+
+
     Inscripcion.where("NOT reinscripcion").each do |inscripcion|
 
       ChequearUsuario(inscripcion.cedula_padre,inscripcion.nombre_padre,inscripcion.apellido_padre,
