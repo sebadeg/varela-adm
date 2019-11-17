@@ -8,7 +8,6 @@ ActiveAdmin.register Socio do
   scope :activos
   scope :suscriptores
 
-
   index do
   	#selectable_column
  

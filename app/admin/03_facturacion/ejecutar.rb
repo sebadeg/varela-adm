@@ -157,9 +157,47 @@ ActiveAdmin.register_page "Ejecutar" do
     file_name = "Salida.txt"
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
-      Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND inscripto").each do |x|
-        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioTotal()}\r\n" )
+
+      Socio.all.order(:id).each do |x|
+        celular = ""
+        if x.celular != nil 
+          celular = "#{x.celular}"
+        end
+        if x.telefono != nil 
+          if celular != "" 
+            celular = celular + "/"
+          end
+          celular = celular + x.telefono
+        end
+
+        f.write(
+          "Socio.create(" +
+            "id: #{x.id}," +
+            "cedula: #{x.cedula}," +
+            "nombre: '#{x.nombre}'," +
+            "apellido: '#{x.apellido}'," +
+            "email: '#{x.email}'," +
+            "domicilio: '#{x.domicilio}'," +
+            "celular: '#{celular}'," +
+            "fecha_ingreso: '#{x.fecha_ingreso.strftime("%Y-%m-%d")}'," +
+            "fecha_egreso: '#{x.fecha_egreso.strftime("%Y-%m-%d")}'" +
+          ")\r\n"
+        )
       end
+
+      CuotaSocio.all.order(:fecha,:socio_id).each do |x|
+
+        f.write(
+          "CuotaSocio.create(" +
+            "socio_id: #{x.socio_id}," +
+            "fecha: '#{x.fecha.strftime("%Y-%m-%d")}'," +
+            "concepto: '#{x.concepto}'," +
+            "importe: #{x.importe}" +
+          ")\r\n"
+        )
+      end
+
+
     end
 
     send_file(
