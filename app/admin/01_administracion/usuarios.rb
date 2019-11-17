@@ -72,6 +72,7 @@ ActiveAdmin.register Usuario do
       row :direccion
       row :celular
       row :habilitado
+      row :passwd
 
       row "Hijos" do 
         table_for PadreAlumno.where("usuario_id=#{r.id}") do |t|
