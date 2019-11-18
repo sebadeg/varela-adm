@@ -170,6 +170,15 @@ ActiveAdmin.register_page "Ejecutar" do
           celular = celular + x.telefono
         end
 
+        fecha_ingreso = ""
+        if x.fecha_ingreso != nil
+          fecha_ingreso = x.fecha_ingreso.strftime("%Y-%m-%d")
+        end
+        fecha_egreso = ""
+        if x.fecha_egreso != nil
+          fecha_egreso = x.fecha_egreso.strftime("%Y-%m-%d")
+        end
+
         f.write(
           "Socio.create(" +
             "id: #{x.id}," +
@@ -179,18 +188,24 @@ ActiveAdmin.register_page "Ejecutar" do
             "email: '#{x.email}'," +
             "domicilio: '#{x.domicilio}'," +
             "celular: '#{celular}'," +
-            "fecha_ingreso: '#{x.fecha_ingreso.strftime("%Y-%m-%d")}'," +
-            "fecha_egreso: '#{x.fecha_egreso.strftime("%Y-%m-%d")}'" +
+            "fecha_ingreso: '#{fecha_ingreso}'," +
+            "fecha_egreso: '#{fecha_egreso}'" +
           ")\r\n"
         )
       end
 
       CuotaSocio.all.order(:fecha,:socio_id).each do |x|
 
+        fecha = ""
+        if x.fecha != nil
+          fecha = x.fecha.strftime("%Y-%m-%d")
+        end
+
+
         f.write(
           "CuotaSocio.create(" +
             "socio_id: #{x.socio_id}," +
-            "fecha: '#{x.fecha.strftime("%Y-%m-%d")}'," +
+            "fecha: '#{fecha}'," +
             "concepto: '#{x.concepto}'," +
             "importe: #{x.importe}" +
           ")\r\n"
