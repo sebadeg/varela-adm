@@ -183,11 +183,12 @@ ActiveAdmin.register_page "Ejecutar" do
           "Socio.create(" +
             "id: #{x.id}," +
             "cedula: #{x.cedula}," +
-            "nombre: '#{x.nombre}'," +
-            "apellido: '#{x.apellido}'," +
-            "email: '#{x.email}'," +
-            "domicilio: '#{x.domicilio}'," +
-            "celular: '#{celular}'," +
+            "nombre: '#{x.nombre[0]}'," +
+            "apellido: '#{x.apellido[0]}'," +
+            #"email: '#{x.email[0]}'," +
+            "email: 'a#{x.id}@a.a'," +
+            "domicilio: '#{x.domicilio[0]}'," +
+            "celular: '#{celular[0]}'," +
             "fecha_ingreso: '#{fecha_ingreso}'," +
             "fecha_egreso: '#{fecha_egreso}'" +
           ")\r\n"
