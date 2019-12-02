@@ -166,7 +166,7 @@ class Factura < ApplicationRecord
 
     config = Config.find(1)
 
-    fecha_factura = config.fecha_facturacion - 1.month
+    fecha_factura = config.fecha_facturacion
     fecha_factura_anterior = fecha_factura - 1.month
     fecha_vencimiento_factura_anterior = fecha_factura_anterior + 9.days
 
