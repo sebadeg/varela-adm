@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Ejecutar" do
     #   "fecha_pagos='#{params[:fecha_pagos]}';" 
     # )
 
-    Factura.generar_recargos()
+    #Factura.generar_recargos()
     Factura.generar_facturacion()
 
     redirect_to admin_ejecutar_path, notice: "Facturación generada!"
