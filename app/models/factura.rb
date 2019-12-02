@@ -166,7 +166,7 @@ class Factura < ApplicationRecord
 
     config = Config.find(1)
 
-    fecha_factura = config.fecha_facturacion
+    fecha_factura = config.fecha_facturacion - 1.month
     fecha_factura_anterior = fecha_factura - 1.month
     fecha_vencimiento_factura_anterior = fecha_factura_anterior + 9.days
 
@@ -260,7 +260,7 @@ class Factura < ApplicationRecord
 
       if total_recargo > 0
         ActiveRecord::Base.connection.execute( 
-         "INSERT INTO movimientos (fecha,cuenta_id,descripcion,debe,haber,tipo,anio,rubro_id,generado,created_at,updated_at) VALUES ('#{fecha_factura}',#{cuenta_id},'RECARGOS',#{total_recargo.round},0,1003,#{config.anio},#{rubro.id},true,now(),now());" 
+         "INSERT INTO movimientos (fecha,cuenta_id,descripcion,debe,haber,tipo,ejercicio,rubro_id,generado,created_at,updated_at) VALUES ('#{fecha_factura}',#{cuenta_id},'RECARGOS',#{total_recargo.round},0,1003,#{config.anio},#{rubro.id},true,now(),now());" 
         )
       end
     end
