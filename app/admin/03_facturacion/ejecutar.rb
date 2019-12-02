@@ -5,20 +5,20 @@ ActiveAdmin.register_page "Ejecutar" do
 
   page_action :generar_facturacion, method: :post do
 
-    fecha = params[:fecha_facturacion].to_datetime
+    # fecha = params[:fecha_facturacion].to_datetime
 
-    if !Factura.verificar_fecha_facturacion(fecha)
-      redirect_to admin_ejecutar_path, notice: "Error en fecha de facturación!"
-      return;
-    end
+    # if !Factura.verificar_fecha_facturacion(fecha)
+    #   redirect_to admin_ejecutar_path, notice: "Error en fecha de facturación!"
+    #   return;
+    # end
 
-    fecha_facturacion = DateTime.new(fecha.year,fecha.month,1)
+    #fecha_facturacion = DateTime.new(fecha.year,fecha.month,1)
 
-    ActiveRecord::Base.connection.execute( 
-      "UPDATE configs SET " + 
-      "fecha_facturacion='#{fecha_facturacion}'," +
-      "fecha_pagos='#{params[:fecha_pagos]}';" 
-    )
+    # ActiveRecord::Base.connection.execute( 
+    #   "UPDATE configs SET " + 
+    #   "fecha_facturacion='#{fecha_facturacion}'," +
+    #   "fecha_pagos='#{params[:fecha_pagos]}';" 
+    # )
 
     Factura.generar_recargos()
     #Factura.generar_facturacion()
