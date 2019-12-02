@@ -21,7 +21,7 @@ ActiveAdmin.register_page "Ejecutar" do
     )
 
     Factura.generar_recargos()
-    Factura.generar_facturacion()
+    #Factura.generar_facturacion()
 
     redirect_to admin_ejecutar_path, notice: "Facturación generada!"
   end

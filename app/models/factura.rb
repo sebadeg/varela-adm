@@ -189,10 +189,6 @@ class Factura < ApplicationRecord
     i = 0
     saldos.keys.sort.each do |cuenta_id|
 
-      if cuenta_id != 9493
-          next
-      end
-
       if !corrientes.has_key?(cuenta_id)
         corrientes[cuenta_id] = 0
       end
