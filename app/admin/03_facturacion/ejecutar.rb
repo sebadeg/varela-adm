@@ -159,11 +159,11 @@ ActiveAdmin.register_page "Ejecutar" do
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
       Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND inscripto").each do |x|
-        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
+        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{InscripcionOpcion.find(x.convenio_id).nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
       end
 
       Inscripcion.where("NOT reinscripcion AND anio=2020").each do |x|
-        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
+        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{InscripcionOpcion.find(x.convenio_id).nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
       end
     end
 
