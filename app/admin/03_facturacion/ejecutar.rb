@@ -170,6 +170,8 @@ ActiveAdmin.register_page "Ejecutar" do
       end
 
       Inscripcion.where("NOT reinscripcion AND anio=2020").each do |x|
+        convenio = InscripcionOpcion.find(x.convenio_id) rescue nil
+
         convenio_nombre = ""
         if convenio != nil
           convenio_nombre = convenio.nombre
