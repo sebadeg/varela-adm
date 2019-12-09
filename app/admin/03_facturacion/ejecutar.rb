@@ -166,7 +166,7 @@ ActiveAdmin.register_page "Ejecutar" do
           convenio_nombre = convenio.nombre
         end
 
-        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{.nombre};#{convenio_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
+        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{convenio_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
       end
 
       Inscripcion.where("NOT reinscripcion AND anio=2020").each do |x|
