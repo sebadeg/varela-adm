@@ -2,7 +2,7 @@ ActiveAdmin.register Cuenta do
 
   menu priority: 103, label: "Cuentas", parent: "Administración"
   
-  permit_params :id, :nombre, :comentario, :brou, :visa, :oca, :retencion,
+  permit_params :id, :nombre, :comentario, :info, :brou, :visa, :oca, :retencion,
     titular_cuenta_attributes: [:id,:cuenta_id,:usuario_id,:_destroy],
     cuenta_alumno_attributes: [:id,:cuenta_id,:alumno_id,:_destroy]
 
@@ -13,7 +13,7 @@ ActiveAdmin.register Cuenta do
   scope :oca, label: "Débito OCA"
 
   index do
-  	#selectable_column
+  	selectable_column
     column "Cuenta" do |cuenta|
       link_to cuenta.id, admin_cuenta_path(cuenta.id)
     end
@@ -39,43 +39,43 @@ ActiveAdmin.register Cuenta do
       row :comentario
       row :info
 
-      row "Titulares" do 
+      row "Titular" do 
         table_for TitularCuenta.where("cuenta_id=#{r.id}") do |t|
-          t.column "Titular" do |c| (c.usuario != nil ? "#{c.usuario.nombre} #{c.usuario.apellido}" : "" ) end
+          t.column "Titular" do |c| c.usuario_tostr() end
         end
       end
       row "Alumnos" do 
         table_for CuentaAlumno.where("cuenta_id=#{r.id}") do |t|
-          t.column "Alumno" do |c| (c.alumno != nil ? "#{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
+          t.column "Alumno" do |c| c.alumno_tostr() end
         end
       end
-
     end
   end
+
 
   form partial: 'form'
 
   controller do
 
     def show
-      @page_title = "Cuenta #"+resource.id.to_s
+      @page_title = "#{resource.nombre_clase}: #{resource.tostr()}"
     end
 
     def edit
-      @page_title = "Cuenta #"+resource.id.to_s
+      @page_title = "#{resource.nombre_clase}: #{resource.tostr()}"
     end
 
-	  def update
-	    update! do |format|
-	      format.html { redirect_to collection_path } if resource.valid?
-	    end
-	  end
+    def update
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
 
-	  def create
-	    create! do |format|
-	      format.html { redirect_to collection_path } if resource.valid?
-	    end
-	  end
+    def create
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+  end
 
-	end  
 end

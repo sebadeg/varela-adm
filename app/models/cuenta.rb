@@ -5,6 +5,9 @@ class Cuenta < ApplicationRecord
   has_many :cuenta_alumno, :dependent => :delete_all
   accepts_nested_attributes_for :cuenta_alumno, allow_destroy: true
 
+  has_many :factura, :dependent => :delete_all
+  accepts_nested_attributes_for :factura, allow_destroy: true
+
   has_many :pago_cuenta
   has_many :recargo
 
@@ -13,6 +16,18 @@ class Cuenta < ApplicationRecord
   scope :brou, -> { where("brou") }
   scope :visa, -> { where("visa") }
   scope :oca, -> { where("oca") }
+
+  def nombre_clase()
+  	return "Cuenta"
+  end
+
+  def tostr()
+  	return "#{id} - #{nombre}" 
+  end
+
+  def self.coleccion()
+  	return Cuenta.all.order(:id).map{|u| [u.tostr(),u.id]} 
+  end
 
   def titular_mail
   	s = ""

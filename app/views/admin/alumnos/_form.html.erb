@@ -1,15 +1,17 @@
 <%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
-
   <%= a.semantic_errors *a.object.errors.keys %>
   <%= a.inputs do %>
       <%= a.input :id %>
+      <%= a.input :cedula %>
       <%= a.input :nombre %>
       <%= a.input :apellido %>
-      <%= a.input :cedula %>
       <%= a.input :lugar_nacimiento %>
       <%= a.input :fecha_nacimiento %>
       <%= a.input :domicilio %>
       <%= a.input :celular %>
+      <%= a.input :mutualista %>
+      <%= a.input :emergencia %>
+      <%= a.input :procede %>
       <%= a.input :anio_ingreso %>
   <% end %>
 
@@ -24,14 +26,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :padre_alumno, PadreAlumno.new do |b| %>
         <tr>
-          <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :usuario_id, label: false , as: :select, collection: Usuario.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
@@ -58,14 +60,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]} %></td>
+          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :cuenta_alumno, CuentaAlumno.new do |b| %>
         <tr>
-          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]} %></td>
+          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
@@ -80,7 +82,6 @@
           class: "button" %>
     </span>
   <% end %>
-
 
   <%= a.actions do %>
     <%= a.action :submit %>
