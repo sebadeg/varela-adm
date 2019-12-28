@@ -162,7 +162,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
       f.write("Reinscripciones\r\n\r\n" )
 
-      Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND inscripto").order(proximo_grado_id,convenio).each do |x|
+      Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND inscripto").order(:proximo_grado_id,:convenio_id).each do |x|
         convenio = InscripcionOpcion.find(x.convenio_id) rescue nil
         convenio_nombre = ""
         if convenio != nil
@@ -180,7 +180,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
       f.write("Inscripciones\r\n\r\n" )
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020").order(proximo_grado_id,convenio).each do |x|
+      Inscripcion.where("NOT reinscripcion AND anio=2020").order(:proximo_grado_id,:convenio_id).each do |x|
         convenio = InscripcionOpcion.find(x.convenio_id) rescue nil
         convenio_nombre = ""
         if convenio != nil
