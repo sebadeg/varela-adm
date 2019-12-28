@@ -180,7 +180,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
       #f.write("Inscripciones\r\n\r\n" )
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020 AND (convenio_id=114 OR convenio_id=266)").order(:proximo_grado_id,:convenio_id).each do |x|
+      Inscripcion.where("NOT reinscripcion AND anio=2020 AND proximo_grado_id=145").order(:proximo_grado_id,:convenio_id).each do |x|
         convenio = InscripcionOpcion.find(x.convenio_id) rescue nil
         convenio_nombre = ""
         if convenio != nil
