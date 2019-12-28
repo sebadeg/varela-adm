@@ -195,7 +195,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
         #f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{convenio_nombre};#{adicional_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
 
-        f.write("http://varela-dev.herokuapp.com/admin/inscripciones/#{x.id}\r\n");
+        f.write("http://varela-adm.herokuapp.com/admin/inscripciones/#{x.id}\r\n");
       end
     end
 
