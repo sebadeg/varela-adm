@@ -180,7 +180,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
       #f.write("Inscripciones\r\n\r\n" )
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020 AND proximo_grado_id=145").order(:proximo_grado_id,:convenio_id).each do |x|
+      Inscripcion.where("NOT reinscripcion AND anio=2020 AND (convenio_id=114 OR convenio_id=266)").order(:proximo_grado_id,:convenio_id).each do |x|
         convenio = InscripcionOpcion.find(x.convenio_id) rescue nil
         convenio_nombre = ""
         if convenio != nil
@@ -193,9 +193,9 @@ ActiveAdmin.register_page "Ejecutar" do
           adicional_nombre = adicional.nombre
         end 
 
-        #f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{convenio_nombre};#{adicional_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
+        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{convenio_nombre};#{adicional_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
 
-        f.write("http://varela-adm.herokuapp.com/admin/inscripciones/#{x.id}\r\n");
+        #f.write("http://varela-adm.herokuapp.com/admin/inscripciones/#{x.id}\r\n");
       end
     end
 
