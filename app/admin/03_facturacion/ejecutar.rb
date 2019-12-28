@@ -185,7 +185,7 @@ ActiveAdmin.register_page "Ejecutar" do
         adicional_nombre = ""
         if adicional != nil
           adicional_nombre = adicional.nombre
-        end
+        end 
 
         f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{convenio_nombre};#{adicional_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
       end
