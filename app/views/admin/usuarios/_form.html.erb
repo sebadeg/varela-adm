@@ -25,14 +25,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :padre_alumno, PadreAlumno.new do |b| %>
         <tr>
-          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
@@ -59,14 +59,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]} %></td>
+          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :titular_cuenta, TitularCuenta.new do |b| %>
         <tr>
-          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.all.order(:id).map{|u| ["#{u.id}",u.id]} %></td>
+          <td><%= b.input :cuenta_id, label: false , as: :select, collection: Cuenta.coleccion() %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>

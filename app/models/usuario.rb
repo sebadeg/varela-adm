@@ -9,6 +9,24 @@ class Usuario < ApplicationRecord
 
   has_many :padre_alumno
   accepts_nested_attributes_for :padre_alumno, allow_destroy: true
+
+  def nombre_clase()
+    return "Usuario"
+  end
+
+  def tostr()
+    return "#{nombre} #{apellido}" 
+  end
+
+  def self.coleccion()
+    return Usuario.all.order(:nombre,:apellido).map{|u| [u.tostr(),u.id]} 
+  end
+
+
+
+
+
+
   
   validates_uniqueness_of :cedula
   validates :cedula, presence: true

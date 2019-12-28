@@ -27,7 +27,7 @@ ActiveAdmin.register Inscripcion, :as => "Pase" do
     actions
   end
 
-  filter :alumno_id, :label => 'Alumno', :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.id} - #{u.nombre} #{u.apellido}", u.id]}
+  filter :alumno_id, label: 'Alumno', as: :select, collection: Alumno.coleccion()
 
   show do
     attributes_table do

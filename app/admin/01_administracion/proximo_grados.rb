@@ -27,7 +27,7 @@ ActiveAdmin.register ProximoGrado do
   	#selectable_column
     column :nombre
     column :precio
-    column "Grado" do |c| (c.grado != nil ? "#{c.grado.nombre}" : "" ) end
+    column "Grado" do |c| c.grado_nombre() end
     column :anio
     actions
   end
@@ -39,7 +39,7 @@ ActiveAdmin.register ProximoGrado do
     attributes_table do
       row :nombre
       row :precio
-      row "Grado" do |c| (c.grado != nil ? "#{c.grado.nombre}" : "") end
+      row "Grado" do |c| c.grado_nombre() end
       row :anio
     end
   end
@@ -48,10 +48,33 @@ ActiveAdmin.register ProximoGrado do
     f.inputs do
       f.input :nombre
       f.input :precio
-      f.input :grado_id, :label => 'Grado', :as => :select, :collection => Grado.order(:nombre).map{|u| [u.nombre, u.id]}
+      f.input :grado_id, :label => 'Grado', as: :select, collection: => Grado.coleccion()
       f.input :anio
     end
     f.actions
   end
-  
+ 
+  controller do
+
+    def show
+      @page_title = "#{resource.nombre_clase}: #{resource.tostr()}"
+    end
+
+    def edit
+      @page_title = "#{resource.nombre_clase}: #{resource.tostr()}"
+    end
+
+    def update
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
+    def create
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+  end
+
 end

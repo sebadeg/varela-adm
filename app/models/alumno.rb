@@ -25,6 +25,9 @@ class Alumno < ApplicationRecord
   	return Alumno.all.order(:nombre,:apellido).map{|u| [u.tostr(),u.id]} 
   end
 
+
+  
+
   def self.sector_num(user)
     if user.primaria
       return 1

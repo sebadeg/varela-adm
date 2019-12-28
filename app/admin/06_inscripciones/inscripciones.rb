@@ -14,6 +14,10 @@ ActiveAdmin.register Inscripcion do
   scope :inscripciones
   scope :reinscripciones
 
+  action_item :chequear, only: :show do
+    link_to "Chequear", chequear_admin_inscripcion_path(inscripcion), method: :put 
+  end
+
   action_item :actualizar, only: :show do
     link_to "Actualizar", actualizar_admin_inscripcion_path(inscripcion), method: :put 
   end
@@ -58,6 +62,12 @@ ActiveAdmin.register Inscripcion do
       link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
     end
   end
+
+
+  member_action :chequear, method: :put do
+
+  end
+
 
   member_action :actualizar, method: :put do
     id = params[:id]

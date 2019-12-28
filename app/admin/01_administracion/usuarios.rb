@@ -76,12 +76,12 @@ ActiveAdmin.register Usuario do
 
       row "Hijos" do 
         table_for PadreAlumno.where("usuario_id=#{r.id}") do |t|
-          t.column "Hijo" do |c| (c.alumno != nil ? "#{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
+          t.column "Hijo" do |c| c.alumno_nombre_tostr() end
         end
       end
       row "Cuentas" do 
         table_for TitularCuenta.where("usuario_id=#{r.id}") do |t|
-          t.column "Cuenta" do |c| (c.cuenta != nil ? "#{c.cuenta.id}" : "" ) end
+          t.column "Cuenta" do |c| c.cuenta_nombre_tostr() end
         end
       end
     end
@@ -89,31 +89,14 @@ ActiveAdmin.register Usuario do
 
   form partial: 'form'
 
-  # form do |f|
-  #   f.inputs do
-  #     f.input :id
-  #     f.input :cedula
-  #     f.input :nombre
-  #     f.input :apellido
-  #     f.input :email
-  #     f.input :direccion
-  #     f.input :celular
-  #     f.input :habilitado
-  #     f.input :passwd
-  #     f.input :password
-  #     f.input :password_confirmation
-  #   end
-  #   f.actions
-  # end
-
-	controller do
+  controller do
 
     def show
-      @page_title = "Usuario: "+ resource.nombre + " " + resource.apellido
+      @page_title = "#{resource.nombre_clase}: #{resource.tostr()}"
     end
 
     def edit
-      @page_title = "Usuario: "+resource.nombre + " " + resource.apellido
+      @page_title = "#{resource.nombre_clase}: #{resource.tostr()}"
     end
 
     def update
@@ -130,6 +113,6 @@ ActiveAdmin.register Usuario do
         format.html { redirect_to collection_path } if resource.valid?
       end
     end
-  end  
+  end
 
 end
