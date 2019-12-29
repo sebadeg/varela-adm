@@ -160,7 +160,16 @@ ActiveAdmin.register_page "Ejecutar" do
 
     File.open(file, "w+") do |f|
 
+
+      f.write("Reinscripciones\r\n\r\n" )
+
       Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND hay_vale AND cuotas_id IN (74,216)").order(:proximo_grado_id,:convenio_id).each do |x|
+        f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{x.cuotas_id};#{x.CalcularPrecioToStr()}\r\n" )
+      end
+
+      f.write("Inscripciones\r\n\r\n" )
+
+      Inscripcion.where("NOT reinscripcion AND anio=2020 AND cuotas_id IN (74,80,216)").order(:proximo_grado_id,:convenio_id).each do |x|
         f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{x.cuotas_id};#{x.CalcularPrecioToStr()}\r\n" )
       end
 
