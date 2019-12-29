@@ -163,7 +163,7 @@ ActiveAdmin.register_page "Ejecutar" do
       Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND hay_vale AND cuotas_id IN (74,216)").order(:proximo_grado_id,:convenio_id).each do |x|
         f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{x.cuotas_id};#{x.CalcularPrecioToStr()}\r\n" )
       end
-      
+
         #f.write("Reinscripciones\r\n\r\n" )
 
       # Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND inscripto").order(:proximo_grado_id,:convenio_id).each do |x|
@@ -200,7 +200,7 @@ ActiveAdmin.register_page "Ejecutar" do
       #   f.write("#{ProximoGrado.find(x.proximo_grado_id).nombre};#{x.cuenta_id};#{x.alumno_id};#{x.nombre};#{x.apellido};#{convenio_nombre};#{adicional_nombre};#{x.cuotas_id};;#{x.matricula_id};#{x.CalcularPrecioToStr()}\r\n" )
 
         #f.write("http://varela-adm.herokuapp.com/admin/inscripciones/#{x.id}\r\n");
-      end
+      #end
     end
 
     send_file(
