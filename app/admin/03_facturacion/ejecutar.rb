@@ -162,7 +162,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
       Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND hay_vale AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
 
-        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()}\r\n" )
+        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
       end
 
@@ -170,7 +170,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
       Inscripcion.where("NOT reinscripcion AND anio=2020 AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
 
-        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()}\r\n" )
+        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
       end
 
