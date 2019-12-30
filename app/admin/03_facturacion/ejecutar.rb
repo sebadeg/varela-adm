@@ -163,7 +163,10 @@ ActiveAdmin.register_page "Ejecutar" do
       Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND hay_vale AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
 
         cuotas = x.CalcularPrecio()
-        f.write("#{x.cuotas_id};#{x.cuenta_id};#{x.alumno_id};#{cuotas[0]};#{cuotas[2]-9.days};#{cuotas[1]};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
+        if cuotas[2] != nil 
+          c2 = cuotas[2]-9.days
+        end
+        f.write("#{x.cuotas_id};#{x.cuenta_id};#{x.alumno_id};#{cuotas[0]};#{c2};#{cuotas[1]};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
       end
 
@@ -172,7 +175,10 @@ ActiveAdmin.register_page "Ejecutar" do
       Inscripcion.where("NOT reinscripcion AND anio=2020 AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
 
         cuotas = x.CalcularPrecio()
-        f.write("#{x.cuotas_id};#{x.cuenta_id};#{x.alumno_id};#{cuotas[0]};#{cuotas[2]-9.days};#{cuotas[1]};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
+        if cuotas[2] != nil 
+          c2 = cuotas[2]-9.days
+        end
+        f.write("#{x.cuotas_id};#{x.cuenta_id};#{x.alumno_id};#{cuotas[0]};#{c2};#{cuotas[1]};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
       end
 
