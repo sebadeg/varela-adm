@@ -172,7 +172,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
     #   f.write("\r\n" )
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020 AND alumno IN (
+      Inscripcion.where("NOT reinscripcion AND anio=2020 AND alumno_id IN (
         111902,114191,115081,119052,119053,121011,122712,122881,123101,125482,
 129331,129391,129592,130081,130131,130761,131861,132071,132271,
 132351,132483,133101,134061,134071,134742,134751,136431,137832,138881,
