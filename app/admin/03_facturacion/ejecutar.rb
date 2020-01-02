@@ -155,24 +155,45 @@ ActiveAdmin.register_page "Ejecutar" do
 
   page_action :prueba, method: :post do   
 
-    file_name = "Salida.txt"
-    file = Tempfile.new(file_name)    
+    insc = 203
+    cuenta_nueva = 14035
+    alumno_nueva = 140351
+    cuenta_vieja = 13310
+    alumno_vieja = 133101
 
-    File.open(file, "w+") do |f|
+#SELECT id,nombre, apellido, cuenta_id, alumno_id FROM inscripciones WHERE cuenta_id = 14035
+#SELECT id,nombre, apellido, cuenta_id, alumno_id FROM inscripciones WHERE id=203
 
-      Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND hay_vale AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
+    ActiveRecord::Base.connection.execute("
+      UPDATE inscripciones SET cuenta_id=NULL, alumno_id=NULL WHERE id=#{insc};
+      DELETE FROM cuenta_alumnos WHERE alumno_id=#{alumno_nueva};
+      UPDATE linea_facturas SET alumno_id=NULL WHERE alumno_id=#{alumno_nueva};
+      UPDATE facturas SET cuenta_id=NULL WHERE cuenta_id=#{cuenta_nueva};
+      UPDATE alumnos SET id=#{alumno_vieja} WHERE id=#{alumno_nueva};
+      UPDATE cuentas SET id=#{cuenta_vieja} WHERE id=#{cuenta_nueva};
+      INSERT INTO cuenta_alumnos (cuenta_id,alumno_id,created_at,updated_at) VALUES (#{cuenta_vieja},#{alumno_vieja},now(),now());
+      UPDATE inscripciones SET cuenta_id=#{cuenta_vieja}, alumno_id=#{alumno_vieja} WHERE id=#{insc};
+      ")
+  redirect_to admin_ejecutar_path, notice: "cambios hechos!"
 
-        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
+    # file_name = "Salida.txt"
+    # file = Tempfile.new(file_name)    
 
-      end
+    # File.open(file, "w+") do |f|
 
-      f.write("\r\n" )
+    #   Inscripcion.where("reinscripcion AND anio=2020 AND registrado AND hay_vale AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020 AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
+    #     f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
-        f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
+    #   end
 
-      end
+    #   f.write("\r\n" )
+
+    #   Inscripcion.where("NOT reinscripcion AND anio=2020 AND cuotas_id IN (32,217,234)").order(:proximo_grado_id,:convenio_id).each do |x|
+
+    #     f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
+
+    #   end
 
       # f.write("Reinscripciones\r\n\r\n" )
 
@@ -223,13 +244,13 @@ ActiveAdmin.register_page "Ejecutar" do
 
         #f.write("http://varela-adm.herokuapp.com/admin/inscripciones/#{x.id}\r\n");
       #end
-    end
+    # end
 
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/txt"
-      )
+    # send_file(
+    #     file.path,
+    #     filename: file_name,
+    #     type: "application/txt"
+    #   )
   end
 
   page_action :prueba2, method: :post do   
