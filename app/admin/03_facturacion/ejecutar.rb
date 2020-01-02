@@ -172,13 +172,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
     #   f.write("\r\n" )
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020 AND alumno_id IN (
-        111902,114191,115081,119052,119053,121011,122712,122881,123101,125482,
-129331,129391,129592,130081,130131,130761,131861,132071,132271,
-132351,132483,133101,134061,134071,134742,134751,136431,137832,138881,
-139541,139542,139741,140152,140231,140691,140771,141011,141021,141031,
-141041,141051,141061,141071,141081,141091,141101,141111,141121,141131,
-141171,141181,141191,141201,141211,141221,141231,141241,141242,141251)").order(:proximo_grado_id,:convenio_id).each do |x|
+      Inscripcion.where("NOT reinscripcion AND anio=2020 AND alumno_id IN (111902,114191,115081,121011,130131,130761,138881,139541,139542,139741,140231)").order(:proximo_grado_id,:convenio_id).each do |x|
 
          f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
