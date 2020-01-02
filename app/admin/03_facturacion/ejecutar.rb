@@ -172,7 +172,7 @@ ActiveAdmin.register_page "Ejecutar" do
 
     #   f.write("\r\n" )
 
-      Inscripcion.where("NOT reinscripcion AND anio=2020 AND alumno_id IN (111902,114191,115081,121011,130131,130761,138881,139541,139542,139741,140231)").order(:proximo_grado_id,:convenio_id).each do |x|
+      Inscripcion.where("anio=2020 AND alumno_id IN (111902,114191,115081,121011,130131,130761,138881,139541,139542,139741,140231)").order(:proximo_grado_id,:convenio_id).each do |x|
 
          f.write("#{x.cuenta_id};#{x.alumno_id};#{x.CalcularPrecioToStr()};#{ProximoGrado.find(x.proximo_grado_id).precio}\r\n" )
 
