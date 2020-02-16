@@ -42,11 +42,10 @@ ActiveAdmin.register Deudor do
           importes[m.cuenta_id] = Array.new
         end
 
-        importe = m.debe-m.haber
-        if importe <= 0
-          saldos[m.cuenta_id] = saldos[m.cuenta_id] - importe
+        if m.haber > 0
+          saldos[m.cuenta_id] = saldos[m.cuenta_id] + m.haber
         else
-          importes[m.cuenta_id].push(importe)
+          importes[m.cuenta_id].push(m.debe-m.haber)
           fechas[m.cuenta_id].push(m.fecha)
         end
       end
