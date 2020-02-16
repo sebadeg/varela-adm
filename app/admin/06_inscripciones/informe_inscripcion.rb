@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Informe" do
       "SELECT cedula as cedula1, inscripciones.nombre || ' ' || inscripciones.apellido as alumno1, proximo_grados.nombre as grado1, reinscripcion as reinscripto1 
          FROM inscripciones INNER JOIN proximo_grados ON inscripciones.proximo_grado_id=proximo_grados.id
          WHERE inscripciones.anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL) AND
-         (NOT reinscripcion OR registrado)
+         ((reinscripcion AND grado!=0 AND registrado) OR (NOT reinscripcion AND inscripto))
          ORDER BY proximo_grados.nombre" 
 
         # "SELECT * FROM
