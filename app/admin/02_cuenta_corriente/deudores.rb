@@ -35,18 +35,20 @@ ActiveAdmin.register Deudor do
 
     Movimiento.where("fecha>='2019-01-01'").order(:fecha).each do |m|
 
-      if !saldos.has_key?(m.cuenta_id)
-        saldos[m.cuenta_id] = 0
-        fechas[m.cuenta_id] = Array.new
-        importes[m.cuenta_id] = Array.new
-      end
+      if ( m.fecha <= DateTime.now )
+        if !saldos.has_key?(m.cuenta_id)
+          saldos[m.cuenta_id] = 0
+          fechas[m.cuenta_id] = Array.new
+          importes[m.cuenta_id] = Array.new
+        end
 
-      importe = m.debe-m.haber
-      if importe <= 0
-        saldos[m.cuenta_id] = saldos[m.cuenta_id] - importe
-      else
-        importes[m.cuenta_id].push(importe)
-        fechas[m.cuenta_id].push(m.fecha)
+        importe = m.debe-m.haber
+        if importe <= 0
+          saldos[m.cuenta_id] = saldos[m.cuenta_id] - importe
+        else
+          importes[m.cuenta_id].push(importe)
+          fechas[m.cuenta_id].push(m.fecha)
+        end
       end
     end
 
