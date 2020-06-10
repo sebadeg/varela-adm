@@ -65,7 +65,7 @@ gem 'combine_pdf', '~> 0.2.5'
 gem 'chunky_png', '~> 1.3', '>= 1.3.10'
 gem 'barby', '~> 0.6.5'
 
-gem 'geocoder', '~> 1.5'
+gem 'geocoder', '~> 1.6'
 
 gem 'delayed_job_active_record'
 
