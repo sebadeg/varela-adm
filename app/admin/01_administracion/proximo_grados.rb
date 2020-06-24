@@ -48,7 +48,7 @@ ActiveAdmin.register ProximoGrado do
     f.inputs do
       f.input :nombre
       f.input :precio
-      f.input :grado_id, :label => 'Grado', as: :select, collection: => Grado.coleccion()
+      #f.input :grado_id, :label => 'Grado', as: :select, collection: => Grado.coleccion()
       f.input :anio
     end
     f.actions

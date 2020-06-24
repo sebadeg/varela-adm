@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_11_011640) do
+ActiveRecord::Schema.define(version: 2020_05_04_145822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -509,6 +509,21 @@ ActiveRecord::Schema.define(version: 2019_11_11_011640) do
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
+  end
+
+  create_table "inscripcion_cuotas", force: :cascade do |t|
+    t.bigint "inscripcion_id"
+    t.date "fecha"
+    t.string "descripcion_cuota"
+    t.string "descripcion_descuento"
+    t.integer "cuota"
+    t.integer "total_cuotas"
+    t.decimal "importe"
+    t.decimal "descuento"
+    t.decimal "total_importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inscripcion_id"], name: "index_inscripcion_cuotas_on_inscripcion_id"
   end
 
   create_table "inscripcion_opcion_alumnos", force: :cascade do |t|
@@ -1138,7 +1153,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_011640) do
     t.string "trabajo"
     t.string "telefono_trabajo"
     t.index ["cedula"], name: "index_usuarios_on_cedula", unique: true
-    t.index ["email"], name: "index_usuarios_on_email", unique: true
+    t.index ["email"], name: "index_usuarios_on_email"
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
@@ -1182,6 +1197,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_011640) do
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripcion_cuotas", "inscripciones"
   add_foreign_key "inscripcion_opcion_alumnos", "inscripcion_opciones"
   add_foreign_key "inscripcion_opcion_cuotas", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"

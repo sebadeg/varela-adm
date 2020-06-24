@@ -34,6 +34,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'refinanciacion', 'refinanciaciones'
   inflect.irregular 'refinanciacion_cuota', 'refinanciacion_cuotas'
   inflect.irregular 'inscripcion_opcion_cuota', 'inscripcion_opcion_cuotas'
+  inflect.irregular 'inscripcion_cuota', 'inscripcion_cuotas'
 end
 
 # These inflection rules are supported but not enabled by default:

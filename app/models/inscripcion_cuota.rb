@@ -1,0 +1,2 @@
+class InscripcionCuota < ApplicationRecord
+end

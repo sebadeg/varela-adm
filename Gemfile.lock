@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actioncable (5.2.0)
       actionpack (= 5.2.0)
@@ -178,7 +178,6 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    puma (3.12.1)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -206,7 +205,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (13.0.0)
+    rake (13.0.1)
     ransack (1.8.8)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -318,8 +317,8 @@ DEPENDENCIES
   jquery-turbolinks
   pg
   prawn (~> 2.2, >= 2.2.2)
-  puma (~> 3.0)
   rails (= 5.2)
+  rake (= 13.0.1)
   responsive_active_admin (= 0.0.5)
   roo (~> 2.7, >= 2.7.1)
   roo-xls (~> 1.2)
@@ -337,4 +336,4 @@ RUBY VERSION
    ruby 2.4.6p354
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
