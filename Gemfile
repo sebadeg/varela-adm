@@ -44,7 +44,7 @@ gem 'jquery-turbolinks'
 gem 'inherited_resources', '1.8'
 gem 'rubyzip', '~> 1.2', '>= 1.2.2'
 
-gem 'devise', '4.4.3'
+gem 'devise', '4.7.1'
 gem 'activeadmin', '1.3'
 gem 'responsive_active_admin', '0.0.5'
 gem 'active_skin', '0.0.12'
