@@ -8,13 +8,9 @@ ActiveAdmin.register Lista do
   member_action :copiar, method: :put do
     id = params[:id]
     lista = Lista.find(id)
-
-    anio = Config.find(1).anio
-    sector_id = UsuarioSector.where(admin_usuario_id: current_admin_usuario.id).order(:indice).first.sector_id
-
-
-    lista_copia = Lista.create(nombre: "#{lista.nombre} Copia", anio: anio, sector_id: sector_id )
-
+    anio = 2019
+    sector_id = 1
+    lista_copia = Lista.create(nombre: "#{lista.nombre} Copia", anio: 2019, sector_id: 1 )
 
     p lista_copia
     ListaAlumno.where(lista_id: lista.id).each do |lista_alumno|
@@ -52,12 +48,12 @@ ActiveAdmin.register Lista do
   form do |f|
     f.inputs do
       f.input :nombre
-      f.input :anio, :input_html => { :value => Config.find(1).anio.to_s }, as: :hidden
-      f.input :sector_id, :input_html => { :value => UsuarioSector.where(admin_usuario_id: current_admin_usuario.id).order(:indice).first.sector_id }, as: :hidden
+      f.input :anio, :input_html => { :value => 2019 }, as: :hidden
+      f.input :sector_id, :input_html => { :value => 1 }, as: :hidden
     end
     f.inputs do
       f.has_many :lista_alumno, heading: "Alumnos", allow_destroy: true, new_record: true do |l|
-        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.where("id IN (SELECT alumno_id FROM sector_alumnos WHERE sector_id IN (SELECT sector_id FROM usuario_sectores WHERE admin_usuario_id=#{current_admin_usuario.id}) AND anio IN (SELECT anio FROM configs WHERE NOT anio IS NULL))").order(:nombre,:apellido).map{|u| [u.nombre + " " + u.apellido, u.id]}
+        l.input :alumno_id, :label => "Nombre", :as => :select, :collection => Alumno.all.order(:nombre,:apellido).map{|u| [u.nombre + " " + u.apellido, u.id]}
       end
     end
     f.actions

@@ -8,6 +8,7 @@ ActiveAdmin.register Movimiento do
 
   scope :corrientes, default: true
   scope :todos 
+  scope :sin_cuenta 
 
   action_item :exportar, only: :index do
     link_to "Exportar", exportar_admin_movimientos_path
