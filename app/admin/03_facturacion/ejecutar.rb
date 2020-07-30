@@ -4,6 +4,13 @@ ActiveAdmin.register_page "Ejecutar" do
   menu priority: 301, label: "Ejecutar", parent: "Facturación"
 
 
+  page_action :generar_recargos, method: :post do
+    Factura.generar_recargos()
+    #Factura.generar_facturacion()
+
+    redirect_to admin_ejecutar_path, notice: "Recargos generados!"
+  end
+
   page_action :generar_facturacion, method: :post do
 
     # fecha = params[:fecha_facturacion].to_datetime

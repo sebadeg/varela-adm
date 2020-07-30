@@ -1,6 +1,15 @@
 <% config = Config.find(1) %>
 <% p "'#{config.fecha_descarga.strftime('%Y-%m-%d')}'" %>
 
+<%= form_tag(admin_ejecutar_generar_recargos_path, :method => "post") do %>
+  <%= label_tag "Fecha facturación: " %>
+  <%= date_field_tag "fecha_facturacion", config.fecha_facturacion, :required => "required" %><br><br>
+  <%= label_tag "Fecha pagos: " %>
+  <%= date_field_tag "fecha_pagos", config.fecha_pagos, required: "required" %><br><br>
+  <%= submit_tag "Generar recargos" %>
+<% end %>
+<br><br>
+
 <%= form_tag(admin_ejecutar_generar_facturacion_path, :method => "post") do %>
   <%= label_tag "Fecha facturación: " %>
   <%= date_field_tag "fecha_facturacion", config.fecha_facturacion, :required => "required" %><br><br>
