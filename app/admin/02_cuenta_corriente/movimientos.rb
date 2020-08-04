@@ -20,7 +20,7 @@ ActiveAdmin.register Movimiento do
     file = Tempfile.new(file_name)    
     File.open(file, "w+") do |f|
       Movimiento.all.order(:fecha,:cuenta_id).each do |mov|
-         f.write("#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe};#{mov.haber};\r\n")
+         f.write("#{mov.id};#{mov.fecha};#{mov.cuenta_id};#{mov.alumno};#{mov.descripcion};#{mov.debe};#{mov.haber};\r\n")
       end
     end
     send_file(
