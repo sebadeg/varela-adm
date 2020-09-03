@@ -67,4 +67,9 @@ class Alumno < ApplicationRecord
     end
     return ""
   end
+
+  def toString()
+    return "#{cedula} - #{nombre} #{apellido} (#{id})";
+  end
+
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  matricula: 1
+  fecha: 2020-08-05
+  cantidad: 1
+  numerador: 1
+  denominador: 1
+
+two:
+  matricula: 1
+  fecha: 2020-08-05
+  cantidad: 1
+  numerador: 1
+  denominador: 1

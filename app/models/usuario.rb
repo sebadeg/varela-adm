@@ -48,6 +48,9 @@ class Usuario < ApplicationRecord
   end
 
 
-
+  def toString()
+    return "#{cedula} - #{nombre} #{apellido} (#{id})";
+  end
+  
 end
 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  formulario: false
+  descuento: 9.99
+  fecha_comienzo: 2020-08-05
+  fecha_fin: 2020-08-05
+
+two:
+  nombre: MyString
+  formulario: false
+  descuento: 9.99
+  fecha_comienzo: 2020-08-05
+  fecha_fin: 2020-08-05
