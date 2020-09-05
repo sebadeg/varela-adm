@@ -25,13 +25,13 @@ ActiveAdmin.register Inscripcion2020 do
       row "Grado" do |r| (r.proximo_grado != nil ? r.proximo_grado.toString() : "") end
     end
     attributes_table title:"Forma de pago" do
-      #row "Formulario" do |r| (r.formulario2020 != nil ? r.afinidad2020.toString() : "") end
+      row "Formulario" do |r| (r.formulario2020 != nil ? r.formulario2020.toString() : "") end
       row "Convenio" do |r| (r.convenio2020 != nil ? r.convenio2020.toString() : "") end
       row "Adicional" do |r| "#{r.adicional}" end    
       row "Afinidad" do |r| (r.afinidad2020 != nil ? r.afinidad2020.toString() : "") end
       row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
       row "Hermanos" do |r| (r.hermanos2020 != nil ? r.hermanos2020.toString() : "") end
-      #row "Cuota" do |r| (r.cuotas2020 != nil ? r.cuotas2020.toString() : "") end
+      row "Cuota" do |r| (r.cuotas2020 != nil ? r.cuotas2020.toString() : "") end
     end
     attributes_table title:"Proceso" do
       row "Registrado" do |r| r.fecha_registrado end
@@ -63,13 +63,13 @@ ActiveAdmin.register Inscripcion2020 do
       f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio=2021").order(:nombre).map{|c| [c.toString(), c.id]}
     end
     f.inputs do
-      #f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.where(consultaFecha()).order(:nombre) all.map{|c| [c.toString(), c.id]}
+      f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.where(consultaFecha()).order(:nombre) all.map{|c| [c.toString(), c.id]}
       f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :adicional
       f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :hermanos2020, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      #f.input :cuotas2020, :label => 'Cuotas', :as => :select, :collection => Cuotas2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :cuota2020, :label => 'Cuotas', :as => :select, :collection => Cuota2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :fecha_registrado, :label => 'Registrado', input_html: {disabled: :true}
       f.input :fecha_vale, :label => 'Vale generado', input_html: {disabled: :true}
       f.input :fecha_descargado, :label => 'Vale descargado', input_html: {disabled: :true}

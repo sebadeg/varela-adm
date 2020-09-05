@@ -6,9 +6,11 @@ class Inscripcion2020 < ApplicationRecord
   belongs_to :titular2, :class_name => "Usuario"
   belongs_to :grado
   belongs_to :proximo_grado
+  belongs_to :formulario2020
   belongs_to :convenio2020
   belongs_to :afinidad2020
   belongs_to :matricula2020
   belongs_to :hermanos2020
+  belongs_to :cuota2020
 
 end

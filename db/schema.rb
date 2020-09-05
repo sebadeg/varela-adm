@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_131857) do
+ActiveRecord::Schema.define(version: 2020_09_05_162528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -466,6 +466,14 @@ ActiveRecord::Schema.define(version: 2020_09_04_131857) do
     t.index ["mail"], name: "index_facturas_on_mail"
   end
 
+  create_table "formulario2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "formulario_alumnos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -551,10 +559,12 @@ ActiveRecord::Schema.define(version: 2020_09_04_131857) do
     t.datetime "updated_at", null: false
     t.bigint "afinidad2020_id"
     t.decimal "adicional"
+    t.bigint "formulario2020_id"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"
     t.index ["cuota2020_id"], name: "index_inscripcion2020s_on_cuota2020_id"
+    t.index ["formulario2020_id"], name: "index_inscripcion2020s_on_formulario2020_id"
     t.index ["grado_id"], name: "index_inscripcion2020s_on_grado_id"
     t.index ["hermanos2020_id"], name: "index_inscripcion2020s_on_hermanos2020_id"
     t.index ["madre_id"], name: "index_inscripcion2020s_on_madre_id_id"
@@ -1324,6 +1334,7 @@ ActiveRecord::Schema.define(version: 2020_09_04_131857) do
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
   add_foreign_key "inscripcion2020s", "afinidad2020s"
+  add_foreign_key "inscripcion2020s", "formulario2020s"
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"

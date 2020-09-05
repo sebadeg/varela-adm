@@ -13,7 +13,7 @@ ActiveAdmin.register Afinidad2020 do
     actions
   end
 
-  filter :alumno_id
+  filter :nombre
 
   show do
     attributes_table do
