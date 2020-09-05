@@ -2,11 +2,10 @@ ActiveAdmin.register Hermanos2020 do
 
   menu priority: 599, label: "Hermanos 2020", parent: "Inscripciones"
 
-  permit_params :nombre, :descuento
+  permit_params :nombre, :descuento, :fecha_comienzo, :fecha_fin
 
   index do
   	#selectable_column
-    column :id
     column :nombre
     column :descuento
     column :fecha_comienzo

@@ -2,11 +2,10 @@ ActiveAdmin.register Formulario2020 do
 
   menu priority: 599, label: "Formulario 2020", parent: "Inscripciones"
 
-  permit_params :nombre, :descuento
+  permit_params :nombre, :descuento, :fecha_comienzo, :fecha_fin
 
   index do
   	#selectable_column
-    column :id
     column :nombre
     column :fecha_comienzo
     column :fecha_fin
