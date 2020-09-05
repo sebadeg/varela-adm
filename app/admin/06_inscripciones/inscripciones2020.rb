@@ -31,11 +31,17 @@ ActiveAdmin.register Inscripcion2020 do
     end 
   end
 
-  form do |f|    
+  form do |f|  
+
+    def consultaFecha()
+      return "fecha_comienzo>='#{DateTime.now.strftime("%Y-%m-%d")}' AND (fecha_fin IS NULL OR fecha_comienzo<='#{DateTime.now.strftime("%Y-%m-%d")}')"
+    end
+
     f.inputs do
       if f.object.new_record?
         #f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
         f.input :reinscripcion, input_html: { value: false }, as: :hidden
+        f.input :anio, input_html: { value: 2021 }
       end
 
       f.input :alumno, :label => 'Alumno', :as => :select, :collection => Alumno.order(:cedula).map{|c| [c.toString(), c.id]}
@@ -46,9 +52,16 @@ ActiveAdmin.register Inscripcion2020 do
       f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio=2021").order(:nombre).map{|c| [c.toString(), c.id]}
     end
     f.inputs do
-      f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.order(:nombre).map{|c| [c.toString(), c.id]}
+      #f.input :formulario, :label => 'Formulario', :as => :select, :collection => Formulario2020.where(consultaFecha()).order(:nombre) all.map{|c| [c.toString(), c.id]}
+      f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :adicional
-      f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      #f.input :matricula, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      #f.input :hermanos, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      #f.input :cuotas, :label => 'Cuotas', :as => :select, :collection => Cuotas2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :registrado
+      f.input :hay_vale
+      f.input :inscripto
     end
     f.actions
   end
