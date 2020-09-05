@@ -8,5 +8,7 @@ class Inscripcion2020 < ApplicationRecord
   belongs_to :proximo_grado
   belongs_to :convenio2020
   belongs_to :afinidad2020
+  belongs_to :matricula2020
+  belongs_to :hermanos2020
 
 end

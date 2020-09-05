@@ -56,8 +56,8 @@ ActiveAdmin.register Inscripcion2020 do
       f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :adicional
       f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      #f.input :matricula, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      #f.input :hermanos, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :matricula, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :hermanos, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       #f.input :cuotas, :label => 'Cuotas', :as => :select, :collection => Cuotas2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :registrado
       f.input :hay_vale
