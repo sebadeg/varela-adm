@@ -34,7 +34,7 @@ ActiveAdmin.register Inscripcion2020 do
   form do |f|  
 
     def consultaFecha()
-      return "fecha_comienzo>='#{DateTime.now.strftime("%Y-%m-%d")}' AND (fecha_fin IS NULL OR fecha_comienzo<='#{DateTime.now.strftime("%Y-%m-%d")}')"
+      return "fecha_comienzo<='#{DateTime.now.strftime("%Y-%m-%d")}' AND (fecha_fin IS NULL OR fecha_fin>='#{DateTime.now.strftime("%Y-%m-%d")}')"
     end
 
     f.inputs do
