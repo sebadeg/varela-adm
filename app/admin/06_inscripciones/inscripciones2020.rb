@@ -25,9 +25,20 @@ ActiveAdmin.register Inscripcion2020 do
       row "Grado" do |r| (r.proximo_grado != nil ? r.proximo_grado.toString() : "") end
     end
     attributes_table title:"Forma de pago" do
+      #row "Formulario" do |r| (r.formulario2020 != nil ? r.afinidad2020.toString() : "") end
       row "Convenio" do |r| (r.convenio2020 != nil ? r.convenio2020.toString() : "") end
       row "Adicional" do |r| "#{r.adicional}" end    
       row "Afinidad" do |r| (r.afinidad2020 != nil ? r.afinidad2020.toString() : "") end
+      row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
+      row "Hermanos" do |r| (r.hermanos2020 != nil ? r.hermanos2020.toString() : "") end
+      #row "Cuota" do |r| (r.cuotas2020 != nil ? r.cuotas2020.toString() : "") end
+    end
+    attributes_table title:"Proceso" do
+      row "Registrado" do |r| r.fecha_registrado end
+      row "Vale generado" do |r| r.fecha_vale end
+      row "Vale descargado" do |r| r.fecha_descargado end
+      row "Vale entregado" do |r| r.fecha_entregado end
+      row "Inscripto" do |r| r.fecha_inscripto end
     end 
   end
 
@@ -59,11 +70,11 @@ ActiveAdmin.register Inscripcion2020 do
       f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :hermanos2020, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       #f.input :cuotas2020, :label => 'Cuotas', :as => :select, :collection => Cuotas2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :fecha_registrado, :label => 'Registrado', input_html: {readonly: :true}
-      f.input :fecha_vale, :label => 'Vale generado', input_html: {readonly: :true}
-      f.input :fecha_descargado, :label => 'Vale descargado', input_html: {readonly: :true}
-      f.input :fecha_entregado, :label => 'Vale entregado', input_html: {readonly: :true}
-      f.input :fecha_inscripto, :label => 'Inscripto', input_html: {readonly: :true}
+      f.input :fecha_registrado, :label => 'Registrado', input_html: {disabled: :true}
+      f.input :fecha_vale, :label => 'Vale generado', input_html: {disabled: :true}
+      f.input :fecha_descargado, :label => 'Vale descargado', input_html: {disabled: :true}
+      f.input :fecha_entregado, :label => 'Vale entregado', input_html: {disabled: :true}
+      f.input :fecha_inscripto, :label => 'Inscripto', input_html: {disabled: :true}
 
     end
     f.actions
