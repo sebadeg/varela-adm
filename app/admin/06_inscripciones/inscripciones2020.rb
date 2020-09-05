@@ -59,9 +59,12 @@ ActiveAdmin.register Inscripcion2020 do
       f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :hermanos2020, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       #f.input :cuotas2020, :label => 'Cuotas', :as => :select, :collection => Cuotas2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :registrado
-      f.input :hay_vale
-      f.input :inscripto
+      f.input :fecha_registrado, :label => 'Registrado', input_html: {readonly: :true}
+      f.input :fecha_vale, :label => 'Vale generado', input_html: {readonly: :true}
+      f.input :fecha_descargado, :label => 'Vale descargado', input_html: {readonly: :true}
+      f.input :fecha_entregado, :label => 'Vale entregado', input_html: {readonly: :true}
+      f.input :fecha_inscripto, :label => 'Inscripto', input_html: {readonly: :true}
+
     end
     f.actions
   end
