@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cuota2020: 1
+  alumno: 1
+
+two:
+  cuota2020: 1
+  alumno: 1
