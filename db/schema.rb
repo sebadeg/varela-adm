@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_162528) do
+ActiveRecord::Schema.define(version: 2020_09_06_131107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -560,6 +560,8 @@ ActiveRecord::Schema.define(version: 2020_09_05_162528) do
     t.bigint "afinidad2020_id"
     t.decimal "adicional"
     t.bigint "formulario2020_id"
+    t.boolean "padre_titular"
+    t.boolean "madre_titular"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"

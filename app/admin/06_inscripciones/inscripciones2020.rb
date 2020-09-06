@@ -19,7 +19,9 @@ ActiveAdmin.register Inscripcion2020 do
     attributes_table title:"Datos" do
       row "Alumno" do |r| (r.alumno != nil ? r.alumno.toString() : "") end
       row "Padre" do |r| (r.padre != nil ? r.padre.toString() : "") end
+      row "Padre Titular" do |r| r.padre_titular end
       row "Madre" do |r| (r.madre != nil ? r.madre.toString() : "") end
+      row "Madre Titular" do |r| r.madre_titular end
       row "Titular 1" do |r| (r.titular1 != nil ? r.titular1.toString() : "") end
       row "Titular 2" do |r| (r.titular2 != nil ? r.titular2.toString() : "") end
       row "Grado" do |r| (r.proximo_grado != nil ? r.proximo_grado.toString() : "") end
@@ -56,7 +58,9 @@ ActiveAdmin.register Inscripcion2020 do
       end
       f.input :alumno, :label => 'Alumno', :as => :select, :collection => Alumno.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :padre, :label => 'Padre', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
+      f.input :padre_titular, :label => 'Padre Titular'
       f.input :madre, :label => 'Madre', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
+      f.input :madre_titular, :label => 'Madre Titular'
       f.input :titular1, :label => 'Titular 1', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :titular2, :label => 'Titular 2', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio=2021").order(:nombre).map{|c| [c.toString(), c.id]}
