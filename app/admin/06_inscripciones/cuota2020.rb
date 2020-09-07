@@ -41,4 +41,34 @@ ActiveAdmin.register Cuota2020 do
 
   form partial: 'form'
 
+  controller do
+
+    def show
+      @page_title = "Cuota"
+    end
+
+    def edit
+      @page_title = "Cuota"
+    end
+
+    def update
+      p "-----"
+      p "update"
+      p "-----"
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
+    def create
+      p "-----"
+      p "create"
+      p "-----"
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
+  end 
+
 end
