@@ -17,16 +17,18 @@ ActiveAdmin.register Cuota2020 do
       row :nombre
       row :fecha_comienzo
       row :fecha_fin
+
+      row "Líneas" do 
+        table_for LineaCuota2020.where("cuota2020_id=#{r.id}").order(:fecha) do |t|
+          t.column :fecha
+          t.column :cantidad
+          t.column :numerador
+          t.column :denominador
+        end
+      end  
     end
   end
 
-  form do |f|    
-    f.inputs do
-      f.input :nombre
-      f.input :fecha_comienzo
-      f.input :fecha_fin
-    end
-    f.actions
-  end
+  form partial: 'form'
 
 end
