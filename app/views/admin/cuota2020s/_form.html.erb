@@ -31,7 +31,7 @@
         </tr>
       <% end %>
 
-      <% js1 = a.semantic_fields_for :linea_cuota2020, LineaCuota2020.new do |b| %>
+      <% js = a.semantic_fields_for :linea_cuota2020, LineaCuota2020.new do |b| %>
         <tr>
           <td><%= b.input :fecha, label:false %></td>
           <td><%= b.input :cantidad, label:false %></td>
@@ -42,10 +42,12 @@
       <% end %>
     </table>
     <span class="add-child">
-      <% js1 = escape_javascript(js1) %>
+      <% js1 = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
-          onclick: "$('table.linea_cuota2020 tr').last(); return false;",
+          onclick: "$('table.linea_cuota2020 tr').last().after(
+                      '#{js}')
+                    ); return false;",
           class: "button" %>
     </span>
   <% end %>
@@ -66,7 +68,7 @@
         </tr>
       <% end %>
 
-      <% js2 = a.semantic_fields_for :cuota2020_alumno, Cuota2020Alumno.new do |b| %>
+      <% js = a.semantic_fields_for :cuota2020_alumno, Cuota2020Alumno.new do |b| %>
         <tr>
           <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
@@ -74,10 +76,12 @@
       <% end %>
     </table>
     <span class="add-child">
-      <% js2 = escape_javascript(js2) %>
+      <% js = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
-          onclick: "$('table.cuota2020_alumno tr').last(); return false;",
+          onclick: "$('table.cuota2020_alumno tr').last().after(
+                      '#{js}')
+                    ); return false;",
           class: "button" %>
     </span>
   <% end %>
