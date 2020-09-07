@@ -42,7 +42,7 @@
       <% end %>
     </table>
     <span class="add-child">
-      <% js1 = escape_javascript(js) %>
+      <% js = escape_javascript(js) %>
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
           onclick: "$('table.linea_cuota2020 tr').last().after(
