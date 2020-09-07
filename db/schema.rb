@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id"
   end
 
-  create_table "actividad_archivos", force: :cascade do |t|
+  create_table "actividad_archivos", id: :serial, force: :cascade do |t|
     t.bigint "actividad_id"
     t.string "nombre"
     t.binary "data"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
-  create_table "adicional2020s", force: :cascade do |t|
+  create_table "adicional2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.boolean "formulario"
     t.decimal "descuento"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true
   end
 
-  create_table "afinidad2020s", force: :cascade do |t|
+  create_table "afinidad2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.boolean "formulario"
     t.decimal "descuento"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "configs", force: :cascade do |t|
+  create_table "configs", id: :serial, force: :cascade do |t|
     t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.date "fecha_descarga"
   end
 
-  create_table "contrasenas", force: :cascade do |t|
+  create_table "contrasenas", id: :serial, force: :cascade do |t|
     t.string "mail"
     t.string "password"
     t.datetime "created_at", null: false
@@ -231,7 +231,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuenta_id"], name: "index_contratos_on_cuenta_id"
   end
 
-  create_table "convenio2020s", force: :cascade do |t|
+  create_table "convenio2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.decimal "descuento"
     t.date "fecha_comienzo"
@@ -249,7 +249,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["convenio_id"], name: "index_convenio_alumnos_on_convenio_id"
   end
 
-  create_table "convenio_cuota", force: :cascade do |t|
+  create_table "convenio_cuota", id: :serial, force: :cascade do |t|
     t.bigint "convenio_id"
     t.date "fecha"
     t.decimal "importe"
@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["convenio_id"], name: "index_convenio_cuota_on_convenio_id"
   end
 
-  create_table "convenio_descuentos", force: :cascade do |t|
+  create_table "convenio_descuentos", id: :serial, force: :cascade do |t|
     t.bigint "convenio_id"
     t.bigint "descuento_id"
     t.datetime "created_at", null: false
@@ -312,7 +312,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["nombre"], name: "index_cuentas_on_nombre"
   end
 
-  create_table "cuota2020_alumnos", force: :cascade do |t|
+  create_table "cuota2020_alumnos", id: :serial, force: :cascade do |t|
     t.bigint "cuota2020_id"
     t.bigint "alumno_id"
     t.datetime "created_at", null: false
@@ -321,7 +321,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuota2020_id"], name: "index_cuota2020_alumnos_on_cuota2020_id"
   end
 
-  create_table "cuota2020s", force: :cascade do |t|
+  create_table "cuota2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.boolean "general"
     t.date "fecha_comienzo"
@@ -330,7 +330,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cuota_socios", force: :cascade do |t|
+  create_table "cuota_socios", id: :serial, force: :cascade do |t|
     t.bigint "socio_id"
     t.date "fecha"
     t.string "concepto"
@@ -355,14 +355,14 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "descuentos", force: :cascade do |t|
+  create_table "descuentos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.decimal "porcentaje"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "deudores", force: :cascade do |t|
+  create_table "deudores", id: :serial, force: :cascade do |t|
     t.bigint "cuenta_id"
     t.decimal "deuda360"
     t.decimal "deuda180"
@@ -375,7 +375,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuenta_id"], name: "index_deudores_on_cuenta_id"
   end
 
-  create_table "direcciones", force: :cascade do |t|
+  create_table "direcciones", id: :serial, force: :cascade do |t|
     t.bigint "usuario_id"
     t.string "direccion"
     t.decimal "latitude"
@@ -443,7 +443,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "exalumnos", force: :cascade do |t|
+  create_table "exalumnos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.string "celular"
     t.string "mail"
@@ -475,7 +475,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["mail"], name: "index_facturas_on_mail"
   end
 
-  create_table "formulario2020s", force: :cascade do |t|
+  create_table "formulario2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.date "fecha_comienzo"
     t.date "fecha_fin"
@@ -483,7 +483,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "formulario_alumnos", force: :cascade do |t|
+  create_table "formulario_alumnos", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "formulario_id"
@@ -491,7 +491,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["formulario_id"], name: "index_formulario_alumnos_on_formulario_id"
   end
 
-  create_table "formulario_inscripcion_opciones", force: :cascade do |t|
+  create_table "formulario_inscripcion_opciones", id: :serial, force: :cascade do |t|
     t.bigint "formulario_id"
     t.bigint "inscripcion_opcion_id"
     t.datetime "created_at", null: false
@@ -500,7 +500,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["inscripcion_opcion_id"], name: "index_formulario_inscripcion_opciones_on_inscripcion_opcion_id"
   end
 
-  create_table "formularios", force: :cascade do |t|
+  create_table "formularios", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.integer "cedula"
     t.datetime "created_at", null: false
@@ -532,7 +532,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.integer "proximo_grado"
   end
 
-  create_table "hermanos2020s", force: :cascade do |t|
+  create_table "hermanos2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.decimal "descuento"
     t.date "fecha_comienzo"
@@ -541,7 +541,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "inscripcion2020s", force: :cascade do |t|
+  create_table "inscripcion2020s", id: :serial, force: :cascade do |t|
     t.bigint "alumno_id"
     t.bigint "padre_id"
     t.bigint "madre_id"
@@ -620,7 +620,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
   end
 
-  create_table "inscripcion_cuotas", force: :cascade do |t|
+  create_table "inscripcion_cuotas", id: :serial, force: :cascade do |t|
     t.bigint "inscripcion_id"
     t.date "fecha"
     t.string "descripcion_cuota"
@@ -635,7 +635,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["inscripcion_id"], name: "index_inscripcion_cuotas_on_inscripcion_id"
   end
 
-  create_table "inscripcion_opcion_alumnos", force: :cascade do |t|
+  create_table "inscripcion_opcion_alumnos", id: :serial, force: :cascade do |t|
     t.bigint "inscripcion_opcion_id"
     t.integer "cedula"
     t.datetime "created_at", null: false
@@ -643,7 +643,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_alumnos_on_inscripcion_opcion_id"
   end
 
-  create_table "inscripcion_opcion_cuotas", force: :cascade do |t|
+  create_table "inscripcion_opcion_cuotas", id: :serial, force: :cascade do |t|
     t.bigint "inscripcion_opcion_id"
     t.date "fecha"
     t.integer "cantidad"
@@ -653,13 +653,13 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_cuotas_on_inscripcion_opcion_id"
   end
 
-  create_table "inscripcion_opcion_tipos", force: :cascade do |t|
+  create_table "inscripcion_opcion_tipos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "inscripcion_opciones", force: :cascade do |t|
+  create_table "inscripcion_opciones", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.integer "anio"
     t.bigint "inscripcion_opcion_tipo_id"
@@ -762,7 +762,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
 
-  create_table "linea_cuota2020s", force: :cascade do |t|
+  create_table "linea_cuota2020s", id: :serial, force: :cascade do |t|
     t.date "fecha"
     t.integer "cantidad"
     t.integer "numerador"
@@ -790,7 +790,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["factura_id"], name: "index_linea_facturas_on_factura_id"
   end
 
-  create_table "linea_matricula2020s", force: :cascade do |t|
+  create_table "linea_matricula2020s", id: :serial, force: :cascade do |t|
     t.bigint "matricula2020_id"
     t.date "fecha"
     t.integer "cantidad"
@@ -819,7 +819,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["sector_id"], name: "index_listas_on_sector_id"
   end
 
-  create_table "lote_recibos", force: :cascade do |t|
+  create_table "lote_recibos", id: :serial, force: :cascade do |t|
     t.bigint "cuenta_id"
     t.string "nombre"
     t.date "fecha"
@@ -834,7 +834,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["rubro_id"], name: "index_lote_recibos_on_rubro_id"
   end
 
-  create_table "matricula2020s", force: :cascade do |t|
+  create_table "matricula2020s", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.boolean "formulario"
     t.decimal "precio"
@@ -844,7 +844,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "matricula_opciones", force: :cascade do |t|
+  create_table "matricula_opciones", id: :serial, force: :cascade do |t|
     t.integer "matricula_id"
     t.integer "cuotas"
     t.date "fecha"
@@ -852,7 +852,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "matriculas", force: :cascade do |t|
+  create_table "matriculas", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.integer "codigo"
     t.integer "anio"
@@ -863,7 +863,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.date "fecha"
   end
 
-  create_table "movimiento2018s", force: :cascade do |t|
+  create_table "movimiento2018s", id: :serial, force: :cascade do |t|
     t.bigint "cuenta_id"
     t.date "fecha"
     t.decimal "importe"
@@ -918,7 +918,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["tipo_movimiento_id"], name: "index_movimientos_on_tipo_movimiento_id"
   end
 
-  create_table "movs", force: :cascade do |t|
+  create_table "movs", id: :serial, force: :cascade do |t|
     t.bigint "placta_id"
     t.integer "movgru"
     t.integer "movcap"
@@ -953,7 +953,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["placta_id"], name: "index_movs_on_placta_id"
   end
 
-  create_table "opcion_conceptos", force: :cascade do |t|
+  create_table "opcion_conceptos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -993,7 +993,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["tipo_pago_id"], name: "index_pagos_on_tipo_pago_id"
   end
 
-  create_table "pases", force: :cascade do |t|
+  create_table "pases", id: :serial, force: :cascade do |t|
     t.bigint "alumno_id"
     t.date "fecha"
     t.text "destino"
@@ -1002,7 +1002,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["alumno_id"], name: "index_pases_on_alumno_id"
   end
 
-  create_table "personas", force: :cascade do |t|
+  create_table "personas", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.string "apellido"
     t.string "lugar_nacimiento"
@@ -1017,7 +1017,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "plactas", force: :cascade do |t|
+  create_table "plactas", id: :serial, force: :cascade do |t|
     t.integer "plagru"
     t.integer "placap"
     t.integer "plarub"
@@ -1037,7 +1037,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["alumno_id"], name: "index_proximo_grado_alumnos_on_alumno_id"
   end
 
-  create_table "proximo_grado_matricula2020s", force: :cascade do |t|
+  create_table "proximo_grado_matricula2020s", id: :serial, force: :cascade do |t|
     t.bigint "proximo_grado_id"
     t.bigint "matricula2020_id"
     t.datetime "created_at", null: false
@@ -1046,7 +1046,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["proximo_grado_id"], name: "index_proximo_grado_matricula2020s_on_proximo_grado_id"
   end
 
-  create_table "proximo_grado_matriculas", force: :cascade do |t|
+  create_table "proximo_grado_matriculas", id: :serial, force: :cascade do |t|
     t.bigint "proximo_grado_id"
     t.bigint "matricula_id"
     t.datetime "created_at", null: false
@@ -1073,7 +1073,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
-  create_table "recargos", force: :cascade do |t|
+  create_table "recargos", id: :serial, force: :cascade do |t|
     t.bigint "cuenta_id"
     t.boolean "recargo"
     t.text "comentario"
@@ -1084,7 +1084,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuenta_id"], name: "index_recargos_on_cuenta_id"
   end
 
-  create_table "recibos", force: :cascade do |t|
+  create_table "recibos", id: :serial, force: :cascade do |t|
     t.string "cheque"
     t.string "banco"
     t.date "fecha_vto"
@@ -1095,7 +1095,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["lote_recibo_id"], name: "index_recibos_on_lote_recibo_id"
   end
 
-  create_table "refinanciacion_cuotas", force: :cascade do |t|
+  create_table "refinanciacion_cuotas", id: :serial, force: :cascade do |t|
     t.bigint "refinanciacion_id"
     t.date "fecha"
     t.integer "cantidad"
@@ -1105,7 +1105,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["refinanciacion_id"], name: "index_refinanciacion_cuotas_on_refinanciacion_id"
   end
 
-  create_table "refinanciaciones", force: :cascade do |t|
+  create_table "refinanciaciones", id: :serial, force: :cascade do |t|
     t.bigint "cuenta_id"
     t.date "fecha"
     t.decimal "importe"
@@ -1114,7 +1114,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuenta_id"], name: "index_refinanciaciones_on_cuenta_id"
   end
 
-  create_table "rubros", force: :cascade do |t|
+  create_table "rubros", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.string "descripcion"
     t.datetime "created_at", null: false
@@ -1123,7 +1123,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["tipo_rubro_id"], name: "index_rubros_on_tipo_rubro_id"
   end
 
-  create_table "sector_alumnos", force: :cascade do |t|
+  create_table "sector_alumnos", id: :serial, force: :cascade do |t|
     t.bigint "alumno_id"
     t.bigint "sector_id"
     t.integer "anio"
@@ -1133,13 +1133,13 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["sector_id"], name: "index_sector_alumnos_on_sector_id"
   end
 
-  create_table "sectores", force: :cascade do |t|
+  create_table "sectores", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "seguimientos", force: :cascade do |t|
+  create_table "seguimientos", id: :serial, force: :cascade do |t|
     t.bigint "alumno_id"
     t.string "celular"
     t.boolean "no_atiende"
@@ -1160,7 +1160,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuenta_id"], name: "index_sinregistro_cuentas_on_cuenta_id"
   end
 
-  create_table "socios", force: :cascade do |t|
+  create_table "socios", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.integer "cedula"
     t.string "email"
@@ -1174,13 +1174,13 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.date "fecha_egreso"
   end
 
-  create_table "spams", force: :cascade do |t|
+  create_table "spams", id: :serial, force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "subgrado_alumnos", force: :cascade do |t|
+  create_table "subgrado_alumnos", id: :serial, force: :cascade do |t|
     t.bigint "subgrado_id"
     t.bigint "alumno_id"
     t.datetime "created_at", null: false
@@ -1190,7 +1190,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["subgrado_id"], name: "index_subgrado_alumnos_on_subgrado_id"
   end
 
-  create_table "subgrados", force: :cascade do |t|
+  create_table "subgrados", id: :serial, force: :cascade do |t|
     t.bigint "grado_id"
     t.string "nombre"
     t.decimal "precio"
@@ -1201,7 +1201,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["grado_id"], name: "index_subgrados_on_grado_id"
   end
 
-  create_table "tarea_tipos", force: :cascade do |t|
+  create_table "tarea_tipos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1217,7 +1217,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["tarea_tipo_id"], name: "index_tareas_on_tarea_tipo_id"
   end
 
-  create_table "temps", force: :cascade do |t|
+  create_table "temps", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "temp_id"
     t.datetime "created_at", null: false
@@ -1232,19 +1232,19 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["cuenta_id"], name: "index_tipo_cuentas_on_cuenta_id"
   end
 
-  create_table "tipo_movimientos", force: :cascade do |t|
+  create_table "tipo_movimientos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tipo_pagos", force: :cascade do |t|
+  create_table "tipo_pagos", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tipo_rubros", force: :cascade do |t|
+  create_table "tipo_rubros", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1261,7 +1261,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["usuario_id"], name: "index_titular_cuentas_on_usuario_id"
   end
 
-  create_table "usuario_sectores", force: :cascade do |t|
+  create_table "usuario_sectores", id: :serial, force: :cascade do |t|
     t.bigint "admin_usuario_id"
     t.bigint "sector_id"
     t.integer "indice", default: 1
