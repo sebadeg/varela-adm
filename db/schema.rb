@@ -846,7 +846,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_183001) do
 
   create_table "matricula2020s", force: :cascade do |t|
     t.string "nombre"
-    t.boolean "formulario"
+    t.boolean "general"
     t.decimal "precio"
     t.date "fecha_comienzo"
     t.date "fecha_fin"
