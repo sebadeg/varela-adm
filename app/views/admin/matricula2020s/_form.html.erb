@@ -86,7 +86,7 @@
     </span>
   <% end %>
 
-<%= a.inputs "Grados" do %>
+  <%= a.inputs "Grados" do %>
     <table class="matricula2020_proximo_grado">
       <tr>
         <th>Grado</th>
@@ -98,7 +98,7 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :proximo_grado_id, label: false %></td>
+          <td><%= b.input :proximo_grado_id, label: false, as: :select, collection: ProximoGrado.all.order(:nombre).map{|u| [u.toString(),u.id]} %></td>
           <td><%= b.input :precio, label: false %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
