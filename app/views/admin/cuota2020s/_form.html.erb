@@ -23,6 +23,7 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
+          <td><%= b.input :cuota2020_id, label: false %></td>
           <td><%= b.input :fecha, label:false %></td>
           <td><%= b.input :cantidad, label:false %></td>
           <td><%= b.input :numerador, label:false %></td>
@@ -33,6 +34,7 @@
 
       <% js1 = a.semantic_fields_for :linea_cuota2020, LineaCuota2020.new do |b| %>
         <tr>
+          <td><%= b.input :cuota2020_id, label: false %></td>
           <td><%= b.input :fecha, label:false %></td>
           <td><%= b.input :cantidad, label:false %></td>
           <td><%= b.input :numerador, label:false %></td>

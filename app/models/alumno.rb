@@ -8,7 +8,7 @@ class Alumno < ApplicationRecord
   has_many :cuenta_alumno
   accepts_nested_attributes_for :cuenta_alumno, allow_destroy: true
 
-  has_many :cuota2020_alumno, :dependent => :delete_all
+  has_many :cuota2020_alumno
   accepts_nested_attributes_for :cuota2020_alumno, allow_destroy: true
 
 
