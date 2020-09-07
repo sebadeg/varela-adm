@@ -78,6 +78,11 @@ class Alumno < ApplicationRecord
     return ""
   end
 
+
+  def self.nextValue()
+    return 99999
+  end
+
   def toString()
     return "#{cedula} - #{nombre} #{apellido} (#{id})";
   end

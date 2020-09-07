@@ -1,7 +1,14 @@
 <%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
 
   <%= a.semantic_errors *a.object.errors.keys %>
-  <%= a.inputs do %>
+
+  <%= a.inputs do %> 
+    <% if a.object.new_record? %>
+      <%= a.input :id, input_html: { value: Alumno.nextValue } %>
+    <% else %>
+      <%= a.input :id %>
+    <% end %>
+
       <%= a.input :id %>
       <%= a.input :nombre %>
       <%= a.input :apellido %>
