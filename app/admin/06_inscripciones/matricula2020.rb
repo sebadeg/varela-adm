@@ -14,7 +14,7 @@ ActiveAdmin.register Matricula2020 do
 
   filter :nombre
 
-  show do
+  show do |r|
     attributes_table do
       row :nombre
       row :fecha_comienzo
