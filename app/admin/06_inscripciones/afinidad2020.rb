@@ -17,7 +17,7 @@ ActiveAdmin.register Afinidad2020 do
 
   filter :nombre
 
-  show do do |r|
+  show do |r|
     attributes_table do
       row :nombre
       row :general
