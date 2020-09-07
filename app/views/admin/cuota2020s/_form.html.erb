@@ -46,7 +46,7 @@
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
           onclick: "$('table.linea_cuota2020 tr').last().after(
-                      '#{js}'.replace('cuota2020','coutaXXXX').replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime()).replace('cuotaXXXX','couta2020'))
+                      '#{js}'.replace('cuota2020','cuotaXXXX').replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime()).replace('cuotaXXXX','cuota2020')
                     ); return false;",
           class: "button" %>
     </span>
@@ -80,7 +80,7 @@
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
           onclick: "$('table.cuota2020_alumno tr').last().after(
-                      '#{js}'.replace('cuota2020','coutaXXXX').replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime()).replace('cuotaXXXX','couta2020')
+                      '#{js}'.replace('cuota2020','cuotaXXXX').replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime()).replace('cuotaXXXX','cuota2020')
                     ); return false;",
           class: "button" %>
     </span>
