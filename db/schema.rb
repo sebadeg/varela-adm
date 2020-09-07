@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_175137) do
+ActiveRecord::Schema.define(version: 2020_09_07_183001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,9 +134,12 @@ ActiveRecord::Schema.define(version: 2020_09_07_175137) do
   end
 
   create_table "afinidad2020_alumnos", force: :cascade do |t|
-    t.integer "alumno"
+    t.bigint "cuota2020_id"
+    t.bigint "alumno_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_afinidad2020_alumnos_on_alumno_id"
+    t.index ["cuota2020_id"], name: "index_afinidad2020_alumnos_on_cuota2020_id"
   end
 
   create_table "afinidad2020s", force: :cascade do |t|
