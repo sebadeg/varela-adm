@@ -26,7 +26,7 @@ ActiveAdmin.register Afinidad2020 do
       row :fecha_fin
 
       row "Alumnos" do 
-        table_for Cuota2020Alumno.where("cuota2020_id=#{r.id}") do |t|
+        table_for Afinidad2020Alumno.where("afinidad2020_id=#{r.id}") do |t|
           t.column "Alumno" do |c| (c.alumno != nil ? c.alumno.toString() : "" ) end
         end
       end
