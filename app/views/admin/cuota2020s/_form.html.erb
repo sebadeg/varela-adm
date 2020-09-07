@@ -23,7 +23,6 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :cuota2020_id, label: false %></td>
           <td><%= b.input :fecha, label:false %></td>
           <td><%= b.input :cantidad, label:false %></td>
           <td><%= b.input :numerador, label:false %></td>
@@ -34,7 +33,6 @@
 
       <% js1 = a.semantic_fields_for :linea_cuota2020, LineaCuota2020.new do |b| %>
         <tr>
-          <td><%= b.input :cuota2020_id, label: false %></td>
           <td><%= b.input :fecha, label:false %></td>
           <td><%= b.input :cantidad, label:false %></td>
           <td><%= b.input :numerador, label:false %></td>
@@ -47,9 +45,39 @@
       <% js1 = escape_javascript(js1) %>
       <%= link_to I18n.t('active_admin.has_many_new',
           model: @child.to_s.singularize.titlecase), "#",
-          onclick: "$('table.linea_cuota2020 tr').last().after(
-                      '#{js1}'.replace(/[0-9]+(?=[\\\]_])/g, new Date().getTime())
-                    ); return false;",
+          onclick: "$('table.linea_cuota2020 tr').last(); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.inputs "Alumnos" do %>
+    <table class="cuota2020_alumno">
+      <tr>
+        <th>Alumno</th>
+      </tr>
+      
+      <%= a.semantic_fields_for :cuota2020_alumno do |b| %>
+        <% if b.object != nil %>
+          <%= b.semantic_errors *b.object.errors.keys %>
+        <% end %>
+        <tr>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js2 = a.semantic_fields_for :cuota2020_alumno, Cuota2020Alumno.new do |b| %>
+        <tr>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js2 = escape_javascript(js2) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.cuota2020_alumno tr').last(); return false;",
           class: "button" %>
     </span>
   <% end %>
