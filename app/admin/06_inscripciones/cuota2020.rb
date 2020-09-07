@@ -15,7 +15,7 @@ ActiveAdmin.register Cuota2020 do
     actions
   end
 
-  show do
+  show do |r|
     attributes_table do
       row :nombre
       row :general
@@ -33,7 +33,7 @@ ActiveAdmin.register Cuota2020 do
 
       row "Alumnos" do 
         table_for Cuota2020Alumno.where("cuota2020_id=#{r.id}") do |t|
-          t.column "Alumno" do |c| (c.alumno != nil ? "#{c.alumno.nombre} #{c.alumno.apellido}" : "" ) end
+          t.column "Alumno" do |c| (c.alumno != nil ? c.alumno.toString() : "" ) end
         end
       end
     end

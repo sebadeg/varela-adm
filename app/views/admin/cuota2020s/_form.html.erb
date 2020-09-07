@@ -63,14 +63,14 @@
           <%= b.semantic_errors *b.object.errors.keys %>
         <% end %>
         <tr>
-          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
 
       <% js = a.semantic_fields_for :cuota2020_alumno, Cuota2020Alumno.new do |b| %>
         <tr>
-          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| ["#{u.nombre} #{u.apellido}",u.id]} %></td>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
           <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
         </tr>
       <% end %>
