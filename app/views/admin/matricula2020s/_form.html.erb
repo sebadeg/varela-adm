@@ -1,0 +1,94 @@
+<%= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |a| %>
+
+  <%= a.semantic_errors *a.object.errors.keys %>
+  <%= a.inputs do %>
+      <%= a.input :id %>
+      <%= a.input :nombre %>
+      <%= a.input :general %>
+      <%= a.input :fecha_comienzo %>
+      <%= a.input :fecha_fin %>
+  <% end %>
+
+  <%= a.inputs "Lineas" do %>
+    <table class="linea_matricula2020">
+      <tr>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+        <th>Numerador</th>
+        <th>Denominador</th>
+      </tr>
+      
+      <%= a.semantic_fields_for :linea_matricula2020 do |b| %>
+        <% if b.object != nil %>
+          <%= b.semantic_errors *b.object.errors.keys %>
+        <% end %>
+        <tr>
+          <td><%= b.input :fecha, label:false %></td>
+          <td><%= b.input :cantidad, label:false %></td>
+          <td><%= b.input :numerador, label:false %></td>
+          <td><%= b.input :denominador, label:false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :linea_matricula2020, LineaMatricula2020.new do |b| %>
+        <tr>
+          <td><%= b.input :fecha, label:false %></td>
+          <td><%= b.input :cantidad, label:false %></td>
+          <td><%= b.input :numerador, label:false %></td>
+          <td><%= b.input :denominador, label:false %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.linea_matricula2020 tr').last().after(
+                      '#{js}'.replace('linea_matricula2020_attributes', new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.inputs "Alumnos" do %>
+    <table class="matricula2020_alumno">
+      <tr>
+        <th>Alumno</th>
+      </tr>
+      
+      <%= a.semantic_fields_for :matricula2020_alumno do |b| %>
+        <% if b.object != nil %>
+          <%= b.semantic_errors *b.object.errors.keys %>
+        <% end %>
+        <tr>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+
+      <% js = a.semantic_fields_for :matricula2020_alumno, Matricula2020Alumno.new do |b| %>
+        <tr>
+          <td><%= b.input :alumno_id, label: false , as: :select, collection: Alumno.all.order(:nombre,:apellido).map{|u| [u.toString(),u.id]} %></td>
+          <td><%= b.input :_destroy, as: :boolean, required: false, label: 'Eliminar' %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="add-child">
+      <% js = escape_javascript(js) %>
+      <%= link_to I18n.t('active_admin.has_many_new',
+          model: @child.to_s.singularize.titlecase), "#",
+          onclick: "$('table.matricula2020_alumno tr').last().after(
+                      '#{js}'.replace('matricula2020_alumno_attributes', new Date().getTime())
+                    ); return false;",
+          class: "button" %>
+    </span>
+  <% end %>
+
+  <%= a.actions do %>
+    <%= a.action :submit %>
+    <li class="cancel"><%= link_to "Cancelar", [:admin, resource] %></li>
+  <% end %>
+
+<% end %>
