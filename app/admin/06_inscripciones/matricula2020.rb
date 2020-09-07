@@ -41,8 +41,8 @@ ActiveAdmin.register Matricula2020 do
       end
 
       row "Grados" do 
-        table_for Matricula2020ProximoGrado.where("matricula2020_id=#{r.id}").order(:fecha) do |t|
-          t.column "Alumno" do |c| (c.proximo_grado != nil ? c.proximo_grado.toString() : "" ) end
+        table_for Matricula2020ProximoGrado.where("matricula2020_id=#{r.id}") do |t|
+          t.column "Grado" do |c| (c.proximo_grado != nil ? c.proximo_grado.toString() : "" ) end
           t.column :precio
         end
       end  
