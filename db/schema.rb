@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_183001) do
   end
 
   create_table "afinidad2020_alumnos", force: :cascade do |t|
-    t.bigint "cuota2020_id"
+    t.bigint "afinidad2020_id"
     t.bigint "alumno_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
