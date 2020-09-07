@@ -4,7 +4,8 @@ ActiveAdmin.register Matricula2020 do
 
   permit_params :id, :nombre, :general, :fecha_comienzo, :fecha_fin,
     linea_matricula2020_attributes: [:id,:matricula2020_id,:fecha,:cantidad,:numerador,:denominador,:_destroy],
-    matricula2020_alumno_attributes: [:id,:matricula2020_id,:alumno_id,:_destroy]
+    matricula2020_alumno_attributes: [:id,:matricula2020_id,:alumno_id,:_destroy],
+    matricula2020_proximo_grado_attributes: [:id,:matricula2020_id,:proximo_grado_id,:precio,:_destroy]
 
   index do
   	#selectable_column
@@ -38,6 +39,15 @@ ActiveAdmin.register Matricula2020 do
           t.column "Alumno" do |c| (c.alumno != nil ? c.alumno.toString() : "" ) end
         end
       end
+
+      row "Grados" do 
+        table_for Matricula2020ProximoGrado.where("matricula2020_id=#{r.id}").order(:fecha) do |t|
+          t.column "Alumno" do |c| (c.proximo_grado != nil ? c.proximo_grado.toString() : "" ) end
+          t.column :precio
+        end
+      end  
+
+
     end
   end
 
