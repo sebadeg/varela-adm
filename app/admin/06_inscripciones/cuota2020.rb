@@ -1,6 +1,6 @@
 ActiveAdmin.register Cuota2020 do
 
-  menu priority: 599, label: "Cuota 2020", parent: "Inscripciones"
+  menu priority: 603, label: "Cuota", parent: "Inscripciones"
 
   permit_params :id, :nombre, :general, :fecha_comienzo, :fecha_fin,
     linea_cuota2020_attributes: [:id,:cuota2020_id,:fecha,:cantidad,:numerador,:denominador,:_destroy],

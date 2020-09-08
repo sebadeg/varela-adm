@@ -1,6 +1,6 @@
 ActiveAdmin.register Afinidad2020 do
 
-  menu priority: 599, label: "Afinidad 2020", parent: "Inscripciones"
+  menu priority: 605, label: "Afinidad", parent: "Inscripciones"
 
   permit_params :nombre, :general, :descuento, :fecha_comienzo, :fecha_fin,
     afinidad2020_alumno_attributes: [:id,:cuota2020_id,:alumno_id,:_destroy]

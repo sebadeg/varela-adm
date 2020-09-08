@@ -1,6 +1,6 @@
 ActiveAdmin.register Matricula2020 do
 
-  menu priority: 599, label: "Matricula 2020", parent: "Inscripciones"
+  menu priority: 604, label: "Matricula", parent: "Inscripciones"
 
   permit_params :id, :nombre, :general, :fecha_comienzo, :fecha_fin,
     linea_matricula2020_attributes: [:id,:matricula2020_id,:fecha,:cantidad,:numerador,:denominador,:_destroy],

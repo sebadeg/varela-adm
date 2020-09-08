@@ -3,11 +3,11 @@
   <%= a.semantic_errors *a.object.errors.keys %>
 
   <%= a.inputs do %> 
-    <% if a.object.new_record? %>
+    <!--<% if a.object.new_record? %>
       <%= a.input :id, input_html: { value: Alumno.nextValue } %>
     <% else %>
       <%= a.input :id %>
-    <% end %>
+    <% end %>-->
 
       <%= a.input :id %>
       <%= a.input :nombre %>

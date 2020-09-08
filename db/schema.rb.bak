@@ -581,7 +581,6 @@ ActiveRecord::Schema.define(version: 2020_09_07_191330) do
     t.bigint "formulario2020_id"
     t.boolean "padre_titular"
     t.boolean "madre_titular"
-    t.decimal "congelado"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"

@@ -1,6 +1,6 @@
 ActiveAdmin.register Convenio2020 do
 
-  menu priority: 599, label: "Convenios 2020", parent: "Inscripciones"
+  menu priority: 602, label: "Convenios", parent: "Inscripciones"
 
   permit_params :nombre, :descuento, :fecha_comienzo, :fecha_fin
 

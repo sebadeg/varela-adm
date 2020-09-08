@@ -1,6 +1,6 @@
 ActiveAdmin.register Inscripcion2020 do
 
-  menu priority: 600, label: "Inscripciones 2020", parent: "Inscripciones"
+  menu priority: 601, label: "Inscripciones", parent: "Inscripciones"
 
   permit_params :created_at, :alumno_id, :padre_id, :madre_id, :titular1_id, :titular1_id,  
         :convenio2020, :matricula2020, :hermanos2020, :cuota2020
@@ -29,6 +29,7 @@ ActiveAdmin.register Inscripcion2020 do
     attributes_table title:"Forma de pago" do
       row "Formulario" do |r| (r.formulario2020 != nil ? r.formulario2020.toString() : "") end
       row "Convenio" do |r| (r.convenio2020 != nil ? r.convenio2020.toString() : "") end
+      row "Congelado" do |r| "#{r.congelado}" end    
       row "Adicional" do |r| "#{r.adicional}" end    
       row "Afinidad" do |r| (r.afinidad2020 != nil ? r.afinidad2020.toString() : "") end
       row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
@@ -68,6 +69,7 @@ ActiveAdmin.register Inscripcion2020 do
     f.inputs do
       f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :congelado
       f.input :adicional
       f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}

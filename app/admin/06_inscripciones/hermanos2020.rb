@@ -1,6 +1,6 @@
 ActiveAdmin.register Hermanos2020 do
 
-  menu priority: 599, label: "Hermanos 2020", parent: "Inscripciones"
+  menu priority: 606, label: "Hermanos", parent: "Inscripciones"
 
   permit_params :nombre, :descuento, :fecha_comienzo, :fecha_fin
 
