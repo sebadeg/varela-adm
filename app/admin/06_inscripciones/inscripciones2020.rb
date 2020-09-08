@@ -2,8 +2,13 @@ ActiveAdmin.register Inscripcion2020 do
 
   menu priority: 601, label: "Inscripciones", parent: "Inscripciones"
 
-  permit_params :created_at, :alumno_id, :padre_id, :madre_id, :titular1_id, :titular1_id,  
-        :convenio2020, :matricula2020, :hermanos2020, :cuota2020
+  permit_params :created_at, :alumno_id, :padre_id, :padre_titular, :madre_id, :madre_titular, :titular1_id, :titular1_id,
+        :proximo_grado_id,
+        :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :congelado, :hermanos2020_id, 
+        :cuota2020_id, :matricula2020_id
+
+  scope :inscripcion
+  scope :reinscripcion
 
   index do
   	#selectable_column

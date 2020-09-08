@@ -13,4 +13,8 @@ class Inscripcion2020 < ApplicationRecord
   belongs_to :hermanos2020
   belongs_to :cuota2020
 
+  scope :inscripcion, -> { where("NOT reinscripcion") }
+  scope :reinscripcion, -> { where("reinscripcion") }
+
+
 end
