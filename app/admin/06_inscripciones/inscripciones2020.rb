@@ -6,7 +6,7 @@ ActiveAdmin.register Inscripcion2020 do
         :proximo_grado_id,
         :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :fija, :congelado, :hermanos2020_id, 
         :cuota2020_id, :matricula2020_id,
-        :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_entregado, :fecha_inscripto
+        :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_inscripto, :fecha_comienzo, :fecha_fin
 
 
 
@@ -72,12 +72,9 @@ ActiveAdmin.register Inscripcion2020 do
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=now() WHERE id=#{id};" )
 
 
-      if inscripcion2020.fecha_entregado == nil
-        TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
-          usuario = Usuario.find(titular_cuenta.usuario_id)
-          UserMailer.hay_vale_usuario(usuario).deliver_now
-        end
-        ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
+      TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
+        usuario = Usuario.find(titular_cuenta.usuario_id)
+        UserMailer.hay_vale_usuario(usuario).deliver_now
       end
 
     else
@@ -86,28 +83,6 @@ ActiveAdmin.register Inscripcion2020 do
 
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
-
-
-  action_item :entregar, only: :show do #, if: proc {current_admin_usuario.inscripciones} do
-    if inscripcion2020.fecha_entregado != nil
-      link_to "Deshabilita entrega de mail", entregar_admin_inscripcion2020_path(inscripcion2020), method: :put   
-    else
-      link_to "Habilita entregada de mail", entregar_admin_inscripcion2020_path(inscripcion2020), method: :put 
-    end
-  end
-
-  member_action :entregar, method: :put do
-    id = params[:id]
-    inscripcion2020 = Inscripcion2020.find(id)
-    if inscripcion2020.fecha_entregado == nil
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
-    else
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=NULL WHERE id=#{id};" )
-    end
-    
-    redirect_to admin_inscripcion2020_path(inscripcion2020)
-  end
-
 
 
 
@@ -176,6 +151,8 @@ action_item :formulario, only: :show do
       row "Fecha" do |r| I18n.l(r.created_at, format: '%-d de %B de %Y') end
       row :recibida
       row "Año" do |r| (r.anio) end
+      row :fecha_comienzo
+      row :fecha_fin
     end
     attributes_table title:"Datos" do
       row "Alumno" do |r| (r.alumno != nil ? r.alumno.toString() : "") end
@@ -185,6 +162,7 @@ action_item :formulario, only: :show do
       row "Madre Titular" do |r| r.madre_titular end
       row "Titular 1" do |r| (r.titular1 != nil ? r.titular1.toString() : "") end
       row "Titular 2" do |r| (r.titular2 != nil ? r.titular2.toString() : "") end
+      row "Nivel" do |r| (r.grado != nil ? r.grado.toString() : "") end
       row "Grado" do |r| (r.proximo_grado != nil ? r.proximo_grado.toString() : "") end
     end
     attributes_table title:"Forma de pago" do
@@ -202,7 +180,6 @@ action_item :formulario, only: :show do
       row "Registrado" do |r| r.fecha_registrado end
       row "Vale generado" do |r| r.fecha_vale end
       row "Vale descargado" do |r| r.fecha_descargado end
-      row "Vale entregado" do |r| r.fecha_entregado end
       row "Inscripto" do |r| r.fecha_inscripto end
     end 
   end
@@ -218,6 +195,10 @@ action_item :formulario, only: :show do
         f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
         f.input :reinscripcion, input_html: { value: false }, as: :hidden
       end
+      f.input :fecha_comienzo
+      f.input :fecha_fin
+    end
+    f.inputs do
       f.input :alumno, :label => 'Alumno', :as => :select, :collection => Alumno.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :padre, :label => 'Padre', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :padre_titular, :label => 'Padre Titular'
@@ -225,6 +206,7 @@ action_item :formulario, only: :show do
       f.input :madre_titular, :label => 'Madre Titular'
       f.input :titular1, :label => 'Titular 1', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :titular2, :label => 'Titular 2', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
+      f.input :grado, :label => 'Nivel', :as => :select, :collection => Grado.all.order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio=2021").order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :anio, :label => 'Año'
     end
@@ -241,7 +223,6 @@ action_item :formulario, only: :show do
       f.input :fecha_registrado, :label => 'Registrado', input_html: {disabled: :true}
       f.input :fecha_vale, :label => 'Vale generado', input_html: {disabled: :true}
       f.input :fecha_descargado, :label => 'Vale descargado', input_html: {disabled: :true}
-      f.input :fecha_entregado, :label => 'Vale entregado', input_html: {disabled: :true}
       f.input :fecha_inscripto, :label => 'Inscripto', input_html: {disabled: :true}
 
     end
