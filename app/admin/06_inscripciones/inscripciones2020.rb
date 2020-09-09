@@ -13,18 +13,18 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :habilitar, only: :show do
-    if inscripcion.inhabilitado
-      link_to "Habilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put 
+    if inscripcion2020.inhabilitado
+      link_to "Habilitar", habilitar_admin_inscripcion2020_path(inscripcion2020), method: :put 
     else
-      link_to "Inhabilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put   
+      link_to "Inhabilitar", habilitar_admin_inscripcion2020_path(inscripcion2020), method: :put   
     end
   end
 
   member_action :habilitar, method: :put do
     id = params[:id]
-    inscripcion = Inscripcion2020.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion.inhabilitado} WHERE id=#{id};" )
-    redirect_to admin_inscripcion_path(inscripcion)
+    inscripcion2020 = Inscripcion2020.find(id)
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion2020.inhabilitado} WHERE id=#{id};" )
+    redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
 
@@ -32,22 +32,22 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :registrar, only: :show do
-    if inscripcion.registrado
-      link_to "Desregistrar", registrar_admin_inscripcion_path(inscripcion), method: :put   
+    if inscripcion2020.registrado
+      link_to "Desregistrar", registrar_admin_inscripcion2020_path(inscripcion2020), method: :put   
     else
-      link_to "Registrar", registrar_admin_inscripcion_path(inscripcion), method: :put 
+      link_to "Registrar", registrar_admin_inscripcion2020_path(inscripcion2020), method: :put 
     end
   end
 
   member_action :registrar, method: :put do
     id = params[:id]
-    inscripcion = Inscripcion2020.find(id)
-    if inscripcion.fecha_registrado == nil
+    inscripcion2020 = Inscripcion2020.find(id)
+    if inscripcion2020.fecha_registrado == nil
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_registrado=now() WHERE id=#{id};" )
     else
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_registrado=NULL WHERE id=#{id};" )
     end
-    redirect_to admin_inscripcion_path(inscripcion)
+    redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
 
@@ -55,22 +55,22 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :generar_vale, only: :show do
-    if inscripcion.hay_vale
-      link_to "Quitar vale", generar_vale_admin_inscripcion_path(inscripcion), method: :put   
+    if inscripcion2020.hay_vale
+      link_to "Quitar vale", generar_vale_admin_inscripcion2020_path(inscripcion2020), method: :put   
     else
-      link_to "Generar vale", generar_vale_admin_inscripcion_path(inscripcion), method: :put 
+      link_to "Generar vale", generar_vale_admin_inscripcion2020_path(inscripcion2020), method: :put 
     end
   end
 
  member_action :generar_vale, method: :put do
     id = params[:id]
-    inscripcion = Inscripcion2020.find(id)
-    if inscripcion.fecha_vale == nil
+    inscripcion2020 = Inscripcion2020.find(id)
+    if inscripcion2020.fecha_vale == nil
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=now() WHERE id=#{id};" )
 
 
-      if inscripcion.fecha_entregado == nil
-        TitularCuenta.where("cuenta_id=#{inscripcion.cuenta_id}").each do |titular_cuenta|
+      if inscripcion2020.fecha_entregado == nil
+        TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
           usuario = Usuario.find(titular_cuenta.usuario_id)
           UserMailer.hay_vale_usuario(usuario).deliver_now
         end
@@ -81,28 +81,28 @@ ActiveAdmin.register Inscripcion2020 do
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=NULL WHERE id=#{id};" )
     end
 
-    redirect_to admin_inscripcion_path(inscripcion)
+    redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
 
   action_item :entregar, only: :show do #, if: proc {current_admin_usuario.inscripciones} do
-    if inscripcion.fecha_entregado != nil
-      link_to "Deshabilita entrega de mail", entregar_admin_inscripcion_path(inscripcion), method: :put   
+    if inscripcion2020.fecha_entregado != nil
+      link_to "Deshabilita entrega de mail", entregar_admin_inscripcion2020_path(inscripcion2020), method: :put   
     else
-      link_to "Habilita entregada de mail", entregar_admin_inscripcion_path(inscripcion), method: :put 
+      link_to "Habilita entregada de mail", entregar_admin_inscripcion2020_path(inscripcion2020), method: :put 
     end
   end
 
   member_action :entregar, method: :put do
     id = params[:id]
-    inscripcion = Inscripcion2020.find(id)
-    if inscripcion.fecha_entregado == nil
+    inscripcion2020 = Inscripcion2020.find(id)
+    if inscripcion2020.fecha_entregado == nil
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
     else
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=NULL WHERE id=#{id};" )
     end
     
-    redirect_to admin_inscripcion_path(inscripcion)
+    redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
 
@@ -110,39 +110,39 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :inscribir, only: :show do
-    if inscripcion.inscripto
-      link_to "Desinscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+    if inscripcion2020.inscripto
+      link_to "Desinscribir", inscribir_admin_inscripcion2020_path(inscripcion2020), method: :put 
     else
-      link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+      link_to "Inscribir", inscribir_admin_inscripcion2020_path(inscripcion2020), method: :put 
     end
   end
 
   member_action :inscribir, method: :put do
     id = params[:id]
-    inscripcion = Inscripcion2020.find(id)
-    if inscripcion.fecha_inscripto == nil
+    inscripcion2020 = Inscripcion2020.find(id)
+    if inscripcion2020.fecha_inscripto == nil
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_inscripto=now() WHERE id=#{id};" )
     else
       ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_inscripto=NULL WHERE id=#{id};" )
     end
     
-    redirect_to admin_inscripcion_path(inscripcion)
+    redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
 
 
 action_item :formulario, only: :show do
-    link_to "Formulario y Vale", formulario_admin_inscripcion_path(inscripcion), method: :put 
+    link_to "Formulario y Vale", formulario_admin_inscripcion2020_path(inscripcion2020), method: :put 
   end
 
   member_action :formulario, method: :put do
     id = params[:id]
-    inscripcion = Inscripcion2020.find(id)
-    alumno = Alumno.find(inscripcion.alumno_id)
+    inscripcion2020 = Inscripcion2020.find(id)
+    alumno = Alumno.find(inscripcion2020.alumno_id)
   
     file_name = "Inscripcion #{alumno.nombre} #{alumno.apellido}.pdf"
     file = Tempfile.new(file_name)
-    inscripcion.vale(file.path)
+    inscripcion2020.vale(file.path)
 
     send_file(
         file.path,
