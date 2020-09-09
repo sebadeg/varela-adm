@@ -153,6 +153,7 @@ action_item :formulario, only: :show do
       row "Año" do |r| (r.anio) end
       row :fecha_comienzo
       row :fecha_fin
+      row :fecha_ultima
       row "Código cuenta" do |r| (r.cuenta_id) end
       row "Código alumno" do |r| (r.nuevo_alumno_id) end
     end
@@ -200,6 +201,7 @@ action_item :formulario, only: :show do
       end
       f.input :fecha_comienzo
       f.input :fecha_fin
+      f.input :fecha_ultima
 
       f.input :cuenta_id, label => 'Código cuenta'
       f.input :nuevo_alumno_id, label => 'Código alumno'
