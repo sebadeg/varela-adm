@@ -1,10 +1,8 @@
-ActiveAdmin.register Alumno, :as => "Insc Alumnos" do
+ActiveAdmin.register Usuario, :as => "Insc Padres" do
 
-  menu priority: 598, label: "Alumnos", parent: "Inscripciones"
+  menu priority: 599, label: "Padres", parent: "Administración"
 
-  permit_params :id, :nombre, :apellido, :cedula, :lugar_nacimiento, :fecha_nacimiento, :domicilio, :celular,
-    :anio_ingreso, :mutualista,:emergencia,:procede
-
+  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, 
 
   index do
   	#selectable_column
@@ -27,14 +25,14 @@ ActiveAdmin.register Alumno, :as => "Insc Alumnos" do
       row :cedula
       row :nombre
       row :apellido
+      row :email
+      row :direccion
+      row :celular
       row :lugar_nacimiento
       row :fecha_nacimiento
-      row :domicilio
-      row :celular
-      row :anio_ingreso
-      row :mutualista
-      row :emergencia
-      row :procede
+      row :profesion
+      row :trabajo
+      row :telefono_trabajo
     end
   end
 
@@ -44,14 +42,14 @@ ActiveAdmin.register Alumno, :as => "Insc Alumnos" do
       f.input :cedula
       f.input :nombre
       f.input :apellido
+      f.input :email
+      f.input :direccion
+      f.input :celular
       f.input :lugar_nacimiento
       f.input :fecha_nacimiento
-      f.input :domicilio
-      f.input :celular
-      f.input :anio_ingreso
-      f.input :mutualista
-      f.input :emergencia
-      f.input :procede
+      f.input :profesion
+      f.input :trabajo
+      f.input :telefono_trabajo
     end
     f.actions
   end
