@@ -18,7 +18,55 @@ class Inscripcion2020 < ApplicationRecord
 
 
 
+def CalcularPrecio()
 
+    cuotas = Array.new
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil
+      return cuotas
+    end
+    importe_total = proximo_grado.precio
+
+    # descuentos = Array.new
+    # descuentos.push(convenio_id)
+    # descuentos.push(adicional_id)
+    # descuentos.push(hermanos_id)
+
+    # p "------------------------------"
+    # p "------------------------------"
+    # p "------------------------------"
+    # p importe_total
+    # p descuentos
+
+
+    # descuentos.each do |inscripcion_opcion_id|
+    #   inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
+    #   if inscripcion_opcion != nil 
+    #     if inscripcion_opcion.valor == nil
+    #       importe_total = 0
+    #       InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion.id}").order(:fecha).each do |cuota|
+    #         importe_total = importe_total + cuota.cantidad*cuota.importe
+    #       end
+    #     else
+    #       importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+    #     end
+    #   end
+    # end
+
+    # p importe_total
+    # p "------------------------------"
+    # p "------------------------------"
+    # p "------------------------------"
+
+    #   inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
+    #   if inscripcion_opcion_cuotas != nil
+    #     InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
+    #      cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha + 9.days])
+    #    end
+
+    cuotas.push([12,20000,DateTime.now])
+    return cuotas
+  end
 
 
 
@@ -253,19 +301,24 @@ class Inscripcion2020 < ApplicationRecord
     titular1 = Usuario.find(titular1_id) rescue nil
     titular2 = Usuario.find(titular2_id) rescue nil
 
+    #cuotas = CalcularPrecio()
 
-
-    cuotas = CalcularPrecio()
-
-    total = 0
-    cuotas.each do |cuota|
-      total = total + cuota[0]*cuota[1]
+    cuotas = Array.new
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil
+      return cuotas
     end
+    total = proximo_grado.precio
+    
+
+    # total = 0
+    # cuotas.each do |cuota|
+    #   total = total + cuota[0]*cuota[1]
+    # end
 
     total_letras = Inscripcion2020.numero_a_letras(total,true)
 
-    cedula_alumno = Inscripcion2020.cedula_tos(cedula)
-
+    cedula_alumno = Inscripcion2020.cedula_tos(alumno.cedula)
     nombre_alumno = ""
     if alumno != nil 
       nombre_alumno = alumno.nombre + " " + alumno.apellido
@@ -277,34 +330,39 @@ class Inscripcion2020 < ApplicationRecord
       nombre_grado = proximo_grado.nombre
     end
 
-    # convenio_nombre = ""
-    # matricula_nombre = ""
-    # hermanos_nombre = ""
-    # if formulario_id != nil
-    #   formulario = Formulario.find(formulario_id) rescue nil
-    #   if formulario != nil 
-    #     convenio_nombre = formulario.nombre
-    #   end
-    # else
-    #   inscripcion_opcion = InscripcionOpcion.find(convenio_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     convenio_nombre = inscripcion_opcion.nombre
-    #   end
-    #   inscripcion_opcion = InscripcionOpcion.find(adicional_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     convenio_nombre = convenio_nombre + " + " + inscripcion_opcion.nombre
-    #   end
+    convenio_nombre = ""
+    convenio = Convenio2020.find(convenio_id) rescue nil
+    if convenio != nil
+      convenio_nombre = "#{convenio.nombre} (#{convenio.descuento}%)"
+    end
 
-    #   inscripcion_opcion = InscripcionOpcion.find(matricula_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     matricula_nombre = inscripcion_opcion.nombre
-    #   end
+    afinidad_nombre = ""
+    afinidad = Afinidad2020.find(afinidad_id) rescue nil
+    if afinidad != nil
+      afinidad_nombre = "#{afinidad.nombre} (#{afinidad.descuento}%)"
+    end
 
-    #   inscripcion_opcion = InscripcionOpcion.find(hermanos_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     hermanos_nombre = inscripcion_opcion.nombre
-    #   end
-    # end
+    adicional_nombre = ""
+    if adicional == nil
+      adicional_nombre = "Adicional (#{adicional}%)"
+    end
+    
+    congelado_nombre = ""
+    if congelado == nil
+      congelado_nombre = "Congelado (#{congelado}%)"
+    end
+
+    matricula_nombre = ""
+    matricula = Matricula2020.find(matricula_id) rescue nil
+    if matricula != nil
+      matricula_nombre = matricula.nombre
+    end
+
+    hermanos_nombre = ""
+    hermanos = Hermanos2020.find(hermanos_id) rescue nil
+    if hermanos != nil
+      hermanos_nombre = hermanos.nombre
+    end
 
     idx=0
     nombreT = Array.new
@@ -369,7 +427,7 @@ class Inscripcion2020 < ApplicationRecord
       "<br>" +
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
-      "Descuento: #{convenio_nombre}<br>" +
+      "Descuento: #{convenio_nombre} + #{afinidad_nombre} + #{adicional_nombre} + #{congelado_nombre}<br>" +
       "Matrícula: #{matricula_nombre}<br>" +
       "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
