@@ -1,8 +1,9 @@
 ActiveAdmin.register Usuario, :as => "Insc Padres" do
 
-  menu priority: 599, label: "Padres", parent: "Administración"
+  menu priority: 599, label: "Padres", parent: "Inscripciones"
 
-  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, 
+  permit_params :id, :cedula, :nombre, :apellido, :email, :direccion, :celular, :lugar_nacimiento
+      :fecha_nacimiento, :profesion, :trabajo, :telefono_trabajo
 
   index do
   	#selectable_column
