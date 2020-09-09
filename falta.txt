@@ -1,20 +1,28 @@
-
-Calculo de cuotas en inscripciones
-
-Prioridad alta
+FALTAN
 -------------
 
-* San Leonardo
-* Afinidad en CDC
-* Deshabilitar deudores
-* Afinidades en la costa
-* Becas concursables
-* Becas comunes
-* Fondo edificio
-* Exonerar matriculas
-* Arantxa
+* Generar cuotas y matriculas descuentos
+
+* Inscripciones -> asignar cuenta a alumno, crear alumno/padre, crear alumno/cuenta, crear cuenta/usuario, mandar mail de bienvenida
 
 * Formularios
+* Facturas pueden tener mas de una hoja
+
+* Informe de inscripciones y reinscripciones
+* Informe para secretarias
+
+* Facturacion
+
+* Ordenar grado en show de matricula
+
+
+
+
+
+-> Iriadna no tiene que generar alumnos ni cuentas 
+-> Iriadna no puede generar cuotas
+
+
 
 
 HECHOS
@@ -25,25 +33,21 @@ HECHOS
 * Datos padre/madre/titular/alumnos
 * Inscripciones 2021 y 2022
 * Verificar app padres (convenio/adicional/afinidad/matriculas/cuotas)
+* Calculo de cuotas en inscripciones
+* San Leonardo
+
+Pueden hacerlo
+-------------
+
+* Afinidad en CDC
+* Deshabilitar deudores
+* Afinidades en la costa
+* Becas concursables
+* Becas comunes
+* Fondo edificio
+* Exonerar matriculas
+* Arantxa
 
 
-Prioridad baja
------------------
-
-* Informe de inscripciones y reinscripciones
-
-* Informe para secretarias
-
-* Generar cuotas y matriculas
-
-* Inscripciones -> asignar cuenta a alumno, crear alumno/padre, crear alumno/cuenta, crear cuenta/usuario, mandar mail de bienvenida
-
-* Facturacion
 
 
-
-
-
-* Ordenar grado en show de matricula
-* Iriadna no tiene que generar alumnos ni cuentas 
-* Iriadna no puede generar cuotas

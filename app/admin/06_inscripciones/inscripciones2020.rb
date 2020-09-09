@@ -153,6 +153,8 @@ action_item :formulario, only: :show do
       row "Año" do |r| (r.anio) end
       row :fecha_comienzo
       row :fecha_fin
+      row "Código cuenta" do |r| (r.cuenta_id) end
+      row "Código alumno" do |r| (r.nuevo_alumno_id) end
     end
     attributes_table title:"Datos" do
       row "Alumno" do |r| (r.alumno != nil ? r.alumno.toString() : "") end
@@ -198,6 +200,10 @@ action_item :formulario, only: :show do
       end
       f.input :fecha_comienzo
       f.input :fecha_fin
+
+      f.input :cuenta_id, label => 'Código cuenta'
+      f.input :nuevo_alumno_id, label => 'Código alumno'
+
     end
     f.inputs do
       f.input :alumno, :label => 'Alumno', :as => :select, :collection => Alumno.order(:cedula).map{|c| [c.toString(), c.id]}
