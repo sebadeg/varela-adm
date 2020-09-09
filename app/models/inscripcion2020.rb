@@ -43,6 +43,10 @@ def CalcularPrecio()
     if congelado != nil
       porcentaje = porcentaje * (100.0-congelado)/100.0
     end
+    hermanos = Hermanos2020.find(hermanos2020_id) rescue nil
+    if hermanos != nil
+      porcentaje = porcentaje * (100.0-hermanos.descuento)/100.0
+    end
 
     # p "------------------------------"
     # p "------------------------------"
