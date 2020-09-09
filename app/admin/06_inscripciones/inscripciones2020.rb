@@ -35,7 +35,7 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :registrar, only: :show do
-    if inscripcion2020.fecha_registrado
+    if inscripcion2020.fecha_registrado != nil
       link_to "Desregistrar", registrar_admin_inscripcion2020_path(inscripcion2020), method: :put   
     else
       link_to "Registrar", registrar_admin_inscripcion2020_path(inscripcion2020), method: :put 
@@ -58,7 +58,7 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :generar_vale, only: :show do
-    if inscripcion2020.hay_vale
+    if inscripcion2020.fecha_vale != nil
       link_to "Quitar vale", generar_vale_admin_inscripcion2020_path(inscripcion2020), method: :put   
     else
       link_to "Generar vale", generar_vale_admin_inscripcion2020_path(inscripcion2020), method: :put 
@@ -113,7 +113,7 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :inscribir, only: :show do
-    if inscripcion2020.inscripto
+    if inscripcion2020.fecha_inscripto != nil
       link_to "Desinscribir", inscribir_admin_inscripcion2020_path(inscripcion2020), method: :put 
     else
       link_to "Inscribir", inscribir_admin_inscripcion2020_path(inscripcion2020), method: :put 
