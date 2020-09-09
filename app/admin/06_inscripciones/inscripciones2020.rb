@@ -10,6 +10,152 @@ ActiveAdmin.register Inscripcion2020 do
   scope :inscripcion
   scope :reinscripcion
 
+
+
+  action_item :habilitar, only: :show do
+    if inscripcion.inhabilitado
+      link_to "Habilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put 
+    else
+      link_to "Inhabilitar", habilitar_admin_inscripcion_path(inscripcion), method: :put   
+    end
+  end
+
+  member_action :habilitar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion2020.find(id)
+    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion.inhabilitado} WHERE id=#{id};" )
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+
+
+
+
+  action_item :registrar, only: :show do
+    if inscripcion.registrado
+      link_to "Desregistrar", registrar_admin_inscripcion_path(inscripcion), method: :put   
+    else
+      link_to "Registrar", registrar_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+  member_action :registrar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion2020.find(id)
+    if inscripcion.fecha_registrado == nil
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_registrado=now() WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_registrado=NULL WHERE id=#{id};" )
+    end
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+
+
+
+
+  action_item :generar_vale, only: :show do
+    if inscripcion.hay_vale
+      link_to "Quitar vale", generar_vale_admin_inscripcion_path(inscripcion), method: :put   
+    else
+      link_to "Generar vale", generar_vale_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+ member_action :generar_vale, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion2020.find(id)
+    if inscripcion.fecha_vale == nil
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=now() WHERE id=#{id};" )
+
+
+      if inscripcion.fecha_entregado == nil
+        TitularCuenta.where("cuenta_id=#{inscripcion.cuenta_id}").each do |titular_cuenta|
+          usuario = Usuario.find(titular_cuenta.usuario_id)
+          UserMailer.hay_vale_usuario(usuario).deliver_now
+        end
+        ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
+      end
+
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=NULL WHERE id=#{id};" )
+    end
+
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+
+  action_item :entregar, only: :show do #, if: proc {current_admin_usuario.inscripciones} do
+    if inscripcion.fecha_entregado != nil
+      link_to "Deshabilita entrega de mail", entregar_admin_inscripcion_path(inscripcion), method: :put   
+    else
+      link_to "Habilita entregada de mail", entregar_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+  member_action :entregar, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion2020.find(id)
+    if inscripcion.fecha_entregado == nil
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=now() WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_entregado=NULL WHERE id=#{id};" )
+    end
+    
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+
+
+
+
+  action_item :inscribir, only: :show do
+    if inscripcion.inscripto
+      link_to "Desinscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+    else
+      link_to "Inscribir", inscribir_admin_inscripcion_path(inscripcion), method: :put 
+    end
+  end
+
+  member_action :inscribir, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion2020.find(id)
+    if inscripcion.fecha_inscripto == nil
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_inscripto=now() WHERE id=#{id};" )
+    else
+      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_inscripto=NULL WHERE id=#{id};" )
+    end
+    
+    redirect_to admin_inscripcion_path(inscripcion)
+  end
+
+
+
+action_item :formulario, only: :show do
+    link_to "Formulario y Vale", formulario_admin_inscripcion_path(inscripcion), method: :put 
+  end
+
+  member_action :formulario, method: :put do
+    id = params[:id]
+    inscripcion = Inscripcion2020.find(id)
+    alumno = Alumno.find(inscripcion.alumno_id)
+  
+    file_name = "Inscripcion #{alumno.nombre} #{alumno.apellido}.pdf"
+    file = Tempfile.new(file_name)
+    inscripcion.vale(file.path)
+
+    send_file(
+        file.path,
+        filename: file_name,
+        type: "application/pdf"
+      )
+    
+  end
+
+
+
+
+
   index do
   	#selectable_column
     column "Alumno" do |r| (r.alumno == nil ? "" : r.alumno.toString()) end      
@@ -31,6 +177,7 @@ ActiveAdmin.register Inscripcion2020 do
       row "Titular 1" do |r| (r.titular1 != nil ? r.titular1.toString() : "") end
       row "Titular 2" do |r| (r.titular2 != nil ? r.titular2.toString() : "") end
       row "Grado" do |r| (r.proximo_grado != nil ? r.proximo_grado.toString() : "") end
+      row "Año" do |r| (r.anio) end
     end
     attributes_table title:"Forma de pago" do
       row "Formulario" do |r| (r.formulario2020 != nil ? r.formulario2020.toString() : "") end
@@ -59,9 +206,8 @@ ActiveAdmin.register Inscripcion2020 do
 
     f.inputs do
       if f.object.new_record?
-        #f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
+        f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
         f.input :reinscripcion, input_html: { value: false }, as: :hidden
-        f.input :anio, input_html: { value: 2021 }
       end
       f.input :alumno, :label => 'Alumno', :as => :select, :collection => Alumno.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :padre, :label => 'Padre', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
@@ -71,6 +217,7 @@ ActiveAdmin.register Inscripcion2020 do
       f.input :titular1, :label => 'Titular 1', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :titular2, :label => 'Titular 2', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio=2021").order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :anio, :label => 'Año'
     end
     f.inputs do
       f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}

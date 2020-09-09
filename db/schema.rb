@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_194611) do
+ActiveRecord::Schema.define(version: 2020_09_09_123147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -584,6 +584,8 @@ ActiveRecord::Schema.define(version: 2020_09_08_194611) do
     t.decimal "congelado"
     t.bigint "cuenta_id"
     t.integer "nuevo_alumno_id"
+    t.integer "anio"
+    t.string "recibida"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"
