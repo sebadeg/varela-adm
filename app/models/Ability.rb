@@ -88,8 +88,13 @@ class Ability
       end
 
       can :manage, Alumno
-      can :manage, Persona
-      can :manage, Inscripcion
+      can :manage, Usuario
+      can :manage, Inscripcion2020
+      can :manage, Convenio2020
+      can :manage, Afinidad2020
+      can :manage, Matricula2020
+      can :manage, Cuota2020
+      can :manage, Hermanos2020
       can :manage, ProximoGrado
 
       can :manage, ActiveAdmin::Page, :name => "Informe"

@@ -168,6 +168,12 @@ action_item :formulario, only: :show do
   filter :alumno_id, :label => 'Cédula', :as => :select, :collection => Alumno.all.order(:cedula).map{|u| [u.toString(), u.id]}
 
   show do
+
+    attributes_table title:"Inscripción" do
+      row "Fecha" do |r| I18n.l(r.created_at, format: '%-d de %B de %Y') end
+      row :recibida
+      row "Año" do |r| (r.anio) end
+    end
     attributes_table title:"Datos" do
       row "Alumno" do |r| (r.alumno != nil ? r.alumno.toString() : "") end
       row "Padre" do |r| (r.padre != nil ? r.padre.toString() : "") end
@@ -177,7 +183,6 @@ action_item :formulario, only: :show do
       row "Titular 1" do |r| (r.titular1 != nil ? r.titular1.toString() : "") end
       row "Titular 2" do |r| (r.titular2 != nil ? r.titular2.toString() : "") end
       row "Grado" do |r| (r.proximo_grado != nil ? r.proximo_grado.toString() : "") end
-      row "Año" do |r| (r.anio) end
     end
     attributes_table title:"Forma de pago" do
       row "Formulario" do |r| (r.formulario2020 != nil ? r.formulario2020.toString() : "") end
