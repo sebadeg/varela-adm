@@ -433,7 +433,7 @@ def CalcularPrecio()
       "<br>"+
       "<b>ALUMNO</b><br>" +
       "Nombre: #{alumno.nombre} #{alumno.apellido}<br>" +
-      "Documento de identidad: #{Inscripcion2020.cedula_tos(cedula)}<br>" +
+      "Documento de identidad: #{Inscripcion2020.cedula_tos(alumno.cedula)}<br>" +
       "Lugar de nacimiento: #{alumno.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(alumno.fecha_nacimiento)}<br>" +
       "Domicilio: #{alumno.direccion}<br>" + 
