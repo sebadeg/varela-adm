@@ -175,6 +175,7 @@ action_item :formulario, only: :show do
       row "Hermanos" do |r| (r.hermanos2020 != nil ? r.hermanos2020.toString() : "") end
       row "Cuota" do |r| (r.cuota2020 != nil ? r.cuota2020.toString() : "") end
       row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
+      row "Precio" do |r| r.CalcularPrecioToStr() end
     end
     attributes_table title:"Proceso" do
       row "Registrado" do |r| r.fecha_registrado end
