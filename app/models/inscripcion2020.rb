@@ -27,17 +27,32 @@ def CalcularPrecio()
     end
     importe_total = proximo_grado.precio
 
-    # descuentos = Array.new
-    # descuentos.push(convenio_id)
-    # descuentos.push(adicional_id)
-    # descuentos.push(hermanos_id)
+    porcentaje = 1
+
+    convenio = Convenio2020.find(convenio2020_id) rescue nil
+    if convenio != nil
+      porcentaje = porcentaje * (100.0-convenio.descuento)/100.0
+    end
+    afinidad = Afinidad2020.find(afinidad2020_id) rescue nil
+    if afinidad != nil
+      porcentaje = porcentaje * (100.0-afinidad.descuento)/100.0
+    end
+    if adicional != nil
+      porcentaje = porcentaje * (100.0-adicional)/100.0
+    end
+    if congelado != nil
+      porcentaje = porcentaje * (100.0-congelado)/100.0
+    end
 
     # p "------------------------------"
     # p "------------------------------"
     # p "------------------------------"
-    # p importe_total
-    # p descuentos
+    p "importe grado = " + importe_total.to_s
+    p "porcentaje =" + porcentaje.to_s
 
+    importe_total = importe_total * porcentaje
+    
+    p "importe =" + importe_total.to_s
 
     # descuentos.each do |inscripcion_opcion_id|
     #   inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
@@ -64,7 +79,22 @@ def CalcularPrecio()
     #      cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha + 9.days])
     #    end
 
-    cuotas.push([12,20000,DateTime.now])
+
+    if cuota2020_id != nil
+      LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
+        cuotas.push([cuota.cantidad,(importe_total*cuota.numerador/cuota.denominador+0.5).to_i,cuota.fecha + 9.days])
+      end
+    end
+
+
+    # p "------------------------------"
+    # p "------------------------------"
+    # p "------------------------------"
+    p cuotas
+    # p "------------------------------"
+    # p "------------------------------"
+    # p "------------------------------"
+
     return cuotas
   end
 
@@ -301,21 +331,12 @@ def CalcularPrecio()
     titular1 = Usuario.find(titular1_id) rescue nil
     titular2 = Usuario.find(titular2_id) rescue nil
 
-    #cuotas = CalcularPrecio()
+    cuotas = CalcularPrecio()
 
-    cuotas = Array.new
-    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    if proximo_grado == nil
-      return cuotas
+    total = 0
+    cuotas.each do |cuota|
+      total = total + cuota[0]*cuota[1]
     end
-    total = proximo_grado.precio
-    
-
-    # total = 0
-    # cuotas.each do |cuota|
-    #   total = total + cuota[0]*cuota[1]
-    # end
-
     total_letras = Inscripcion2020.numero_a_letras(total,true)
 
     cedula_alumno = Inscripcion2020.cedula_tos(alumno.cedula)
@@ -331,13 +352,13 @@ def CalcularPrecio()
     end
 
     convenio_nombre = ""
-    convenio = Convenio2020.find(convenio_id) rescue nil
+    convenio = Convenio2020.find(convenio2020_id) rescue nil
     if convenio != nil
       convenio_nombre = "#{convenio.nombre} (#{convenio.descuento}%)"
     end
 
     afinidad_nombre = ""
-    afinidad = Afinidad2020.find(afinidad_id) rescue nil
+    afinidad = Afinidad2020.find(afinidad2020_id) rescue nil
     if afinidad != nil
       afinidad_nombre = "#{afinidad.nombre} (#{afinidad.descuento}%)"
     end
@@ -353,13 +374,13 @@ def CalcularPrecio()
     end
 
     matricula_nombre = ""
-    matricula = Matricula2020.find(matricula_id) rescue nil
+    matricula = Matricula2020.find(matricula2020_id) rescue nil
     if matricula != nil
       matricula_nombre = matricula.nombre
     end
 
     hermanos_nombre = ""
-    hermanos = Hermanos2020.find(hermanos_id) rescue nil
+    hermanos = Hermanos2020.find(hermanos2020_id) rescue nil
     if hermanos != nil
       hermanos_nombre = hermanos.nombre
     end
