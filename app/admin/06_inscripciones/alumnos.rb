@@ -1,4 +1,4 @@
-ActiveAdmin.register Alumno do
+ActiveAdmin.register Alumno, :as => "Insc Alumnos" do
 
   menu priority: 598, label: "Alumnos", parent: "Inscripciones"
 
