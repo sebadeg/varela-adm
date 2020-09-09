@@ -436,7 +436,7 @@ def CalcularPrecio()
       "Documento de identidad: #{Inscripcion2020.cedula_tos(alumno.cedula)}<br>" +
       "Lugar de nacimiento: #{alumno.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(alumno.fecha_nacimiento)}<br>" +
-      "Domicilio: #{alumno.direccion}<br>" + 
+      "Domicilio: #{alumno.domicilio}<br>" + 
       "Teléfono/Celular: #{alumno.celular}<br>" + 
       "Mutualista: #{alumno.mutualista}<br>" + 
       "Emergencia: #{alumno.emergencia}<br>" + 
@@ -462,7 +462,7 @@ def CalcularPrecio()
       "Lugar de nacimiento: #{madre.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(madre.fecha_nacimiento)}<br>" +
       "Mail: #{madre.email}<br>" + 
-      "Domicilio: #{madre.domicilio}<br>" + 
+      "Domicilio: #{madre.direccion}<br>" + 
       "Teléfono/Celular: #{madre.celular}<br>" + 
       "Profesión: #{madre.profesion}<br>" + 
       "Lugar de trabajo: #{madre.trabajo}<br>" + 
