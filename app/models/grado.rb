@@ -2,7 +2,7 @@ class Grado < ApplicationRecord
   has_many :subgrado
 
   def toString()
-  	return "#{nombre} - $U #{precio}"
+  	return "#{nombre}"
   end
 
 end
