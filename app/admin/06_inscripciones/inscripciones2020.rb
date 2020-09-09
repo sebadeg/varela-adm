@@ -6,6 +6,9 @@ ActiveAdmin.register Inscripcion2020 do
         :proximo_grado_id,
         :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :congelado, :hermanos2020_id, 
         :cuota2020_id, :matricula2020_id
+        :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_entregado, :fecha_inscripto
+
+
 
   scope :inscripcion
   scope :reinscripcion
@@ -32,7 +35,7 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :registrar, only: :show do
-    if inscripcion2020.registrado
+    if inscripcion2020.fecha_registrado
       link_to "Desregistrar", registrar_admin_inscripcion2020_path(inscripcion2020), method: :put   
     else
       link_to "Registrar", registrar_admin_inscripcion2020_path(inscripcion2020), method: :put 
