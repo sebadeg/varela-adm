@@ -4,7 +4,7 @@ ActiveAdmin.register Inscripcion2020 do
 
   permit_params :created_at, :alumno_id, :padre_id, :padre_titular, :madre_id, :madre_titular, :titular1_id, :titular1_id,
         :proximo_grado_id,
-        :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :congelado, :hermanos2020_id, 
+        :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :fija, :congelado, :hermanos2020_id, 
         :cuota2020_id, :matricula2020_id,
         :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_entregado, :fecha_inscripto
 
@@ -193,6 +193,7 @@ action_item :formulario, only: :show do
       row "Afinidad" do |r| (r.afinidad2020 != nil ? r.afinidad2020.toString() : "") end
       row "Congelado" do |r| "#{r.congelado}" end    
       row "Adicional" do |r| "#{r.adicional}" end
+      row "Fija" do |r| "#{r.fija}" end
       row "Hermanos" do |r| (r.hermanos2020 != nil ? r.hermanos2020.toString() : "") end
       row "Cuota" do |r| (r.cuota2020 != nil ? r.cuota2020.toString() : "") end
       row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
@@ -233,6 +234,7 @@ action_item :formulario, only: :show do
       f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :congelado
       f.input :adicional
+      f.input :fija
       f.input :hermanos2020, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :cuota2020, :label => 'Cuotas', :as => :select, :collection => Cuota2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}

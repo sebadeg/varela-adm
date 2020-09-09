@@ -33,6 +33,11 @@ def CalcularPrecio()
     if convenio != nil
       porcentaje = porcentaje * (100.0-convenio.descuento)/100.0
     end
+    if fija != nil
+      importe_total = fija
+      porcentaje = 1
+    end
+
     afinidad = Afinidad2020.find(afinidad2020_id) rescue nil
     if afinidad != nil
       porcentaje = porcentaje * (100.0-afinidad.descuento)/100.0
@@ -55,6 +60,8 @@ def CalcularPrecio()
     p "porcentaje =" + porcentaje.to_s
 
     importe_total = importe_total * porcentaje
+
+
     
     p "importe =" + importe_total.to_s
 
