@@ -5,7 +5,7 @@ ActiveAdmin.register Inscripcion2020 do
   permit_params :created_at, :alumno_id, :padre_id, :padre_titular, :madre_id, :madre_titular, :titular1_id, :titular1_id,
         :proximo_grado_id,
         :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :congelado, :hermanos2020_id, 
-        :cuota2020_id, :matricula2020_id
+        :cuota2020_id, :matricula2020_id,
         :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_entregado, :fecha_inscripto
 
 
