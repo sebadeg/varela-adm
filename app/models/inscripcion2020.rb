@@ -31,7 +31,7 @@ class Inscripcion2020 < ApplicationRecord
     descuentos = Array.new
 
     if fija != nil
-        descuentos.push(["FIJO",false,fija])
+        descuentos.push(["FIJO",false,fija.to_s("%.2f")])
     else
       c = Convenio2020.find(convenio2020_id) rescue nil
       if c != nil
@@ -44,10 +44,10 @@ class Inscripcion2020 < ApplicationRecord
       descuentos.push([c.toString(),true,c.descuento])
     end
     if adicional != nil
-      descuentos.push(["Adicional #{adicional}%",true,adicional])
+      descuentos.push(["Adicional #{adicional.to_s("%.2f")}%",true,adicional])
     end
     if congelado != nil
-      descuentos.push(["Congelado #{congelado}%",true,congelado])
+      descuentos.push(["Congelado #{congelado.to_s("%.2f")}%",true,congelado])
     end
     c = Hermanos2020.find(hermanos2020_id) rescue nil
     if c != nil
@@ -84,7 +84,7 @@ class Inscripcion2020 < ApplicationRecord
       (0..(cuota[0]-1)).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
         movimientos.push([cuota[1] + x.month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe])
-        descuentos.each_char do |descuento| 
+        descuentos.each do |descuento| 
           if descuento[1]
             desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
             importe = importe - desc
