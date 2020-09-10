@@ -85,7 +85,7 @@ class Inscripcion2020 < ApplicationRecord
         importe = importe_total*cuota[2]/cuota[3]
         
         mov = MovimientoInscripcion.new
-        mov.fecha = [cuota[1] + x.month
+        mov.fecha = cuota[1] + x.month
         mov.concepto = "CUOTA #{anio} #{num_cuota}/#{total_cuotas}"
         mov.debe = importe
 
@@ -96,7 +96,7 @@ class Inscripcion2020 < ApplicationRecord
             importe = importe - desc
 
             mov = MovimientoInscripcion.new
-            mov.fecha = [cuota[1] + x.month
+            mov.fecha = cuota[1] + x.month
             mov.concepto = "DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}"
             mov.debe = desc
             movimientos.push(mov)
@@ -105,7 +105,7 @@ class Inscripcion2020 < ApplicationRecord
             importe = importe - desc
 
             mov = MovimientoInscripcion.new
-            mov.fecha = [cuota[1] + x.month
+            mov.fecha = cuota[1] + x.month
             mov.concepto = "DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}"
             mov.debe = desc
 
