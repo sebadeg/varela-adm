@@ -79,8 +79,8 @@ class Inscripcion2020 < ApplicationRecord
       total_cuotas += cuota[0]
     end
 
-    cuotas.each do |cuota|
-      num_cuota = 1
+    num_cuota = 1
+    cuotas.each do |cuota|      
       (1..cuota[0]).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
 
@@ -106,18 +106,31 @@ class Inscripcion2020 < ApplicationRecord
       end
     end
 
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-    p "MOVIMIENTOS"
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
+    matricula = Matricula2020.find(matricula2020_id) rescue nil
+    importe_total = Matricula2020ProximoGrado.where("matricula2020_id=#{matricula2020_id} AND proximo_grado_id=#{proximo_grado_id}").first rescue nil
+    if matricula != nil && importe_total != nil
 
-    p movimientos
+      cuotas = Array.new
+      Matricula2020Linea.where("matricula2020_id=#{matricula2020_id}").order(:fecha) do |cuota|
+        cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
+      end
 
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
+      total_cuotas = 0
+      cuotas.each do |cuota|
+        total_cuotas += cuota[0]
+      end
+
+      num_cuota = 1
+      cuotas.each do |cuota|      
+      (1..cuota[0]).each do |x|
+        importe = importe_total*cuota[2]/cuota[3]
+        
+        mov = [cuota[1] + (x-1).month,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe]        
+        movimientos.push(mov)
+
+        num_cuota = num_cuota+1
+      end
+    end
 
     return movimientos
 
