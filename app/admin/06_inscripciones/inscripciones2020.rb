@@ -181,7 +181,7 @@ action_item :formulario, only: :show do
       row "Precio" do |r| r.CalcularPrecioToStr() end
 
       row "Movimientos" do |r|
-        table_for r.CalcularMovimientosToStr() do |t|
+        table_for r.CalcularMovimientos() do |t|
           t.column :fecha
           t.column :concepto
           t.column :debe
