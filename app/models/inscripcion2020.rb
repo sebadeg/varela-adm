@@ -35,7 +35,7 @@ class Inscripcion2020 < ApplicationRecord
     else
       c = Convenio2020.find(convenio2020_id) rescue nil
       if c != nil
-        descuentos.push([c.nombre,true,c.descuento])
+        descuentos.push([c.toString(),true,c.descuento])
       end
     end
 
@@ -80,24 +80,24 @@ class Inscripcion2020 < ApplicationRecord
     end
 
     cuotas.each do |cuota|
-      num_cuota = 0
+      num_cuota = 1
       (1..cuota[0]).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
 
-        mov = [cuota[1] + (x-1).month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe]
+        mov = [cuota[1] + (x-1).month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe.to_i]
         movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
             importe = importe - desc
 
-            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
+            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc.to_i]
             movimientos.push(mov)
           else
             desc = (importe_total-descuento[2])*cuota[2]/cuota[3]
             importe = importe - desc
 
-            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
+            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc.to_i]
 
             movimientos.push(mov)
           end
