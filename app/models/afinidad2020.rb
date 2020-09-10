@@ -4,7 +4,7 @@ class Afinidad2020 < ApplicationRecord
   accepts_nested_attributes_for :afinidad2020_alumno, allow_destroy: true
 
   def toString()
-    return "#{nombre} (#{descuento.to_s("%.2f")}%)";
+    return "#{nombre} #{'%.2f' % descuento}%";
   end
   
 end

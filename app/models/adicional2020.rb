@@ -1,7 +1,7 @@
 class Adicional2020 < ApplicationRecord
 
   def toString()
-    return "#{nombre} #{descuento.to_s("%.2f")}%";
+    return "#{nombre} #{'%.2f' % descuento}%";
   end
 
 end

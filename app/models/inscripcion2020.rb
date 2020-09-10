@@ -31,7 +31,7 @@ class Inscripcion2020 < ApplicationRecord
     descuentos = Array.new
 
     if fija != nil
-        descuentos.push(["FIJO",false,fija.to_s("%.2f")])
+        descuentos.push(["FIJO",false,fija])
     else
       c = Convenio2020.find(convenio2020_id) rescue nil
       if c != nil
@@ -44,10 +44,10 @@ class Inscripcion2020 < ApplicationRecord
       descuentos.push([c.toString(),true,c.descuento])
     end
     if adicional != nil
-      descuentos.push(["Adicional #{adicional.to_s("%.2f")}%",true,adicional])
+      descuentos.push(["Adicional #{'%.2f' % adicional}%",true,adicional])
     end
     if congelado != nil
-      descuentos.push(["Congelado #{congelado.to_s("%.2f")}%",true,congelado])
+      descuentos.push(["Congelado #{'%.2f' % congelado}%",true,congelado])
     end
     c = Hermanos2020.find(hermanos2020_id) rescue nil
     if c != nil
@@ -81,23 +81,23 @@ class Inscripcion2020 < ApplicationRecord
 
     cuotas.each do |cuota|
       num_cuota = 0
-      (0..(cuota[0]-1)).each do |x|
+      (1..cuota[0]).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
 
-        mov = [cuota[1] + x.month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe]
+        mov = [cuota[1] + (x-1).month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe]
         movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
             importe = importe - desc
 
-            mov = [cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc]
+            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
             movimientos.push(mov)
           else
             desc = (importe_total-descuento[2])*cuota[2]/cuota[3]
             importe = importe - desc
 
-            mov = [cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc]
+            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
 
             movimientos.push(mov)
           end
@@ -129,7 +129,7 @@ def CalcularMovimientosToStr()
 
   str = ""
   movimientos.each do |mov|
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")};#{mov[1]};#{mov[2]}\\r\\n"
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")};#{mov[1]};#{mov[2].to_s("%.2f")}\\r\\n"
   end
   return str
 
