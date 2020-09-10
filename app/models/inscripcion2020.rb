@@ -44,10 +44,10 @@ class Inscripcion2020 < ApplicationRecord
       descuentos.push([c.toString(),true,c.descuento])
     end
     if adicional != nil
-      descuentos.push(["Adicional #{'%.2f' % adicional}%",true,adicional])
+      descuentos.push(["Adicional #{sprintf( "%0.02f", adicional)}%",true,adicional])
     end
     if congelado != nil
-      descuentos.push(["Congelado #{'%.2f' % congelado}%",true,congelado])
+      descuentos.push(["Congelado #{sprintf( "%0.02f", congelado)}%",true,congelado])
     end
     c = Hermanos2020.find(hermanos2020_id) rescue nil
     if c != nil

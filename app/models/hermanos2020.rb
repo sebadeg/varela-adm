@@ -1,7 +1,7 @@
 class Hermanos2020 < ApplicationRecord
 
   def toString()
-    return "#{nombre} #{'%.2f' % descuento}%";
+    return "#{nombre} #{sprintf( "%0.02f", descuento)}%";
   end
 
 end
