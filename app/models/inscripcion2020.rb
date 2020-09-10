@@ -88,7 +88,7 @@ class Inscripcion2020 < ApplicationRecord
         movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
-            desc = importe*descuento[2]*cuota[2]/(100*cuota[3])
+            desc = importe*descuento[2]/100
             importe = importe - desc
 
             mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
