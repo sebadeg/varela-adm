@@ -180,7 +180,7 @@ action_item :formulario, only: :show do
       row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
       row "Precio" do |r| r.CalcularPrecioToStr() end
 
-      row "Movimientos" do 
+      row "Movimientos" do |r|
         table_for r.CalcularMovimientosToStr() do |t|
           t.column :fecha
           t.column :concepto
