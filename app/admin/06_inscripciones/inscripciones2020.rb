@@ -203,8 +203,8 @@ action_item :formulario, only: :show do
       f.input :fecha_comienzo
       f.input :fecha_fin
       f.input :fecha_ultima
-      f.input :cuenta_id, label => 'Código cuenta'
-      f.input :nuevo_alumno_id, label => 'Código alumno'
+      f.input :cuenta_id #, label => 'Código cuenta'
+      f.input :nuevo_alumno_id #, label => 'Código alumno'
     end
     f.inputs do
       f.input :alumno, :label => 'Alumno', :as => :select, :collection => Alumno.order(:cedula).map{|c| [c.toString(), c.id]}
