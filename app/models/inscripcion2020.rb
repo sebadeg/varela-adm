@@ -88,13 +88,13 @@ class Inscripcion2020 < ApplicationRecord
         movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
-            desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
+            desc = importe*descuento[2]*cuota[2]/(100*cuota[3])
             importe = importe - desc
 
             mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
             movimientos.push(mov)
           else
-            desc = (importe_total-descuento[2])*cuota[2]/cuota[3]
+            desc = importe-descuento[2]*cuota[2]/cuota[3]
             importe = importe - desc
 
             mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
@@ -129,7 +129,7 @@ def CalcularMovimientosToStr()
 
   str = ""
   movimientos.each do |mov|
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")};#{mov[1]};#{mov[2].to_i}\r\\n"
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} - #{mov[1]} - #{mov[2].to_i}     \r\n"
   end
   return str
 
