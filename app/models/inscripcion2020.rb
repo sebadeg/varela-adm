@@ -83,31 +83,21 @@ class Inscripcion2020 < ApplicationRecord
       num_cuota = 0
       (0..(cuota[0]-1)).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
-        
-        mov = MovimientoInscripcion.new
-        mov.fecha = cuota[1] + x.month
-        mov.concepto = "CUOTA #{anio} #{num_cuota}/#{total_cuotas}"
-        mov.debe = importe
 
+        mov = [cuota[1] + x.month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe]
         movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
             importe = importe - desc
 
-            mov = MovimientoInscripcion.new
-            mov.fecha = cuota[1] + x.month
-            mov.concepto = "DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}"
-            mov.debe = desc
+            mov = [cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc]
             movimientos.push(mov)
           else
             desc = (importe_total-descuento[2])*cuota[2]/cuota[3]
             importe = importe - desc
 
-            mov = MovimientoInscripcion.new
-            mov.fecha = cuota[1] + x.month
-            mov.concepto = "DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}"
-            mov.debe = desc
+            mov = [cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc]
 
             movimientos.push(mov)
           end
@@ -134,11 +124,12 @@ class Inscripcion2020 < ApplicationRecord
 end
 
 def CalcularMovimientosToStr()
+
   movimientos = CalcularMovimientos()
 
   str = ""
   movimientos.each do |mov|
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")},#{mov[1]},#{mov[2]}<br>"
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")};#{mov[1]};#{mov[2]}\\r\\n"
   end
   return str
 

@@ -179,15 +179,6 @@ action_item :formulario, only: :show do
       row "Cuota" do |r| (r.cuota2020 != nil ? r.cuota2020.toString() : "") end
       row "Matricula" do |r| (r.matricula2020 != nil ? r.matricula2020.toString() : "") end
       row "Precio" do |r| r.CalcularPrecioToStr() end
-
-      row "Movimientos" do |r|
-        table_for r.CalcularMovimientos() do |t|
-          t.column :fecha
-          t.column :concepto
-          t.column :debe
-        end
-      end
-
       row "Movimientos" do |r| r.CalcularMovimientosToStr() end
     end
     attributes_table title:"Proceso" do
