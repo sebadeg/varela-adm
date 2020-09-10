@@ -17,6 +17,116 @@ class Inscripcion2020 < ApplicationRecord
   scope :reinscripcion, -> { where("reinscripcion") }
 
 
+  def CalcularMovimientos()
+
+    movimientos = Array.new
+
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil || cuota2020_id == nil
+      return movimientos
+    end
+
+    importe_total = proximo_grado.precio
+
+    descuento = Array.new
+
+    if fija != nil
+        descuento.push(["FIJO",false,fija])
+    else
+      c = Convenio2020.find(convenio2020_id) rescue nil
+      if c != nil
+        descuento.push([c.nombre,true,c.descuento])
+      end
+    end
+
+    c = Afinidad2020.find(afinidad2020_id) rescue nil
+    if c != nil
+      descuento.push([c.toString(),true,c.descuento])
+    end
+    if adicional != nil
+      descuento.push(["Adicional #{adicional}%",true,adicional])
+    end
+    if congelado != nil
+      descuento.push(["Congelado #{congelado}%",true,congelado])
+    end
+    c = Hermanos2020.find(hermanos2020_id) rescue nil
+    if c != nil
+      descuento.push([c.toString(),true,c.descuento])
+    end
+
+    cuotas = Array.new
+    LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
+      cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
+    end
+
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+    p "CUOTAS"
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+
+    p cuotas
+
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+
+
+
+    total_cuotas = 0
+    cuotas.each do |cuota|
+      total_cuotas += cuota[0]
+    end
+
+    cuotas.each do |cuota|
+      num_cuota = 0
+      (0..(cuota[0]-1)).each do |x|
+        importe = importe_total*cuota[2]/cuota[3]
+        movimientos.push([cuota[1] + x.month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe])
+        descuentos.each_char do |descuento| 
+          if descuento[1]
+            desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
+            importe = importe - desc
+            movimientos.push([cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc])
+          else
+            desc = (importe_total-descuento[2])*cuota[2]/cuota[3]
+            importe = importe - desc
+            movimientos.push([cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc])
+          end
+        end
+        num_cuota = num_cuota+1
+      end
+    end
+
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+    p "MOVIMIENTOS"
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+
+    p movimientos
+
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+    p "-------------------------------------------------"
+
+    return movimientos
+
+end
+
+def CalcularMovimientosToStr()
+  movimientos = CalcularMovimientos()
+
+  str = ""
+  movimientos.each_char do |mov|
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")},#{mov[1]},#{mov[2]}<br>"
+  end
+  return str
+
+end
+
 
 def CalcularPrecio()
 
@@ -97,7 +207,6 @@ def CalcularPrecio()
       end
     end
 
-
     # p "------------------------------"
     # p "------------------------------"
     # p "------------------------------"
@@ -108,7 +217,6 @@ def CalcularPrecio()
 
     return cuotas
   end
-
 
   def CalcularPrecioToStr()
 
