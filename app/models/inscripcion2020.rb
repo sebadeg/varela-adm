@@ -83,16 +83,33 @@ class Inscripcion2020 < ApplicationRecord
       num_cuota = 0
       (0..(cuota[0]-1)).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
-        movimientos.push([cuota[1] + x.month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe])
+        
+        mov = MovimientoInscripcion.new
+        mov.fecha = [cuota[1] + x.month
+        mov.concepto = "CUOTA #{anio} #{num_cuota}/#{total_cuotas}"
+        mov.debe = importe
+
+        movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe_total*descuento[2]*cuota[2]/(100*cuota[3])
             importe = importe - desc
-            movimientos.push([cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc])
+
+            mov = MovimientoInscripcion.new
+            mov.fecha = [cuota[1] + x.month
+            mov.concepto = "DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}"
+            mov.debe = desc
+            movimientos.push(mov)
           else
             desc = (importe_total-descuento[2])*cuota[2]/cuota[3]
             importe = importe - desc
-            movimientos.push([cuota[1] + x.month,"DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}",desc])
+
+            mov = MovimientoInscripcion.new
+            mov.fecha = [cuota[1] + x.month
+            mov.concepto = "DESCUENTO #{descuento[0]}#{anio} #{num_cuota}/#{total_cuotas}"
+            mov.debe = desc
+
+            movimientos.push(mov)
           end
         end
         num_cuota = num_cuota+1
