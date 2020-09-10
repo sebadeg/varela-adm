@@ -129,7 +129,7 @@ def CalcularMovimientosToStr()
 
   str = ""
   movimientos.each do |mov|
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} - #{mov[1]} - #{mov[2].to_i}     \r\n"
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1]} = #{mov[2].to_i} ====="
   end
   return str
 
