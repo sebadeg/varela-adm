@@ -28,30 +28,30 @@ class Inscripcion2020 < ApplicationRecord
 
     importe_total = proximo_grado.precio
 
-    descuento = Array.new
+    descuentos = Array.new
 
     if fija != nil
-        descuento.push(["FIJO",false,fija])
+        descuentos.push(["FIJO",false,fija])
     else
       c = Convenio2020.find(convenio2020_id) rescue nil
       if c != nil
-        descuento.push([c.nombre,true,c.descuento])
+        descuentos.push([c.nombre,true,c.descuento])
       end
     end
 
     c = Afinidad2020.find(afinidad2020_id) rescue nil
     if c != nil
-      descuento.push([c.toString(),true,c.descuento])
+      descuentos.push([c.toString(),true,c.descuento])
     end
     if adicional != nil
-      descuento.push(["Adicional #{adicional}%",true,adicional])
+      descuentos.push(["Adicional #{adicional}%",true,adicional])
     end
     if congelado != nil
-      descuento.push(["Congelado #{congelado}%",true,congelado])
+      descuentos.push(["Congelado #{congelado}%",true,congelado])
     end
     c = Hermanos2020.find(hermanos2020_id) rescue nil
     if c != nil
-      descuento.push([c.toString(),true,c.descuento])
+      descuentos.push([c.toString(),true,c.descuento])
     end
 
     cuotas = Array.new
