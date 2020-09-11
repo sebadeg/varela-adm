@@ -167,7 +167,7 @@ def CalcularMovimientosToStr()
     m.cuenta_id = cuenta_id
     m.alumno = alumno_id
     m.fecha = mov[0]
-    m.descipcion = mov[1]
+    m.descripcion = mov[1]
     m.debe = mov[2]
     m.rubro_id = mov[3]
     m.haber = 0
