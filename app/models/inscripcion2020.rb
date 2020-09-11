@@ -120,7 +120,9 @@ class Inscripcion2020 < ApplicationRecord
       p importe_total
 
       cuotas = Array.new
-      LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) do |cuota|
+      xx = LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) 
+      p xx
+      xx.each do |cuota|
         p cuota 
 
         cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
