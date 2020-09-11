@@ -113,7 +113,7 @@ class Inscripcion2020 < ApplicationRecord
       importe_total = matricula2020ProximoGrado.precio
 
       cuotas = Array.new
-      Matricula2020Linea.where("matricula2020_id=#{matricula2020_id}").order(:fecha) do |cuota|
+      LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) do |cuota|
         cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
       end
 
