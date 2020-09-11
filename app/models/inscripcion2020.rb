@@ -169,6 +169,7 @@ def CalcularMovimientosToStr()
     m.fecha = mov[0]
     m.descripcion = mov[1].upcase
     m.debe = (mov[2]+0.5).to_i
+    m.ejercicio = anio
     m.rubro_id = mov[3]
     m.haber = 0
     m.save!
