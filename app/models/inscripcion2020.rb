@@ -167,13 +167,13 @@ def CalcularMovimientosToStr()
     m.cuenta_id = cuenta_id
     m.alumno = alumno_id
     m.fecha = mov[0]
-    m.descripcion = mov[1]
-    m.debe = mov[2]
+    m.descripcion = mov[1].upcase
+    m.debe = (mov[2]+0.5).to_i
     m.rubro_id = mov[3]
     m.haber = 0
     m.save!
 
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2].to_i} ====="
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{(mov[2]+0.5).to_i} ====="
 
     i = i+1
   end
