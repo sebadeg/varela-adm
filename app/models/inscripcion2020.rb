@@ -108,7 +108,7 @@ class Inscripcion2020 < ApplicationRecord
 
     matricula = Matricula2020.find(matricula2020_id) rescue nil
     matricula2020ProximoGrado = Matricula2020ProximoGrado.where("matricula2020_id=#{matricula2020_id} AND proximo_grado_id=#{proximo_grado_id}").first rescue nil
-    if matricula != nil && importe_total != nil
+    if matricula != nil && matricula2020ProximoGrado != nil
       
       importe_total = matricula2020ProximoGrado.precio
 
