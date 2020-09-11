@@ -160,24 +160,30 @@ def CalcularMovimientosToStr()
   str = ""
   movimientos.each do |mov|
 
-    m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
-    m ||= Movimiento.new
-    m.inscripcion2020_id = id
-    m.inscripcion2020_indice = i    
-    m.cuenta_id = cuenta_id
-    m.alumno = alumno_id
-    m.fecha = mov[0]
-    m.descripcion = mov[1].upcase
-    m.debe = (mov[2]+0.5).to_i
-    m.ejercicio = anio
-    m.rubro_id = mov[3]
-    m.haber = 0
-    m.save!
-
+    if fecha_vale != nil
+      m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
+      m ||= Movimiento.new
+      m.inscripcion2020_id = id
+      m.inscripcion2020_indice = i    
+      m.cuenta_id = cuenta_id
+      m.alumno = alumno_id
+      m.fecha = mov[0]
+      m.descripcion = mov[1].upcase
+      m.debe = (mov[2]+0.5).to_i
+      m.ejercicio = anio
+      m.rubro_id = mov[3]
+      m.haber = 0
+      m.save!
+    end
     str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{(mov[2]+0.5).to_i} ====="
 
     i = i+1
   end
+
+  if fecha_vale != nil
+    Movimiento.where("inscripcion2020_id=#{id} AND inscripcion2020_indice>=#{i}").delete_all
+  end
+  
   return str
 
 end
