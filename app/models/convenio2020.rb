@@ -1,7 +1,7 @@
 class Convenio2020 < ApplicationRecord
 
   def toString()
-    return "#{nombre} #{'%.2f' % descuento}";
+    return "#{nombre} #{Common.decimal_to_string(descuento,2)}%";
   end
 
 end

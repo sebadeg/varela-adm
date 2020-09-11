@@ -172,8 +172,8 @@ action_item :formulario, only: :show do
       row "Formulario" do |r| (r.formulario2020 != nil ? r.formulario2020.toString() : "") end
       row "Convenio" do |r| (r.convenio2020 != nil ? r.convenio2020.toString() : "") end
       row "Afinidad" do |r| (r.afinidad2020 != nil ? r.afinidad2020.toString() : "") end
-      row "Congelado" do |r| "#{r.congelado}" end    
-      row "Adicional" do |r| "#{r.adicional}" end
+      row "Congelado" do |r| "#{Common.decimal_to_string(r.congelado,2)}%" end    
+      row "Adicional" do |r| "#{Common.decimal_to_string(r.adicional,2)}%" end
       row "Fija" do |r| "#{r.fija}" end
       row "Hermanos" do |r| (r.hermanos2020 != nil ? r.hermanos2020.toString() : "") end
       row "Cuota" do |r| (r.cuota2020 != nil ? r.cuota2020.toString() : "") end
