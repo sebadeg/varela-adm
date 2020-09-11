@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_195734) do
+ActiveRecord::Schema.define(version: 2020_09_11_221646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -940,6 +940,7 @@ ActiveRecord::Schema.define(version: 2020_09_09_195734) do
     t.bigint "inscripcion_id"
     t.boolean "generado"
     t.bigint "inscripcion2020_id"
+    t.integer "inscripcion2020_indice"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"

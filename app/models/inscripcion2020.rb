@@ -84,20 +84,20 @@ class Inscripcion2020 < ApplicationRecord
       (1..cuota[0]).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
 
-        mov = [cuota[1] + (x-1).month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe]
+        mov = [cuota[1] + (x-1).month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.rubro_id]
         movimientos.push(mov)
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe*descuento[2]/100
             importe = importe - desc
 
-            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
+            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
             movimientos.push(mov)
           else
             desc = importe-descuento[2]*cuota[2]/cuota[3]
             importe = importe - desc
 
-            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc]
+            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
 
             movimientos.push(mov)
           end
@@ -140,7 +140,7 @@ class Inscripcion2020 < ApplicationRecord
           p x
           importe = importe_total*cuota[2]/cuota[3]
         
-          mov = [cuota[1] + (x-1).month,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe]        
+          mov = [cuota[1] + (x-1).month,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.matricula_rubro]        
           movimientos.push(mov)
 
           num_cuota = num_cuota+1
@@ -156,9 +156,27 @@ def CalcularMovimientosToStr()
 
   movimientos = CalcularMovimientos()
 
+  i = 0
   str = ""
   movimientos.each do |mov|
+
+    m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
+    m ||= Movimiento.new
+    m.inscripcion2020_id = id
+    m.inscripcion2020_indice = i    
+    m.cuenta_id = cuenta_id
+    m.alumno_id = alumno_id
+    m.fecha = mov[0]
+    m.descipcion = mov[1]
+    m.debe = mov[2]
+    m.rubro_id = mov[3]
+    m.haber = 0
+    m.save!
+
+
     str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2].to_i} ====="
+
+    i = i+1
   end
   return str
 

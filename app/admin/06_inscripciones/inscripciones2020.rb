@@ -219,15 +219,15 @@ action_item :formulario, only: :show do
       f.input :anio, :label => 'Año'
     end
     f.inputs do
-      f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :convenio2020, :label => 'Convenio', :as => :select, :collection => Convenio2020.order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :afinidad2020, :label => 'Afinidad', :as => :select, :collection => Afinidad2020.order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :congelado
       f.input :adicional
       f.input :fija
-      f.input :hermanos2020, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :cuota2020, :label => 'Cuotas', :as => :select, :collection => Cuota2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.where(consultaFecha()).order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :hermanos2020, :label => 'Hermanos', :as => :select, :collection => Hermanos2020.order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :cuota2020, :label => 'Cuotas', :as => :select, :collection => Cuota2020.order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :matricula2020, :label => 'Matrícula', :as => :select, :collection => Matricula2020.order(:nombre).map{|c| [c.toString(), c.id]}
       f.input :fecha_registrado, :label => 'Registrado', input_html: {disabled: :true}
       f.input :fecha_vale, :label => 'Vale generado', input_html: {disabled: :true}
       f.input :fecha_descargado, :label => 'Vale descargado', input_html: {disabled: :true}
