@@ -223,8 +223,8 @@ action_item :formulario, only: :show do
       f.input :titular1, :label => 'Titular 1', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :titular2, :label => 'Titular 2', :as => :select, :collection => Usuario.order(:cedula).map{|c| [c.toString(), c.id]}
       f.input :grado, :label => 'Nivel', :as => :select, :collection => Grado.all.order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio=2021").order(:nombre).map{|c| [c.toString(), c.id]}
-      f.input :anio, :label => 'Año'
+      f.input :proximo_grado, :label => 'Grado', :as => :select, :collection => ProximoGrado.where("anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)").order(:nombre).map{|c| [c.toString(), c.id]}
+      f.input :anio, :label => 'Año', input_html: { value: Config.find(1).anio_inscripciones }
     end
     f.inputs do
       f.input :formulario2020, :label => 'Formulario', :as => :select, :collection => Formulario2020.order(:nombre).map{|c| [c.toString(), c.id]}

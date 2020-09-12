@@ -1,10 +1,8 @@
 FALTAN
 -------------
 
-* Generar cuotas y matriculas descuentos
 
 * Inscripciones -> asignar cuenta a alumno, crear alumno/padre, crear alumno/cuenta, crear cuenta/usuario, mandar mail de bienvenida
-
 * Formularios
 * Facturas pueden tener mas de una hoja
 
@@ -13,12 +11,8 @@ FALTAN
 
 * Facturacion
 
+
 * Ordenar grado en show de matricula
-
-
-
-
-
 -> Iriadna no tiene que generar alumnos ni cuentas 
 -> Iriadna no puede generar cuotas
 
@@ -28,6 +22,7 @@ FALTAN
 HECHOS
 ------
 
+* Generar cuotas y matriculas descuentos
 * Calcular vale
 * Calcular cuotas
 * Datos padre/madre/titular/alumnos

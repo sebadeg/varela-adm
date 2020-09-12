@@ -73,10 +73,11 @@ class Inscripcion2020 < ApplicationRecord
 
         mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.rubro_id]
 
-        if fecha >= fecha_comienzo && fecha < fecha_ultima
-          if fecha >= fecha_fin
+        if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
+          if fecha_fin != nil && fecha >= fecha_fin
             devolucion = devolucion + mov[2]
-          elsif fecha < fecha_primera
+          end
+          if fecha_primera != nil && fecha < fecha_primera
             mov[0] = fecha_primera
           end
           movimientos.push(mov)
@@ -89,10 +90,11 @@ class Inscripcion2020 < ApplicationRecord
 
             mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
 
-            if fecha >= fecha_comienzo && fecha < fecha_ultima
-              if fecha >= fecha_fin
+            if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
+              if fecha_fin != nil && fecha >= fecha_fin
                 devolucion = devolucion + mov[2]
-              elsif fecha < fecha_primera
+              end
+              if fecha_primera != nil && fecha < fecha_primera
                 mov[0] = fecha_primera
               end
               movimientos.push(mov)
@@ -104,10 +106,11 @@ class Inscripcion2020 < ApplicationRecord
 
             mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
 
-            if fecha >= fecha_comienzo && fecha < fecha_ultima
-              if fecha >= fecha_fin
+            if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
+              if fecha_fin != nil && fecha >= fecha_fin
                 devolucion = devolucion + mov[2]
-              elsif fecha < fecha_primera
+              end
+              if fecha_primera != nil && fecha < fecha_primera
                 mov[0] = fecha_primera
               end
               movimientos.push(mov)
