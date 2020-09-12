@@ -6,7 +6,8 @@ ActiveAdmin.register Inscripcion2020 do
         :proximo_grado_id,
         :formulario2020_id, :convenio2020_id, :afinidad2020_id, :adicional, :fija, :congelado, :hermanos2020_id, 
         :cuota2020_id, :matricula2020_id,
-        :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_inscripto, :fecha_comienzo, :fecha_fin
+        :fecha_registrado, :fecha_vale, :fecha_descargado, :fecha_inscripto, 
+        :fecha_comienzo, :fecha_primera, :fecha_ultima, :fecha_fin
 
 
 
@@ -25,8 +26,11 @@ ActiveAdmin.register Inscripcion2020 do
 
   member_action :habilitar, method: :put do
     id = params[:id]
+
     inscripcion2020 = Inscripcion2020.find(id)
-    ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET inhabilitado=#{!inscripcion2020.inhabilitado} WHERE id=#{id};" )
+    inscripcion2020.inhabilitado = !inscripcion2020.inhabilitado;
+    inscripcion2020.save!
+
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
@@ -46,10 +50,11 @@ ActiveAdmin.register Inscripcion2020 do
     id = params[:id]
     inscripcion2020 = Inscripcion2020.find(id)
     if inscripcion2020.fecha_registrado == nil
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_registrado=now() WHERE id=#{id};" )
+      inscripcion2020.fecha_registrado = DateTime.now
     else
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_registrado=NULL WHERE id=#{id};" )
+      inscripcion2020.fecha_registrado = nil
     end
+    inscripcion2020.save!
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
@@ -69,8 +74,7 @@ ActiveAdmin.register Inscripcion2020 do
     id = params[:id]
     inscripcion2020 = Inscripcion2020.find(id)
     if inscripcion2020.fecha_vale == nil
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=now() WHERE id=#{id};" )
-
+      inscripcion2020.fecha_vale = DateTime.now
 
       TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
         usuario = Usuario.find(titular_cuenta.usuario_id)
@@ -78,8 +82,9 @@ ActiveAdmin.register Inscripcion2020 do
       end
 
     else
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_vale=NULL WHERE id=#{id};" )
+      inscripcion2020.fecha_vale = nil
     end
+    inscripcion2020.save!
 
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
@@ -99,10 +104,11 @@ ActiveAdmin.register Inscripcion2020 do
     id = params[:id]
     inscripcion2020 = Inscripcion2020.find(id)
     if inscripcion2020.fecha_inscripto == nil
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_inscripto=now() WHERE id=#{id};" )
+      inscripcion2020.fecha_inscripto = DateTime.now
     else
-      ActiveRecord::Base.connection.execute( "UPDATE inscripciones SET fecha_inscripto=NULL WHERE id=#{id};" )
+      inscripcion2020.fecha_inscripto = nil
     end
+    inscripcion2020.save!
     
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
@@ -152,8 +158,9 @@ action_item :formulario, only: :show do
       row :recibida
       row "Año" do |r| (r.anio) end
       row :fecha_comienzo
-      row :fecha_fin
+      row :fecha_primera
       row :fecha_ultima
+      row :fecha_fin
       row "Código cuenta" do |r| (r.cuenta_id) end
       row "Código alumno" do |r| (r.nuevo_alumno_id) end
     end
@@ -198,11 +205,12 @@ action_item :formulario, only: :show do
     f.inputs do
       if f.object.new_record?
         f.input :recibida, input_html: { value: current_admin_usuario.email }, as: :hidden
-        f.input :reinscripcion, input_html: { value: false }, as: :hidden
+        f.input :reinscripcion, input_html: { value: false }
       end
       f.input :fecha_comienzo
-      f.input :fecha_fin
+      f.input :fecha_primera
       f.input :fecha_ultima
+      f.input :fecha_fin
       f.input :cuenta_id #, label => 'Código cuenta'
       f.input :nuevo_alumno_id #, label => 'Código alumno'
     end
