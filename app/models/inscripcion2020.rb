@@ -16,7 +16,6 @@ class Inscripcion2020 < ApplicationRecord
   scope :inscripcion, -> { where("NOT reinscripcion") }
   scope :reinscripcion, -> { where("reinscripcion") }
 
-
   def CalcularMovimientos()
 
     movimientos = Array.new
@@ -29,7 +28,6 @@ class Inscripcion2020 < ApplicationRecord
     importe_total = proximo_grado.precio
 
     descuentos = Array.new
-
     if fija != nil
         descuentos.push(["FIJO",false,fija])
     else
@@ -58,21 +56,6 @@ class Inscripcion2020 < ApplicationRecord
     LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
       cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
     end
-
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-    p "CUOTAS"
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-
-    p cuotas
-
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-    p "-------------------------------------------------"
-
-
 
     total_cuotas = 0
     cuotas.each do |cuota|
@@ -175,134 +158,207 @@ class Inscripcion2020 < ApplicationRecord
 
     return movimientos
 
-end
+  end
 
-def CalcularMovimientosToStr()
+  def CalcularMovimientosToStr()
 
-  movimientos = CalcularMovimientos()
+    movimientos = CalcularMovimientos()
 
-  i = 0
-  str = ""
-  movimientos.each do |mov|
+    i = 0
+    str = ""
+    movimientos.each do |mov|
+
+      if fecha_vale != nil
+        m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
+        m ||= Movimiento.new
+        m.inscripcion2020_id = id
+        m.inscripcion2020_indice = i    
+        m.cuenta_id = cuenta_id
+        m.alumno = alumno_id
+        m.fecha = mov[0]
+        m.descripcion = mov[1].upcase
+        m.debe = (mov[2]+0.5).to_i
+        m.ejercicio = anio
+        m.rubro_id = mov[3]
+        m.haber = 0
+        m.save!
+      end
+      str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2]} ====="
+
+      i = i+1
+    end
 
     if fecha_vale != nil
-      m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
-      m ||= Movimiento.new
-      m.inscripcion2020_id = id
-      m.inscripcion2020_indice = i    
-      m.cuenta_id = cuenta_id
-      m.alumno = alumno_id
-      m.fecha = mov[0]
-      m.descripcion = mov[1].upcase
-      m.debe = (mov[2]+0.5).to_i
-      m.ejercicio = anio
-      m.rubro_id = mov[3]
-      m.haber = 0
-      m.save!
+      Movimiento.where("inscripcion2020_id=#{id} AND inscripcion2020_indice>=#{i}").delete_all
     end
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2]} ====="
+    
+    return str
 
-    i = i+1
   end
 
-  if fecha_vale != nil
-    Movimiento.where("inscripcion2020_id=#{id} AND inscripcion2020_indice>=#{i}").delete_all
-  end
-  
-  return str
 
-end
+  def CalcularPrecio()
 
+    movimientos = Array.new
 
-def CalcularPrecio()
-
-    cuotas = Array.new
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    if proximo_grado == nil
-      return cuotas
+    if proximo_grado == nil || cuota2020_id == nil
+      return movimientos
     end
+
     importe_total = proximo_grado.precio
 
-    porcentaje = 1
-
-    convenio = Convenio2020.find(convenio2020_id) rescue nil
-    if convenio != nil
-      porcentaje = porcentaje * (100.0-convenio.descuento)/100.0
-    end
+    descuentos = Array.new
     if fija != nil
-      importe_total = fija
-      porcentaje = 1
-    end
-
-    afinidad = Afinidad2020.find(afinidad2020_id) rescue nil
-    if afinidad != nil
-      porcentaje = porcentaje * (100.0-afinidad.descuento)/100.0
-    end
-    if adicional != nil
-      porcentaje = porcentaje * (100.0-adicional)/100.0
-    end
-    if congelado != nil
-      porcentaje = porcentaje * (100.0-congelado)/100.0
-    end
-    hermanos = Hermanos2020.find(hermanos2020_id) rescue nil
-    if hermanos != nil
-      porcentaje = porcentaje * (100.0-hermanos.descuento)/100.0
-    end
-
-    # p "------------------------------"
-    # p "------------------------------"
-    # p "------------------------------"
-    p "importe grado = " + importe_total.to_s
-    p "porcentaje =" + porcentaje.to_s
-
-    importe_total = importe_total * porcentaje
-
-
-    
-    p "importe =" + importe_total.to_s
-
-    # descuentos.each do |inscripcion_opcion_id|
-    #   inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     if inscripcion_opcion.valor == nil
-    #       importe_total = 0
-    #       InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion.id}").order(:fecha).each do |cuota|
-    #         importe_total = importe_total + cuota.cantidad*cuota.importe
-    #       end
-    #     else
-    #       importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
-    #     end
-    #   end
-    # end
-
-    # p importe_total
-    # p "------------------------------"
-    # p "------------------------------"
-    # p "------------------------------"
-
-    #   inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
-    #   if inscripcion_opcion_cuotas != nil
-    #     InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
-    #      cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha + 9.days])
-    #    end
-
-
-    if cuota2020_id != nil
-      LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
-        cuotas.push([cuota.cantidad,(importe_total*cuota.numerador/cuota.denominador+0.5).to_i,cuota.fecha + 9.days])
+        descuentos.push(["FIJO",false,fija])
+    else
+      c = Convenio2020.find(convenio2020_id) rescue nil
+      if c != nil
+        descuentos.push([c.toString(),true,c.descuento])
       end
     end
 
-    # p "------------------------------"
-    # p "------------------------------"
-    # p "------------------------------"
-    p cuotas
-    # p "------------------------------"
-    # p "------------------------------"
-    # p "------------------------------"
+    c = Afinidad2020.find(afinidad2020_id) rescue nil
+    if c != nil
+      descuentos.push([c.toString(),true,c.descuento])
+    end
+    if adicional != nil
+      descuentos.push(["Adicional #{Common.decimal_to_string(adicional,2)}%",true,adicional])
+    end
+    if congelado != nil
+      descuentos.push(["Congelado #{Common.decimal_to_string(congelado,2)}%",true,congelado])
+    end
+    c = Hermanos2020.find(hermanos2020_id) rescue nil
+    if c != nil
+      descuentos.push([c.toString(),true,c.descuento])
+    end
 
-    return cuotas
+    cuotas = Array.new
+    LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
+      cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
+    end
+
+    total_cuotas = 0
+    cuotas.each do |cuota|
+      total_cuotas = total_cuotas + cuota[0]
+    end
+
+    devolucion = 0
+
+    num_cuota = 1
+    cuotas.each do |cuota|      
+      importe = importe_total*cuota[2]/cuota[3]
+      fecha = cuota[1] + (x-1).month
+      mov = [cuota[0],(importe+0.5).to_i,fecha + 9.days]
+      descuentos.each do |descuento| 
+        if descuento[1]
+          desc = importe*descuento[2]/100
+          importe = importe - desc
+          mov[1] = mov[1]+(-desc+0.5).to_i
+        else
+          desc = importe-descuento[2]*cuota[2]/cuota[3]
+          importe = importe - desc
+          mov[1] = mov[1]+(-desc+0.5).to_i
+        end          
+      end
+      movimientos.push(mov)
+      num_cuota = num_cuota+1
+    end
+
+    return movimientos
+
   end
+
+
+# def CalcularPrecio()
+
+#     cuotas = Array.new
+#     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+#     if proximo_grado == nil
+#       return cuotas
+#     end
+#     importe_total = proximo_grado.precio
+
+#     porcentaje = 1
+
+#     convenio = Convenio2020.find(convenio2020_id) rescue nil
+#     if convenio != nil
+#       porcentaje = porcentaje * (100.0-convenio.descuento)/100.0
+#     end
+#     if fija != nil
+#       importe_total = fija
+#       porcentaje = 1
+#     end
+
+#     afinidad = Afinidad2020.find(afinidad2020_id) rescue nil
+#     if afinidad != nil
+#       porcentaje = porcentaje * (100.0-afinidad.descuento)/100.0
+#     end
+#     if adicional != nil
+#       porcentaje = porcentaje * (100.0-adicional)/100.0
+#     end
+#     if congelado != nil
+#       porcentaje = porcentaje * (100.0-congelado)/100.0
+#     end
+#     hermanos = Hermanos2020.find(hermanos2020_id) rescue nil
+#     if hermanos != nil
+#       porcentaje = porcentaje * (100.0-hermanos.descuento)/100.0
+#     end
+
+#     # p "------------------------------"
+#     # p "------------------------------"
+#     # p "------------------------------"
+#     p "importe grado = " + importe_total.to_s
+#     p "porcentaje =" + porcentaje.to_s
+
+#     importe_total = importe_total * porcentaje
+
+
+    
+#     p "importe =" + importe_total.to_s
+
+#     # descuentos.each do |inscripcion_opcion_id|
+#     #   inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
+#     #   if inscripcion_opcion != nil 
+#     #     if inscripcion_opcion.valor == nil
+#     #       importe_total = 0
+#     #       InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion.id}").order(:fecha).each do |cuota|
+#     #         importe_total = importe_total + cuota.cantidad*cuota.importe
+#     #       end
+#     #     else
+#     #       importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+#     #     end
+#     #   end
+#     # end
+
+#     # p importe_total
+#     # p "------------------------------"
+#     # p "------------------------------"
+#     # p "------------------------------"
+
+#     #   inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
+#     #   if inscripcion_opcion_cuotas != nil
+#     #     InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
+#     #      cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha + 9.days])
+#     #    end
+
+
+#     if cuota2020_id != nil
+#       LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
+#         cuotas.push([cuota.cantidad,(importe_total*cuota.numerador/cuota.denominador+0.5).to_i,cuota.fecha + 9.days])
+#       end
+#     end
+
+#     # p "------------------------------"
+#     # p "------------------------------"
+#     # p "------------------------------"
+#     p cuotas
+#     # p "------------------------------"
+#     # p "------------------------------"
+#     # p "------------------------------"
+
+#     return cuotas
+#   end
 
   def CalcularPrecioToStr()
 
