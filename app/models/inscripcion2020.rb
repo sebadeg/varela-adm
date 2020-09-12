@@ -93,12 +93,10 @@ class Inscripcion2020 < ApplicationRecord
         if fecha >= fecha_comienzo && fecha < fecha_ultima
           if fecha >= fecha_fin
             devolucion = devolucion + mov[2]
-          else
-            if fecha < fecha_primera
-              mov[0] = fecha_primera
-            end
-            movimientos.push(mov)
+          elsif fecha < fecha_primera
+            mov[0] = fecha_primera
           end
+          movimientos.push(mov)
         end
 
         descuentos.each do |descuento| 
@@ -111,12 +109,10 @@ class Inscripcion2020 < ApplicationRecord
             if fecha >= fecha_comienzo && fecha < fecha_ultima
               if fecha >= fecha_fin
                 devolucion = devolucion + mov[2]
-              else
-                if fecha < fecha_primera
-                  mov[0] = fecha_primera
-                end
-                movimientos.push(mov)
+              elsif fecha < fecha_primera
+                mov[0] = fecha_primera
               end
+              movimientos.push(mov)
             end
 
           else
@@ -128,14 +124,12 @@ class Inscripcion2020 < ApplicationRecord
             if fecha >= fecha_comienzo && fecha < fecha_ultima
               if fecha >= fecha_fin
                 devolucion = devolucion + mov[2]
-              else
-                if fecha < fecha_primera
-                  mov[0] = fecha_primera
-                end
-                movimientos.push(mov)
+              elsif fecha < fecha_primera
+                mov[0] = fecha_primera
               end
+              movimientos.push(mov)
             end
-            
+
           end          
         end
         num_cuota = num_cuota+1
