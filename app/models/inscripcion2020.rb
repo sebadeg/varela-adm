@@ -823,7 +823,7 @@ class Inscripcion2020 < ApplicationRecord
       "MAIL: #{emailT[1]}<br><br>" +
       "TEL/CEL: #{celularT[1]}<br><br>" +
       "FIRMA:<br><br>" +
-      "Aclaración:<br><br>";
+      "Aclaración:";
 
     text_file = Tempfile.new("text.pdf")
     text_file_path = text_file.path
