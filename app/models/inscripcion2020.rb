@@ -248,7 +248,7 @@ class Inscripcion2020 < ApplicationRecord
     num_cuota = 1
     cuotas.each do |cuota|      
       importe = importe_total*cuota[2]/cuota[3]
-      fecha = cuota[1] + (x-1).month
+      fecha = cuota[1] 
       mov = [cuota[0],(importe+0.5).to_i,fecha + 9.days]
       descuentos.each do |descuento| 
         if descuento[1]
@@ -262,7 +262,6 @@ class Inscripcion2020 < ApplicationRecord
         end          
       end
       movimientos.push(mov)
-      num_cuota = num_cuota+1
     end
 
     return movimientos
