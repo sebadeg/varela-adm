@@ -79,52 +79,80 @@ class Inscripcion2020 < ApplicationRecord
       total_cuotas = total_cuotas + cuota[0]
     end
 
+    devolucion = 0
+
     num_cuota = 1
     cuotas.each do |cuota|      
       (1..cuota[0]).each do |x|
         importe = importe_total*cuota[2]/cuota[3]
 
-        mov = [cuota[1] + (x-1).month,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.rubro_id]
-        movimientos.push(mov)
+        fecha = cuota[1] + (x-1).month
+
+        mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.rubro_id]
+
+        if fecha >= fecha_comienzo && fecha < fecha_fin
+          if fecha < fecha_primera
+            mov[0] = fecha_primera
+          end
+          movimientos.push(mov)
+        else
+          if fecha < fecha_ultima
+            devolucion = devolucion + mov[2]
+          end
+        end
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe*descuento[2]/100
             importe = importe - desc
 
-            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
-            movimientos.push(mov)
+            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
+            if fecha >= fecha_comienzo && fecha < fecha_fin
+              if fecha < fecha_primera
+                mov[0] = fecha_primera
+              end
+              movimientos.push(mov)
+            else
+              if fecha < fecha_ultima
+                devolucion = devolucion + mov[2]
+              end
+            end
+
           else
             desc = importe-descuento[2]*cuota[2]/cuota[3]
             importe = importe - desc
 
-            mov = [cuota[1] + (x-1).month,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
+            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
 
-            movimientos.push(mov)
+            if fecha >= fecha_comienzo && fecha < fecha_fin
+              if fecha < fecha_primera
+                mov[0] = fecha_primera
+              end
+              movimientos.push(mov)
+            else
+              if fecha < fecha_ultima
+                devolucion = devolucion + mov[2]
+              end
+            end
           end
         end
         num_cuota = num_cuota+1
       end
     end
 
+    if devolucion > 0 
+      mov = [fecha_ultima,"DEVOLUCIÓN CUOTAS",-devolucion,proximo_grado.rubro_id]
+      movimientos.push(mov)
+    end
+
     matricula = Matricula2020.find(matricula2020_id) rescue nil
     matricula2020ProximoGrado = Matricula2020ProximoGrado.where("matricula2020_id=#{matricula2020_id} AND proximo_grado_id=#{proximo_grado_id}").first rescue nil
-
-    p matricula
-    p matricula2020ProximoGrado
-
-
     if matricula != nil && matricula2020ProximoGrado != nil
       
       importe_total = matricula2020ProximoGrado.precio
 
-      p importe_total
-
       cuotas = Array.new
-      xx = LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) 
-      p xx
-      xx.each do |cuota|
-        p cuota 
-
+      lineas = LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) 
+      lineas.each do |cuota|
         cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
       end
 
@@ -135,14 +163,14 @@ class Inscripcion2020 < ApplicationRecord
 
       num_cuota = 1
       cuotas.each do |cuota|     
-        p cuota 
         (1..cuota[0]).each do |x|
-          p x
+          
+          fecha = cuota[1] + (x-1).month
           importe = importe_total*cuota[2]/cuota[3]
-        
-          mov = [cuota[1] + (x-1).month,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.matricula_rubro]        
-          movimientos.push(mov)
 
+          mov = [fecha,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.matricula_rubro]
+          movimientos.push(mov)
+          
           num_cuota = num_cuota+1
         end
       end
