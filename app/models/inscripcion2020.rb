@@ -90,30 +90,32 @@ class Inscripcion2020 < ApplicationRecord
 
         mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.rubro_id]
 
-        if fecha >= fecha_comienzo && fecha < fecha_fin
-          if fecha < fecha_primera
-            mov[0] = fecha_primera
-          end
-          movimientos.push(mov)
-        else
-          if fecha < fecha_ultima
+        if fecha >= fecha_comienzo && fecha < fecha_ultima
+          if fecha >= fecha_fin
             devolucion = devolucion + mov[2]
+          else
+            if fecha < fecha_primera
+              mov[0] = fecha_primera
+            end
+            movimientos.push(mov)
           end
         end
+
         descuentos.each do |descuento| 
           if descuento[1]
             desc = importe*descuento[2]/100
             importe = importe - desc
 
             mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
-            if fecha >= fecha_comienzo && fecha < fecha_fin
-              if fecha < fecha_primera
-                mov[0] = fecha_primera
-              end
-              movimientos.push(mov)
-            else
-              if fecha < fecha_ultima
+
+            if fecha >= fecha_comienzo && fecha < fecha_ultima
+              if fecha >= fecha_fin
                 devolucion = devolucion + mov[2]
+              else
+                if fecha < fecha_primera
+                  mov[0] = fecha_primera
+                end
+                movimientos.push(mov)
               end
             end
 
@@ -123,17 +125,18 @@ class Inscripcion2020 < ApplicationRecord
 
             mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
 
-            if fecha >= fecha_comienzo && fecha < fecha_fin
-              if fecha < fecha_primera
-                mov[0] = fecha_primera
-              end
-              movimientos.push(mov)
-            else
-              if fecha < fecha_ultima
+            if fecha >= fecha_comienzo && fecha < fecha_ultima
+              if fecha >= fecha_fin
                 devolucion = devolucion + mov[2]
+              else
+                if fecha < fecha_primera
+                  mov[0] = fecha_primera
+                end
+                movimientos.push(mov)
               end
             end
-          end
+            
+          end          
         end
         num_cuota = num_cuota+1
       end
@@ -170,7 +173,7 @@ class Inscripcion2020 < ApplicationRecord
 
           mov = [fecha,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.matricula_rubro]
           movimientos.push(mov)
-          
+
           num_cuota = num_cuota+1
         end
       end
