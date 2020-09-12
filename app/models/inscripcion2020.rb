@@ -88,7 +88,7 @@ class Inscripcion2020 < ApplicationRecord
 
         fecha = cuota[1] + (x-1).month
 
-        mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.rubro_id]
+        mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.rubro_id]
 
         if fecha >= fecha_comienzo && fecha < fecha_ultima
           if fecha >= fecha_fin
@@ -104,7 +104,7 @@ class Inscripcion2020 < ApplicationRecord
             desc = importe*descuento[2]/100
             importe = importe - desc
 
-            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
+            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
 
             if fecha >= fecha_comienzo && fecha < fecha_ultima
               if fecha >= fecha_fin
@@ -119,7 +119,7 @@ class Inscripcion2020 < ApplicationRecord
             desc = importe-descuento[2]*cuota[2]/cuota[3]
             importe = importe - desc
 
-            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",-desc,proximo_grado.rubro_id]
+            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
 
             if fecha >= fecha_comienzo && fecha < fecha_ultima
               if fecha >= fecha_fin
@@ -165,7 +165,7 @@ class Inscripcion2020 < ApplicationRecord
           fecha = cuota[1] + (x-1).month
           importe = importe_total*cuota[2]/cuota[3]
 
-          mov = [fecha,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",importe,proximo_grado.matricula_rubro]
+          mov = [fecha,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.matricula_rubro]
           movimientos.push(mov)
 
           num_cuota = num_cuota+1
@@ -200,7 +200,7 @@ def CalcularMovimientosToStr()
       m.haber = 0
       m.save!
     end
-    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{(mov[2]+0.5).to_i} ====="
+    str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2]} ====="
 
     i = i+1
   end
