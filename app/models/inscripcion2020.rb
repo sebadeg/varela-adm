@@ -651,12 +651,12 @@ class Inscripcion2020 < ApplicationRecord
     end
 
     adicional_nombre = ""
-    if adicional == nil
+    if adicional != nil
       adicional_nombre = "Adicional (#{adicional}%)"
     end
     
     congelado_nombre = ""
-    if congelado == nil
+    if congelado != nil
       congelado_nombre = "Congelado (#{congelado}%)"
     end
 
@@ -735,7 +735,7 @@ class Inscripcion2020 < ApplicationRecord
       "<br>" +
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
-      "Descuento: #{convenio_nombre}<br>" +
+      "Descuento: #{convenio_nombre} #{afinidad_nombre} #{adicional_nombre} #{congelado_nombre}<br>" +
       "Matrícula: #{matricula_nombre}<br>" +
       "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
