@@ -735,7 +735,7 @@ class Inscripcion2020 < ApplicationRecord
       "<br>" +
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
-      "Descuento: #{convenio_nombre} + #{afinidad_nombre} + #{adicional_nombre} + #{congelado_nombre}<br>" +
+      "Descuento: #{convenio_nombre}<br>" +
       "Matrícula: #{matricula_nombre}<br>" +
       "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
