@@ -15,7 +15,7 @@ class Inscripcion2020 < ApplicationRecord
 
   scope :inscripcion, -> { where("NOT reinscripcion") }
   scope :reinscripcion, -> { where("reinscripcion") }
-  scope :para_generar_vale, -> { where("reinscripcion AND fecha_vale IS NULL") }
+  scope :para_generar_vale, -> { where("reinscripcion AND NOT fecha_registrado IS NULL AND fecha_vale IS NULL") }
 
   def CalcularMovimientos()
 
