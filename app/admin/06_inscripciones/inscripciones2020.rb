@@ -13,6 +13,7 @@ ActiveAdmin.register Inscripcion2020 do
 
   scope :inscripcion
   scope :reinscripcion
+  scope :para_generar_vale
 
 
 
