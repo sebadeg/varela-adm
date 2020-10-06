@@ -44,7 +44,7 @@ class Ability
       can :manage, Cuenta
       can :manage, Alumno
       can :manage, Tarea
-      can :read, Usuario
+      can :manage, Usuario
       can :manage, Contrato
       can :manage, Recargo
 
@@ -53,7 +53,16 @@ class Ability
 
       can :manage, ActiveAdmin::Page, :name => "Ejecutar"
       can :manage, Formulario
+  
 
+      can :manage, Inscripcion
+      can :manage, Inscripcion2020
+      can :manage, Convenio2020
+      can :manage, Afinidad2020
+      can :manage, Matricula2020
+      can :manage, Cuota2020
+      can :manage, Hermanos2020
+      can :manage, ProximoGrado
 
 
     end
@@ -103,5 +112,6 @@ class Ability
       can :manage, Subgrado
     end
       
+
   end
 end
