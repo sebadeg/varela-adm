@@ -145,6 +145,7 @@ action_item :formulario, only: :show do
   	#selectable_column
     column "Alumno" do |r| (r.alumno == nil ? "" : r.alumno.toString()) end      
     column "Modificado" do |r| r.updated_at == nil ? "" : I18n.l(r.updated_at, format: '%d/%m/%Y %H:%M:%S') end
+    column "Registrado" do |r| r.fecha_registrado == nil ? "" : I18n.l(r.fecha_registrado, format: '%d/%m/%Y') end
 
     actions
   end
