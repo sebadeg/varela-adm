@@ -753,7 +753,7 @@ class Inscripcion2020 < ApplicationRecord
 
       texto_padre =
       "<b>PADRE</b><br>" +
-      "Nombre: # => {padre.nombre} #{padre.apellido}<br>" +
+      "Nombre: #{padre.nombre} #{padre.apellido}<br>" +
       "Documento de identidad: #{Inscripcion2020.cedula_tos(padre.cedula)}<br>" +
       "Lugar de nacimiento: #{padre.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(padre.fecha_nacimiento)}<br>" +
