@@ -123,6 +123,11 @@ action_item :formulario, only: :show do
   member_action :formulario, method: :put do
     id = params[:id]
     inscripcion2020 = Inscripcion2020.find(id)
+    inscripcion2020.fecha_vale = DateTime.now
+    inscripcion2020.save!
+
+
+
     alumno = Alumno.find(inscripcion2020.alumno_id)
   
     file_name = "Inscripcion #{alumno.nombre} #{alumno.apellido}.pdf"
