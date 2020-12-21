@@ -150,8 +150,8 @@ action_item :formulario, only: :show do
     actions
   end
 
-  filter :alumno_id, :label => 'Código' 
-  filter :alumno_id, :label => 'Cédula', :as => :select, :collection => Alumno.all.order(:cedula).map{|u| [u.toString(), u.id]}
+  filter :alumno_id, :label => 'Código'
+  #filter :alumno_id, :label => 'Cédula', :as => :select, :collection => Alumno.all.order(:cedula).map{|u| [u.toString(), u.id]}
 
   show do
 
