@@ -17,6 +17,11 @@ class Inscripcion2020 < ApplicationRecord
   scope :reinscripcion, -> { where("reinscripcion") }
   scope :para_generar_vale, -> { where("reinscripcion AND NOT fecha_registrado IS NULL AND fecha_vale IS NULL") }
 
+  validates :madre_id, :presence => false
+  validates :padre_id, :presence => false
+  validates :titular1_id, :presence => false
+  validates :titular2_id, :presence => false
+
   def CalcularMovimientos()
 
     movimientos = Array.new
