@@ -1,14 +1,14 @@
 class Inscripcion2020 < ApplicationRecord
   belongs_to :alumno
-  belongs_to :padre, :class_name => "Usuario"
-  belongs_to :madre, :class_name => "Usuario"
-  belongs_to :titular1, :class_name => "Usuario"
-  belongs_to :titular2, :class_name => "Usuario"
-  belongs_to :grado
+  belongs_to :padre, :class_name => "Usuario", required: false
+  belongs_to :madre, :class_name => "Usuario", required: false
+  belongs_to :titular1, :class_name => "Usuario", required: false
+  belongs_to :titular2, :class_name => "Usuario", required: false
+  belongs_to :grado, required: false
   belongs_to :proximo_grado
-  belongs_to :formulario2020
-  belongs_to :convenio2020
-  belongs_to :afinidad2020
+  belongs_to :formulario2020, required: false
+  belongs_to :convenio2020, required: false
+  belongs_to :afinidad2020, required: false
   belongs_to :matricula2020
   belongs_to :hermanos2020
   belongs_to :cuota2020
@@ -17,10 +17,6 @@ class Inscripcion2020 < ApplicationRecord
   scope :reinscripcion, -> { where("reinscripcion") }
   scope :para_generar_vale, -> { where("reinscripcion AND NOT fecha_registrado IS NULL AND fecha_vale IS NULL") }
 
-  validates :madre_id, :presence => false
-  validates :padre_id, :presence => false
-  validates :titular1_id, :presence => false
-  validates :titular2_id, :presence => false
 
   def CalcularMovimientos()
 
