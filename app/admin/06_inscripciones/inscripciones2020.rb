@@ -18,6 +18,21 @@ ActiveAdmin.register Inscripcion2020 do
 
 
   action_item :habilitar, only: :show do
+
+    [632,617,563,544,553,569,750,588,589,590,
+    592,594,595,744,596,612,615,629,746,622,
+    623,625,626,630,636,643,642,644,638,639,
+    748,640,641,645,646,689,691,680,682,683,
+    684,690,692,693,694,695,696,697,698,699,
+    701,702,704,705,706,707,708,751,752,754,
+    756,757,758,759,760,762,763,764,765,766,
+    770,768,771,772,776,777,598,597,687,688,
+    631,703,601,602,761,755,619,618,606,605,
+    685,686,681,749,773,551,774,700,614,562].each do |xid|
+      inscripcion2020 = Inscripcion2020.find(xid);
+      inscripcion2020.CalcularMovimientosToStr();
+    end
+
     if inscripcion2020.inhabilitado
       link_to "Habilitar", habilitar_admin_inscripcion2020_path(inscripcion2020), method: :put 
     else
@@ -59,10 +74,6 @@ ActiveAdmin.register Inscripcion2020 do
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
-
-
-
-
   action_item :generar_vale, only: :show do
     if inscripcion2020.fecha_vale != nil
       link_to "Quitar vale", generar_vale_admin_inscripcion2020_path(inscripcion2020), method: :put   
@@ -71,22 +82,40 @@ ActiveAdmin.register Inscripcion2020 do
     end
   end
 
- member_action :generar_vale, method: :put do
+  member_action :generar_vale, method: :put do
     id = params[:id]
     inscripcion2020 = Inscripcion2020.find(id)
     if inscripcion2020.fecha_vale == nil
       inscripcion2020.fecha_vale = DateTime.now
 
-      TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
-        usuario = Usuario.find(titular_cuenta.usuario_id)
-        UserMailer.hay_vale_usuario(usuario).deliver_now
-      end
+      # TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
+      #   usuario = Usuario.find(titular_cuenta.usuario_id)
+      #   UserMailer.hay_vale_usuario(usuario).deliver_now
+      # end
 
     else
       inscripcion2020.fecha_vale = nil
     end
     inscripcion2020.save!
 
+    redirect_to admin_inscripcion2020_path(inscripcion2020)
+  end
+
+  action_item :enviar_mail, only: :show do
+    if inscripcion2020.fecha_vale != nil
+      link_to "Enviar mail", enviar_mail_admin_inscripcion2020_path(inscripcion2020), method: :put   
+    end
+  end
+
+  member_action :enviar_mail, method: :put do
+    id = params[:id]
+    inscripcion2020 = Inscripcion2020.find(id)
+    if inscripcion2020.fecha_vale != nil
+      TitularCuenta.where("cuenta_id=#{inscripcion2020.cuenta_id}").each do |titular_cuenta|
+        usuario = Usuario.find(titular_cuenta.usuario_id)
+        UserMailer.hay_vale_usuario(usuario).deliver_now
+      end
+    end
     redirect_to admin_inscripcion2020_path(inscripcion2020)
   end
 
@@ -123,10 +152,6 @@ action_item :formulario, only: :show do
   member_action :formulario, method: :put do
     id = params[:id]
     inscripcion2020 = Inscripcion2020.find(id)
-    inscripcion2020.fecha_vale = DateTime.now
-    inscripcion2020.save!
-
-
 
     alumno = Alumno.find(inscripcion2020.alumno_id)
   
