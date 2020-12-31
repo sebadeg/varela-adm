@@ -116,7 +116,7 @@ class Factura < ApplicationRecord
           end
 
           if (pagina != paginas)
-            start_new_page(template: template_file, template_page: 1)
+            start_new_page
           end
         end
 
