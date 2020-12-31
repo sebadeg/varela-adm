@@ -167,7 +167,7 @@ class Factura < ApplicationRecord
 
       pdf = CombinePDF.new
       pdf << CombinePDF.load(text_file_path)
-      pdf.pages.each {|page| page <<  CombinePDF.load(template_file).pages[0]}
+      pdf.pages.each {|page| CombinePDF.load(template_file).pages[0] << page }
       pdf.save file_path
 
 	    text_file.unlink
