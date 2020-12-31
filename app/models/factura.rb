@@ -160,14 +160,16 @@ class Factura < ApplicationRecord
         text_box factura.total.to_s , :at => [20+6*delta, 33], size:8
       end
 
-      #pdf = CombinePDF.new
-      #pdf << CombinePDF.load(template_file) # one way to combine, very fast.
-      #pdf.pages.each {|page| page <<  CombinePDF.load(text_file_path).pages[0]}
-      #pdf.save file_path
-
       pdf = CombinePDF.new
-      pdf << CombinePDF.load(text_file_path)
-      pdf.pages.each {|page| CombinePDF.load(template_file).pages[0] << page }
+      (1..paginas).each do |pagina|
+        pdf >> CombinePDF.load(template_file) # one way to combine, very fast.
+      end
+
+      indice = 0
+      pdf.pages.each do |page|
+        page <<  CombinePDF.load(text_file_path).pages[indice]
+        indice = indice + 1
+      end
       pdf.save file_path
 
 	    text_file.unlink
