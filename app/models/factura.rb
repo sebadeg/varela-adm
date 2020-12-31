@@ -71,8 +71,7 @@ class Factura < ApplicationRecord
             text_box cuenta.nombre, align: :left
             transparent(0) { stroke_bounds }
           end
-          text_box paginas.to_s, :at => [280, 710-renglon]
-          #cuenta_id.to_s, :at => [280, 710-renglon]
+          text_box cuenta_id.to_s, :at => [280, 710-renglon]
           text_box factura.id.to_s, :at => [280, 710-2*renglon]
           text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
   
@@ -116,9 +115,9 @@ class Factura < ApplicationRecord
             indice = indice+1          
           end
 
-          #if (pagina != paginas)
-            start_new_page
-          #end
+          if (pagina != paginas)
+            start_new_page(template: template_file, template_page: 1)
+          end
         end
 
         text_box "Total", :at => [200, 145]
@@ -161,9 +160,13 @@ class Factura < ApplicationRecord
         text_box factura.total.to_s , :at => [20+6*delta, 33], size:8
       end
 
+      #pdf = CombinePDF.new
+      #pdf << CombinePDF.load(template_file) # one way to combine, very fast.
+      #pdf.pages.each {|page| page <<  CombinePDF.load(text_file_path).pages[0]}
+      #pdf.save file_path
+
       pdf = CombinePDF.new
-      pdf << CombinePDF.load(template_file) # one way to combine, very fast.
-      pdf.pages.each {|page| page <<  CombinePDF.load(text_file_path).pages[0]}
+      pdf << CombinePDF.load(text_file_path)
       pdf.save file_path
 
 	    text_file.unlink
