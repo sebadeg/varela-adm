@@ -71,7 +71,8 @@ class Factura < ApplicationRecord
             text_box cuenta.nombre, align: :left
             transparent(0) { stroke_bounds }
           end
-          text_box cuenta_id.to_s, :at => [280, 710-renglon]
+          text_box paginas.to_s, :at => [280, 710-renglon]
+          #cuenta_id.to_s, :at => [280, 710-renglon]
           text_box factura.id.to_s, :at => [280, 710-2*renglon]
           text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
   
@@ -115,9 +116,9 @@ class Factura < ApplicationRecord
             indice = indice+1          
           end
 
-          if (pagina != paginas)
+          #if (pagina != paginas)
             start_new_page
-          end
+          #end
         end
 
         text_box "Total", :at => [200, 145]
