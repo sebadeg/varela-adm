@@ -1,0 +1,7 @@
+<%= form_tag(admin_saico_saico_path, :method => "post") do %>
+  <%= label_tag "Fecha comienzo:" %>
+  <%= date_field_tag "fecha_comienzo", "", :required => "required" %><br><br>
+  <%= label_tag "Fecha final:" %>
+  <%= date_field_tag "fecha_final", "", required: "required" %><br><br>
+  <%= submit_tag "Generar archivo SAICO" %>
+<% end %>
