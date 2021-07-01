@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_12_113145) do
+ActiveRecord::Schema.define(version: 2021_07_01_135759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -399,6 +399,12 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
     t.index ["usuario_id"], name: "index_direcciones_on_usuario_id"
   end
 
+  create_table "dominios", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "especial_alumnos", id: :serial, force: :cascade do |t|
     t.integer "especial_id"
     t.integer "alumno_id"
@@ -589,6 +595,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
     t.decimal "fija"
     t.date "fecha_ultima"
     t.date "fecha_primera"
+    t.decimal "aumento"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"
@@ -1068,6 +1075,19 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "preguntas", force: :cascade do |t|
+    t.bigint "dominio_id"
+    t.bigint "subdominio_id"
+    t.string "pregunta"
+    t.string "respuestas"
+    t.boolean "resultado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "link"
+    t.index ["dominio_id"], name: "index_preguntas_on_dominio_id"
+    t.index ["subdominio_id"], name: "index_preguntas_on_subdominio_id"
+  end
+
   create_table "proximo_grado_alumnos", id: :serial, force: :cascade do |t|
     t.integer "alumno_id"
     t.integer "grado"
@@ -1153,6 +1173,16 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
     t.index ["cuenta_id"], name: "index_refinanciaciones_on_cuenta_id"
   end
 
+  create_table "respuestas", force: :cascade do |t|
+    t.bigint "pregunta_id"
+    t.string "respuesta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "resultado"
+    t.string "orden"
+    t.index ["pregunta_id"], name: "index_respuestas_on_pregunta_id"
+  end
+
   create_table "rubros", force: :cascade do |t|
     t.string "nombre"
     t.string "descripcion"
@@ -1217,6 +1247,14 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subdominios", force: :cascade do |t|
+    t.bigint "dominio_id"
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dominio_id"], name: "index_subdominios_on_dominio_id"
   end
 
   create_table "subgrado_alumnos", force: :cascade do |t|
@@ -1424,6 +1462,8 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "pagos", "tipo_pagos"
   add_foreign_key "pases", "alumnos"
+  add_foreign_key "preguntas", "dominios"
+  add_foreign_key "preguntas", "subdominios"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grado_matriculas", "matriculas"
   add_foreign_key "proximo_grado_matriculas", "proximo_grados"
@@ -1433,11 +1473,13 @@ ActiveRecord::Schema.define(version: 2020_09_12_113145) do
   add_foreign_key "recibos", "lote_recibos"
   add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
   add_foreign_key "refinanciaciones", "cuentas"
+  add_foreign_key "respuestas", "preguntas"
   add_foreign_key "rubros", "tipo_rubros"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
+  add_foreign_key "subdominios", "dominios"
   add_foreign_key "subgrado_alumnos", "alumnos"
   add_foreign_key "subgrado_alumnos", "subgrados"
   add_foreign_key "subgrados", "grados"

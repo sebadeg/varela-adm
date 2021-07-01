@@ -72,6 +72,9 @@ class Inscripcion2020 < ApplicationRecord
         importe = importe_total*cuota[2]/cuota[3]
 
         fecha = cuota[1] + (x-1).month
+        if (fecha >= DateTime.new(2021,07,01))
+          importe = importe * (100.0 + aumento) / 100.0
+        end
 
         mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.rubro_id]
 
